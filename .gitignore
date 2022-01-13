@@ -4,3 +4,4 @@
 /client/.pnp.js
 /client/coverage
 /client/build
+/server/.env
