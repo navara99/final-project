@@ -1,0 +1,12 @@
+Tables
+- users
+- business_profile
+- bridge table users:business_profile
+- career fair
+- bridge table career fair:business_profile
+- messages
+- jobs
+- application
+- interviews
+- bridge table jobs:career fair
+- bridge table career fair:users
