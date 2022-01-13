@@ -1,0 +1,7 @@
+DROP TABLE IF EXISTS users_groups CASCADE;  
+
+CREATE TABLE users_groups (
+  id SERIAL PRIMARY KEY,
+  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  group_id INTEGER REFERENCES groups(id) ON DELETE CASCADE
+);

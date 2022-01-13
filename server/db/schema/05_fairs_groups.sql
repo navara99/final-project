@@ -1,0 +1,7 @@
+DROP TABLE IF EXISTS fairs_groups CASCADE; 
+
+CREATE TABLE fairs_groups (
+  id SERIAL PRIMARY KEY,
+  fair_id INTEGER REFERENCES fairs(id) ON DELETE CASCADE,
+  group_id INTEGER REFERENCES groups(id) ON DELETE CASCADE
+);
