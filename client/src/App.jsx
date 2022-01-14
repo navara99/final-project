@@ -2,8 +2,7 @@ import React from 'react';
 import './App.css';
 import axios from "axios"
 import { useEffect } from 'react';
-import Navbar from './components/Navbar';
-import Dashboard from './components/Home/Dashboard';
+import Register from "./components/Register"
 
 function App() {
 
@@ -17,8 +16,7 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar/>
-      <Dashboard/>
+      <Register/>
     </div>
   );
 }
