@@ -12,7 +12,7 @@ import { Person, Email, Lock } from "@mui/icons-material";
 import useInput from '../hooks/useInput';
 import axios from 'axios';
 
-function Register() {
+function Register({ setErrorMessage, setShowError }) {
   const [email, handleEmailChange] = useInput("");
   const [username, handleUsernameChange] = useInput("");
   const [password, handlePasswordChange] = useInput("");
@@ -33,7 +33,11 @@ function Register() {
 
     try {
       const { data } = await axios.post("/api/users/register", userInfo);
-      console.log(data);
+      const error = data["error"];
+      if (error) {
+        setErrorMessage(error);
+        setShowError(true);
+      };
     } catch (err) {
       console.log(err.message);
     };
