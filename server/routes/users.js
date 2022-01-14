@@ -68,6 +68,11 @@ module.exports = (db) => {
 
   });
 
+  router.post("/logout", (req, res) => {
+    req.session = null;
+    res.json({});
+  });
+
   router.get("/me", async (req, res) => {
     const { user_id } = req.session;
     if (!user_id) return res.json({});
