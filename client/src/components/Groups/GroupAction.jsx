@@ -1,15 +1,25 @@
 import React from "react";
 import GroupsBtn from "./GroupsBtn";
-import { Delete, Edit, Add } from "@mui/icons-material";
+import { Delete, Edit, Add, Person, Event, EventAvailableSharp } from "@mui/icons-material";
 
 function GroupAction() {
 
   const btnInfo = [
-    {
-      text: "Add Member",
-      variant: "contained",
-      icon: <Add />
-    },
+    // {
+    //   text: "Add Member",
+    //   variant: "contained",
+    //   icon: <Add />
+    // },
+    // {
+    //   text: "View Members",
+    //   variant: "contained",
+    //   icon: <Person />
+    // },
+    // {
+    //   text: "View Fairs",
+    //   variant: "contained",
+    //   icon: <Event />
+    // },
     {
       text: "Edit",
       variant: "outlined",
@@ -29,7 +39,12 @@ function GroupAction() {
 
   return (
     <div className="organization-action-btn">
-      {btns}
+      <div class="action-btns">
+        <GroupsBtn text="Details" variant="contained" />
+        <div>
+          {btns}
+        </div>
+      </div>
     </div>
   );
 };

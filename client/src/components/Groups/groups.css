@@ -16,3 +16,8 @@
 .organization-card-name {
   margin-bottom: 1em;
 }
+
+.action-btns {
+  display: flex;
+  justify-content: space-between;
+}
