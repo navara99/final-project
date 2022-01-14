@@ -2,7 +2,6 @@ import React from 'react'
 import {Avatar, Button, CssBaseline, TextField, Link, Grid, Box, Typography, Container} from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import axios from 'axios';
-import useInput from '../hooks/useInput';
 
 const LogIn = () => {
 
