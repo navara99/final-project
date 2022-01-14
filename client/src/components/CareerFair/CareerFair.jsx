@@ -61,6 +61,7 @@ const CareerFair = () => {
       </Grid>
       {/* companies detail */}
       <CompanyList industries = {industries}/>
+    
     </Grid>
   )
 }

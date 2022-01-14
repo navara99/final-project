@@ -2,6 +2,7 @@ import { Grid } from '@mui/material';
 import React from 'react'
 import CompanyItem from './CompanyItem';
 
+
 const CompanyList = (props) => {
   const {industries} = props;
   console.log(industries);
