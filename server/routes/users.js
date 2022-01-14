@@ -22,6 +22,12 @@ module.exports = (db) => {
         return res.status(400).json({ error: "Passwords do not match." });
       };
 
+      const userWithSameUsername = await getUserByValue("username", username);
+
+      if (userWithSameUsername) {
+        return res.status(400).json({ error: "This username is already taken." });
+      };
+
       const hashedPassword = await bcrypt.hash(password, 12);
       const userInfo = { ...req.body, password: hashedPassword };
       const newUser = await createNewUser(userInfo);
