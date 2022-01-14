@@ -36,10 +36,10 @@ const queryGenerator = (db) => {
     }
   };
 
-  const createNewOrganization = async ({ name, description, email, industry, website, creator }) => {
-    const values = [name, description, email, industry, website, creator];
+  const createNewOrganization = async ({ name, description, email, industry, website }) => {
+    const values = [name, description, email, industry, website];
     const queryString = `
-      INSERT INTO groups (name, description, email, industry, website, creator)
+      INSERT INTO groups (name, description, email, industry, website)
       VALUES ($1, $2, $3, $4, $5, $6)
       RETURNING *;
     `;
