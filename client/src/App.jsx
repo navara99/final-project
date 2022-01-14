@@ -8,6 +8,7 @@ import ErrorModal from "./components/ErrorModal";
 import Home from "./components/Home";
 import { Routes, Route } from "react-router-dom";
 import useCurrentUser from "./hooks/useCurrentUser";
+import Groups from "./components/Groups/index";
 
 function App() {
   const [errorMessage, setErrorMessage] = useState("");
@@ -30,6 +31,7 @@ function App() {
             }
           />
           <Route path="/login" element={<LogIn {...{ setCurrentUser }} />} />
+          <Route path="/groups" element={<Groups />} />
         </Routes>
       </div>
     </div>
