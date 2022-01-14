@@ -31,10 +31,29 @@ function Register() {
           spacing={2}
         >
           <Grid item>
-            <Typography component="div"><h1>V Career</h1></Typography>
+            <Typography component="div"><h2>Register</h2></Typography>
           </Grid>
           <Grid item>
-            <Typography component="div"><h2>Register</h2></Typography>
+            <TextField
+              variant="outlined"
+              onChange={handleFirstNameChange}
+              InputProps={{ startAdornment: (< InputAdornment position="start" ><Person /></InputAdornment>) }}
+              label="First Name"
+              error={false}
+              required
+            >
+            </TextField>
+          </Grid>
+          <Grid item>
+            <TextField
+              variant="outlined"
+              onChange={handleLastNameChange}
+              InputProps={{ startAdornment: (< InputAdornment position="start" ><Person /></InputAdornment>) }}
+              label="Last Name"
+              error={false}
+              required
+            >
+            </TextField>
           </Grid>
           <Grid item>
             <TextField
@@ -75,7 +94,7 @@ function Register() {
               variant="outlined"
               label="Confirm Password"
               error={true}
-              helperText={"Test"}
+              helperText={"Test an error message"}
               InputProps={{ startAdornment: (< InputAdornment position="start" ><Lock /></InputAdornment>) }}
               onChange={handleConfirmPasswordChange}
               type="password"
