@@ -1,11 +1,14 @@
 import React, { useEffect } from "react";
+import useFairs from "../../hooks/useFairs";
 
 const Home = () => {
-  useEffect(() => {
-    
-  }, []);
+  const { onGoingFairs } = useFairs();
 
-  return <div>Home</div>;
+  useEffect(() => {
+    console.log(onGoingFairs);
+  }, [onGoingFairs]);
+
+  return <div>HOME</div>;
 };
 
 export default Home;
