@@ -30,12 +30,6 @@ const usersRoutes = require("./routes/users");
 
 app.use("/api/users", usersRoutes(db));
 
-app.use("/test", (req, res) => {
-  res.json({
-    status:"success"
-  })
-})
-
 app.get("/", (req, res) => {
   res.render("index");
 });

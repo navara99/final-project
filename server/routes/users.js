@@ -68,5 +68,18 @@ module.exports = (db) => {
 
   });
 
+  router.get("/me", async (req, res) => {
+    const { user_id } = req.session;
+    if (!user_id) return res.json({});
+
+    try {
+      const userInfo = await getUserByValue("id", user_id);
+      res.json(userInfo);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+
+  });
+
   return router;
 };

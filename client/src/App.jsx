@@ -14,7 +14,7 @@ function App() {
   const [showError, setShowError] = useState(false);
 
   useEffect(() => {
-    axios.get("/test").then((result) => {
+    axios.get("/api/users/me").then((result) => {
       console.log(result);
     });
   }, []);
@@ -23,7 +23,7 @@ function App() {
     <div className="App">
       <Navbar currentUser={null} />
       <ErrorModal {...{ errorMessage, showError, setShowError }} />
-      <div class="main-container">
+      <div className="main-container">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route

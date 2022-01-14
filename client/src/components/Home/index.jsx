@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
 
 const Home = () => {
-  useEffect(() => {}, []);
+  useEffect(() => {
+    
+  }, []);
 
   return <div>test</div>;
 };
