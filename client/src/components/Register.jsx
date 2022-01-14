@@ -1,20 +1,27 @@
 import React from 'react'
-import { 
-  Container, 
-  Grid, 
-  Typography, 
-  Button, 
-  InputAdornment, 
+import {
+  Container,
+  Grid,
+  Typography,
+  Button,
+  InputAdornment,
   TextField,
   Box
- } from '@mui/material'
-
-import { Person, Email, Lock} from "@mui/icons-material"
+} from '@mui/material'
+import { Person, Email, Lock } from "@mui/icons-material"
+import useInput from '../hooks/useInput'
 
 function Register() {
+  const { email, setEmail, handleEmailChange } = useInput("");
+  const { username, setUsername, handleUsernameChange } = useInput("");
+  const { password, setPassword, handlePasswordChange } = useInput("");
+  const { confirmPassword, setConfirmPassword, handleConfirmPasswordChange} = useInput("");
+  const { firstName, setFirstName, handleFirstNameChange } = useInput("");
+  const { lastName, setLastName, handleLastNameChange } = useInput("");
+
   return (
     <Container>
-      <form onSubmit={()=>{}}>
+      <form onSubmit={() => { }}>
         <Grid
           container
           direction="column"
@@ -32,7 +39,7 @@ function Register() {
           <Grid item>
             <TextField
               variant="outlined"
-              onChange={()=>{}}
+              onChange={() => { }}
               InputProps={{ startAdornment: (< InputAdornment position="start" ><Email /></InputAdornment>) }}
               label="Email"
               type="email"
@@ -44,7 +51,7 @@ function Register() {
           <Grid item>
             <TextField
               variant="outlined"
-              onChange={()=>{}}
+              onChange={() => { }}
               InputProps={{ startAdornment: (< InputAdornment position="start" ><Person /></InputAdornment>) }}
               label="Username"
               error={false}
@@ -59,7 +66,7 @@ function Register() {
               error={false}
               helperText={"Test"}
               InputProps={{ startAdornment: (< InputAdornment position="start" ><Lock /></InputAdornment>) }}
-              onChange={()=>{}}
+              onChange={() => { }}
               type="password"
               required></TextField>
           </Grid>
@@ -70,7 +77,7 @@ function Register() {
               error={true}
               helperText={"Test"}
               InputProps={{ startAdornment: (< InputAdornment position="start" ><Lock /></InputAdornment>) }}
-              onChange={()=>{}}
+              onChange={() => { }}
               type="password"
               required></TextField>
           </Grid>
