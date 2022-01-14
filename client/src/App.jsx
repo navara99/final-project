@@ -6,7 +6,7 @@ import Navbar from "./components/Navbar/index";
 import { useEffect, useState } from "react";
 import Register from "./components/Register";
 import ErrorModal from "./components/ErrorModal";
-import Home from "./components/Home/Home";
+import Home from "./components/Home";
 import { Routes, Route } from "react-router-dom";
 
 function App() {
