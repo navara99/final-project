@@ -7,7 +7,7 @@ import {
   Card
 } from "@mui/material";
 import GroupAction from "./GroupAction";
-
+import "./groups.css";
 
 function Groups() {
 

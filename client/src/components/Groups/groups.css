@@ -1,0 +1,14 @@
+.groups-container {
+  padding-top: 5em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  width: 90%;
+}
+
+.organization-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
