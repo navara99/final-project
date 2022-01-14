@@ -5,10 +5,24 @@ function GroupAction() {
 
 
 
-  const btnTexts = ["Add Member", "Edit", "Delete"];
+  const btnInfo = [
+    {
+      text: "Add Member",
+      variant: "contained",
+    },
+    {
+      text: "Edit",
+      variant: "outlined"
+    }
+    ,
+    {
+      text: "Delete",
+      variant: "outlined"
+    }
+  ];
 
-  const btns = btnTexts.map((text) => {
-    return <GroupsBtn {...{ text }} />
+  const btns = btnInfo.map((info, i) => {
+    return <GroupsBtn key={i} text={info.text} variant={info.variant} />
   });
 
 
