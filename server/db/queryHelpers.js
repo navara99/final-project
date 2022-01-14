@@ -22,7 +22,11 @@ const queryGenerator = (db) => {
     };
   };
 
-  return { createNewUser };
+  const getUserByValue = async (columnName, value) => {
+
+  };
+
+  return { createNewUser, getUserByValue };
 };
 
 module.exports = queryGenerator;
