@@ -7,6 +7,10 @@ const express = require("express");
 const app = express();
 const morgan = require("morgan");
 
+// Set up cookie-session
+const cookieSession = require("cookie-session");
+app.use(cookieSession({ secret: process.env.SECRET }));
+
 // PG database client/connection setup
 const { Pool } = require("pg");
 const dbParams = require("./lib/db.js");
@@ -40,6 +44,9 @@ app.post("/login", async (req, res) => {
     // req.session.user_id = user.id;
     res.status(200).json(user);
 })
+const usersRoutes = require("./routes/users");
+
+app.use("/api/users", usersRoutes(db));
 
 app.use("/test", (req, res) => {
   res.json({
