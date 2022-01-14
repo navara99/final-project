@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import React from "react";
 import useInput from "../../hooks/useInput";
+import axios from "axios";
 
 function GroupForm({ openForm, setOpenForm }) {
   const [name, handleNameChange] = useInput("");
@@ -17,7 +18,7 @@ function GroupForm({ openForm, setOpenForm }) {
   const [industry, handleIndustryChange] = useInput("");
   const [website, handleWebsiteChange] = useInput("");
 
-  const createOrganization = () => {
+  const createOrganization = async () => {
 
     const newGroupInfo = {
       name,
@@ -27,10 +28,12 @@ function GroupForm({ openForm, setOpenForm }) {
       website
     };
 
-    
-
-
-
+    try {
+      const { data } = await axios.post("/api/organizations", newGroupInfo);
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+    };
 
   };
 
