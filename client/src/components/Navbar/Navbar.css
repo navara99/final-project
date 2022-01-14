@@ -7,20 +7,17 @@
   margin-right: 0.5em;
 }
 
-.navbar > div > a, span {
-  width: 2em;
-  height: 2em;
-}
-
-.navbar a, span {
+.navbar-button {
   color: #e8f1f2;
   font-size: 1.5em;
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 2em;
+  height: 2em;
 }
 
-.navbar a:hover, span:hover {
+.navbar-button:hover {
   background-color: #13293d;
   cursor: pointer;
 }

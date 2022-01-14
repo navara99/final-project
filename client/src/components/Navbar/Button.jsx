@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Button = ({ icon, to }) => {
   return (
-    <Link to={to}>
+    <Link to={to} className="navbar-button">
       <FontAwesomeIcon icon={icon} />
     </Link>
   );
