@@ -9,10 +9,10 @@ import LogoutIcon from '@mui/icons-material/Logout';
 const UserButtons = ({ logout, currentUser }) => {
   return (
     <div>
-      <Button to="/schedule" Icon={DateRangeIcon} />
-      <Button to="/messages" Icon={ForumIcon} />
-      <Button to="/groups" Icon={GroupsIcon} />
-      <Button to="/settings" Icon={SettingsIcon} />
+      <Button {...{ to: "/schedule", Icon: DateRangeIcon, text: "My Schedule" }} />
+      <Button {...{ to: "/messages", Icon: ForumIcon, text: "Messages" }} />
+      <Button {...{ to: "/groups", Icon: GroupsIcon, text: "My Groups" }} />
+      <Button {...{ to: "/settings", Icon: SettingsIcon, text: "Settings" }} />
       <span onClick={logout} className="navbar-button">
         <LogoutIcon />
       </span>
