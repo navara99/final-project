@@ -37,7 +37,7 @@ module.exports = (db) => {
       const hashedPassword = await bcrypt.hash(password, 12);
       const userInfo = { ...req.body, password: hashedPassword };
       const newUser = await createNewUser(userInfo);
-
+      req.session.user_id = newUser.id;
       res.json(newUser);
     } catch (err) {
       console.log(err.message);
