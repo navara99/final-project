@@ -15,7 +15,7 @@ const LogIn = () => {
       email: data.get('email'),
       password: data.get('password'),
     }
-    axios.post("/login", logInDetail)
+    axios.post("/api/users/login", logInDetail)
         .then(result => console.log(result))
   };
   return (
