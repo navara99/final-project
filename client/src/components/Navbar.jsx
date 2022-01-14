@@ -7,9 +7,11 @@ import { Link } from "react-router-dom";
 export default function Navbar() {
   return (
     <div className="navbar">
-      <Link to="/">
-        <FontAwesomeIcon icon={faCoffee} />
-      </Link>
+      <div>
+        <Link to="/">
+          <FontAwesomeIcon icon={faCoffee} />
+        </Link>
+      </div>
     </div>
   );
 }
