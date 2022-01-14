@@ -19,19 +19,19 @@ module.exports = (db) => {
     try {
       const passwordIsSame = confirmPassword === password;
       if (!passwordIsSame) {
-        return res.status(400).json({ error: "Passwords do not match." });
+        return res.json({ error: "Passwords do not match." });
       };
 
       const userWithSameUsername = await getUserByValue("username", username);
 
       if (userWithSameUsername) {
-        return res.status(400).json({ error: "This username is already taken." });
+        return res.json({ error: "This username is already taken." });
       };
 
       const userWithSameEmail = await getUserByValue("email", email);
 
       if (userWithSameEmail) {
-        return res.status(400).json({ error: "This email is already taken." });
+        return res.json({ error: "This email is already taken." });
       };
 
       const hashedPassword = await bcrypt.hash(password, 12);
