@@ -12,7 +12,7 @@ import { Person, Email, Lock } from "@mui/icons-material";
 import useInput from '../hooks/useInput';
 import axios from 'axios';
 
-function Register({ setErrorMessage, setShowError }) {
+function Register({ setErrorMessage, setShowError, setCurrentUser }) {
   const [email, handleEmailChange] = useInput("");
   const [username, handleUsernameChange] = useInput("");
   const [password, handlePasswordChange] = useInput("");
@@ -38,6 +38,9 @@ function Register({ setErrorMessage, setShowError }) {
         setErrorMessage(error);
         setShowError(true);
       };
+      if (!error) {
+        setCurrentUser(data);
+      }
     } catch (err) {
       console.log(err.message);
     };

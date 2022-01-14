@@ -1,21 +1,34 @@
-import React from 'react'
-import {Avatar, Button, CssBaseline, TextField, Link, Grid, Box, Typography, Container} from '@mui/material';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import axios from 'axios';
+import React from "react";
+import {
+  Avatar,
+  Button,
+  CssBaseline,
+  TextField,
+  Link,
+  Grid,
+  Box,
+  Typography,
+  Container,
+} from "@mui/material";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import axios from "axios";
 
-const LogIn = () => {
-
-  const handleSubmit = (event) => {
+const LogIn = ({ setCurrentUser }) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(FormData)
+    console.log(FormData);
     const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
+
     const logInDetail = {
-      email: data.get('email'),
-      password: data.get('password'),
+      email: data.get("email"),
+      password: data.get("password"),
+    };
+    try {
+      const { data } = await axios.post("/api/users/login", logInDetail);
+      setCurrentUser(data);
+    } catch (e) {
+      console.log(e);
     }
-    axios.post("/api/users/login", logInDetail)
-        .then(result => console.log(result))
   };
   return (
     <Container component="main" maxWidth="xs">
@@ -23,12 +36,12 @@ const LogIn = () => {
       <Box
         sx={{
           marginTop: 8,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
         }}
       >
-        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+        <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
@@ -78,7 +91,7 @@ const LogIn = () => {
         </Box>
       </Box>
     </Container>
-  )
-}
+  );
+};
 
-export default LogIn
+export default LogIn;
