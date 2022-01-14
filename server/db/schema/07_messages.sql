@@ -4,5 +4,6 @@ CREATE TABLE messages (
   id SERIAL PRIMARY KEY,
   sender_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   receiver_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-  message varchar
+  message varchar,
+  created_at TIMESTAMP NOT NULL DEFAULT NOW()
 );
