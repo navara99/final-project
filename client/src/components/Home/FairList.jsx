@@ -1,8 +1,12 @@
 import React from "react";
-import FairListItem from './FairListItem';
+import FairListItem from "./FairListItem";
 
 const FairList = () => {
-  <FairListItem />
+  return (
+    <div className="fair-list">
+      <FairListItem />
+    </div>
+  );
 };
 
-export default FairList
+export default FairList;

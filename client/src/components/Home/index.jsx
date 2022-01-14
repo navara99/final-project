@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import useFairs from "../../hooks/useFairs";
-import FairListItem from "./FairListItem";
+import "./Home.css";
+import FairList from "./FairList";
 
 const Home = () => {
   const { onGoingFairs, upcomingFairs, pastFairs } = useFairs();
@@ -13,7 +14,7 @@ const Home = () => {
 
   return (
     <div>
-      <FairListItem />
+      <FairList />
     </div>
   );
 };

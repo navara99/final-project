@@ -7,11 +7,11 @@ import { Link } from "react-router-dom";
 
 const FairListItem = () => {
   return (
-    <Link to="/">
-      <Card sx={{ maxWidth: 345 }}>
+    <Link to="/job">
+      <Card sx={{ maxWidth: 250 }}>
         <CardMedia
           component="img"
-          height="300em"
+          height="200"
           image="https://mui.com/static/images/cards/contemplative-reptile.jpg"
           alt="green iguana"
         />
