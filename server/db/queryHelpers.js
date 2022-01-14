@@ -36,7 +36,25 @@ const queryGenerator = (db) => {
     }
   };
 
-  return { createNewUser, getUserByValue };
+  const createNewOrganization = async ({ name, description, email, industry, website }) => {
+    const values = [name, description, email, industry, website];
+    const queryString = `
+      INSERT INTO groups (name, description, email, industry, website, creator)
+      VALUES ($1, $2, $3, $4, $5, $6)
+      RETURNING *;
+    `;
+
+    try {
+      const result = await db.query(queryString, values);
+      const newOrganizationInfo = getFirstRecord(result);
+
+      return newOrganizationInfo;
+    } catch (err) {
+      console.log(err);
+    };
+  }
+
+  return { createNewUser, getUserByValue, createNewOrganization };
 };
 
 module.exports = queryGenerator;
