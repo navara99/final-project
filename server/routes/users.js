@@ -10,6 +10,8 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 
 module.exports = (db) => {
+  const queryGenerator = require("../db/queryHelpers");
+  const { createNewUser } = queryGenerator(db);
 
   router.post("/register", async (req, res) => {
     const { firstName, lastName, email, username, password, confirmPassword } = req.body;
@@ -21,7 +23,10 @@ module.exports = (db) => {
       };
 
       const hashedPassword = await bcrypt.hash(password, 12);
-      console.log(hashedPassword);
+      const userInfo = { ...req.body, password: hashedPassword };
+      const newUser = await createNewUser(userInfo);
+
+      console.log(newUser);
 
     } catch (err) {
       console.log(err.message);
