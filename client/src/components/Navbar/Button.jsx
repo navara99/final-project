@@ -1,11 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const Button = ({ icon, to }) => {
+const Button = ({ Icon, to }) => {
   return (
     <Link to={to} className="navbar-button">
-      <FontAwesomeIcon icon={icon} />
+      <Icon />
     </Link>
   );
 };

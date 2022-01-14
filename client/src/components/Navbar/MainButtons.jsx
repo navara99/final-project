@@ -1,12 +1,13 @@
 import React from "react";
 import { faHome, faThList } from "@fortawesome/free-solid-svg-icons";
 import Button from "./Button";
+import HomeIcon from '@mui/icons-material/Home';
 
 const MainButtons = () => {
   return (
     <div>
-      <Button to="/" icon={faHome}/>
-      <Button to="/jobs" icon={faThList}/>
+      <Button to="/" Icon={HomeIcon}/>
+      {/* <Button to="/jobs" Icon={faThList}/> */}
     </div>
   );
 };

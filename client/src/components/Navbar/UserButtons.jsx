@@ -8,14 +8,16 @@ import {
   faComment,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import DateRangeIcon from "@mui/icons-material/DateRange";
+import GroupsIcon from "@mui/icons-material/Groups";
 
-const UserButtons = ({logout, currentUser}) => {
+const UserButtons = ({ logout, currentUser }) => {
   return (
     <div>
-      <Button to="/schedule" icon={faCalendar} />
-      <Button to="/groups" icon={faUsers} />
-      <Button to="/messages" icon={faComment} />
-      <Button to="/settings" icon={faCog} />
+      <Button to="/schedule" Icon={DateRangeIcon} />
+      <Button to="/groups" Icon={GroupsIcon} />
+      {/*  <Button to="/messages" icon={faComment} />
+      <Button to="/settings" icon={faCog} /> */}
       <span onClick={logout} className="navbar-button">
         <FontAwesomeIcon icon={faSignOutAlt} />
       </span>
