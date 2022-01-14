@@ -2,7 +2,6 @@ import React from "react";
 import {
   Avatar,
   Button,
-  CssBaseline,
   TextField,
   Link,
   Grid,
@@ -16,7 +15,7 @@ import axios from "axios";
 const LogIn = ({ setCurrentUser }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(FormData);
+
     const data = new FormData(event.currentTarget);
 
     const logInDetail = {
@@ -28,7 +27,8 @@ const LogIn = ({ setCurrentUser }) => {
       setCurrentUser(data);
     } catch (e) {
       console.log(e);
-    }
+    };
+    
   };
   return (
     <Container maxWidth="xs">
