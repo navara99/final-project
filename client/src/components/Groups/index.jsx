@@ -1,15 +1,12 @@
 import React from "react";
 import {
   List,
-  ListItemButton,
-  Avatar,
-  ListItemAvatar,
   ListItemText,
   Typography,
-  Divider,
   Button,
   Card
 } from "@mui/material";
+import GroupAction from "./GroupAction";
 
 
 function Groups() {
@@ -35,9 +32,7 @@ function Groups() {
               </React.Fragment>
             }
           />
-          <Button variant="contained">Add Member</Button>
-          <Button variant="contained">Edit</Button>
-          <Button variant="contained">Delete</Button>
+          <GroupAction />
         </Card>
         <Card style={cardStyles} alignItems="flex-start">
           <ListItemText
