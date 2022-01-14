@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import axios from "axios";
 import { useEffect } from "react";
-import Navbar from "./components/Navbar/Navbar";
+import Navbar from "./components/Navbar/index";
 import Dashboard from "./components/Home/Dashboard";
 
 function App() {
@@ -14,7 +14,7 @@ function App() {
 
   return (
     <div className="app">
-      <Navbar />
+      <Navbar currentUser={null} />
       <Dashboard />
     </div>
   );

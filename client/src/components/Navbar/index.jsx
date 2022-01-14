@@ -1,20 +1,14 @@
-import "./Navbar.css";
 import React from "react";
+import "./Navbar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHome, faThList, faSignInAlt, faRegistered, faCalendar } from "@fortawesome/free-solid-svg-icons";
+import { faSignInAlt, faRegistered } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import MainButtons from "./MainButtons";
 
-export default function Navbar() {
+const Navbar = ({ currentUser }) => {
   return (
     <div className="navbar">
-      <div>
-        <Link to="/">
-          <FontAwesomeIcon icon={faHome} />
-        </Link>
-        <Link to="/jobs">
-          <FontAwesomeIcon icon={faThList} />
-        </Link>
-      </div>
+      <MainButtons />
       <div>
         <Link to="/login">
           <FontAwesomeIcon icon={faSignInAlt} />
@@ -25,4 +19,6 @@ export default function Navbar() {
       </div>
     </div>
   );
-}
+};
+
+export default Navbar;
