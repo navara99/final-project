@@ -1,9 +1,11 @@
 import React from 'react';
 import './App.css';
-import axios from "axios"
+import axios from "axios";
+import Navbar from "./components/Navbar/index";
 import { useEffect, useState } from 'react';
 import Register from "./components/Register"
 import ErrorModal from './components/ErrorModal';
+import Dashboard from "./components/Home/Dashboard";
 
 function App() {
   const [errorMessage, setErrorMessage] = useState("");
@@ -19,10 +21,14 @@ function App() {
 
   return (
     <div className="App">
-      <ErrorModal {...{ errorMessage }} {...{ showError }} {...{ setShowError }} />
-      <Register {...{ setErrorMessage }} {...{ setShowError }} />
+      <Navbar currentUser={null} />
+      <div class="main-container">
+        <Dashboard />
+        <ErrorModal {...{ errorMessage }} {...{ showError }} {...{ setShowError }} />
+        <Register {...{ setErrorMessage }} {...{ setShowError }} />
+      </div>
     </div>
   );
-}
+};
 
 export default App;
