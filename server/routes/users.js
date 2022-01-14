@@ -6,20 +6,28 @@
  */
 
 const express = require('express');
-const router  = express.Router();
+const router = express.Router();
 
 module.exports = (db) => {
-  router.get("/", (req, res) => {
-    db.query(`SELECT * FROM users;`)
-      .then(data => {
-        const users = data.rows;
-        res.json({ users });
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
+
+  router.post("/register", async (req, res) => {
+    const { firstName, lastName, email, username, password, confirmPassword } = req.body;
+
+    try {
+      const passwordIsSame = confirmedPassword === password;
+      if (!passwordIsSame) {
+        return res.status(400).json({ error: "Passwords do not match." });
+      };
+
+    } catch (err) {
+
+    }
+
+
+    res.json({
+      status: "logged-in"
+    });
   });
+
   return router;
 };
