@@ -7,9 +7,8 @@ const CompanyItem = (props) => {
   const {industry} = props
   return (
     <Grid item xs={8}>
-      <Paper sx={{ p: 2, margin: 'auto',  flexGrow: 1 }} elevation={8}>
-      <Grid container spacing={2}>
-        <Grid item xs={12} sm container>
+      <Paper sx={{ p: 4, margin: 'auto',  flexGrow: 1, borderRadius:5 }} elevation={8}>
+        <Grid item xs={12} sm container spacing={2}>
           <Grid item xs container  spacing={2}>
             <Grid item xs>
               <Typography gutterBottom variant="h5" component="div">
@@ -37,7 +36,6 @@ const CompanyItem = (props) => {
             </Grid>
           </Grid>
         </Grid>
-      </Grid>
     </Paper>
     </Grid>
   )
