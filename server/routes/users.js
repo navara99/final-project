@@ -11,10 +11,10 @@ const bcrypt = require("bcryptjs");
 
 module.exports = (db) => {
   const queryGenerator = require("../db/queryHelpers");
-  const { createNewUser } = queryGenerator(db);
+  const { createNewUser, getUserByValue } = queryGenerator(db);
 
   router.post("/register", async (req, res) => {
-    const { firstName, lastName, email, username, password, confirmPassword } = req.body;
+    const { email, username, password, confirmPassword } = req.body;
 
     try {
       const passwordIsSame = confirmPassword === password;
@@ -26,6 +26,12 @@ module.exports = (db) => {
 
       if (userWithSameUsername) {
         return res.status(400).json({ error: "This username is already taken." });
+      };
+
+      const userWithSameEmail = await getUserByValue("email", email);
+
+      if (userWithSameEmail) {
+        return res.status(400).json({ error: "This email is already taken." });
       };
 
       const hashedPassword = await bcrypt.hash(password, 12);
