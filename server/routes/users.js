@@ -26,16 +26,11 @@ module.exports = (db) => {
       const userInfo = { ...req.body, password: hashedPassword };
       const newUser = await createNewUser(userInfo);
 
-      console.log(newUser);
-
+      res.json(newUser);
     } catch (err) {
       console.log(err.message);
     }
 
-
-    res.json({
-      status: "logged-in"
-    });
   });
 
   return router;
