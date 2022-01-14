@@ -7,6 +7,7 @@ import {
   Card
 } from "@mui/material";
 import GroupAction from "./GroupAction";
+import { Add } from "@mui/icons-material";
 import "./groups.css";
 
 function Groups() {
@@ -20,7 +21,7 @@ function Groups() {
     <div className="groups-container">
       <div className="organization-header">
         <Typography><h2>Your Organizations</h2></Typography>
-        <Button variant="contained">Add Organization</Button>
+        <Button variant="contained" startIcon={<Add />}>Add Organization</Button>
       </div>
       <List sx={{ width: '90%', paddingTop: "2em" }}>
         <Card style={cardStyles} alignItems="flex-start">
