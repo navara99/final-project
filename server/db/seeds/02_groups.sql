@@ -1,6 +1,8 @@
-copy groups (
- name,
-description 
-) FROM '/Users/yagneshparekh/lighthouse/final-project/server/db/raw_data/groups.csv' -- replace path for related .csv file from your folder
-DELIMITER ','
-CSV HEADER;
+INSERT INTO groups (
+  name,
+  description 
+)
+VALUES
+('Dabtype', 'Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero convallis eget eleifend luctus ultricies eu nibh.'),
+('Devcast', 'Etiam vel augue. Vestibulum rutrum rutrum neque. Aenean auctor gravida sem.')
+;
