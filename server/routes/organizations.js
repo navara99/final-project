@@ -11,7 +11,6 @@ module.exports = (db) => {
     try {
       const newOrganization = await createNewOrganization({ ...req.body });
       await addUserToOrganization(user_id, newOrganization.id, true);
-
       res.json(newOrganization);
     } catch (err) {
       console.log(err.message);

@@ -54,8 +54,18 @@ const queryGenerator = (db) => {
   }
 
   const addUserToOrganization = async (user_id, group_id, admin) => {
+    const values = [user_id, group_id, admin];
+    const queryString = `
+      INSERT INTO users_groups (user_id, group_id, admin)
+      VALUES ($1, $2, $3)
+      RETURNING *;
+    `;
 
-    console.log(user_id, group_id, admin);
+    try {
+      await db.query(queryString, values);
+    } catch (err) {
+      console.log(err.message);
+    };
 
   };
 
