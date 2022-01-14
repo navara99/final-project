@@ -39,7 +39,7 @@ function GroupAction() {
 
   return (
     <div className="organization-action-btn">
-      <div class="action-btns">
+      <div className="action-btns">
         <GroupsBtn text="Details" variant="contained" />
         <div>
           {btns}
