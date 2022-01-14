@@ -31,8 +31,13 @@ function Register() {
       lastName
     };
 
-    const { data } = await axios.post("/api/users/register", userInfo);
-    console.log(data);
+    try {
+      const { data } = await axios.post("/api/users/register", userInfo);
+      console.log(data);
+    } catch (err) {
+      console.log(err.message);
+    };
+
   };
 
   return (
