@@ -27,8 +27,10 @@ app.use(express.urlencoded({ extended: true }));
 // Note: Feel free to replace the example routes below with your own
 
 const usersRoutes = require("./routes/users");
+const organizationRoutes = require("./routes/organizations");
 
 app.use("/api/users", usersRoutes(db));
+app.use("/api/organizations", organizationRoutes(db));
 
 app.get("/", (req, res) => {
   res.render("index");
