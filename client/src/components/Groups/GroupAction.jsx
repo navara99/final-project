@@ -1,15 +1,21 @@
 import React from "react";
 import { Button } from "@mui/material";
+import GroupsBtn from "./GroupsBtn";
 
 function GroupAction() {
 
 
 
+  const btnTexts = ["Add Member", "Edit", "Delete"];
+
+  const btns = btnTexts.map((text) => {
+    return <GroupsBtn {...{ text }} />
+  });
+
+
   return (
     <div className="organization-action-btn">
-      <Button variant="contained">Add Member</Button>
-      <Button variant="contained">Edit</Button>
-      <Button variant="contained">Delete</Button>
+      {btns}
     </div>
   );
 };
