@@ -1,7 +1,7 @@
 import "./Navbar.css";
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCoffee } from "@fortawesome/free-solid-svg-icons";
+import { faHome, faThList } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
 export default function Navbar() {
@@ -9,7 +9,10 @@ export default function Navbar() {
     <div className="navbar">
       <div>
         <Link to="/">
-          <FontAwesomeIcon icon={faCoffee} />
+          <FontAwesomeIcon icon={faHome} />
+        </Link>
+        <Link to="/jobs">
+          <FontAwesomeIcon icon={faThList} />
         </Link>
       </div>
     </div>
