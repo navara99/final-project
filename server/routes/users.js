@@ -7,6 +7,7 @@
 
 const express = require('express');
 const router = express.Router();
+const bcrypt = require("bcryptjs");
 
 module.exports = (db) => {
 
@@ -14,13 +15,16 @@ module.exports = (db) => {
     const { firstName, lastName, email, username, password, confirmPassword } = req.body;
 
     try {
-      const passwordIsSame = confirmedPassword === password;
+      const passwordIsSame = confirmPassword === password;
       if (!passwordIsSame) {
         return res.status(400).json({ error: "Passwords do not match." });
       };
 
-    } catch (err) {
+      const hashedPassword = await bcrypt.hash(password, 12);
+      console.log(hashedPassword);
 
+    } catch (err) {
+      console.log(err.message);
     }
 
 
