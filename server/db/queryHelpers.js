@@ -40,14 +40,13 @@ const queryGenerator = (db) => {
     const values = [name, description, email, industry, website];
     const queryString = `
       INSERT INTO groups (name, description, email, industry, website)
-      VALUES ($1, $2, $3, $4, $5, $6)
+      VALUES ($1, $2, $3, $4, $5)
       RETURNING *;
     `;
 
     try {
       const result = await db.query(queryString, values);
       const newOrganizationInfo = getFirstRecord(result);
-
       return newOrganizationInfo;
     } catch (err) {
       console.log(err);
