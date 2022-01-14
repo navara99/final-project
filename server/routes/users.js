@@ -45,5 +45,27 @@ module.exports = (db) => {
 
   });
 
+  app.post("/login", async (req, res) => {
+    const { email, password } = req.body;
+
+    const data = await getUserByValue("email", email);
+    const user = data.rows[0];
+
+    try {
+      if (!user) return res.json({ error: "Email doesn't exists. Please create a new account." });
+
+      const correctPassword = await bcrypt.compare(password, user.password);
+      if (!correctPassword) return res.json({ error: "Incorrect credentials." });
+
+      req.session.user_id = user.id;
+      res.json(user);
+
+    } catch (err) {
+      console.log(err);
+    };
+
+    res.status(200).json(user);
+  });
+
   return router;
 };
