@@ -12,16 +12,20 @@ import { Person, Email, Lock } from "@mui/icons-material"
 import useInput from '../hooks/useInput'
 
 function Register() {
-  const [ email, handleEmailChange ] = useInput("");
-  const [ username, handleUsernameChange ] = useInput("");
-  const [ password, handlePasswordChange ] = useInput("");
-  const [ confirmPassword, handleConfirmPasswordChange ] = useInput("");
-  const [ firstName, handleFirstNameChange ] = useInput("");
-  const [ lastName, handleLastNameChange ] = useInput("");
+  const [email, handleEmailChange] = useInput("");
+  const [username, handleUsernameChange] = useInput("");
+  const [password, handlePasswordChange] = useInput("");
+  const [confirmPassword, handleConfirmPasswordChange] = useInput("");
+  const [firstName, handleFirstNameChange] = useInput("");
+  const [lastName, handleLastNameChange] = useInput("");
+
+  const registerUser = (e) => {
+    e.preventDefault();
+  };
 
   return (
     <Container>
-      <form onSubmit={() => { }}>
+      <form onSubmit={registerUser}>
         <Grid
           container
           direction="column"
@@ -83,7 +87,7 @@ function Register() {
               variant="outlined"
               label="Password"
               error={false}
-              helperText={"Test"}
+              helperText={""}
               InputProps={{ startAdornment: (< InputAdornment position="start" ><Lock /></InputAdornment>) }}
               onChange={handlePasswordChange}
               type="password"
@@ -93,8 +97,8 @@ function Register() {
             <TextField
               variant="outlined"
               label="Confirm Password"
-              error={true}
-              helperText={"Test an error message"}
+              error={false}
+              helperText={""}
               InputProps={{ startAdornment: (< InputAdornment position="start" ><Lock /></InputAdornment>) }}
               onChange={handleConfirmPasswordChange}
               type="password"
