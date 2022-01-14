@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import useFairs from "../../hooks/useFairs";
+import FairListItem from "./FairListItem";
 
 const Home = () => {
   const { onGoingFairs, upcomingFairs, pastFairs } = useFairs();
@@ -10,7 +11,11 @@ const Home = () => {
     console.log(pastFairs);
   }, [pastFairs]);
 
-  return <div>HOME</div>;
+  return (
+    <div>
+      <FairListItem />
+    </div>
+  );
 };
 
 export default Home;
