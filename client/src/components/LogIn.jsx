@@ -13,7 +13,8 @@ const LogIn = () => {
       email: data.get('email'),
       password: data.get('password'),
     }
-    axios.post("/login", {logInDetail})
+    axios.post("/login", logInDetail)
+        .then(result => console.log(result))
   };
   return (
     <Container component="main" maxWidth="xs">
