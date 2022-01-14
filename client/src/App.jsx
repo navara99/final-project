@@ -1,23 +1,42 @@
-import React from "react";
-import "./App.css";
+import React from 'react';
+import './App.css';
+// import axios from "axios"
+// import { useEffect } from 'react';
+// import Navbar from './components/Navbar';
+// import Dashboard from './components/Home/Dashboard';
+import LogIn from './components/LogIn';
 import axios from "axios";
-import { useEffect } from "react";
 import Navbar from "./components/Navbar/index";
+import { useEffect, useState } from 'react';
+import Register from "./components/Register"
+import ErrorModal from './components/ErrorModal';
 import Dashboard from "./components/Home/Dashboard";
 
 function App() {
+  const [errorMessage, setErrorMessage] = useState("");
+  const [showError, setShowError] = useState(false);
+
   useEffect(() => {
+
     axios.get("/test").then((result) => {
-      console.log(result);
-    });
-  }, []);
+      console.log(result)
+    })
+
+  }, [])
 
   return (
-    <div className="app">
+    <div className="App">
       <Navbar currentUser={null} />
-      <Dashboard />
+      <div class="main-container">
+        <Dashboard />
+        <ErrorModal {...{ errorMessage }} {...{ showError }} {...{ setShowError }} />
+        <Register {...{ setErrorMessage }} {...{ setShowError }} />
+      </div>
+      <div>
+        <LogIn/>
+      </div>
     </div>
   );
-}
+};
 
 export default App;
