@@ -2,7 +2,6 @@ const getData = ({ rows }) => rows;
 const getFirstRecord = (result) => getData(result)[0];
 
 const queryGenerator = (db) => {
-
   const createNewUser = async (userInfo) => {
     const { email, password, username, firstName, lastName } = userInfo;
     const values = [email, password, username, firstName, lastName];
@@ -19,7 +18,7 @@ const queryGenerator = (db) => {
       return newUserInfo;
     } catch (err) {
       console.log(err);
-    };
+    }
   };
 
   const getUserByValue = async (columnName, value) => {
@@ -36,7 +35,20 @@ const queryGenerator = (db) => {
     }
   };
 
-  return { createNewUser, getUserByValue };
+  const getAllFairs = async () => {
+    const queryString = `SELECT * FROM fairs;`;
+
+    try {
+      const result = await db.query(queryString);
+      const data = getData(result);
+
+      return data;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  return { createNewUser, getUserByValue, getAllFairs };
 };
 
 module.exports = queryGenerator;

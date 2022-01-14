@@ -27,12 +27,10 @@ app.use(express.urlencoded({ extended: true }));
 // Note: Feel free to replace the example routes below with your own
 
 const usersRoutes = require("./routes/users");
+const fairsRoutes = require("./routes/fairs");
 
 app.use("/api/users", usersRoutes(db));
-
-app.get("/", (req, res) => {
-  res.render("index");
-});
+app.use("/api/fairs", fairsRoutes(db));
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
