@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {
   Container,
   Grid,
@@ -7,9 +7,10 @@ import {
   InputAdornment,
   TextField,
   Box
-} from '@mui/material'
-import { Person, Email, Lock } from "@mui/icons-material"
-import useInput from '../hooks/useInput'
+} from '@mui/material';
+import { Person, Email, Lock } from "@mui/icons-material";
+import useInput from '../hooks/useInput';
+import axios from 'axios';
 
 function Register() {
   const [email, handleEmailChange] = useInput("");
@@ -19,8 +20,19 @@ function Register() {
   const [firstName, handleFirstNameChange] = useInput("");
   const [lastName, handleLastNameChange] = useInput("");
 
-  const registerUser = (e) => {
+  const registerUser = async (e) => {
     e.preventDefault();
+    const userInfo = {
+      email,
+      username,
+      password,
+      confirmPassword,
+      firstName,
+      lastName
+    };
+
+    const { data } = axios.post("/register", userInfo);
+    console.log(data);
   };
 
   return (
