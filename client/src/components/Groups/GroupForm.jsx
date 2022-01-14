@@ -8,9 +8,31 @@ import {
   Button
 } from "@mui/material";
 import React from "react";
+import useInput from "../../hooks/useInput";
 
 function GroupForm({ openForm, setOpenForm }) {
+  const [name, handleNameChange] = useInput("");
+  const [description, handleDescriptionChange] = useInput("");
+  const [email, handleEmailChange] = useInput("");
+  const [industry, handleIndustryChange] = useInput("");
+  const [website, handleWebsiteChange] = useInput("");
 
+  const createOrganization = () => {
+
+    const newGroupInfo = {
+      name,
+      description,
+      email,
+      industry,
+      website
+    };
+
+    
+
+
+
+
+  };
 
   return (
     <Dialog open={openForm} onClose={() => { }}>
@@ -26,6 +48,7 @@ function GroupForm({ openForm, setOpenForm }) {
           label="Organization Name"
           fullWidth
           required
+          onChange={handleNameChange}
         />
         <TextField
           multiline
@@ -35,6 +58,7 @@ function GroupForm({ openForm, setOpenForm }) {
           label="Description"
           fullWidth
           required
+          onChange={handleDescriptionChange}
         />
         <TextField
           margin="dense"
@@ -43,6 +67,7 @@ function GroupForm({ openForm, setOpenForm }) {
           fullWidth
           type="email"
           required
+          onChange={handleEmailChange}
         />
         <TextField
           margin="dense"
@@ -50,17 +75,19 @@ function GroupForm({ openForm, setOpenForm }) {
           label="Industry"
           fullWidth
           required
+          onChange={handleIndustryChange}
         />
         <TextField
           margin="dense"
           id="website"
           label="Website"
           fullWidth
+          onChange={handleWebsiteChange}
         />
       </DialogContent>
       <DialogActions>
         <Button onClick={() => { setOpenForm(!openForm) }}>Cancel</Button>
-        <Button onClick={() => { }}>Create</Button>
+        <Button onClick={createOrganization}>Create</Button>
       </DialogActions>
     </Dialog>
   )
