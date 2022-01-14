@@ -6,15 +6,16 @@ import FairList from "./FairList";
 const Home = () => {
   const { onGoingFairs, upcomingFairs, pastFairs } = useFairs();
 
-  useEffect(() => {
-    console.log(upcomingFairs);
-    console.log(onGoingFairs);
-    console.log(pastFairs);
-  }, [pastFairs]);
-
   return (
     <div>
-      <FairList />
+      <h2>On Going Fairs</h2>
+      <FairList items={onGoingFairs} />
+
+      <h2>Upcoming Fairs</h2>
+      <FairList items={upcomingFairs} />
+
+      <h2>Past Fairs</h2>
+      <FairList items={pastFairs} />
     </div>
   );
 };
