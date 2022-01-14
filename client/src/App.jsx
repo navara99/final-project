@@ -4,7 +4,6 @@ import axios from "axios";
 import { useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Dashboard from "./components/Home/Dashboard";
-import { BrowserRouter } from "react-router-dom";
 
 function App() {
   useEffect(() => {
@@ -14,12 +13,10 @@ function App() {
   }, []);
 
   return (
-    <BrowserRouter>
-      <div className="App">
-        <Navbar />
-        <Dashboard />
-      </div>
-    </BrowserRouter>
+    <div className="App">
+      <Navbar />
+      <Dashboard />
+    </div>
   );
 }
 
