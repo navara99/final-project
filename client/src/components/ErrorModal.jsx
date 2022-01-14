@@ -1,11 +1,11 @@
+import React from "react";
 import { Dialog, DialogTitle } from "@mui/material";
 
-function ErrorModal() {
-
+function ErrorModal({ errorMessage, showError, setShowError }) {
 
   return (
-    <Dialog open={true}>
-      <DialogTitle>Error</DialogTitle>
+    <Dialog onClose={() => setShowError(false)} open={showError}>
+      <DialogTitle>{errorMessage}</DialogTitle>
     </Dialog>
   );
 };
