@@ -53,7 +53,13 @@ const queryGenerator = (db) => {
     };
   }
 
-  return { createNewUser, getUserByValue, createNewOrganization };
+  const addUserToOrganization = async (user_id, group_id, admin) => {
+
+    console.log(user_id, group_id, admin);
+
+  };
+
+  return { createNewUser, getUserByValue, createNewOrganization, addUserToOrganization };
 };
 
 module.exports = queryGenerator;
