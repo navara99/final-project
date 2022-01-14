@@ -23,7 +23,17 @@ const queryGenerator = (db) => {
   };
 
   const getUserByValue = async (columnName, value) => {
+    const values = [value];
+    const queryString = `SELECT * FROM users WHERE ${columnName} = $1;`;
 
+    try {
+      const result = await db.query(queryString, values);
+      const userInfo = getFirstRecord(result);
+
+      return userInfo;
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return { createNewUser, getUserByValue };
