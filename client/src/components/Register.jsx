@@ -12,12 +12,12 @@ import { Person, Email, Lock } from "@mui/icons-material"
 import useInput from '../hooks/useInput'
 
 function Register() {
-  const { email, handleEmailChange } = useInput("");
-  const { username, handleUsernameChange } = useInput("");
-  const { password, handlePasswordChange } = useInput("");
-  const { confirmPassword, handleConfirmPasswordChange } = useInput("");
-  const { firstName, handleFirstNameChange } = useInput("");
-  const { lastName, handleLastNameChange } = useInput("");
+  const [ email, handleEmailChange ] = useInput("");
+  const [ username, handleUsernameChange ] = useInput("");
+  const [ password, handlePasswordChange ] = useInput("");
+  const [ confirmPassword, handleConfirmPasswordChange ] = useInput("");
+  const [ firstName, handleFirstNameChange ] = useInput("");
+  const [ lastName, handleLastNameChange ] = useInput("");
 
   return (
     <Container>
