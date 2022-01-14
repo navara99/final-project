@@ -7,14 +7,11 @@ import Dashboard from './components/Home/Dashboard';
 import LogIn from './components/LogIn';
 
 function App() {
-
-  useEffect(()=> {
-
-    axios.get("/test").then((result)=> {
-      console.log(result)
-    })
-
-  }, [])
+  useEffect(() => {
+    axios.get("/test").then((result) => {
+      console.log(result);
+    });
+  }, []);
 
   return (
     <div className="App">
