@@ -9,16 +9,14 @@ import {
 } from "@mui/material";
 import React from "react";
 import useInput from "../../hooks/useInput";
-import useMyGroups from "../../hooks/useMyGroups";
 import axios from "axios";
 
-function GroupForm({ openForm, setOpenForm }) {
+function GroupForm({ openForm, setOpenForm, setMyGroups }) {
   const [name, handleNameChange] = useInput("");
   const [description, handleDescriptionChange] = useInput("");
   const [email, handleEmailChange] = useInput("");
   const [industry, handleIndustryChange] = useInput("");
   const [website, handleWebsiteChange] = useInput("");
-  const { myGroups, setMyGroups } = useMyGroups();
 
   const createOrganization = async () => {
 
@@ -32,11 +30,16 @@ function GroupForm({ openForm, setOpenForm }) {
 
     try {
       const { data } = await axios.post("/api/organizations", newGroupInfo);
-      console.log(data);
+      setMyGroups((prev) => [...prev, data]);
     } catch (err) {
       console.log(err);
     };
 
+  };
+
+  const handleCreate = () => {
+    createOrganization();
+    setOpenForm(!openForm);
   };
 
   return (
@@ -92,7 +95,7 @@ function GroupForm({ openForm, setOpenForm }) {
       </DialogContent>
       <DialogActions>
         <Button onClick={() => { setOpenForm(!openForm) }}>Cancel</Button>
-        <Button onClick={createOrganization}>Create</Button>
+        <Button onClick={handleCreate}>Create</Button>
       </DialogActions>
     </Dialog>
   )

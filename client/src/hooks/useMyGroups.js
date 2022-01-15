@@ -6,17 +6,11 @@ const useMyGroups = () => {
 
   useEffect(() => {
     axios.get("/api/users/me/organizations").then(({ data }) => {
-      console.log(data);
       setMyGroups(data);
     });
   }, []);
 
-  useEffect(() => {
-    console.log(myGroups);
-  }, [myGroups])
-
   return { myGroups, setMyGroups };
 };
-
 
 export default useMyGroups;
