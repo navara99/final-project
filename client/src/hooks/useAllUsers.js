@@ -1,12 +1,12 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import axios from "axios";
 
 const useAllUsers = () => {
-  let allUsers;
+  const [allUsers, setAllUsers] = useState([])
 
   useEffect(() => {
     axios.get("/api/users").then(({ data }) => {
-      allUsers = data;
+      setAllUsers(data);
     });
   }, []);
 
