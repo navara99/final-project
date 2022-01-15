@@ -6,9 +6,10 @@ import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
 import { formatDate } from "../../helpers/date";
 
-const FairListItem = ({ name, description, poster, start_time, end_time, showDate }) => {
+const FairListItem = ({ id, name, description, poster, start_time, end_time, showDate }) => {
+
   return (
-    <Link to="/jobs">
+    <Link to={`fairs/${id}`}>
       <Card sx={{ maxWidth: 250 }}>
         {showDate && <div className="badge">{formatDate(start_time)}</div>}
         <div className="title">
