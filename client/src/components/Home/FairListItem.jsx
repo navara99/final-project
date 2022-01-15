@@ -4,7 +4,6 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
-import { shortenStr } from "../../helpers/string";
 import { formatDate } from "../../helpers/date";
 
 const FairListItem = ({ name, description, poster, start_time, end_time }) => {
@@ -14,12 +13,14 @@ const FairListItem = ({ name, description, poster, start_time, end_time }) => {
         <div className="badge">{formatDate(start_time)}</div>
         <CardMedia component="img" height="200" image={poster} alt={name} />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            {name}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {shortenStr(description, 120)}
-          </Typography>
+          <div className="content">
+            <Typography gutterBottom variant="h5" component="div">
+              {name}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              {description}
+            </Typography>
+          </div>
         </CardContent>
       </Card>
     </Link>
