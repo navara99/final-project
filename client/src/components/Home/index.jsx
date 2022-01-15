@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import useFairs from "../../hooks/useFairs";
 import "./Home.css";
 import FairList from "./FairList";
@@ -8,14 +8,9 @@ const Home = () => {
 
   return (
     <div className="Home">
-      <h2>On Going Fairs</h2>
-      <FairList items={onGoingFairs} />
-
-      <h2>Upcoming Fairs</h2>
-      <FairList items={upcomingFairs} />
-
-      <h2>Past Fairs</h2>
-      <FairList items={pastFairs} />
+      <FairList items={onGoingFairs} text="On Going Fairs" />
+      <FairList items={upcomingFairs} text="Upcoming Fairs" />
+      <FairList items={pastFairs} text="Past Fairs" />
     </div>
   );
 };
