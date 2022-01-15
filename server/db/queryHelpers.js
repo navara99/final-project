@@ -84,10 +84,10 @@ const queryGenerator = (db) => {
   const getOrganizationsByUser = async (user_id) => {
     const values = [user_id];
     const queryString = `
-    SELECT organizations.id, organizations.name, organizations.description, organizations.email, organizations.industry, organizations.website FROM users_organizations 
+    SELECT users_organizations.admin, organizations.id, organizations.name, organizations.description, organizations.email, organizations.industry, organizations.website FROM users_organizations 
     JOIN users ON users.id = users_organizations.user_id
     JOIN organizations ON organization_id = users_organizations.organization_id
-    GROUP BY organizations.id, users_organizations.user_id
+    GROUP BY organizations.id, users_organizations.user_id, users_organizations.admin
     HAVING user_id = $1;`;
 
     try {
