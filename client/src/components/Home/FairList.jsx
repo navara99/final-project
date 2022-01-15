@@ -1,5 +1,8 @@
 import React from "react";
 import FairListItem from "./FairListItem";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/swiper-bundle.min.css";
+import "swiper/swiper.min.css";
 
 const objectIsEmpty = (obj) => {
   const numOfKey = Object.keys(obj).length;
