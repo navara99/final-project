@@ -116,6 +116,13 @@ const queryGenerator = (db) => {
 
   };
 
+
+  const getAllDetailsOfOrganizationById = async (organization_id) => {
+
+    
+
+  };
+
   return {
     createNewUser,
     getUserByValue,
@@ -123,7 +130,8 @@ const queryGenerator = (db) => {
     addUserToOrganization,
     getOrganizationsByUser,
     getAllOtherUsers,
-    getAllFairs
+    getAllFairs,
+    getAllDetailsOfOrganizationById
   };
 };
 
