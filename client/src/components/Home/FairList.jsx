@@ -7,9 +7,9 @@ const objectIsEmpty = (obj) => {
   return false;
 };
 
-const FairList = ({ text, items }) => {
+const FairList = ({ text, items, showDate }) => {
   const itemArr = items.map((item) => {
-    return <FairListItem {...{ ...item, key: item.id }} />;
+    return <FairListItem {...{ ...item, key: item.id, showDate }} />;
   });
   return (
     <>
