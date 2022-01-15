@@ -6,6 +6,10 @@
   width: 90%;
 }
 
+.organization-card {
+  display: flex;
+}
+
 .organization-header {
   width: 100%;
   display: flex;
