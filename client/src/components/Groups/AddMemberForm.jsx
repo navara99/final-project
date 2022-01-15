@@ -21,14 +21,13 @@ const AddMemberForm = ({ openAddMembersModal, setOpenAddMembersModal, selectedGr
 
   const handleAddMember = async () => {
     const usersIdToAdd = allUsers.filter((users, i) => selectedUsers[i]).map((user) => user.id);
-    console.log(usersIdToAdd);
 
     try {
-      await axios.post(`/api/organizations/${selectedGroup.id}`)
+      await axios.post(`/api/organizations/${selectedGroup.id}/users`, { usersIdToAdd });
       setOpenAddMembersModal(!openAddMembersModal);
       setSnackBarDetails({
-        open:true,
-        message:"Members have been added."
+        open: true,
+        message: "Members have been added."
       });
     } catch (err) {
       console.log(err);
