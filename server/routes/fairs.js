@@ -30,10 +30,32 @@ module.exports = (db) => {
       const upcoming = fairsWithValidDate.filter(
         ({ start_time }) => start_time > Date.now()
       );
-      res.json({past, ongoing, upcoming});
+      res.json({ past, ongoing, upcoming });
     } catch (e) {
       console.log(e);
     }
+  });
+
+  router.get("/:id", async (req, res) => {
+    const fair_id = req.params.id;
+    const values = [fair_id];
+    const queryString = `
+  SELECT 
+  fairs.id as FairId, 
+  fairs.description as FairDesc, 
+  fairs.name as FairName, 
+  fairs.poster as POSTER, 
+  fairs.host_id as Host, 
+  organizations.id as OrganizationId, 
+  organizations.name as OrganizationsName, 
+  organizations.description as OrganizationsDesc 
+  FROM fairs_organizations 
+  RIGHT JOIN fairs ON (fairs.id = $1) 
+  JOIN organizations ON (organizations.id = organization_id)
+  `;
+    const result = await db.query(queryString, values);
+    console.log(result.rows[0]);
+    res.json(result.rows);
   });
 
   return router;

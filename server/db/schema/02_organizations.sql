@@ -1,7 +1,7 @@
-DROP TABLE IF EXISTS groups
+DROP TABLE IF EXISTS organizations
 CASCADE;
 
-CREATE TABLE groups
+CREATE TABLE organizations
 (
   id SERIAL PRIMARY KEY,
   name varchar NOT NULL,

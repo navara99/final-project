@@ -51,7 +51,7 @@ const queryGenerator = (db) => {
   const createNewOrganization = async ({ name, description, email, industry, website }) => {
     const values = [name, description, email, industry, website];
     const queryString = `
-      INSERT INTO groups (name, description, email, industry, website)
+      INSERT INTO organizations (name, description, email, industry, website)
       VALUES ($1, $2, $3, $4, $5)
       RETURNING *;
     `;
@@ -65,10 +65,10 @@ const queryGenerator = (db) => {
     };
   }
 
-  const addUserToOrganization = async (user_id, group_id, admin) => {
-    const values = [user_id, group_id, admin];
+  const addUserToOrganization = async (user_id, organization_id, admin) => {
+    const values = [user_id, organization_id, admin];
     const queryString = `
-      INSERT INTO users_groups (user_id, group_id, admin)
+      INSERT INTO users_organizations (user_id, organization_id, admin)
       VALUES ($1, $2, $3)
       RETURNING *;
     `;
@@ -84,10 +84,10 @@ const queryGenerator = (db) => {
   const getOrganizationsByUser = async (user_id) => {
     const values = [user_id];
     const queryString = `
-    SELECT groups.id, groups.name, groups.description, groups.email, groups.industry, groups.website FROM users_groups 
-    JOIN users ON users.id = users_groups.user_id
-    JOIN groups ON group_id = users_groups.group_id
-    GROUP BY groups.id, users_groups.user_id
+    SELECT organizations.id, organizations.name, organizations.description, organizations.email, organizations.industry, organizations.website FROM users_organizations 
+    JOIN users ON users.id = users_organizations.user_id
+    JOIN organizations ON organization_id = users_organizations.organization_id
+    GROUP BY organizations.id, users_organizations.user_id
     HAVING user_id = $1;`;
 
     try {

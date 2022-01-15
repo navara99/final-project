@@ -1,4 +1,4 @@
-INSERT INTO groups (
+INSERT INTO organizations (
   name,
   description,
   email,

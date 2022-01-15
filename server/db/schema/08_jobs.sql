@@ -6,5 +6,5 @@ CREATE TABLE jobs (
   created_at TIMESTAMP NOT NULL DEFAULT NOW(),
   description varchar NOT NULL,
   location varchar NOT NULL,
-  employer_id int NOT NULL REFERENCES groups(id) ON DELETE CASCADE
+  employer_id int NOT NULL REFERENCES organizations(id) ON DELETE CASCADE
 );
