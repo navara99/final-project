@@ -17,3 +17,17 @@
   color: #e8f1f2;
   text-decoration: none;
 }
+
+.fair-list .badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0.5em;
+  background-color: #FFF;
+  opacity: 0.75;
+  border-bottom-left-radius: 15px;
+}
+
+.MuiCard-root {
+  position: relative;
+}
