@@ -159,7 +159,7 @@ const queryGenerator = (db) => {
   const getAllMembersByOrganizationId = async (organization_id) => {
     const values = [organization_id];
     const queryString = `
-    SELECT users.* FROM users
+    SELECT users.*, users_organizations.admin FROM users
     JOIN users_organizations ON users.id = users_organizations.user_id
     WHERE users_organizations.organization_id = $1;
     `

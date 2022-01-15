@@ -8,7 +8,8 @@ module.exports = (db) => {
     addUserToOrganization,
     getAllJobsByOrganizationId,
     getAllMembersByOrganizationId,
-    getAllFairsByOrganizationId
+    getAllFairsByOrganizationId,
+    getAllApplicationsByOrganizationId
   } = queryGenerator(db);
 
   router.post("/", async (req, res) => {
@@ -42,7 +43,6 @@ module.exports = (db) => {
 
   router.get("/:id", async (req, res) => {
     const { id } = req.params;
-    const { user_id } = req.session;
 
     try {
       const jobs = await getAllJobsByOrganizationId(id);
