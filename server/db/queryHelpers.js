@@ -48,6 +48,35 @@ const queryGenerator = (db) => {
     }
   };
 
+
+    // Individual Fair
+  const getFair = async (fair_id) => {
+    const values = [fair_id];
+    const queryString = `
+    SELECT 
+    fairs.id as Fair_Id, 
+    fairs.description as Fair_Desc, 
+    fairs.name as Fair_Name, 
+    fairs.poster as POSTER, 
+    (SELECT organizations.name FROM organizations WHERE host_id = organizations.id)as Host_Name, 
+    organizations.id as Organizations_Id, 
+    organizations.name as Organizations_Name, 
+    organizations.description as Organizations_Desc 
+    FROM fairs
+    JOIN fairs_organizations ON (fairs.id = fairs_organizations.fair_id) 
+    JOIN organizations ON (organizations.id = fairs_organizations.organization_id)
+    WHERE fairs.id = $1
+    `;
+  
+      try {
+        const result  = await db.query(queryString, values)
+        return getData(result)
+      } catch (err) {
+        console.log(err.message)
+      }
+  }
+  
+
   const createNewOrganization = async ({ name, description, email, industry, website }) => {
     const values = [name, description, email, industry, website];
     const queryString = `
@@ -116,6 +145,7 @@ const queryGenerator = (db) => {
 
   };
 
+
   return {
     createNewUser,
     getUserByValue,
@@ -123,7 +153,8 @@ const queryGenerator = (db) => {
     addUserToOrganization,
     getOrganizationsByUser,
     getAllOtherUsers,
-    getAllFairs
+    getAllFairs,
+    getFair
   };
 };
 
