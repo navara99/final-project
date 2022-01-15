@@ -1,3 +1,18 @@
+.Home {
+  width: 97%;
+}
+
+.fair-list {
+  width: 95%;
+  overflow: scroll;
+  display: flex;
+}
+
+.fair-list > * {
+  flex: 0 0 auto;
+  margin: 0.2em 0.5em;
+}
+
 .fair-list > a {
   color: #e8f1f2;
   text-decoration: none;

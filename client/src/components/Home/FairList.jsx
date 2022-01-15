@@ -5,6 +5,10 @@ const FairList = () => {
   return (
     <div className="fair-list">
       <FairListItem />
+      <FairListItem />
+      <FairListItem />
+      <FairListItem />
+      <FairListItem />
     </div>
   );
 };

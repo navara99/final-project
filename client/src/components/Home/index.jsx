@@ -7,7 +7,7 @@ const Home = () => {
   const { onGoingFairs, upcomingFairs, pastFairs } = useFairs();
 
   return (
-    <div>
+    <div className="Home">
       <h2>On Going Fairs</h2>
       <FairList items={onGoingFairs} />
 
