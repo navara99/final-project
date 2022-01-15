@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { ListItemText, Card, IconButton, Collapse } from "@mui/material";
+import { ListItemText, Card, IconButton, Collapse, CardActions } from "@mui/material";
 import GroupAction from "./GroupAction";
 import { styled } from '@mui/material/styles';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
 
 function GroupListItem({ group, openAddMembersModal, setOpenAddMembersModal, selectedGroup, setSelectedGroup }) {
   const [expanded, setExpanded] = useState(false)
@@ -32,15 +33,18 @@ function GroupListItem({ group, openAddMembersModal, setOpenAddMembersModal, sel
       <div className="organization-card">
         <ListItemText
           primary={<h3 className="organization-card-name">{group.name}</h3>}
+          secondary={group.admin && <p>Admin</p>}
         />
-        <ExpandMore
-          expand={expanded}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          <ExpandMoreIcon />
-        </ExpandMore>
+        <CardActions>
+          <ExpandMore
+            expand={expanded}
+            onClick={handleExpandClick}
+            aria-expanded={expanded}
+            aria-label="show more"
+          >
+            <ExpandMoreIcon />
+          </ExpandMore>
+        </CardActions>
       </div>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <ListItemText
