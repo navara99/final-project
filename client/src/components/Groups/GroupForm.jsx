@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import React from "react";
 import useInput from "../../hooks/useInput";
+import useMyGroups from "../../hooks/useMyGroups";
 import axios from "axios";
 
 function GroupForm({ openForm, setOpenForm }) {
@@ -17,6 +18,7 @@ function GroupForm({ openForm, setOpenForm }) {
   const [email, handleEmailChange] = useInput("");
   const [industry, handleIndustryChange] = useInput("");
   const [website, handleWebsiteChange] = useInput("");
+  const { myGroups, setMyGroups } = useMyGroups();
 
   const createOrganization = async () => {
 
