@@ -2,6 +2,17 @@
   width: 97%;
 }
 
+.Home > div {
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.slick-slider.slick-initialized {
+  max-width: calc(100% - 60px);
+}
+
 .fair-list {
   width: 100%;
   overflow: scroll;
@@ -25,7 +36,7 @@
   top: 0;
   right: 0;
   padding: 0.5em;
-  background-color: #FFFFFFAF;
+  background-color: #ffffffaf;
   border-bottom-left-radius: 15px;
 }
 
@@ -48,7 +59,7 @@
   width: 100%;
   position: absolute;
   bottom: 140px;
-  background-color: #ffffffAF;
+  background-color: #ffffffaf;
   padding: 0.3em 0.6em 0;
   overflow: hidden;
   display: -webkit-box;

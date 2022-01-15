@@ -4,7 +4,6 @@ import Slider from "react-slick";
 import "../../../node_modules/slick-carousel/slick/slick.css";
 import "../../../node_modules/slick-carousel/slick/slick-theme.css";
 
-
 const objectIsEmpty = (obj) => {
   const numOfKey = Object.keys(obj).length;
   if (!numOfKey) return true;
@@ -17,10 +16,37 @@ const FairList = ({ text, items, showDate }) => {
   });
   const settings = {
     dots: true,
-    infinite: true,
+    infinite: false,
     speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1
+    slidesToShow: 4,
+    slidesToScroll: 4,
+    initialSlide: 0,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
   return (
     <div>
@@ -47,16 +73,16 @@ const FairList = ({ text, items, showDate }) => {
       </Slider>
     </div>
   );
-  return (
-    // <>
-    //   {!objectIsEmpty(items) && (
-    //     <>
-    //       <h3>{text}</h3>
-    //       <div className="fair-list">{itemArr}</div>
-    //     </>
-    //   )}
-    // </>
-  );
+  // return (
+  // <>
+  //   {!objectIsEmpty(items) && (
+  //     <>
+  //       <h3>{text}</h3>
+  //       <div className="fair-list">{itemArr}</div>
+  //     </>
+  //   )}
+  // </>
+  // );
 };
 
 export default FairList;
