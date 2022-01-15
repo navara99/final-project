@@ -9,6 +9,11 @@
   align-items: center;
 }
 
+button.slick-prev:before,
+button.slick-next:before {
+  color: #404040;
+}
+
 .slick-slider.slick-initialized {
   max-width: calc(100% - 60px);
 }
