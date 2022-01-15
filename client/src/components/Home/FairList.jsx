@@ -17,7 +17,7 @@ const FairList = ({ text, items, showDate }) => {
       {!objectIsEmpty(items) && (
         <>
           <h2>{text}</h2>
-          <div>{itemArr}</div>
+          <div className="fair-list">{itemArr}</div>
         </>
       )}
     </>

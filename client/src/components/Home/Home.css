@@ -2,22 +2,6 @@
   width: 97%;
 }
 
-.Home > div {
-  max-width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-button.slick-prev:before,
-button.slick-next:before {
-  color: #404040;
-}
-
-.slick-slider.slick-initialized {
-  max-width: calc(100% - 60px);
-}
-
 .fair-list {
   width: 100%;
   overflow: scroll;
