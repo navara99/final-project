@@ -11,7 +11,7 @@ const bcrypt = require("bcryptjs");
 
 module.exports = (db) => {
   const queryGenerator = require("../db/queryHelpers");
-  const { createNewUser, getUserByValue } = queryGenerator(db);
+  const { createNewUser, getUserByValue, getOrganizationsByUser } = queryGenerator(db);
 
   router.post("/register", async (req, res) => {
     const { email, username, password, confirmPassword } = req.body;
@@ -83,6 +83,18 @@ module.exports = (db) => {
     } catch (err) {
       res.status(500).json({ error: err.message });
     }
+
+  });
+
+  router.get("/me/organizations", async (req, res) => {
+    const { user_id } = req.session;
+
+    try {
+      const organizations = await getOrganizationsByUser(user_id);
+      res.json(organizations);
+    } catch (err) {
+      console.log(err.message);
+    };
 
   });
 
