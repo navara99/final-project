@@ -26,11 +26,25 @@ module.exports = (db) => {
         return await addUserToOrganization(id, req.params.id, false);
       }));
       res.json({
-        status:"success"
+        status: "success"
       });
     } catch (err) {
       console.log(err.message);
     }
+
+  });
+
+  router.get("/:id", (req, res) => {
+    const { id } = req.params;
+
+    try {
+
+      
+
+    } catch (err) {
+
+    };
+
 
   });
 
