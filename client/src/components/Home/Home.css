@@ -39,11 +39,11 @@
 }
 
 .ongoing-fair-list .MuiPaper-root {
-  margin: 0.5em 5%;
+  margin: 0.5em 8%;
 }
 
 .ongoing-fair-list .MuiCardContent-root {
-  height: 100px;
+  height: 110px;
 }
 
 .fair-list .content {
@@ -51,6 +51,10 @@
   display: -webkit-box;
   -webkit-line-clamp: 5;
   -webkit-box-orient: vertical;
+}
+
+.ongoing-fair-list .content {
+  -webkit-line-clamp: 4;
 }
 
 .fair-list .title {
@@ -67,5 +71,5 @@
 }
 
 .ongoing-fair-list .title {
-  bottom: 100px;
+  bottom: 110px;
 }
