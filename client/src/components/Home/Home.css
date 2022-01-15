@@ -10,7 +10,7 @@
 
 .fair-list > * {
   flex: 0 0 auto;
-  margin: 0.2em 0.5em;
+  margin: 0.2em 0.7em;
 }
 
 .fair-list > a {
@@ -28,7 +28,7 @@
   border-bottom-left-radius: 15px;
 }
 
-.fair-list MuiPaper-root {
+.fair-list .MuiPaper-root {
   position: relative;
 }
 
@@ -38,5 +38,7 @@
 
 .fair-list .content {
   overflow: hidden;
-  height: 100%;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
 }
