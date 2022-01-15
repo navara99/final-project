@@ -7,7 +7,8 @@ module.exports = (db) => {
     createNewOrganization,
     addUserToOrganization,
     getAllJobsByOrganizationId,
-    getAllMembersByOrganizationId
+    getAllMembersByOrganizationId,
+    getAllFairsByOrganizationId
   } = queryGenerator(db);
 
   router.post("/", async (req, res) => {
@@ -46,7 +47,9 @@ module.exports = (db) => {
     try {
       const jobs = await getAllJobsByOrganizationId(id);
       const members = await getAllMembersByOrganizationId(id);
-      res.json({ jobs, members });
+      const fairs = await getAllFairsByOrganizationId(id);
+
+      res.json({ jobs, members, fairs });
     } catch (err) {
       console.log(err.message);
     };
