@@ -1,7 +1,8 @@
 import React from "react";
 import FairListItem from "./FairListItem";
-import { Swiper, SwiperSlide } from 'swiper/react';
-import "swiper/swiper-bundle.min.css";
+import AliceCarousel from "react-alice-carousel";
+import "react-alice-carousel/lib/alice-carousel.css";
+import { fairListSettings } from "../../constants";
 
 const objectIsEmpty = (obj) => {
   const numOfKey = Object.keys(obj).length;
@@ -19,7 +20,12 @@ const FairList = ({ text, items, showDate }) => {
       {!objectIsEmpty(items) && (
         <>
           <h2>{text}</h2>
-          <div className="fair-list">{itemArr}</div>
+          <div className="fair-list">
+            <AliceCarousel
+              items={itemArr}
+              {...fairListSettings}
+            />
+          </div>
         </>
       )}
     </>

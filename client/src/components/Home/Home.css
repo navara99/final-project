@@ -30,7 +30,8 @@
 }
 
 .fair-list .MuiPaper-root {
-  position: relative;
+  margin: 0.5em 5%;
+  box-sizing: content-box;
 }
 
 .fair-list .MuiCardContent-root {

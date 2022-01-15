@@ -16,24 +16,26 @@ const FairListItem = ({
   showDate,
 }) => {
   return (
-    <Link to={`fairs/${id}`}>
-      <Card sx={{ maxWidth: 250 }}>
-        {showDate && <div className="badge">{formatDate(start_time)}</div>}
-        <div className="title">
-          <Typography gutterBottom variant="h6" component="div">
-            {name}
-          </Typography>
-        </div>
-        <CardMedia component="img" height="250" image={poster} alt={name} />
-        <CardContent>
-          <div className="content">
-            <Typography variant="body2" color="text.secondary">
-              {description}
+    <div>
+      <Link to={`fairs/${id}`}>
+        <Card>
+          {showDate && <div className="badge">{formatDate(start_time)}</div>}
+          <div className="title">
+            <Typography gutterBottom variant="h6" component="div">
+              {name}
             </Typography>
           </div>
-        </CardContent>
-      </Card>
-    </Link>
+          <CardMedia component="img" height="250" image={poster} alt={name} />
+          <CardContent>
+            <div className="content">
+              <Typography variant="body2" color="text.secondary">
+                {description}
+              </Typography>
+            </div>
+          </CardContent>
+        </Card>
+      </Link>
+    </div>
   );
 };
 
