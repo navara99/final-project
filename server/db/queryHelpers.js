@@ -48,7 +48,83 @@ const queryGenerator = (db) => {
     }
   };
 
-  return { createNewUser, getUserByValue, getAllFairs };
+  const createNewOrganization = async ({ name, description, email, industry, website }) => {
+    const values = [name, description, email, industry, website];
+    const queryString = `
+      INSERT INTO groups (name, description, email, industry, website)
+      VALUES ($1, $2, $3, $4, $5)
+      RETURNING *;
+    `;
+
+    try {
+      const result = await db.query(queryString, values);
+      const newOrganizationInfo = getFirstRecord(result);
+      return newOrganizationInfo;
+    } catch (err) {
+      console.log(err);
+    };
+  }
+
+  const addUserToOrganization = async (user_id, group_id, admin) => {
+    const values = [user_id, group_id, admin];
+    const queryString = `
+      INSERT INTO users_groups (user_id, group_id, admin)
+      VALUES ($1, $2, $3)
+      RETURNING *;
+    `;
+
+    try {
+      await db.query(queryString, values);
+    } catch (err) {
+      console.log(err.message);
+    };
+
+  };
+
+  const getOrganizationsByUser = async (user_id) => {
+    const values = [user_id];
+    const queryString = `
+    SELECT groups.id, groups.name, groups.description, groups.email, groups.industry, groups.website FROM users_groups 
+    JOIN users ON users.id = users_groups.user_id
+    JOIN groups ON group_id = users_groups.group_id
+    GROUP BY groups.id, users_groups.user_id
+    HAVING user_id = $1;`;
+
+    try {
+      const result = await db.query(queryString, values);
+      const { rows } = result;
+      return rows;
+    } catch (err) {
+      console.log(err.message);
+    };
+  };
+
+  const getAllOtherUsers = async (user_id) => {
+    const values = [user_id];
+    const queryString = `
+    SELECT * FROM users
+    WHERE users.id <> $1;
+    `
+
+    try {
+      const result = await db.query(queryString, values);
+      const { rows } = result;
+      return rows;
+    } catch (err) {
+      console.log(err.message);
+    };
+
+  };
+
+  return {
+    createNewUser,
+    getUserByValue,
+    createNewOrganization,
+    addUserToOrganization,
+    getOrganizationsByUser,
+    getAllOtherUsers,
+    getAllFairs
+  };
 };
 
 module.exports = queryGenerator;

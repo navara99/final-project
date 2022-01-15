@@ -28,9 +28,12 @@ app.use(express.urlencoded({ extended: true }));
 
 const usersRoutes = require("./routes/users");
 const fairsRoutes = require("./routes/fairs");
+const organizationRoutes = require("./routes/organizations");
 
 app.use("/api/users", usersRoutes(db));
 app.use("/api/fairs", fairsRoutes(db));
+app.use("/api/organizations", organizationRoutes(db));
+
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
