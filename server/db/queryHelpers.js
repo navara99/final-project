@@ -116,18 +116,40 @@ const queryGenerator = (db) => {
 
   };
 
-
-  const getAllJobsByOrganizationId = async (organization_id) => {
-    const values = [organization_id];
+  const getAllApplicationsByJobId = async (job_id) => {
+    const values = [job_id];
     const queryString = `
-    SELECT jobs.* FROM jobs
-    JOIN organizations ON jobs.employer_id =  organizations.id
-    WHERE organizations.id = $1;
+    SELECT applications.*, users.first_name, users.last_name FROM applications
+    JOIN jobs ON jobs.id = applications.user_id
+    JOIN users ON applications.user_id = users.id
+    WHERE jobs.id = $1;
     `
 
     try {
       const result = await db.query(queryString, values);
       return result.rows;
+    } catch (err) {
+      console.log(err.message);
+    };
+
+  };
+
+  const getAllJobsByOrganizationId = async (organization_id) => {
+    const values = [organization_id];
+    const queryString = `
+    SELECT jobs.* FROM jobs
+    JOIN organizations ON jobs.employer_id = organizations.id
+    WHERE organizations.id = $1;
+    `
+
+    try {
+      const result = await db.query(queryString, values);
+      const jobs = await Promise.all(result.rows.map(async (job) => {
+        const jobWithApplicationArr = await getAllApplicationsByJobId(job.id);
+        return { ...job, applications: jobWithApplicationArr };
+      }));
+      return jobs;
+
     } catch (err) {
       console.log(err.message);
     };
@@ -151,6 +173,7 @@ const queryGenerator = (db) => {
 
   };
 
+
   const getAllFairsByOrganizationId = async (organization_id) => {
     const values = [organization_id];
     const queryString = `
@@ -168,6 +191,7 @@ const queryGenerator = (db) => {
 
   };
 
+
   return {
     createNewUser,
     getUserByValue,
@@ -178,7 +202,8 @@ const queryGenerator = (db) => {
     getAllFairs,
     getAllJobsByOrganizationId,
     getAllMembersByOrganizationId,
-    getAllFairsByOrganizationId
+    getAllFairsByOrganizationId,
+    getAllApplicationsByJobId
   };
 };
 
