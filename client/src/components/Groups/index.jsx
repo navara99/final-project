@@ -39,7 +39,7 @@ function Groups({ setSnackBarDetails }) {
       />}
       <div className="organization-header">
         <h1>Your Organizations</h1>
-        <Button variant="contained" startIcon={<Add />} onClick={() => setOpenForm(!openForm)}>Add Organization</Button>
+        <Button style={{height:"50%"}} variant="contained" startIcon={<Add />} onClick={() => setOpenForm(!openForm)}>Add Organization</Button>
         <GroupForm {...{ openForm }} {...{ setOpenForm }}  {...{ setMyGroups }} />
       </div>
       <List sx={{ width: '90%', paddingTop: "2em" }}>
