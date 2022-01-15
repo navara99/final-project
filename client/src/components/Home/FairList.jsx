@@ -8,6 +8,7 @@ const objectIsEmpty = (obj) => {
 };
 
 const FairList = ({ text, items }) => {
+  console.log(items);
   return (
     <>
       {!objectIsEmpty(items) && (

@@ -15,7 +15,22 @@ module.exports = (db) => {
   router.get("/", async (req, res) => {
     try {
       const fairs = await getAllFairs();
-      res.json(fairs);
+      const fairsWithValidDate = fairs.map((fair) => {
+        const { start_time, end_time } = fair;
+        const parsedStart = Date.parse(start_time);
+        const parsedEnd = Date.parse(end_time);
+        return { ...fair, start_time: parsedStart, end_time: parsedEnd };
+      });
+      const past = fairsWithValidDate.filter(
+        ({ end_time }) => end_time < Date.now()
+      );
+      const ongoing = fairsWithValidDate.filter(({ end_time, start_time }) => {
+        return end_time > Date.now() && start_time < Date.now();
+      });
+      const upcoming = fairsWithValidDate.filter(
+        ({ start_time }) => start_time > Date.now()
+      );
+      res.json({past, ongoing, upcoming});
     } catch (e) {
       console.log(e);
     }
