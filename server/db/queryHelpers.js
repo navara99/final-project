@@ -85,9 +85,33 @@ const queryGenerator = (db) => {
     } catch (err) {
       console.log(err.message);
     };
-  }
+  };
 
-  return { createNewUser, getUserByValue, createNewOrganization, addUserToOrganization, getOrganizationsByUser };
+  const getAllOtherUsers = async (user_id) => {
+    const values = [user_id];
+    const queryString = `
+    SELECT * FROM users
+    WHERE users.id <> $1;
+    `
+
+    try {
+      const result = await db.query(queryString, values);
+      const { rows } = result;
+      return rows;
+    } catch (err) {
+      console.log(err.message);
+    };
+
+  };
+
+  return {
+    createNewUser,
+    getUserByValue,
+    createNewOrganization,
+    addUserToOrganization,
+    getOrganizationsByUser,
+    getAllOtherUsers
+  };
 };
 
 module.exports = queryGenerator;
