@@ -69,7 +69,24 @@ const queryGenerator = (db) => {
 
   };
 
-  return { createNewUser, getUserByValue, createNewOrganization, addUserToOrganization };
+  const getOrganizationsByUser = async (user_id) => {
+    const values = [user_id];
+    const queryString = `
+    SELECT groups.name, groups.description, groups.email, groups.industry, groups.website FROM users_groups 
+      JOIN users ON users.id = users_groups.user_id
+      JOIN groups ON group_id = users_groups.group_id
+    WHERE user_id = $1;`;
+
+    try {
+      const result = await db.query(queryString, values);
+      const { rows } = result;
+      return rows;
+    } catch (err) {
+      console.log(err.message);
+    };
+  }
+
+  return { createNewUser, getUserByValue, createNewOrganization, addUserToOrganization, getOrganizationsByUser };
 };
 
 module.exports = queryGenerator;
