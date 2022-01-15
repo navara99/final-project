@@ -4,42 +4,21 @@ import CompanyList from "./Companies/CompanyList";
 import FairHeader from "./FairHeader";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import useEachFair from "../../hooks/useEachFair";
 
 const CareerFair = () => {
   let { id } = useParams();
-
-  const [fair, updateFair] = useState();
-
-  useEffect(() => {
-    axios.get(`/api/fairs/${id}`).then((result) => {
-      updateFair(result.data);
-      console.log(result.data);
-    });
-  }, []);
-
-  const industries = [
-    {
-      name: "Dabtype",
-      description:
-        "Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero convallis eget eleifend luctus ultricies eu nibh.",
-    },
-    {
-      name: "Devcast",
-      description:
-        "Etiam vel augue. Vestibulum rutrum rutrum neque. Aenean auctor gravida sem.",
-    },
-  ];
-
+  const {organizations, fair_name, fair_desc, host_name, poster} = useEachFair(id)
   return (
     <Grid container spacing={2}>
       {/* Name of the fair */}
-      {fair && (
+      {fair_name && (
         <>
           <Grid item xs={12}>
-            <FairHeader fair={fair} />
+            <FairHeader fair_name={fair_name} fair_desc={fair_desc} host_name={host_name} poster={poster} />
           </Grid>
           <Grid item xs={12} marginTop={2}>
-            <CompanyList industries={industries} />
+            <CompanyList organizations={organizations} />
           </Grid>
         </>
       )}

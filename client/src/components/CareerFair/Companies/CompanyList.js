@@ -3,14 +3,12 @@ import React from 'react'
 import CompanyItem from './CompanyItem';
 
 
-const CompanyList = (props) => {
-  const {industries} = props;
-  console.log(industries);
-  let industriesList = industries ? industries.map(industry => <CompanyItem key={industry.name} industry={industry}/>) : null;
-
+const CompanyList = ({organizations}) => {
+  console.log(organizations);
+  let organizationsList = organizations ? organizations.map(organization => <CompanyItem key={organization.organizations_id} organization={organization}/>) : null;
   return (
     <>
-     {industriesList}
+     {organizationsList}
     </>
   )
 }

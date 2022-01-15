@@ -22,9 +22,8 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-const FairHeader = (props) => {
+const FairHeader = ({fair_name, fair_desc, host_name, poster}) => {
   const [expanded, setExpanded] = React.useState(false);
-  const {name, poster, description, start_time, end_time} = props.fair;
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -35,12 +34,12 @@ const FairHeader = (props) => {
         component="img"
         height="250"
         image={poster}
-        alt={name}
+        alt={fair_name}
         sx={{objectFit:'fill'}}
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-          {description}
+          {fair_desc}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
