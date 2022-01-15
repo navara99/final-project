@@ -18,5 +18,21 @@ module.exports = (db) => {
 
   });
 
+  router.post("/:id/users", async (req, res) => {
+    const { usersIdToAdd } = req.body;
+
+    try {
+      await Promise.all(usersIdToAdd.map(async (id) => {
+        return await addUserToOrganization(id, req.params.id, false);
+      }));
+      res.json({
+        status:"success"
+      });
+    } catch (err) {
+      console.log(err.message);
+    }
+
+  });
+
   return router;
 };
