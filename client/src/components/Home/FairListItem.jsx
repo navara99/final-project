@@ -11,12 +11,14 @@ const FairListItem = ({ name, description, poster, start_time, end_time }) => {
     <Link to="/jobs">
       <Card sx={{ maxWidth: 250 }}>
         <div className="badge">{formatDate(start_time)}</div>
-        <CardMedia component="img" height="200" image={poster} alt={name} />
+        <div className="title">
+          <Typography gutterBottom variant="h6" component="div">
+            {name}
+          </Typography>
+        </div>
+        <CardMedia component="img" height="250" image={poster} alt={name} />
         <CardContent>
           <div className="content">
-            <Typography gutterBottom variant="h5" component="div">
-              {name}
-            </Typography>
             <Typography variant="body2" color="text.secondary">
               {description}
             </Typography>
