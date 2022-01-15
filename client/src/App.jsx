@@ -9,7 +9,7 @@ import Home from "./components/Home";
 import { Routes, Route } from "react-router-dom";
 import useCurrentUser from "./hooks/useCurrentUser";
 import Groups from "./components/Groups/index";
-import { Snackbar } from "@mui/material";
+import { Snackbar, Alert } from "@mui/material";
 
 function App() {
   const [errorMessage, setErrorMessage] = useState("");
@@ -39,7 +39,7 @@ function App() {
             }
           />
           <Route path="/login" element={<LogIn {...{ setCurrentUser }} />} />
-          <Route path="/groups" element={<Groups setSnackBarDetails/>} />
+          <Route path="/groups" element={<Groups {...{ setSnackBarDetails }} />} />
         </Routes>
       </div>
     </div>

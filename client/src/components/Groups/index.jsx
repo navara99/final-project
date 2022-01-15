@@ -8,7 +8,7 @@ import { useState } from "react";
 import useMyGroups from "../../hooks/useMyGroups";
 import AddMemberForm from "./AddMemberForm";
 
-function Groups() {
+function Groups({ setSnackBarDetails }) {
   const [openForm, setOpenForm] = useState(false);
   const [openAddMembersModal, setOpenAddMembersModal] = useState(false);
   const { myGroups, setMyGroups } = useMyGroups();
@@ -35,6 +35,7 @@ function Groups() {
         {...{ openAddMembersModal }}
         {...{ setOpenAddMembersModal }}
         {...{ selectedGroup }}
+        {...{ setSnackBarDetails }}
       />}
       <div className="organization-header">
         <h1>Your Organizations</h1>

@@ -15,7 +15,7 @@ import useAllUsers from "../../hooks/useAllUsers";
 import { useState } from "react";
 import axios from "axios";
 
-const AddMemberForm = ({ openAddMembersModal, setOpenAddMembersModal, selectedGroup }) => {
+const AddMemberForm = ({ openAddMembersModal, setOpenAddMembersModal, selectedGroup, setSnackBarDetails }) => {
   const allUsers = useAllUsers();
   const [selectedUsers, setSelectedUsers] = useState(new Array(allUsers.length).fill(false));
 
@@ -23,8 +23,17 @@ const AddMemberForm = ({ openAddMembersModal, setOpenAddMembersModal, selectedGr
     const usersIdToAdd = allUsers.filter((users, i) => selectedUsers[i]).map((user) => user.id);
     console.log(usersIdToAdd);
 
-    axios.post(`/api/organizations/${selectedGroup.id}`)
-    setOpenAddMembersModal(!openAddMembersModal);
+    try {
+      await axios.post(`/api/organizations/${selectedGroup.id}`)
+      setOpenAddMembersModal(!openAddMembersModal);
+      setSnackBarDetails({
+        open:true,
+        message:"Members have been added."
+      });
+    } catch (err) {
+      console.log(err);
+    };
+
   };
 
   const handleSearchChange = () => {
