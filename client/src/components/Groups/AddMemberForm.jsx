@@ -10,8 +10,11 @@ import {
   Checkbox,
   ListItemText
 } from "@mui/material";
+import useAllUsers from "../../hooks/useAllUsers";
 
 const AddMemberForm = ({ openAddMembersModal, setOpenAddMembersModal }) => {
+  const allUsers = useAllUsers();
+  const [selectedUsers, setSelectedUsers] = useAllUsers(new Array(allUsers.length).fill(false));
 
   const handleAddMember = () => {
 
@@ -21,23 +24,33 @@ const AddMemberForm = ({ openAddMembersModal, setOpenAddMembersModal }) => {
 
   };
 
+  const toggleCheckBox = (i) => {
+    selectedUsers[i] = !selectedUsers[i]
+    setSelectedUsers([...selectedUsers])
+  };
+
+  const generateUsersList = () => {
+    allUsers.map(({ id, first_name, last_name, username }, i) => {
+      <ListItem >
+        <ListItemText>
+          {`${first_name} ${last_name} (${username})`}
+        </ListItemText>
+        <Checkbox
+          checked={true}
+          color="primary"
+          value={id}
+          onChange={() => toggleCheckBox(i)}
+        />
+      </ListItem>
+    });
+  }
+
   return (
     <Dialog open={openAddMembersModal} onClose={() => { }}>
       <DialogTitle>Add users to group</DialogTitle>
       <DialogContent>
-        <DialogContentText>
-          Search
-        </DialogContentText>
-        <ListItem >
-          <Checkbox
-            checked={true}
-            color="primary"
-            value={1}
-          />
-          <ListItemText>
-            {"Some user"}
-          </ListItemText>
-        </ListItem>
+        <DialogContentText>Search</DialogContentText>
+        {generateUsersList()}
       </DialogContent>
       <DialogActions>
         <Button onClick={() => { setOpenAddMembersModal(!openAddMembersModal) }}>Cancel</Button>
