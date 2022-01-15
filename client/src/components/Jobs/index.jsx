@@ -1,10 +1,10 @@
 import React from "react";
 
-const Job = () => {
+const Jobs = () => {
 
   return (
     <div>JOB BOARD</div>
   );
 };
 
-export default Job;
+export default Jobs;
