@@ -3,12 +3,7 @@ import FairListItem from "./FairListItem";
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
 import { fairListSettings, ongoingFairListSettings } from "../../constants";
-
-const objectIsEmpty = (obj) => {
-  const numOfKey = Object.keys(obj).length;
-  if (!numOfKey) return true;
-  return false;
-};
+import { objectIsEmpty } from "../../helpers/object"
 
 const FairList = ({ text, items, showDate, isOngoing }) => {
   const itemArr = items.map((item) => {
