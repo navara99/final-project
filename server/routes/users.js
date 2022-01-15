@@ -11,13 +11,13 @@ const bcrypt = require("bcryptjs");
 
 module.exports = (db) => {
   const queryGenerator = require("../db/queryHelpers");
-  const { createNewUser, getUserByValue, getOrganizationsByUser } = queryGenerator(db);
+  const { createNewUser, getUserByValue, getOrganizationsByUser, getAllOtherUsers } = queryGenerator(db);
 
   router.get("/", async (req, res) => {
     const { user_id } = req.session;
 
     try {
-      const users = getAllOtherUsers(user_id);
+      const users = await getAllOtherUsers(user_id);
       console.log(users);
       res.json(users);
     } catch (err) {
