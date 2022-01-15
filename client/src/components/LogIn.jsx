@@ -2,7 +2,6 @@ import React from "react";
 import {
   Avatar,
   Button,
-  CssBaseline,
   TextField,
   Link,
   Grid,
@@ -16,7 +15,7 @@ import axios from "axios";
 const LogIn = ({ setCurrentUser }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(FormData);
+
     const data = new FormData(event.currentTarget);
 
     const logInDetail = {
@@ -28,14 +27,14 @@ const LogIn = ({ setCurrentUser }) => {
       setCurrentUser(data);
     } catch (e) {
       console.log(e);
-    }
+    };
+    
   };
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
+    <Container maxWidth="xs">
       <Box
         sx={{
-          marginTop: 8,
+          marginTop: 0,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -76,14 +75,9 @@ const LogIn = ({ setCurrentUser }) => {
           >
             Sign In
           </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
+          <Grid container justifyContent="center">
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link href="/register" variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
