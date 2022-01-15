@@ -17,13 +17,24 @@ function App() {
   const { currentUser, setCurrentUser, logout } = useCurrentUser();
   const [snackBarDetails, setSnackBarDetails] = useState({
     open: false,
-    message: "Success"
+    message: ""
   });
+
+  const handleSnackBarClose = () => {
+    setSnackBarDetails({ open: false, message: "" });
+  }
 
   return (
     <div className="App">
-      <Snackbar open={snackBarDetails.open} autoHideDuration={6000} onClose={() => { }}>
-        <Alert onClose={() => { }} severity="success" sx={{ width: '100%' }}>{snackBarDetails.message}</Alert>
+      <Snackbar
+        open={snackBarDetails.open}
+        autoHideDuration={6000}
+        onClose={handleSnackBarClose}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      >
+        <Alert
+          severity="success"
+          sx={{ width: '100%' }}>{snackBarDetails.message}</Alert>
       </Snackbar>
       <Navbar {...{ currentUser, logout }} />
       <ErrorModal {...{ errorMessage, showError, setShowError }} />
