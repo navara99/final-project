@@ -15,9 +15,9 @@ const FairListItem = ({
   start_time,
   end_time,
   showDate,
-  isOnGoing,
+  isOngoing,
 }) => {
-  const height = isOnGoing ? onGoingMediaHeight : otherMediaHeight;
+  const height = isOngoing ? onGoingMediaHeight : otherMediaHeight;
   const formattedDate = formatDate(start_time);
 
   return (

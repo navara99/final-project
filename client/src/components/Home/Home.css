@@ -38,6 +38,14 @@
   height: 140px;
 }
 
+.ongoing-fair-list .MuiPaper-root {
+  margin: 0.5em 5%;
+}
+
+.ongoing-fair-list .MuiCardContent-root {
+  height: 100px;
+}
+
 .fair-list .content {
   overflow: hidden;
   display: -webkit-box;
@@ -56,4 +64,8 @@
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   line-height: 1em;
+}
+
+.ongoing-fair-list .title {
+  bottom: 100px;
 }

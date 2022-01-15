@@ -25,5 +25,5 @@ export const ongoingFairListSettings = {
   },
 };
 
-export const onGoingMediaHeight = 350;
+export const onGoingMediaHeight = 450;
 export const otherMediaHeight = 250;

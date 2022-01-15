@@ -15,13 +15,13 @@ const FairList = ({ text, items, showDate, isOngoing }) => {
     return <FairListItem {...{ ...item, key: item.id, showDate, isOngoing }} />;
   });
   const settings = isOngoing ? ongoingFairListSettings : fairListSettings;
-
+  const classes = isOngoing ? "fair-list ongoing-fair-list" : "fair-list";
   return (
     <>
       {!objectIsEmpty(items) && (
         <>
           <h2>{text}</h2>
-          <div className="fair-list">
+          <div className={classes}>
             <AliceCarousel items={itemArr} {...settings} />
           </div>
         </>
