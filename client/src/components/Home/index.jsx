@@ -8,9 +8,13 @@ const Home = () => {
 
   return (
     <div className="Home">
-      <FairList items={onGoingFairs} text="On Going Fairs" />
-      <FairList items={upcomingFairs} text="Upcoming Fairs" showDate={true} />
-      <FairList items={pastFairs} text="Past Fairs" showDate={true} />
+      <FairList items={onGoingFairs} text="On Going Career Fairs" />
+      <FairList
+        items={upcomingFairs}
+        text="Upcoming Career Fairs"
+        showDate={true}
+      />
+      <FairList items={pastFairs} text="Past Career Fairs" showDate={true} />
     </div>
   );
 };
