@@ -8,7 +8,7 @@ const useOrganizationDetails = (id) => {
     axios.get(`/api/organizations/${id}`).then(({ data }) => {
       setOrganizationDetails(data);
     });
-  },[]);
+  }, []);
 
   return organizationDetails;
 };
