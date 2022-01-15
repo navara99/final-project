@@ -5,7 +5,7 @@ const useMyGroups = () => {
   const [myGroups, setMyGroups] = useState();
 
   useEffect(() => {
-    axios.get("/api/user/organizations").then(({ data }) => {
+    axios.get("/api/users/me/organizations").then(({ data }) => {
       console.log(data);
       setMyGroups(data);
     });
