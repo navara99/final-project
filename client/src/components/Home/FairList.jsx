@@ -3,6 +3,7 @@ import FairListItem from "./FairListItem";
 import Slider from "react-slick";
 import "../../../node_modules/slick-carousel/slick/slick.css";
 import "../../../node_modules/slick-carousel/slick/slick-theme.css";
+import { sliderSettings } from "../../constants";
 
 const objectIsEmpty = (obj) => {
   const numOfKey = Object.keys(obj).length;
@@ -14,44 +15,11 @@ const FairList = ({ text, items, showDate }) => {
   const itemArr = items.map((item) => {
     return <FairListItem {...{ ...item, key: item.id, showDate }} />;
   });
-  const settings = {
-    dots: true,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 4,
-    initialSlide: 0,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: true,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-  };
+
   return (
     <div>
       <h2> Single Item</h2>
-      <Slider {...settings}>
+      <Slider {...sliderSettings }>
         <div>
           <h3>1</h3>
         </div>
