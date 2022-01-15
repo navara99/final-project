@@ -2,7 +2,7 @@ import React from "react";
 import GroupsBtn from "./GroupsBtn";
 import { Delete, Edit, Add, Person, Event, EventAvailableSharp } from "@mui/icons-material";
 
-function GroupAction() {
+function GroupAction({ admin }) {
 
   const btnInfo = [
     // {
@@ -40,7 +40,10 @@ function GroupAction() {
   return (
     <div className="organization-action-btn">
       <div className="action-btns">
-        <GroupsBtn text="Details" variant="contained" />
+        <div>
+          <GroupsBtn text="Details" variant="contained" />
+          <GroupsBtn text="Add member" variant="contained" icon={<Person />} />
+        </div>
         <div>
           {btns}
         </div>
