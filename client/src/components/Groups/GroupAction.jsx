@@ -2,7 +2,8 @@ import React from "react";
 import GroupsBtn from "./GroupsBtn";
 import { Delete, Edit, Add, Person, Event, EventAvailableSharp } from "@mui/icons-material";
 
-function GroupAction({ admin }) {
+function GroupAction({ admin, openAddMembersModal, setOpenAddMembersModal }) {
+
 
   const btnInfo = [
     // {
@@ -42,7 +43,16 @@ function GroupAction({ admin }) {
       <div className="action-btns">
         <div>
           <GroupsBtn text="Details" variant="contained" />
-          <GroupsBtn text="Add member" variant="contained" icon={<Person />} />
+          <GroupsBtn
+            text="Add member"
+            variant="contained"
+            icon={<Person />}
+            onClick={() => {
+              console.log("clicked")
+              setOpenAddMembersModal(!openAddMembersModal
+              )
+            }}
+          />
         </div>
         <div>
           {btns}
