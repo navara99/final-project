@@ -8,19 +8,15 @@ const objectIsEmpty = (obj) => {
 };
 
 const FairList = ({ text, items }) => {
-  console.log(items);
+  const itemArr = items.map((item) => {
+    return <FairListItem {...{ ...item, key: item.id }} />;
+  });
   return (
     <>
       {!objectIsEmpty(items) && (
         <>
           <h3>{text}</h3>
-          <div className="fair-list">
-            <FairListItem />
-            <FairListItem />
-            <FairListItem />
-            <FairListItem />
-            <FairListItem />
-          </div>
+          <div className="fair-list">{itemArr}</div>
         </>
       )}
     </>

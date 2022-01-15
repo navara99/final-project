@@ -4,23 +4,26 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
+import { shortenStr } from "../../helpers/string";
+import { formatDate } from "../../helpers/date"
 
-const FairListItem = () => {
+const FairListItem = ({name, description, poster, start_time, end_time}) => {
   return (
-    <Link to="/job">
+    <Link to="/jobs">
       <Card sx={{ maxWidth: 250 }}>
         <CardMedia
           component="img"
           height="200"
-          image="https://mui.com/static/images/cards/contemplative-reptile.jpg"
-          alt="green iguana"
+          image={poster}
+          alt={name}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            Lizard
+            {name}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            Lizards are a widespread group of squamate reptiles, with over 6,000
+            {formatDate(start_time)} - 
+            {shortenStr(description, 120)}
           </Typography>
         </CardContent>
       </Card>
