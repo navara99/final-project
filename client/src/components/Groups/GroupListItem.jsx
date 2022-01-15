@@ -1,9 +1,8 @@
 import React from "react";
 import { ListItemText, Card } from "@mui/material";
 import GroupAction from "./GroupAction";
-import { useState } from "react";
 
-function GroupListItem({ description, name, openAddMembersModal, setOpenAddMembersModal }) {
+function GroupListItem({ group, openAddMembersModal, setOpenAddMembersModal, selectedGroup, setSelectedGroup }) {
 
   const cardStyles = {
     padding: "2em",
@@ -13,10 +12,16 @@ function GroupListItem({ description, name, openAddMembersModal, setOpenAddMembe
   return (
     <Card style={cardStyles} alignItems="flex-start">
       <ListItemText
-        primary={<h3 className="organization-card-name">{name}</h3>}
-        secondary={description}
+        primary={<h3 className="organization-card-name">{group.name}</h3>}
+        secondary={group.description}
       />
-      <GroupAction {...{ openAddMembersModal }} {...{ setOpenAddMembersModal }} />
+      <GroupAction
+        {...{ openAddMembersModal }}
+        {...{ setOpenAddMembersModal }}
+        {...{ group }}
+        {...{ selectedGroup }}
+        {...{ setSelectedGroup }}
+      />
     </Card>
   )
 };

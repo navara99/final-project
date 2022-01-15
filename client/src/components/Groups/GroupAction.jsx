@@ -2,8 +2,7 @@ import React from "react";
 import GroupsBtn from "./GroupsBtn";
 import { Delete, Edit, Add, Person, Event, EventAvailableSharp } from "@mui/icons-material";
 
-function GroupAction({ admin, openAddMembersModal, setOpenAddMembersModal }) {
-
+function GroupAction({ openAddMembersModal, setOpenAddMembersModal, group, selectedGroup, setSelectedGroup }) {
 
   const btnInfo = [
     // {
@@ -38,6 +37,11 @@ function GroupAction({ admin, openAddMembersModal, setOpenAddMembersModal }) {
     return <GroupsBtn key={i} text={info.text} variant={info.variant} icon={info.icon} />
   });
 
+  const handleAddMemberBtn = () => {
+    setSelectedGroup(group);
+    setOpenAddMembersModal(!openAddMembersModal)
+  }
+
   return (
     <div className="organization-action-btn">
       <div className="action-btns">
@@ -47,11 +51,7 @@ function GroupAction({ admin, openAddMembersModal, setOpenAddMembersModal }) {
             text="Add member"
             variant="contained"
             icon={<Person />}
-            onClick={() => {
-              console.log("clicked")
-              setOpenAddMembersModal(!openAddMembersModal
-              )
-            }}
+            onClick={handleAddMemberBtn}
           />
         </div>
         <div>

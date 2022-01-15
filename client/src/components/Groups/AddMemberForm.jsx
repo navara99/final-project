@@ -13,13 +13,18 @@ import {
 } from "@mui/material";
 import useAllUsers from "../../hooks/useAllUsers";
 import { useState } from "react";
+import axios from "axios";
 
-const AddMemberForm = ({ openAddMembersModal, setOpenAddMembersModal }) => {
+const AddMemberForm = ({ openAddMembersModal, setOpenAddMembersModal, selectedGroup }) => {
   const allUsers = useAllUsers();
   const [selectedUsers, setSelectedUsers] = useState(new Array(allUsers.length).fill(false));
 
-  const handleAddMember = () => {
-    
+  const handleAddMember = async () => {
+    const usersIdToAdd = allUsers.filter((users, i) => selectedUsers[i]).map((user) => user.id);
+    console.log(usersIdToAdd);
+
+    axios.post(`/api/organizations/${selectedGroup.id}`)
+    setOpenAddMembersModal(!openAddMembersModal);
   };
 
   const handleSearchChange = () => {
@@ -35,25 +40,20 @@ const AddMemberForm = ({ openAddMembersModal, setOpenAddMembersModal }) => {
 
     return allUsers.map(({ id, first_name, last_name, username }, i) => {
       return (
-        <ListItem >
+        <ListItem key={id}>
           <ListItemText>
             {`${first_name} ${last_name} (${username})`}
           </ListItemText>
-          <Checkbox
-            checked={selectedUsers[i]}
-            color="primary"
-            value={id}
-            onChange={() => toggleCheckBox(i)}
-          />
+          <Checkbox color="primary" onChange={() => toggleCheckBox(i)} />
         </ListItem>
       )
     });
 
-  }
-  console.log(allUsers)
+  };
+
   return (
     <Dialog open={openAddMembersModal} onClose={() => { }}>
-      <DialogTitle>Add users to group</DialogTitle>
+      <DialogTitle>Add users to group: {selectedGroup.name}</DialogTitle>
       <DialogContent>
         <TextField
           autoFocus
