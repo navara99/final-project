@@ -8,13 +8,15 @@ import {
   DialogContentText,
   ListItem,
   Checkbox,
-  ListItemText
+  ListItemText,
+  List
 } from "@mui/material";
 import useAllUsers from "../../hooks/useAllUsers";
+import { useState } from "react";
 
 const AddMemberForm = ({ openAddMembersModal, setOpenAddMembersModal }) => {
   const allUsers = useAllUsers();
-  const [selectedUsers, setSelectedUsers] = useAllUsers(new Array(allUsers.length).fill(false));
+  const [selectedUsers, setSelectedUsers] = useState(new Array(allUsers.length).fill(false));
 
   const handleAddMember = () => {
 
@@ -30,27 +32,33 @@ const AddMemberForm = ({ openAddMembersModal, setOpenAddMembersModal }) => {
   };
 
   const generateUsersList = () => {
-    allUsers.map(({ id, first_name, last_name, username }, i) => {
-      <ListItem >
-        <ListItemText>
-          {`${first_name} ${last_name} (${username})`}
-        </ListItemText>
-        <Checkbox
-          checked={true}
-          color="primary"
-          value={id}
-          onChange={() => toggleCheckBox(i)}
-        />
-      </ListItem>
-    });
-  }
 
+    return allUsers.map(({ id, first_name, last_name, username }, i) => {
+      return (
+        <ListItem >
+          <ListItemText>
+            {`${first_name} ${last_name} (${username})`}
+          </ListItemText>
+          <Checkbox
+            checked={selectedUsers[i]}
+            color="primary"
+            value={id}
+            onChange={() => toggleCheckBox(i)}
+          />
+        </ListItem>
+      )
+    });
+
+  }
+  console.log(allUsers)
   return (
     <Dialog open={openAddMembersModal} onClose={() => { }}>
       <DialogTitle>Add users to group</DialogTitle>
       <DialogContent>
         <DialogContentText>Search</DialogContentText>
-        {generateUsersList()}
+        <List>
+          {allUsers && generateUsersList()}
+        </List>
       </DialogContent>
       <DialogActions>
         <Button onClick={() => { setOpenAddMembersModal(!openAddMembersModal) }}>Cancel</Button>

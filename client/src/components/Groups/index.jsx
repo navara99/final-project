@@ -29,7 +29,7 @@ function Groups() {
 
   return (
     <div className="groups-container">
-      <AddMemberForm {...{ openAddMembersModal }} {...{ setOpenAddMembersModal }} />
+      {openAddMembersModal && <AddMemberForm {...{ openAddMembersModal }} {...{ setOpenAddMembersModal }} />}
       <div className="organization-header">
         <h1>Your Organizations</h1>
         <Button variant="contained" startIcon={<Add />} onClick={() => setOpenForm(!openForm)}>Add Organization</Button>
