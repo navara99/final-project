@@ -5,7 +5,7 @@ const Home = () => {
     
   }, []);
 
-  return <div>test</div>;
+  return <div>Home</div>;
 };
 
 export default Home;

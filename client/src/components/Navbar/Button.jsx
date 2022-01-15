@@ -1,12 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Tippy from "@tippyjs/react";
+import 'tippy.js/dist/tippy.css'; 
 
-const Button = ({ icon, to }) => {
+const Button = ({ Icon, to, text }) => {
   return (
-    <Link to={to} className="navbar-button">
-      <FontAwesomeIcon icon={icon} />
-    </Link>
+    <Tippy
+      content={text}
+      placement="right"
+      theme="material"
+      arrow={true}
+    >
+      <Link to={to} className="navbar-button">
+        <Icon />
+      </Link>
+    </Tippy>
   );
 };
 
