@@ -117,7 +117,7 @@ const queryGenerator = (db) => {
   };
 
 
-  const getAllJobsByOrganizationById = async (organization_id) => {
+  const getAllJobsByOrganizationId = async (organization_id) => {
     const values = [organization_id];
     const queryString = `
     SELECT jobs.* FROM jobs
@@ -134,7 +134,22 @@ const queryGenerator = (db) => {
 
   };
 
+  const getAllMembersByOrganizationId = async (organization_id) => {
+    const values = [organization_id];
+    const queryString = `
+    SELECT users.* FROM users
+    JOIN users_organizations ON users.id = users_organizations.user_id
+    WHERE users_organizations.organization_id = $1;
+    `
 
+    try {
+      const result = await db.query(queryString, values);
+      return result.rows;
+    } catch (err) {
+      console.log(err.message);
+    };
+
+  };
 
 
   return {
@@ -145,7 +160,8 @@ const queryGenerator = (db) => {
     getOrganizationsByUser,
     getAllOtherUsers,
     getAllFairs,
-    getAllJobsByOrganizationById
+    getAllJobsByOrganizationId,
+    getAllMembersByOrganizationId
   };
 };
 

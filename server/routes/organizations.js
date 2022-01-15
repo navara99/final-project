@@ -3,7 +3,12 @@ const router = express.Router();
 
 module.exports = (db) => {
   const queryGenerator = require("../db/queryHelpers");
-  const { createNewOrganization, addUserToOrganization, getAllJobsByOrganizationById } = queryGenerator(db);
+  const {
+    createNewOrganization,
+    addUserToOrganization,
+    getAllJobsByOrganizationId,
+    getAllMembersByOrganizationId
+  } = queryGenerator(db);
 
   router.post("/", async (req, res) => {
     const { user_id } = req.session;
@@ -39,8 +44,9 @@ module.exports = (db) => {
     const { user_id } = req.session;
 
     try {
-      const organizationDetails = await getAllJobsByOrganizationById(id);
-      res.json(organizationDetails);
+      const jobs = await getAllJobsByOrganizationId(id);
+      const members = await getAllMembersByOrganizationId(id);
+      res.json({ jobs, members });
     } catch (err) {
       console.log(err.message);
     };
