@@ -5,7 +5,7 @@ import {
   DialogContent,
   Button,
   DialogActions,
-  DialogContentText,
+  TextField,
   ListItem,
   Checkbox,
   ListItemText,
@@ -19,7 +19,7 @@ const AddMemberForm = ({ openAddMembersModal, setOpenAddMembersModal }) => {
   const [selectedUsers, setSelectedUsers] = useState(new Array(allUsers.length).fill(false));
 
   const handleAddMember = () => {
-
+    
   };
 
   const handleSearchChange = () => {
@@ -55,7 +55,14 @@ const AddMemberForm = ({ openAddMembersModal, setOpenAddMembersModal }) => {
     <Dialog open={openAddMembersModal} onClose={() => { }}>
       <DialogTitle>Add users to group</DialogTitle>
       <DialogContent>
-        <DialogContentText>Search</DialogContentText>
+        <TextField
+          autoFocus
+          margin="dense"
+          id="search"
+          label="Search"
+          fullWidth
+          onChange={handleSearchChange}
+        />
         <List>
           {allUsers && generateUsersList()}
         </List>
