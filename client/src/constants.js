@@ -15,3 +15,15 @@ export const fairListSettings = {
     },
   },
 };
+
+export const ongoingFairListSettings = {
+  infinite: true,
+  responsive: {
+    0: {
+      items: 1,
+    },
+  },
+};
+
+export const onGoingMediaHeight = 350;
+export const otherMediaHeight = 250;

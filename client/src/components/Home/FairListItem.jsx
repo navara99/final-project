@@ -5,6 +5,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
 import { formatDate } from "../../helpers/date";
+import { onGoingMediaHeight, otherMediaHeight } from "../../constants";
 
 const FairListItem = ({
   id,
@@ -14,18 +15,27 @@ const FairListItem = ({
   start_time,
   end_time,
   showDate,
+  isOnGoing,
 }) => {
+  const height = isOnGoing ? onGoingMediaHeight : otherMediaHeight;
+  const formattedDate = formatDate(start_time);
+
   return (
     <div>
       <Link to={`fairs/${id}`}>
         <Card>
-          {showDate && <div className="badge">{formatDate(start_time)}</div>}
+          {showDate && <div className="badge">{formattedDate}</div>}
           <div className="title">
             <Typography gutterBottom variant="h6" component="div">
               {name}
             </Typography>
           </div>
-          <CardMedia component="img" height="250" image={poster} alt={name} />
+          <CardMedia
+            component="img"
+            height={height}
+            image={poster}
+            alt={name}
+          />
           <CardContent>
             <div className="content">
               <Typography variant="body2" color="text.secondary">

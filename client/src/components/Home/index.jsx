@@ -8,7 +8,7 @@ const Home = () => {
 
   return (
     <div className="Home">
-      <FairList items={onGoingFairs} text="On Going Career Fairs" />
+      <FairList items={onGoingFairs} text="Career Fairs LIVE" isOngoing={true} />
       <FairList
         items={upcomingFairs}
         text="Upcoming Career Fairs"
