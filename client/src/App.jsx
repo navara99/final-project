@@ -9,14 +9,22 @@ import Home from "./components/Home";
 import { Routes, Route } from "react-router-dom";
 import useCurrentUser from "./hooks/useCurrentUser";
 import Groups from "./components/Groups/index";
+import { Snackbar } from "@mui/material";
 
 function App() {
   const [errorMessage, setErrorMessage] = useState("");
   const [showError, setShowError] = useState(false);
   const { currentUser, setCurrentUser, logout } = useCurrentUser();
+  const [snackBarDetails, setSnackBarDetails] = useState({
+    open: false,
+    message: "Success"
+  });
 
   return (
     <div className="App">
+      <Snackbar open={snackBarDetails.open} autoHideDuration={6000} onClose={() => { }}>
+        <Alert onClose={() => { }} severity="success" sx={{ width: '100%' }}>{snackBarDetails.message}</Alert>
+      </Snackbar>
       <Navbar {...{ currentUser, logout }} />
       <ErrorModal {...{ errorMessage, showError, setShowError }} />
       <div className="main-container">
@@ -31,7 +39,7 @@ function App() {
             }
           />
           <Route path="/login" element={<LogIn {...{ setCurrentUser }} />} />
-          <Route path="/groups" element={<Groups />} />
+          <Route path="/groups" element={<Groups setSnackBarDetails/>} />
         </Routes>
       </div>
     </div>
