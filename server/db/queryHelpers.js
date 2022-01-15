@@ -117,11 +117,25 @@ const queryGenerator = (db) => {
   };
 
 
-  const getAllDetailsOfOrganizationById = async (organization_id) => {
+  const getAllJobsByOrganizationById = async (organization_id) => {
+    const values = [organization_id];
+    const queryString = `
+    SELECT jobs.* FROM jobs
+    JOIN organizations ON jobs.employer_id =  organizations.id
+    WHERE organizations.id = $1;
+    `
 
-    
+    try {
+      const result = await db.query(queryString, values);
+      return result.rows;
+    } catch (err) {
+      console.log(err.message);
+    };
 
   };
+
+
+
 
   return {
     createNewUser,
@@ -131,7 +145,7 @@ const queryGenerator = (db) => {
     getOrganizationsByUser,
     getAllOtherUsers,
     getAllFairs,
-    getAllDetailsOfOrganizationById
+    getAllJobsByOrganizationById
   };
 };
 
