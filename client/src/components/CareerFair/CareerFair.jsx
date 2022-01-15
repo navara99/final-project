@@ -1,17 +1,7 @@
 import React from 'react'
-
 import Grid from '@mui/material/Grid';
 import CompanyList from './Companies/CompanyList';
-import { styled } from '@mui/material/styles';
-import Paper from '@mui/material/Paper';
-const Item = styled(Paper)(({ theme }) => ({
-  ...theme.typography.h3,
-  padding: theme.spacing(1),
-  textAlign: 'center',
-  color: theme.palette.text.secondary,
-}));
-
-
+import FairHeader from './FairHeader';
 
 const CareerFair = () => {
   const fair = 
@@ -21,7 +11,7 @@ const CareerFair = () => {
       description : "Some text",
       start_time : '2022-01-22',
       end_time:'2022-01-23',
-      poster:"url"
+      poster:"https://wonder.ph/wp-content/uploads/2021/03/upcap-career-fair-thumbnail.jpg"
     };
 
   
@@ -52,15 +42,16 @@ const CareerFair = () => {
       }
     ]
   return (
-    <Grid container spacing={2}>
+    <Grid container spacing={2} >
       {/* Name of the fair */}
-      <Grid item xs={12} marginTop={2}>
-        <Item elevation={3}>
-          {fair.name}
-        </Item>
+      <Grid item xs={12} >
+        <FairHeader fair={fair}/>
       </Grid>
       {/* companies detail */}
-      <CompanyList industries = {industries}/>
+      <Grid item xs={12} marginTop={2}>
+        <CompanyList industries = {industries}/>
+      </Grid>
+      
     
     </Grid>
   )
