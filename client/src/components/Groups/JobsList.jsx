@@ -5,11 +5,11 @@ import JobListItem from "./JobListItem";
 function JobsList({ jobs, isMember }) {
 
   const renderJobs = () => {
-    return jobs.map((job) => {
+    return jobs.map((job, i) => {
       return (
         <>
           <JobListItem {...{ job }} {...{ isMember }} />
-          <Divider />
+          {i === jobs.length - 1 ? "" : < Divider />}
         </>
       )
     });
