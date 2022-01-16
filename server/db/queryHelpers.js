@@ -253,6 +253,21 @@ const queryGenerator = (db) => {
 
   };
 
+  //Messages queryhelper functions
+
+  const getMessagesByUserId = async(user_id) => {
+    const values = [user_id];
+    const queryString = `
+    SELECT * FROM messages WHERE sender_id = $1 OR receiver_id = $1
+    `
+    try {
+      const result = await db.query(queryString,values);
+      return result.rows;
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return {
     createNewUser,
     getUserByValue,
@@ -267,7 +282,8 @@ const queryGenerator = (db) => {
     getAllFairsByOrganizationId,
     getAllApplicationsByJobId,
     getOrganizationDetails,
-    checkIfIAmMember
+    checkIfIAmMember,
+    getMessagesByUserId
   };
 };
 

@@ -11,10 +11,21 @@ const morgan = require("morgan");
 const {createServer} = require("http");
 const {Server} = require("socket.io");
 const httpServer = createServer(app);
-const io = new Server(httpServer); //need cors
+const io = new Server(httpServer, {
+  cors: {
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST"],
+  },
+}); 
 
 io.on("connection", (socket) => {
-  console.log('a new user connected')
+  console.log('a new user connected');
+  console.log("Connected socketId:", socket.id);
+
+  //client disconnect 
+  socket.on("disconnect", () => {
+    console.log("user disconnected!")
+  })
 })
 
 // Set up cookie-session
@@ -39,10 +50,14 @@ app.use(express.urlencoded({ extended: true }));
 const usersRoutes = require("./routes/users");
 const fairsRoutes = require("./routes/fairs");
 const organizationRoutes = require("./routes/organizations");
+const messagesRoutes = require("./routes/messages");
+
 
 app.use("/api/users", usersRoutes(db));
 app.use("/api/fairs", fairsRoutes(db));
 app.use("/api/organizations", organizationRoutes(db));
+app.use("/api/messages", messagesRoutes(db));
+
 
 
 httpServer.listen(PORT, () => {
