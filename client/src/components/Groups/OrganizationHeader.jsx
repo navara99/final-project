@@ -33,9 +33,9 @@ function OrganizationHeader({ organization, cardStyles }) {
           </CardActions>
         </div>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
-          <p><strong>Industry:</strong> {organization.details.industry}</p>
-          <p><strong>Email:</strong> {organization.details.email}</p>
-          <p><strong>Website:</strong> {organization.details.website}</p>
+          <p>Industry: {organization.details.industry}</p>
+          <p>Email: {organization.details.email}</p>
+          <p>Website: {organization.details.website}</p>
         </Collapse>
       </Card >
     </div>
