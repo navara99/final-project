@@ -2,7 +2,10 @@ import React from "react";
 import useExpand from "../../hooks/useExpand";
 import { ListItemText, Card, IconButton, Collapse, CardActions, CardMedia } from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import AddIcon from '@mui/icons-material/Add';
+
 import JobsList from "./JobsList";
+import GroupsBtn from "./GroupsBtn";
 
 function OrganizationJobs({ cardStyles, organization }) {
   const { ExpandMore, handleExpandClick, expanded } = useExpand();
@@ -16,7 +19,9 @@ function OrganizationJobs({ cardStyles, organization }) {
             secondary={`${organization.details.name} has ${organization.jobs.length} jobs listed.`}
           />
           <CardActions>
+            <GroupsBtn text="New Job" variant="contained" icon={<AddIcon />} />
             <ExpandMore
+              style={{ marginLeft: "1em" }}
               expand={expanded}
               onClick={handleExpandClick}
               aria-expanded={expanded}
