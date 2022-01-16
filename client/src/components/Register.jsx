@@ -11,7 +11,7 @@ import {
 import { Person, Email, Lock } from "@mui/icons-material";
 import useInput from '../hooks/useInput';
 import axios from 'axios';
-import Unauthorised from './Unauthorised';
+import Unauthorized from './Unauthorized';
 import { useNavigate } from 'react-router-dom';
 
 function Register({ setErrorMessage, setShowError, setCurrentUser, currentUser, logout }) {
@@ -53,7 +53,7 @@ function Register({ setErrorMessage, setShowError, setCurrentUser, currentUser, 
   };
 
   if (currentUser) {
-    return <Unauthorised action="register for another account" logout={logout} />;
+    return <Unauthorized action="register for another account" logout={logout} />;
   }
 
   return (

@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import axios from "axios";
-import Unauthorised from "./Unauthorised/index";
+import Unauthorized from "./Unauthorized/index";
 import { useNavigate } from 'react-router-dom';
 
 const LogIn = ({ setCurrentUser, currentUser, logout }) => {
@@ -36,7 +36,7 @@ const LogIn = ({ setCurrentUser, currentUser, logout }) => {
   };
 
   if (currentUser) {
-    return <Unauthorised action="login again" logout={logout} />;
+    return <Unauthorized action="login again" logout={logout} />;
   }
 
   return (
