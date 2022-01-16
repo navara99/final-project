@@ -51,7 +51,7 @@ function App() {
               />
             }
           />
-          <Route path="/login" element={<LogIn {...{ setCurrentUser }} />} />
+          <Route path="/login" element={<LogIn {...{ setCurrentUser, currentUser, logout }} />} />
           <Route path="/groups" element={<Groups {...{ setSnackBarDetails }} />} />
           <Route path="/jobs" element={<Jobs />} />
           <Route path="/schedule" element={<>My Schedule</>} />

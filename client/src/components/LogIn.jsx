@@ -11,8 +11,9 @@ import {
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import axios from "axios";
+import Unauthorised from "./Unauthorised";
 
-const LogIn = ({ setCurrentUser }) => {
+const LogIn = ({ setCurrentUser, currentUser, logout }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -27,9 +28,16 @@ const LogIn = ({ setCurrentUser }) => {
       setCurrentUser(data);
     } catch (e) {
       console.log(e);
-    };
-    
+    }
   };
+
+  if (currentUser) {
+    const Link = () => {
+      return <button onClick={logout}>Logout</button>;
+    };
+    return <Unauthorised action="login again" Link={Link} />;
+  }
+
   return (
     <Container maxWidth="xs">
       <Box

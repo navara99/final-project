@@ -11,3 +11,7 @@
   overflow: scroll;
   height: 100%;
 }
+
+.unauthorised {
+  text-align: center;
+}
