@@ -8,13 +8,13 @@ import JobsList from "./JobsList";
 import GroupsBtn from "./GroupsBtn";
 import { useState } from "react";
 
-function OrganizationJobs({ cardStyles, organization }) {
+function OrganizationJobs({ cardStyles, organization, setSnackBarDetails }) {
   const { ExpandMore, handleExpandClick, expanded } = useExpand();
   const [jobFormOpen, setJobFormOpen] = useState(false);
 
   return (
     <div className="organization-details-header">
-      <JobForm {...{ jobFormOpen }} {...{ setJobFormOpen }} />
+      <JobForm {...{ jobFormOpen }} {...{ setJobFormOpen }} {...{ setSnackBarDetails }} />
       <Card alignItems="flex-start" style={cardStyles}>
         <div className="organization-card">
           <ListItemText

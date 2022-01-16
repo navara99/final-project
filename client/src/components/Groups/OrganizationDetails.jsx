@@ -10,7 +10,7 @@ const cardStyles = {
   margin: "1em"
 };
 
-function OrganizationDetails() {
+function OrganizationDetails({ setSnackBarDetails }) {
   const { id } = useParams();
   const organization = useOrganizationDetails(id);
 
@@ -21,7 +21,7 @@ function OrganizationDetails() {
         {organization && <OrganizationHeader {...{ organization }} {...{ cardStyles }} />}
         {organization && <OrganizationMembers {...{ organization }} {...{ cardStyles }} />}
       </div>
-      {organization && <OrganizationJobs {...{ organization }} {...{ cardStyles }} />}
+      {organization && <OrganizationJobs {...{ organization }} {...{ cardStyles }} {...{ setSnackBarDetails }} />}
 
     </div>
 

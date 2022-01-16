@@ -11,12 +11,36 @@ import {
 import useInput from "../../hooks/useInput";
 import axios from "axios";
 
-function JobForm({ jobFormOpen, setJobFormOpen }) {
+function JobForm({ jobFormOpen, setJobFormOpen, setSnackBarDetails }) {
   const [title, setTitle] = useInput();
   const [description, setDescription] = useInput();
   const [experience, setExperience] = useInput();
   const [location, setLocation] = useInput();
   const [salary, setSalary] = useInput();
+
+
+  const handleJobSubmit = () => {
+    const jobDetails = {
+      title,
+      description,
+      experience,
+      location,
+      salary
+    };
+
+    try {
+      setSnackBarDetails({
+        open: true,
+        message: "Job successfully posted"
+      });
+      await axios.post("/api/organizations/:id/jobs", jobDetails);
+      setJobFormOpen(!jobFormOpen);
+    } catch (err) {
+      console.log(err.message);
+    };
+
+
+  };
 
   return (
     <Dialog open={jobFormOpen} onClose={() => { }}>
@@ -69,7 +93,7 @@ function JobForm({ jobFormOpen, setJobFormOpen }) {
       </DialogContent>
       <DialogActions>
         <Button onClick={() => { setJobFormOpen(!jobFormOpen) }}>Cancel</Button>
-        <Button onClick={() => { }}>Create</Button>
+        <Button onClick={handleJobSubmit}>Create</Button>
       </DialogActions>
     </Dialog>
   )
