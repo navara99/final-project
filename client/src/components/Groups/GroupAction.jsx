@@ -47,7 +47,7 @@ function GroupAction({ openAddMembersModal, setOpenAddMembersModal, group, selec
     <div className="organization-action-btn">
       <div className="action-btns">
         <div>
-          <Link to={`/groups/${group.id}`} style={{ textDecoration: 'none' }}>
+          <Link to={`/organizations/${group.id}`} style={{ textDecoration: 'none' }}>
             <GroupsBtn text="Details" variant="contained" />
           </Link>
           <GroupsBtn

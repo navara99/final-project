@@ -76,7 +76,7 @@ function App() {
             }
           />
           <Route
-            path="/groups"
+            path="/organizations"
             element={<Groups {...{ setSnackBarDetails }} />}
           />
           <Route path="/jobs" element={<Jobs />} />
@@ -84,7 +84,7 @@ function App() {
           <Route path="/messages" element={<ChatBox/>} />
           <Route path="/settings" element={<>Settings</>} />
           <Route path="/fairs/:id" element={<CareerFair />} />
-          <Route path="/groups/:id" element={<OrganizationDetails />} />
+          <Route path="/organizations/:id" element={<OrganizationDetails />} />
         </Routes>
       </div>
     </div>
