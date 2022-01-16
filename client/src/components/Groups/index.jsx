@@ -8,6 +8,11 @@ import { useState } from "react";
 import useMyGroups from "../../hooks/useMyGroups";
 import AddMemberForm from "./AddMemberForm";
 
+const cardStyles = {
+  padding: "2em",
+  margin: "1em"
+};
+
 function Groups({ setSnackBarDetails }) {
   const [openForm, setOpenForm] = useState(false);
   const [openAddMembersModal, setOpenAddMembersModal] = useState(false);
@@ -17,6 +22,7 @@ function Groups({ setSnackBarDetails }) {
   const renderMyGroups = (myGroups) => {
 
     return myGroups.sort((a, b) => b.id - a.id).map((group) => {
+      console.log(group);
       return <GroupListItem
         key={group.id}
         {...{ group }}
@@ -24,6 +30,7 @@ function Groups({ setSnackBarDetails }) {
         {...{ setOpenAddMembersModal }}
         {...{ selectedGroup }}
         {...{ setSelectedGroup }}
+        {...{ cardStyles }}
       />
     });
 
@@ -39,7 +46,7 @@ function Groups({ setSnackBarDetails }) {
       />}
       <div className="organization-header">
         <h1>Your Organizations</h1>
-        <Button variant="contained" startIcon={<Add />} onClick={() => setOpenForm(!openForm)}>Add Organization</Button>
+        <Button style={{ height: "50%" }} variant="contained" startIcon={<Add />} onClick={() => setOpenForm(!openForm)}>Add Organization</Button>
         <GroupForm {...{ openForm }} {...{ setOpenForm }}  {...{ setMyGroups }} />
       </div>
       <List sx={{ width: '90%', paddingTop: "2em" }}>
