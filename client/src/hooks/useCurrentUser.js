@@ -24,10 +24,6 @@ const useCurrentUser = () => {
     }
   };
 
-  useEffect(() => {
-    console.log(currentUser);
-  }, [currentUser])
-
   return { currentUser, setCurrentUser, logout };
 };
 

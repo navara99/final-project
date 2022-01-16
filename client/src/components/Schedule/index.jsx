@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "./schedule.css";
 import Event from "./Event";
+import axios from "axios";
 
 const localizer = momentLocalizer(moment);
 
@@ -181,7 +182,11 @@ const events = [
 ];
 
 const Schedule = () => {
-  const [selectedEvent, setSelectedEvent] = useState();
+  useEffect(() => {
+    axios.get("/api/schedule/").then(({ data }) => {
+      console.log(data);
+    });
+  }, []);
   return (
     <div className="schedule">
       <Calendar

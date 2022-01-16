@@ -5,7 +5,7 @@ module.exports = (db) => {
   const queryGenerator = require("../db/queryHelpers");
   const { getSchedule } = queryGenerator(db);
 
-  router.post("/", async (req, res) => {
+  router.get("/", async (req, res) => {
     const { user_id } = req.session;
 
     try {
