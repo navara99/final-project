@@ -2,6 +2,7 @@ import React from "react";
 import useExpand from "../../hooks/useExpand";
 import { ListItemText, Card, IconButton, Collapse, CardActions, CardMedia } from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import MembersList from "./MembersList";
 
 function OrganizationMembers({ organization, cardStyles }) {
   const { ExpandMore, handleExpandClick, expanded } = useExpand();
@@ -26,7 +27,7 @@ function OrganizationMembers({ organization, cardStyles }) {
           </CardActions>
         </div>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
-
+          <MembersList members={organization.members} />
         </Collapse>
       </Card >
     </div>
