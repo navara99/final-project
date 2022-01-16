@@ -253,7 +253,23 @@ const queryGenerator = (db) => {
 
   };
 
+  const getSchedule = (id) => {
+    const values = [id];
+    const queryString = `
+      SELECT fairs.* FROM fairs
+      JOIN fairs_organizations ON fairs.host_id = fairs_organizations.fair_id
+      WHERE fairs_organizations.organization_id = $1;
+    `
+    try {
+      const result = await db.query(queryString, values);
+      return result.rows;
+    } catch (err) {
+      console.log(err.message);
+    };
+  };
+
   return {
+    getSchedule,
     createNewUser,
     getUserByValue,
     createNewOrganization,
