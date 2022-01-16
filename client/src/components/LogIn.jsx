@@ -12,8 +12,11 @@ import {
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import axios from "axios";
 import Unauthorised from "./Unauthorised/index";
+import { useNavigate } from 'react-router-dom';
 
 const LogIn = ({ setCurrentUser, currentUser, logout }) => {
+  const navigate = useNavigate();
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -26,6 +29,7 @@ const LogIn = ({ setCurrentUser, currentUser, logout }) => {
     try {
       const { data } = await axios.post("/api/users/login", logInDetail);
       setCurrentUser(data);
+      navigate("/");
     } catch (e) {
       console.log(e);
     }
