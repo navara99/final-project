@@ -4,7 +4,14 @@ import "tippy.js/dist/tippy.css";
 
 const Event = ({ event }) => {
   return (
-    <Tippy content="testing" placement="top" theme="material" arrow={true}>
+    <Tippy
+      interactive={true}
+      content="testing"
+      placement="top"
+      theme="material"
+      arrow={true}
+      interactiveDebounce={75}
+    >
       <div>
         <strong>{event.title}</strong>
         {event.desc && ":  " + event.desc}

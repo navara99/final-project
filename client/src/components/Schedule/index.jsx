@@ -189,6 +189,7 @@ const Schedule = () => {
         events={events}
         startAccessor="start"
         endAccessor="end"
+        tooltipAccessor={null}
         components={{
           event: Event,
         }}
