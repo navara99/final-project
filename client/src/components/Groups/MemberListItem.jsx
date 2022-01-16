@@ -1,5 +1,6 @@
 import React from "react";
-import { ListItem, Avatar, ListItemAvatar, ListItemText } from "@mui/material";
+import { ListItem, Avatar, ListItemAvatar, ListItemText, IconButton } from "@mui/material";
+import MessageIcon from '@mui/icons-material/Message';
 
 function MembersListItem({ member }) {
 
@@ -16,6 +17,10 @@ function MembersListItem({ member }) {
             <p>Email: {member.email}</p>
           </>}
       />
+      <IconButton color="primary" component="span" edge="start">
+        <MessageIcon />
+      </IconButton>
+
     </ListItem>
   )
 
