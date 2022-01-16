@@ -29,3 +29,13 @@
 .organization-details-header {
   width: 90%;
 }
+
+.organization-logo {
+  width: 30%;
+  padding-right: 1em;
+}
+
+.card {
+  padding: "2em";
+  margin: "1em"
+}

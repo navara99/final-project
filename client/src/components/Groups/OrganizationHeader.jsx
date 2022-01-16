@@ -1,7 +1,12 @@
 import React, { useState } from "react";
-import { ListItemText, Card, IconButton, Collapse, CardActions } from "@mui/material";
+import { ListItemText, Card, IconButton, Collapse, CardActions, CardMedia } from "@mui/material";
 import { styled } from '@mui/material/styles';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
+const cardStyles = {
+  padding: "2em",
+  margin: "1em"
+};
 
 function OrganizationHeader({ organization }) {
   const [expanded, setExpanded] = useState(false)
@@ -21,12 +26,19 @@ function OrganizationHeader({ organization }) {
     setExpanded(!expanded);
   };
 
+  console.log(organization);
+
   return (
     <div className="organization-details-header">
-      <Card alignItems="flex-start">
+      <Card alignItems="flex-start" style={cardStyles}>
         <div className="organization-card">
+          <img
+            className="organization-logo"
+            src="https://assets.brand.microsites.netflix.io/assets/7dc497e2-4975-11ec-a9ce-066b49664af6_cm_1440w.jpg?v=1"
+          />
           <ListItemText
-            primary={<h3 className="organization-card-name">{organization.details.name}</h3>}
+            primary={<h2 className="organization-card-name">{organization.details.name}</h2>}
+            secondary={organization.details.description}
           />
           <CardActions>
             <ExpandMore
@@ -40,7 +52,9 @@ function OrganizationHeader({ organization }) {
           </CardActions>
         </div>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
-          <div>HI</div>
+          <p><strong>Industry:</strong> {organization.details.industry}</p>
+          <p><strong>Email:</strong> {organization.details.email}</p>
+          <p><strong>Website:</strong> {organization.details.website}</p>
         </Collapse>
       </Card >
     </div>
