@@ -11,7 +11,7 @@
   height: 95%;
 }
 
-.rbc-event-content > div {
+.rbc-event-content > div.event {
   text-overflow: ellipsis;
   overflow: hidden;
 }

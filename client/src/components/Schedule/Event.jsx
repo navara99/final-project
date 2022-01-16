@@ -10,9 +10,10 @@ const Event = ({ event }) => {
       placement="top"
       theme="material"
       arrow={true}
-      interactiveDebounce={75}
+      interactiveDebounce={20}
+      hideOnClick={false}
     >
-      <div>
+      <div className="event">
         <strong>{event.title}</strong>
         {event.desc && ":  " + event.desc}
       </div>
