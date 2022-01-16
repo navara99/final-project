@@ -1,14 +1,18 @@
 import React from "react";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
+import { formatTime } from "../../helpers/date";
 
 const Event = ({ event }) => {
+  const { start, end, title } = event;
+  const formatStart = formatTime(start);
+  const formatEnd = formatTime(end);
   return (
     <Tippy
       interactive={true}
-      content={<>{event.title}
+      content={<>{title}
       <br />
-      {event.start} - {event.end}</>}
+      {formatStart} - {formatEnd}</>}
       placement="bottom"
       theme="material"
       arrow={true}
