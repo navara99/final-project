@@ -49,7 +49,7 @@ function Register({ setErrorMessage, setShowError, setCurrentUser, currentUser, 
   };
 
   if (currentUser) {
-    return <Unauthorised action="login again" logout={logout} />;
+    return <Unauthorised action="register for another account" logout={logout} />;
   }
 
   return (
