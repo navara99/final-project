@@ -46,7 +46,6 @@ const BootstrapDialogTitle = (props) => {
 
 const CompanyInfo = (props) => {
   const {open, setOpen, organization} = props;
-  console.log("org", organization);
   const {organizations_name,organizations_desc } = organization;
   const handleClose = () => {
     setOpen(false);
