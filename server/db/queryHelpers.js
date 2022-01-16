@@ -173,6 +173,39 @@ const queryGenerator = (db) => {
 
   };
 
+  const checkIfIAmMember = async (organization_id, user_id) => {
+    const values = [organization_id, user_id];
+    console.log(user_id, organization_id);
+    const queryString = `
+    SELECT COUNT(*)
+    FROM users_organizations
+    WHERE organization_id = $1 AND user_id = $2;
+    `;
+
+    try {
+      const result = await db.query(queryString, values);
+      const { count } = getFirstRecord(result);
+      return Number(count) ? true : false;
+    } catch (err) {
+      console.log(err.message);
+    };
+  };
+
+  const getOrganizationDetails = async (organization_id) => {
+    const values = [organization_id];
+    const queryString = `
+    SELECT organizations.*
+    FROM organizations
+    WHERE organizations.id = $1;
+    `;
+
+    try {
+      const result = await db.query(queryString, values);
+      return getFirstRecord(result);
+    } catch (err) {
+      console.log(err.message);
+    };
+  }
 
   const getAllFairsByOrganizationId = async (organization_id) => {
     const values = [organization_id];
@@ -191,7 +224,6 @@ const queryGenerator = (db) => {
 
   };
 
-
   return {
     createNewUser,
     getUserByValue,
@@ -203,7 +235,9 @@ const queryGenerator = (db) => {
     getAllJobsByOrganizationId,
     getAllMembersByOrganizationId,
     getAllFairsByOrganizationId,
-    getAllApplicationsByJobId
+    getAllApplicationsByJobId,
+    getOrganizationDetails,
+    checkIfIAmMember
   };
 };
 

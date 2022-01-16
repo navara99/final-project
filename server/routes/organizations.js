@@ -9,7 +9,8 @@ module.exports = (db) => {
     getAllJobsByOrganizationId,
     getAllMembersByOrganizationId,
     getAllFairsByOrganizationId,
-    getAllApplicationsByOrganizationId
+    getOrganizationDetails,
+    checkIfIAmMember
   } = queryGenerator(db);
 
   router.post("/", async (req, res) => {
@@ -42,14 +43,17 @@ module.exports = (db) => {
   });
 
   router.get("/:id", async (req, res) => {
+    const { user_id } = req.session;
     const { id } = req.params;
 
     try {
       const jobs = await getAllJobsByOrganizationId(id);
       const members = await getAllMembersByOrganizationId(id);
       const fairs = await getAllFairsByOrganizationId(id);
+      const details = await getOrganizationDetails(id);
+      const isMember = await checkIfIAmMember(id, user_id);
 
-      res.json({ jobs, members, fairs });
+      res.json({ jobs, members, fairs, details, isMember });
     } catch (err) {
       console.log(err.message);
     };
