@@ -10,7 +10,7 @@ function OrganizationHeader({ organization, cardStyles }) {
   console.log(organization);
 
   return (
-    <div className="organization-details-header">
+    <div >
       <Card alignItems="flex-start" style={cardStyles}>
         <div className="organization-card">
           <img

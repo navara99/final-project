@@ -16,11 +16,14 @@ function OrganizationDetails() {
 
   console.log(organization);
   return (
-    <>
-      {organization && <OrganizationHeader {...{ organization }} {...{ cardStyles }} />}
+    <div className="organization-details-wrapper">
+      <div className="organization-details-left-wrapper">
+        {organization && <OrganizationHeader {...{ organization }} {...{ cardStyles }} />}
+        {organization && <OrganizationMembers {...{ organization }} {...{ cardStyles }} />}
+      </div>
       {organization && <OrganizationJobs {...{ organization }} {...{ cardStyles }} />}
-      {organization && <OrganizationMembers {...{ organization }} {...{ cardStyles }} />}
-    </>
+
+    </div>
 
   );
 };

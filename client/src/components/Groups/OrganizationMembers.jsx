@@ -7,7 +7,7 @@ function OrganizationMembers({ organization, cardStyles }) {
   const { ExpandMore, handleExpandClick, expanded } = useExpand();
 
   return (
-    <div className="organization-details-header">
+    <div>
       <Card alignItems="flex-start" style={cardStyles}>
         <div className="organization-card">
           <ListItemText
