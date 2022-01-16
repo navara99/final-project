@@ -22,7 +22,6 @@ function GroupListItem({ group, openAddMembersModal, setOpenAddMembersModal, sel
 
   const handleExpandClick = (e) => {
     setExpanded(!expanded);
-    e.stopPropagation();
   };
 
   return (
