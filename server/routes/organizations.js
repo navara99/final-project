@@ -10,7 +10,8 @@ module.exports = (db) => {
     getAllMembersByOrganizationId,
     getAllFairsByOrganizationId,
     getOrganizationDetails,
-    checkIfIAmMember
+    checkIfIAmMember,
+    addJobToOrganization
   } = queryGenerator(db);
 
   router.post("/", async (req, res) => {
@@ -39,6 +40,21 @@ module.exports = (db) => {
     } catch (err) {
       console.log(err.message);
     }
+
+  });
+
+  router.post("/:id/jobs", async (req, res) => {
+    const { id } = req.params;
+    console.log(req.body);
+    
+    try {
+      await addJobToOrganization(id, req.body);
+      res.json({
+        status: "success"
+      });
+    } catch (err) {
+      console.log(err.message);
+    };
 
   });
 

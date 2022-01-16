@@ -49,7 +49,7 @@ const queryGenerator = (db) => {
   };
 
 
-    // Individual Fair
+  // Individual Fair
   const getFair = async (fair_id) => {
     const values = [fair_id];
     const queryString = `
@@ -67,15 +67,15 @@ const queryGenerator = (db) => {
     JOIN organizations ON (organizations.id = fairs_organizations.organization_id)
     WHERE fairs.id = $1
     `;
-  
-      try {
-        const result  = await db.query(queryString, values)
-        return getData(result)
-      } catch (err) {
-        console.log(err.message)
-      }
+
+    try {
+      const result = await db.query(queryString, values)
+      return getData(result)
+    } catch (err) {
+      console.log(err.message)
+    }
   }
-  
+
 
   const createNewOrganization = async ({ name, description, email, industry, website }) => {
     const values = [name, description, email, industry, website];
@@ -168,7 +168,7 @@ const queryGenerator = (db) => {
     const values = [organization_id];
     const queryString = `
     SELECT jobs.* FROM jobs
-    JOIN organizations ON jobs.employer_id = organizations.id
+    JOIN organizations ON jobs.organization_id = organizations.id
     WHERE organizations.id = $1;
     `
 
@@ -254,6 +254,23 @@ const queryGenerator = (db) => {
 
   };
 
+  const addJobToOrganization = async (organization_id, { title, description, experience, location, salary }) => {
+    const values = [organization_id, title, description, experience, location, salary];
+    const queryString = `
+      INSERT INTO jobs (organization_id, title, description, experience, location, salary)
+      VALUES ($1, $2, $3, $4, $5, $6)
+      RETURNING *;
+    `;
+
+    try {
+      await db.query(queryString, values);
+      console.log("here");
+    } catch (err) {
+      console.log(err.message);
+    };
+
+  };
+
   return {
     createNewUser,
     getUserByValue,
@@ -268,7 +285,8 @@ const queryGenerator = (db) => {
     getAllFairsByOrganizationId,
     getAllApplicationsByJobId,
     getOrganizationDetails,
-    checkIfIAmMember
+    checkIfIAmMember,
+    addJobToOrganization
   };
 };
 
