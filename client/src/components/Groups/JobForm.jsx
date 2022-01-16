@@ -3,13 +3,13 @@ import {
   Dialog,
   DialogTitle,
   DialogContent,
-  DialogContentText,
   DialogActions,
   TextField,
   Button
 } from "@mui/material";
 import useInput from "../../hooks/useInput";
 import axios from "axios";
+import { useParams } from "react-router";
 
 function JobForm({ jobFormOpen, setJobFormOpen, setSnackBarDetails }) {
   const [title, setTitle] = useInput();
@@ -17,9 +17,9 @@ function JobForm({ jobFormOpen, setJobFormOpen, setSnackBarDetails }) {
   const [experience, setExperience] = useInput();
   const [location, setLocation] = useInput();
   const [salary, setSalary] = useInput();
+  const { id } = useParams();
 
-
-  const handleJobSubmit = () => {
+  const handleJobSubmit = async () => {
     const jobDetails = {
       title,
       description,
@@ -29,16 +29,15 @@ function JobForm({ jobFormOpen, setJobFormOpen, setSnackBarDetails }) {
     };
 
     try {
+      await axios.post(`/api/organizations/${id}/jobs`, jobDetails);
+      setJobFormOpen(!jobFormOpen);
       setSnackBarDetails({
         open: true,
         message: "Job successfully posted"
       });
-      await axios.post("/api/organizations/:id/jobs", jobDetails);
-      setJobFormOpen(!jobFormOpen);
     } catch (err) {
       console.log(err.message);
     };
-
 
   };
 
@@ -49,7 +48,7 @@ function JobForm({ jobFormOpen, setJobFormOpen, setSnackBarDetails }) {
         <TextField
           autoFocus
           margin="dense"
-          id="name"
+          id="title"
           label="Title"
           fullWidth
           required
@@ -72,7 +71,6 @@ function JobForm({ jobFormOpen, setJobFormOpen, setSnackBarDetails }) {
           fullWidth
           required
           onChange={setExperience}
-          type="number"
         />
         <TextField
           margin="dense"
