@@ -1,5 +1,5 @@
 import React from 'react'
-import { List } from '@mui/material'
+import { Grid, List } from '@mui/material'
 import MessageListItem from './MessageListItem';
 
 const MessageList = () => {
@@ -34,7 +34,7 @@ const MessageList = () => {
   const messageList = messages ? messages.map(message => <MessageListItem message = {message}/>) : null
   return (
     <List >
-      {messageList}
+        {messageList}
     </List>
   )
 }
