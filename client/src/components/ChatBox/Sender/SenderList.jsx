@@ -20,7 +20,7 @@ const SenderList = () => {
     }
   ]
 
-  const senderList = senders ? senders.map(sender => <SenderListItem sender = {sender}/>) : null
+  const senderList = senders ? senders.map(sender => <SenderListItem key={sender.name}sender = {sender}/>) : null
 
   return (
     <List>

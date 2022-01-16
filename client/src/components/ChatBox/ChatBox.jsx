@@ -16,6 +16,8 @@ import SendIcon from '@mui/icons-material/Send';
 
 import SenderListItem from './Sender/SenderListItem';
 import SenderList from './Sender/SenderList';
+import MessageList from './Messages/MessageList';
+import MessageForm from './MessageForm/MessageForm';
 
 const ChatBox = () => {
 
@@ -34,7 +36,9 @@ const ChatBox = () => {
         </Grid>
         {/* Chatter Box */}
         <Grid item xs ={9}  px={2} sx={{backgroundColor:"#eff2f6"}} component={Paper} variant='outlined'>
-                
+            <MessageList />
+            <Divider />
+            <MessageForm />
         </Grid>
     </Grid>
   );
