@@ -1,6 +1,7 @@
 import React from "react";
 import GroupsBtn from "./GroupsBtn";
 import { Delete, Edit, Add, Person, Event, EventAvailableSharp } from "@mui/icons-material";
+import { Link } from "react-router-dom";
 
 function GroupAction({ openAddMembersModal, setOpenAddMembersModal, group, selectedGroup, setSelectedGroup }) {
 
@@ -46,7 +47,9 @@ function GroupAction({ openAddMembersModal, setOpenAddMembersModal, group, selec
     <div className="organization-action-btn">
       <div className="action-btns">
         <div>
-          <GroupsBtn text="Details" variant="contained" />
+          <Link to={`/groups/${group.id}`} style={{ textDecoration: 'none' }}>
+            <GroupsBtn text="Details" variant="contained" />
+          </Link>
           <GroupsBtn
             text="Add member"
             variant="contained"

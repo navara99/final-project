@@ -3,7 +3,15 @@ const router = express.Router();
 
 module.exports = (db) => {
   const queryGenerator = require("../db/queryHelpers");
-  const { createNewOrganization, addUserToOrganization } = queryGenerator(db);
+  const {
+    createNewOrganization,
+    addUserToOrganization,
+    getAllJobsByOrganizationId,
+    getAllMembersByOrganizationId,
+    getAllFairsByOrganizationId,
+    getOrganizationDetails,
+    checkIfIAmMember
+  } = queryGenerator(db);
 
   router.post("/", async (req, res) => {
     const { user_id } = req.session;
@@ -26,11 +34,29 @@ module.exports = (db) => {
         return await addUserToOrganization(id, req.params.id, false);
       }));
       res.json({
-        status:"success"
+        status: "success"
       });
     } catch (err) {
       console.log(err.message);
     }
+
+  });
+
+  router.get("/:id", async (req, res) => {
+    const { user_id } = req.session;
+    const { id } = req.params;
+
+    try {
+      const jobs = await getAllJobsByOrganizationId(id);
+      const members = await getAllMembersByOrganizationId(id);
+      const fairs = await getAllFairsByOrganizationId(id);
+      const details = await getOrganizationDetails(id);
+      const isMember = await checkIfIAmMember(id, user_id);
+
+      res.json({ jobs, members, fairs, details, isMember });
+    } catch (err) {
+      console.log(err.message);
+    };
 
   });
 

@@ -6,6 +6,10 @@
   width: 90%;
 }
 
+.organization-card {
+  display: flex;
+}
+
 .organization-header {
   width: 100%;
   display: flex;
@@ -20,4 +24,27 @@
 .action-btns {
   display: flex;
   justify-content: space-between;
+}
+
+.organization-details-header {
+  width: 90%;
+  margin: 0;
+}
+
+.organization-logo {
+  width: 30%;
+  padding-right: 1em;
+}
+
+.card {
+  padding: "2em";
+  margin: "1em"
+}
+
+.organization-details-wrapper {
+  display: flex;
+}
+
+.organization-details-left-wrapper {
+  width: 50%;
 }

@@ -10,7 +10,7 @@ const router = express.Router();
 
 module.exports = (db) => {
   const queryGenerator = require("../db/queryHelpers");
-  const { getAllFairs } = queryGenerator(db);
+  const { getAllFairs, getFair } = queryGenerator(db);
 
   router.get("/", async (req, res) => {
     try {
@@ -48,25 +48,20 @@ module.exports = (db) => {
   });
 
   router.get("/:id", async (req, res) => {
-    const fair_id = req.params.id;
-    const values = [fair_id];
-    const queryString = `
-  SELECT 
-  fairs.id as FairId, 
-  fairs.description as FairDesc, 
-  fairs.name as FairName, 
-  fairs.poster as POSTER, 
-  fairs.host_id as Host, 
-  organizations.id as OrganizationId, 
-  organizations.name as OrganizationsName, 
-  organizations.description as OrganizationsDesc 
-  FROM fairs_organizations 
-  RIGHT JOIN fairs ON (fairs.id = $1) 
-  JOIN organizations ON (organizations.id = organization_id)
-  `;
-    const result = await db.query(queryString, values);
-    console.log(result.rows[0]);
-    res.json(result.rows);
+    try {
+      const fair = await getFair(req.params.id);
+      const organizations = fair.map(f => {
+        return ({
+          organizations_name :f.organizations_name,
+          organizations_id : f.organizations_id,
+          organizations_desc : f.organizations_desc
+        })
+      });
+      const {fair_name, fair_desc, host_name,poster} = fair[0];
+      res.status(200).json({organizations, fair_name, fair_desc, host_name, poster});
+    } catch (error) {
+      console.log(error)
+    }
   });
 
   return router;

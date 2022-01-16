@@ -48,6 +48,35 @@ const queryGenerator = (db) => {
     }
   };
 
+
+    // Individual Fair
+  const getFair = async (fair_id) => {
+    const values = [fair_id];
+    const queryString = `
+    SELECT 
+    fairs.id as Fair_Id, 
+    fairs.description as Fair_Desc, 
+    fairs.name as Fair_Name, 
+    fairs.poster as POSTER, 
+    (SELECT organizations.name FROM organizations WHERE host_id = organizations.id)as Host_Name, 
+    organizations.id as Organizations_Id, 
+    organizations.name as Organizations_Name, 
+    organizations.description as Organizations_Desc 
+    FROM fairs
+    JOIN fairs_organizations ON (fairs.id = fairs_organizations.fair_id) 
+    JOIN organizations ON (organizations.id = fairs_organizations.organization_id)
+    WHERE fairs.id = $1
+    `;
+  
+      try {
+        const result  = await db.query(queryString, values)
+        return getData(result)
+      } catch (err) {
+        console.log(err.message)
+      }
+  }
+  
+
   const createNewOrganization = async ({ name, description, email, industry, website }) => {
     const values = [name, description, email, industry, website];
     const queryString = `
@@ -84,10 +113,10 @@ const queryGenerator = (db) => {
   const getOrganizationsByUser = async (user_id) => {
     const values = [user_id];
     const queryString = `
-    SELECT organizations.id, organizations.name, organizations.description, organizations.email, organizations.industry, organizations.website FROM users_organizations 
+    SELECT users_organizations.admin, organizations.id, organizations.name, organizations.description, organizations.email, organizations.industry, organizations.website FROM users_organizations 
     JOIN users ON users.id = users_organizations.user_id
     JOIN organizations ON organization_id = users_organizations.organization_id
-    GROUP BY organizations.id, users_organizations.user_id
+    GROUP BY organizations.id, users_organizations.user_id, users_organizations.admin
     HAVING user_id = $1;`;
 
     try {
@@ -116,6 +145,114 @@ const queryGenerator = (db) => {
 
   };
 
+  const getAllApplicationsByJobId = async (job_id) => {
+    const values = [job_id];
+    const queryString = `
+    SELECT applications.*, users.first_name, users.last_name FROM applications
+    JOIN jobs ON jobs.id = applications.user_id
+    JOIN users ON applications.user_id = users.id
+    WHERE jobs.id = $1;
+    `
+
+    try {
+      const result = await db.query(queryString, values);
+      return result.rows;
+    } catch (err) {
+      console.log(err.message);
+    };
+
+  };
+
+  const getAllJobsByOrganizationId = async (organization_id) => {
+    const values = [organization_id];
+    const queryString = `
+    SELECT jobs.* FROM jobs
+    JOIN organizations ON jobs.employer_id = organizations.id
+    WHERE organizations.id = $1;
+    `
+
+    try {
+      const result = await db.query(queryString, values);
+      const jobs = await Promise.all(result.rows.map(async (job) => {
+        const jobWithApplicationArr = await getAllApplicationsByJobId(job.id);
+        return { ...job, applications: jobWithApplicationArr };
+      }));
+      return jobs;
+
+    } catch (err) {
+      console.log(err.message);
+    };
+
+  };
+
+  const getAllMembersByOrganizationId = async (organization_id) => {
+    const values = [organization_id];
+    const queryString = `
+    SELECT users.*, users_organizations.admin FROM users
+    JOIN users_organizations ON users.id = users_organizations.user_id
+    WHERE users_organizations.organization_id = $1;
+    `
+
+    try {
+      const result = await db.query(queryString, values);
+      return result.rows;
+    } catch (err) {
+      console.log(err.message);
+    };
+
+  };
+
+  const checkIfIAmMember = async (organization_id, user_id) => {
+    const values = [organization_id, user_id];
+    console.log(user_id, organization_id);
+    const queryString = `
+    SELECT COUNT(*)
+    FROM users_organizations
+    WHERE organization_id = $1 AND user_id = $2;
+    `;
+
+    try {
+      const result = await db.query(queryString, values);
+      const { count } = getFirstRecord(result);
+      return Number(count) ? true : false;
+    } catch (err) {
+      console.log(err.message);
+    };
+  };
+
+  const getOrganizationDetails = async (organization_id) => {
+    const values = [organization_id];
+    const queryString = `
+    SELECT organizations.*
+    FROM organizations
+    WHERE organizations.id = $1;
+    `;
+
+    try {
+      const result = await db.query(queryString, values);
+      return getFirstRecord(result);
+    } catch (err) {
+      console.log(err.message);
+    };
+  }
+
+  const getAllFairsByOrganizationId = async (organization_id) => {
+    const values = [organization_id];
+    const queryString = `
+    SELECT fairs.* FROM fairs
+    JOIN fairs_organizations ON fairs.host_id = fairs_organizations.fair_id
+    WHERE fairs_organizations.organization_id = $1;
+    `
+
+    try {
+      const result = await db.query(queryString, values);
+      return result.rows;
+    } catch (err) {
+      console.log(err.message);
+    };
+
+  };
+
   return {
     createNewUser,
     getUserByValue,
@@ -123,7 +260,14 @@ const queryGenerator = (db) => {
     addUserToOrganization,
     getOrganizationsByUser,
     getAllOtherUsers,
-    getAllFairs
+    getAllFairs,
+    getFair,
+    getAllJobsByOrganizationId,
+    getAllMembersByOrganizationId,
+    getAllFairsByOrganizationId,
+    getAllApplicationsByJobId,
+    getOrganizationDetails,
+    checkIfIAmMember
   };
 };
 

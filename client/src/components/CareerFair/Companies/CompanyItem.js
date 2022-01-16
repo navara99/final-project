@@ -1,24 +1,27 @@
 import React,{useState}from 'react'
-import { Button, Typography, Grid, Paper} from '@mui/material';
+import { Button, Typography, Grid, Paper, Avatar} from '@mui/material';
 import CompanyInfo from './CompanyInfo';
 
-const CompanyItem = (props) => {
-  const {industry} = props;
+const CompanyItem = ({organization}) => {
+  const {organizations_name} = organization;
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
   };
- 
-
   return (
-    <Grid item xs={8} marginTop={2} >
-      <Paper sx={{ p: 4, margin: 'auto',  flexGrow: 1, borderRadius:5 }} elevation={8}>
+    <Grid item xs={12} mx={2}>
+      <Paper sx={{ p: 3,  flexGrow: 1, borderRadius:3, mx:"auto"}} elevation={8}>
         <Grid item xs={12} sm container spacing={2}>
-          <Grid item xs container  spacing={2}>
-            <Grid item xs>
+          <Grid item xs container spacing={2}>
+            <Grid item  xs>
+              <Avatar
+                alt="Google"
+                src="https://blog.hubspot.com/hubfs/image8-2.jpg"
+                sx={{ width: 56, height: 56 }}
+              />
               <Typography gutterBottom variant="h5" component="div">
-                {industry.name}
+                {organizations_name}
               </Typography>
             </Grid>
             <Grid item container spacing={2}>
@@ -26,14 +29,7 @@ const CompanyItem = (props) => {
                 <Button variant="outlined" onClick={handleClickOpen}>
                   Detail
                 </Button>
-                <CompanyInfo open = {open} setOpen = {setOpen}/>
-              </Grid>
-              <Grid item>
-                <Button variant='contained'>
-                  <Typography sx={{ cursor: 'pointer' }} variant="body2">
-                    See Flyer
-                  </Typography>
-                </Button>
+                <CompanyInfo open = {open} setOpen = {setOpen} organization = {organization}/>
               </Grid>
               <Grid item>
                 <Button variant='contained' color='secondary'>

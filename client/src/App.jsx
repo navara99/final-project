@@ -11,6 +11,9 @@ import useCurrentUser from "./hooks/useCurrentUser";
 import Groups from "./components/Groups/index";
 import { Snackbar, Alert } from "@mui/material";
 import CareerFair from "./components/CareerFair/CareerFair";
+import ChatBox from "./components/ChatBox/ChatBox";
+
+import OrganizationDetails from "./components/Groups/OrganizationDetails";
 import Jobs from "./components/Jobs/index";
 import Schedule from "./components/Schedule";
 
@@ -78,9 +81,10 @@ function App() {
           />
           <Route path="/jobs" element={<Jobs />} />
           <Route path="/schedule" element={<Schedule />} />
-          <Route path="/messages" element={<>Messages</>} />
+          <Route path="/messages" element={<ChatBox/>} />
           <Route path="/settings" element={<>Settings</>} />
           <Route path="/fairs/:id" element={<CareerFair />} />
+          <Route path="/groups/:id" element={<OrganizationDetails />} />
         </Routes>
       </div>
     </div>
