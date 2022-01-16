@@ -4,7 +4,7 @@ import { ListItemText, Card, IconButton, Collapse, CardActions, CardMedia } from
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import JobsList from "./JobsList";
 
-function OrganizationJobs({cardStyles, organization}) {
+function OrganizationJobs({ cardStyles, organization }) {
   const { ExpandMore, handleExpandClick, expanded } = useExpand();
 
   return (
@@ -27,7 +27,7 @@ function OrganizationJobs({cardStyles, organization}) {
           </CardActions>
         </div>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
-          <JobsList jobs={organization.jobs}/>
+          <JobsList jobs={organization.jobs} isMember={organization.isMember} />
         </Collapse>
       </Card >
     </div>
