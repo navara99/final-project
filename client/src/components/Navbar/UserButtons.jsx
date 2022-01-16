@@ -15,7 +15,7 @@ const UserButtons = ({ logout, currentUser }) => {
         {...{ to: "/schedule", Icon: DateRangeIcon, text: "My Schedule" }}
       />
       <Button {...{ to: "/messages", Icon: ForumIcon, text: "Messages" }} />
-      <Button {...{ to: "/groups", Icon: GroupsIcon, text: "My Groups" }} />
+      <Button {...{ to: "/organizations", Icon: GroupsIcon, text: "My Organizations" }} />
       <Button {...{ to: "/settings", Icon: SettingsIcon, text: "Settings" }} />
       <Tippy content="Logout" placement="right" theme="material" arrow={true} >
         <span onClick={logout} className="navbar-button">

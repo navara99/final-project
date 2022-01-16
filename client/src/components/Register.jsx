@@ -11,14 +11,18 @@ import {
 import { Person, Email, Lock } from "@mui/icons-material";
 import useInput from '../hooks/useInput';
 import axios from 'axios';
+import Unauthorized from './Unauthorized';
+import { useNavigate } from 'react-router-dom';
 
-function Register({ setErrorMessage, setShowError, setCurrentUser }) {
+function Register({ setErrorMessage, setShowError, setCurrentUser, currentUser, logout }) {
   const [email, handleEmailChange] = useInput("");
   const [username, handleUsernameChange] = useInput("");
   const [password, handlePasswordChange] = useInput("");
   const [confirmPassword, handleConfirmPasswordChange] = useInput("");
   const [firstName, handleFirstNameChange] = useInput("");
   const [lastName, handleLastNameChange] = useInput("");
+
+  const navigate = useNavigate();
 
   const registerUser = async (e) => {
     e.preventDefault();
@@ -33,19 +37,24 @@ function Register({ setErrorMessage, setShowError, setCurrentUser }) {
 
     try {
       const { data } = await axios.post("/api/users/register", userInfo);
-      const error = data["error"];
+      const { error } = data;
       if (error) {
         setErrorMessage(error);
         setShowError(true);
       };
       if (!error) {
         setCurrentUser(data);
+        navigate("/");
       }
     } catch (err) {
       console.log(err.message);
     };
 
   };
+
+  if (currentUser) {
+    return <Unauthorized action="register for another account" logout={logout} />;
+  }
 
   return (
     <Container>
