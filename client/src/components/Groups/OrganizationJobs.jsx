@@ -2,6 +2,7 @@ import React from "react";
 import useExpand from "../../hooks/useExpand";
 import { ListItemText, Card, IconButton, Collapse, CardActions, CardMedia } from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import JobsList from "./JobsList";
 
 function OrganizationJobs({cardStyles, organization}) {
   const { ExpandMore, handleExpandClick, expanded } = useExpand();
@@ -26,7 +27,7 @@ function OrganizationJobs({cardStyles, organization}) {
           </CardActions>
         </div>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
-          
+          <JobsList jobs={organization.jobs}/>
         </Collapse>
       </Card >
     </div>
