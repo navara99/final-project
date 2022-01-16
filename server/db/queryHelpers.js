@@ -253,16 +253,23 @@ const queryGenerator = (db) => {
 
   };
 
-  const getSchedule = (id) => {
+  const getSchedule = async (id) => {
     const values = [id];
-    const queryString = `
-      SELECT fairs.* FROM fairs
-      JOIN fairs_organizations ON fairs.host_id = fairs_organizations.fair_id
-      WHERE fairs_organizations.organization_id = $1;
+    const conductInterviewQueryString = `
+      SELECT interviews.start_time
+      interviews.end_time
+      users.first_name as candidate_first_name
+      users.last_name as candidate_last_name
+      FROM interviews
+      JOIN applications ON application_id = applications.id
+      JOIN users ON users.id = applications.user_id
+      JOIN jobs ON applications.job_id = jobs.id
+      WHERE interviewer_id = $1;
     `
     try {
-      const result = await db.query(queryString, values);
-      return result.rows;
+      const dataConductInterview = await db.query(conductInterviewQueryString, values);
+      const conductInterview = getData(dataConductInterview);
+      return { conductInterview };
     } catch (err) {
       console.log(err.message);
     };
