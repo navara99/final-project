@@ -11,6 +11,8 @@ import useCurrentUser from "./hooks/useCurrentUser";
 import Groups from "./components/Groups/index";
 import { Snackbar, Alert } from "@mui/material";
 import CareerFair from "./components/CareerFair/CareerFair";
+import ChatBox from "./components/ChatBox/ChatBox";
+
 
 function App() {
   const [errorMessage, setErrorMessage] = useState("");
@@ -54,7 +56,7 @@ function App() {
           <Route path="/groups" element={<Groups {...{ setSnackBarDetails }} />} />
           <Route path="/jobs" element={<>Job board</>} />
           <Route path="/schedule" element={<>My Schedule</>} />
-          <Route path="/messages" element={<>Messages</>} />
+          <Route path="/messages" element={<ChatBox/>} />
           <Route path="/groups" element={<>My Groups</>} />
           <Route path="/settings" element={<>Settings</>} />
           <Route path="/fairs/:id" element={<CareerFair />} />
