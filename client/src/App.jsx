@@ -56,7 +56,6 @@ function App() {
           <Route path="/jobs" element={<Jobs />} />
           <Route path="/schedule" element={<>My Schedule</>} />
           <Route path="/messages" element={<>Messages</>} />
-          <Route path="/groups" element={<>My Groups</>} />
           <Route path="/settings" element={<>Settings</>} />
           <Route path="/fairs/:id" element={<CareerFair />} />
         </Routes>

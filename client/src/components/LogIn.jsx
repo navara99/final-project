@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import axios from "axios";
-import Unauthorised from "./Unauthorised";
+import Unauthorised from "./Unauthorised/index";
 
 const LogIn = ({ setCurrentUser, currentUser, logout }) => {
   const handleSubmit = async (event) => {
@@ -32,10 +32,7 @@ const LogIn = ({ setCurrentUser, currentUser, logout }) => {
   };
 
   if (currentUser) {
-    const Link = () => {
-      return <button onClick={logout}>Logout</button>;
-    };
-    return <Unauthorised action="login again" Link={Link} />;
+    return <Unauthorised action="login again" logout={logout} />;
   }
 
   return (
