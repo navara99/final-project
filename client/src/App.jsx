@@ -13,6 +13,8 @@ import { Snackbar, Alert } from "@mui/material";
 import CareerFair from "./components/CareerFair/CareerFair";
 import ChatBox from "./components/ChatBox/ChatBox";
 
+import OrganizationDetails from "./components/Groups/OrganizationDetails";
+import Jobs from "./components/Jobs/index";
 
 function App() {
   const [errorMessage, setErrorMessage] = useState("");
@@ -20,12 +22,12 @@ function App() {
   const { currentUser, setCurrentUser, logout } = useCurrentUser();
   const [snackBarDetails, setSnackBarDetails] = useState({
     open: false,
-    message: ""
+    message: "",
   });
 
   const handleSnackBarClose = () => {
     setSnackBarDetails({ open: false, message: "" });
-  }
+  };
 
   return (
     <div className="App">
@@ -35,9 +37,9 @@ function App() {
         onClose={handleSnackBarClose}
         anchorOrigin={{ vertical: "top", horizontal: "right" }}
       >
-        <Alert
-          severity="success"
-          sx={{ width: '100%' }}>{snackBarDetails.message}</Alert>
+        <Alert severity="success" sx={{ width: "100%" }}>
+          {snackBarDetails.message}
+        </Alert>
       </Snackbar>
       <Navbar {...{ currentUser, logout }} />
       <ErrorModal {...{ errorMessage, showError, setShowError }} />
@@ -48,18 +50,40 @@ function App() {
             path="/register"
             element={
               <Register
-                {...{ setErrorMessage, setShowError, setCurrentUser }}
+                {...{
+                  setErrorMessage,
+                  setShowError,
+                  setCurrentUser,
+                  currentUser,
+                  logout,
+                }}
               />
             }
           />
-          <Route path="/login" element={<LogIn {...{ setCurrentUser }} />} />
-          <Route path="/groups" element={<Groups {...{ setSnackBarDetails }} />} />
-          <Route path="/jobs" element={<>Job board</>} />
+          <Route
+            path="/login"
+            element={
+              <LogIn
+                {...{
+                  setErrorMessage,
+                  setShowError,
+                  setCurrentUser,
+                  currentUser,
+                  logout,
+                }}
+              />
+            }
+          />
+          <Route
+            path="/groups"
+            element={<Groups {...{ setSnackBarDetails }} />}
+          />
+          <Route path="/jobs" element={<Jobs />} />
           <Route path="/schedule" element={<>My Schedule</>} />
           <Route path="/messages" element={<ChatBox/>} />
-          <Route path="/groups" element={<>My Groups</>} />
           <Route path="/settings" element={<>Settings</>} />
           <Route path="/fairs/:id" element={<CareerFair />} />
+          <Route path="/groups/:id" element={<OrganizationDetails />} />
         </Routes>
       </div>
     </div>

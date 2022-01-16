@@ -6,7 +6,7 @@
   width: 100%;
   overflow: scroll;
   display: flex;
-  padding-bottom: 1.5em;
+  padding-bottom: 0.4em;
   text-align: justify;
 }
 
@@ -15,26 +15,35 @@
   margin: 0.2em 0.7em;
 }
 
-.fair-list > a {
+.fair-list a {
   color: #e8f1f2;
   text-decoration: none;
 }
 
 .fair-list .badge {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 0.5em;
+  right: 5%;
   padding: 0.5em;
-  background-color: #FFFFFFAF;
+  background-color: #ffffffaf;
   border-bottom-left-radius: 15px;
 }
 
 .fair-list .MuiPaper-root {
-  position: relative;
+  margin: 0.5em 5%;
+  box-sizing: content-box;
 }
 
 .fair-list .MuiCardContent-root {
   height: 140px;
+}
+
+.ongoing-fair-list .MuiPaper-root {
+  margin: 0.5em 8%;
+}
+
+.ongoing-fair-list .MuiCardContent-root {
+  height: 110px;
 }
 
 .fair-list .content {
@@ -44,15 +53,23 @@
   -webkit-box-orient: vertical;
 }
 
+.ongoing-fair-list .content {
+  -webkit-line-clamp: 4;
+}
+
 .fair-list .title {
-  width: 100%;
+  width: 90%;
   position: absolute;
   bottom: 140px;
-  background-color: #ffffffAF;
+  background-color: #ffffffaf;
   padding: 0.3em 0.6em 0;
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   line-height: 1em;
+}
+
+.ongoing-fair-list .title {
+  bottom: 110px;
 }
