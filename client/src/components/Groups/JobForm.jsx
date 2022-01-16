@@ -12,8 +12,11 @@ import useInput from "../../hooks/useInput";
 import axios from "axios";
 
 function JobForm({ jobFormOpen, setJobFormOpen }) {
-
-
+  const [title, setTitle] = useInput();
+  const [description, setDescription] = useInput();
+  const [experience, setExperience] = useInput();
+  const [location, setLocation] = useInput();
+  const [salary, setSalary] = useInput();
 
   return (
     <Dialog open={jobFormOpen} onClose={() => { }}>
@@ -26,7 +29,7 @@ function JobForm({ jobFormOpen, setJobFormOpen }) {
           label="Title"
           fullWidth
           required
-          onChange={() => { }}
+          onChange={setTitle}
         />
         <TextField
           multiline
@@ -36,7 +39,7 @@ function JobForm({ jobFormOpen, setJobFormOpen }) {
           label="Description"
           fullWidth
           required
-          onChange={() => { }}
+          onChange={setDescription}
         />
         <TextField
           margin="dense"
@@ -44,7 +47,7 @@ function JobForm({ jobFormOpen, setJobFormOpen }) {
           label="Years Of Experience"
           fullWidth
           required
-          onChange={() => { }}
+          onChange={setExperience}
           type="number"
         />
         <TextField
@@ -53,7 +56,15 @@ function JobForm({ jobFormOpen, setJobFormOpen }) {
           label="Location"
           fullWidth
           required
-          onChange={() => { }}
+          onChange={setLocation}
+        />
+        <TextField
+          margin="dense"
+          id="salary"
+          label="Salary"
+          fullWidth
+          required
+          onChange={setSalary}
         />
       </DialogContent>
       <DialogActions>
