@@ -1,5 +1,5 @@
-import React,{useState}from 'react';
-import {Button, Avatar} from '@mui/material';
+import React from 'react';
+import {Button, Avatar, List, ListItem} from '@mui/material';
 import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
@@ -45,7 +45,9 @@ const BootstrapDialogTitle = (props) => {
 
 
 const CompanyInfo = (props) => {
-  const {open, setOpen} = props
+  const {open, setOpen, organization} = props;
+  console.log("org", organization);
+  const {organizations_name,organizations_desc } = organization;
   const handleClose = () => {
     setOpen(false);
   };
@@ -57,25 +59,26 @@ const CompanyInfo = (props) => {
         open={open}
       >
         <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
-          {/* <img src ='https://blog.hubspot.com/hubfs/image8-2.jpg'/> */}
           <Avatar
             alt="Google"
             src="https://blog.hubspot.com/hubfs/image8-2.jpg"
             sx={{ width: 56, height: 56 }}
           />
-          Company Name
+          {organizations_name}
         </BootstrapDialogTitle>
         <DialogContent dividers>
-          <Typography gutterBottom>
+          <Typography gutterBottom variant='h6'>
             Company Discription:
-            Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus
-            magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec
-            ullamcorper nulla non metus auctor fringilla.
           </Typography>
           <Typography gutterBottom>
+            {organizations_desc}
+          </Typography>   
+          <Typography gutterBottom variant='h6'>
             Availabel Jobs:
+          </Typography>
+          <Typography gutterBottom>
             1) Full-Stack Dev
-            2) Ux Designer
+            2) Ux Designer         
           </Typography>
         </DialogContent>
         <DialogActions>
