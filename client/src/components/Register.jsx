@@ -11,8 +11,9 @@ import {
 import { Person, Email, Lock } from "@mui/icons-material";
 import useInput from '../hooks/useInput';
 import axios from 'axios';
+import Unauthorised from './Unauthorised';
 
-function Register({ setErrorMessage, setShowError, setCurrentUser }) {
+function Register({ setErrorMessage, setShowError, setCurrentUser, currentUser, logout }) {
   const [email, handleEmailChange] = useInput("");
   const [username, handleUsernameChange] = useInput("");
   const [password, handlePasswordChange] = useInput("");
@@ -46,6 +47,10 @@ function Register({ setErrorMessage, setShowError, setCurrentUser }) {
     };
 
   };
+
+  if (currentUser) {
+    return <Unauthorised action="login again" logout={logout} />;
+  }
 
   return (
     <Container>

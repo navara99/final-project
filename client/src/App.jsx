@@ -19,12 +19,12 @@ function App() {
   const { currentUser, setCurrentUser, logout } = useCurrentUser();
   const [snackBarDetails, setSnackBarDetails] = useState({
     open: false,
-    message: ""
+    message: "",
   });
 
   const handleSnackBarClose = () => {
     setSnackBarDetails({ open: false, message: "" });
-  }
+  };
 
   return (
     <div className="App">
@@ -34,9 +34,9 @@ function App() {
         onClose={handleSnackBarClose}
         anchorOrigin={{ vertical: "top", horizontal: "right" }}
       >
-        <Alert
-          severity="success"
-          sx={{ width: '100%' }}>{snackBarDetails.message}</Alert>
+        <Alert severity="success" sx={{ width: "100%" }}>
+          {snackBarDetails.message}
+        </Alert>
       </Snackbar>
       <Navbar {...{ currentUser, logout }} />
       <ErrorModal {...{ errorMessage, showError, setShowError }} />
@@ -47,12 +47,24 @@ function App() {
             path="/register"
             element={
               <Register
-                {...{ setErrorMessage, setShowError, setCurrentUser }}
+                {...{
+                  setErrorMessage,
+                  setShowError,
+                  setCurrentUser,
+                  currentUser,
+                  logout,
+                }}
               />
             }
           />
-          <Route path="/login" element={<LogIn {...{ setCurrentUser, currentUser, logout }} />} />
-          <Route path="/groups" element={<Groups {...{ setSnackBarDetails }} />} />
+          <Route
+            path="/login"
+            element={<LogIn {...{ setCurrentUser, currentUser, logout }} />}
+          />
+          <Route
+            path="/groups"
+            element={<Groups {...{ setSnackBarDetails }} />}
+          />
           <Route path="/jobs" element={<Jobs />} />
           <Route path="/schedule" element={<>My Schedule</>} />
           <Route path="/messages" element={<>Messages</>} />
