@@ -3,6 +3,7 @@ import { useParams } from "react-router";
 import useOrganizationDetails from "../../hooks/useOrganizationDetails";
 import OrganizationHeader from "./OrganizationHeader";
 import OrganizationJobs from "./OrganizationJobs";
+import OrganizationMembers from "./OrganizationMembers";
 
 const cardStyles = {
   padding: "2em",
@@ -16,8 +17,9 @@ function OrganizationDetails() {
   console.log(organization);
   return (
     <>
-      {organization && <OrganizationHeader {...{ organization }} {...{cardStyles}} />}
-      {organization && <OrganizationJobs {...{ organization }} {...{cardStyles}}/>}
+      {organization && <OrganizationHeader {...{ organization }} {...{ cardStyles }} />}
+      {organization && <OrganizationJobs {...{ organization }} {...{ cardStyles }} />}
+      {organization && <OrganizationMembers {...{ organization }} {...{ cardStyles }} />}
     </>
 
   );
