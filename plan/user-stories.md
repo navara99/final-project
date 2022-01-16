@@ -24,21 +24,21 @@
 
 ### Members of organization
 
-* admin can add users into the group
+* admin can add users into the organization
 
-* admin could add or remove users from the group
+* admin could add or remove users from the organization
 
-* members of the group should be able to create a job fair, including time/date
+* members of the organization should be able to create a job fair, including time/date
 
-* members of the group can create jobs postings
+* members of the organization can create jobs postings
 
-* members of the group can view job application and send an interview request
+* members of the organization can view job application and send an interview request
 
-* members of the group can add jobs to the career fair
+* members of the organization can add jobs to the career fair
 
-* members of the group can attend the career fair as a host of a stall
+* members of the organization can attend the career fair as a host of a stall
 
-* members of the group can update the description of the organization
+* members of the organization can update the description of the organization
 
 
 

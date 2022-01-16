@@ -6,7 +6,7 @@ const Event = ({ event }) => {
   return (
     <Tippy
       interactive={true}
-      content="testing"
+      content={event.title}
       placement="top"
       theme="material"
       arrow={true}
