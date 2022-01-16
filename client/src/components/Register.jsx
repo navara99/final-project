@@ -12,6 +12,7 @@ import { Person, Email, Lock } from "@mui/icons-material";
 import useInput from '../hooks/useInput';
 import axios from 'axios';
 import Unauthorised from './Unauthorised';
+import { useNavigate } from 'react-router-dom';
 
 function Register({ setErrorMessage, setShowError, setCurrentUser, currentUser, logout }) {
   const [email, handleEmailChange] = useInput("");
@@ -20,6 +21,8 @@ function Register({ setErrorMessage, setShowError, setCurrentUser, currentUser, 
   const [confirmPassword, handleConfirmPasswordChange] = useInput("");
   const [firstName, handleFirstNameChange] = useInput("");
   const [lastName, handleLastNameChange] = useInput("");
+
+  const navigate = useNavigate();
 
   const registerUser = async (e) => {
     e.preventDefault();
@@ -41,6 +44,7 @@ function Register({ setErrorMessage, setShowError, setCurrentUser, currentUser, 
       };
       if (!error) {
         setCurrentUser(data);
+        navigate("/");
       }
     } catch (err) {
       console.log(err.message);
