@@ -6,12 +6,15 @@ const Event = ({ event }) => {
   return (
     <Tippy
       interactive={true}
-      content={event.title}
-      placement="top"
+      content={<>{event.title}
+      <br />
+      {event.start} - {event.end}</>}
+      placement="bottom"
       theme="material"
       arrow={true}
       interactiveDebounce={20}
       hideOnClick={false}
+      maxWidth="350"
     >
       <div className="event">
         <strong>{event.title}</strong>
