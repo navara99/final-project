@@ -13,7 +13,7 @@ function OrganizationMembers({ organization, cardStyles }) {
         <div className="organization-card">
           <ListItemText
             primary={<h2 className="organization-card-name">Members</h2>}
-            secondary={`${organization.details.name} has ${organization.jobs.length} members.`}
+            secondary={`${organization.details.name} has ${organization.members.length} member(s).`}
           />
           <CardActions>
             <ExpandMore
