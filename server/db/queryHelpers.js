@@ -260,6 +260,7 @@ const queryGenerator = (db) => {
       interviews.end_time
       users.first_name as candidate_first_name
       users.last_name as candidate_last_name
+      jobs.name as job_title
       FROM interviews
       JOIN applications ON application_id = applications.id
       JOIN users ON users.id = applications.user_id
