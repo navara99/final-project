@@ -59,7 +59,17 @@ function App() {
           />
           <Route
             path="/login"
-            element={<LogIn {...{ setCurrentUser, currentUser, logout }} />}
+            element={
+              <LogIn
+                {...{
+                  setErrorMessage,
+                  setShowError,
+                  setCurrentUser,
+                  currentUser,
+                  logout,
+                }}
+              />
+            }
           />
           <Route
             path="/groups"

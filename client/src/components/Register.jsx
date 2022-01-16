@@ -37,7 +37,7 @@ function Register({ setErrorMessage, setShowError, setCurrentUser, currentUser, 
 
     try {
       const { data } = await axios.post("/api/users/register", userInfo);
-      const error = data["error"];
+      const { error } = data;
       if (error) {
         setErrorMessage(error);
         setShowError(true);
