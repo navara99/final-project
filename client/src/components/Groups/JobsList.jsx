@@ -1,24 +1,23 @@
 import React from "react";
-import { List, ListItem, ListItemText, Divider } from "@mui/material"
+import { List, Divider } from "@mui/material"
+import JobListItem from "./JobListItem";
 
 function JobsList({ jobs }) {
 
-  console.log(jobs);
-  const job = jobs[0]
+  const renderJobs = () => {
+    return jobs.map((job) => {
+      return (
+        <>
+          <JobListItem {...{ job }} />
+          <Divider />
+        </>
+      )
+    });
+  };
 
   return (
     <List>
-      <ListItem>
-        <ListItemText
-          primary={job.name}
-          secondary={
-          <>
-          <p>Location: {job.location}</p>
-          <p>{job.description}</p>
-          </>}
-        />
-      </ListItem>
-      <Divider/>
+      {renderJobs()}
     </List>
   )
 
