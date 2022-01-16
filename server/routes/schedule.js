@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 module.exports = (db) => {
-  const queryGenerator = require("../db/queryHelpers");
+  const queryGenerator = require("../db/queryHelpers/schedule");
   const { getSchedule } = queryGenerator(db);
 
   router.get("/", async (req, res) => {
