@@ -1,30 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { ListItemText, Card, IconButton, Collapse, CardActions, CardMedia } from "@mui/material";
-import { styled } from '@mui/material/styles';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import useExpand from "../../hooks/useExpand";
 
-const cardStyles = {
-  padding: "2em",
-  margin: "1em"
-};
 
-function OrganizationHeader({ organization }) {
-  const [expanded, setExpanded] = useState(false)
-
-  const ExpandMore = styled((props) => {
-    const { expand, ...other } = props;
-    return <IconButton {...other} />;
-  })(({ theme, expand }) => ({
-    transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-    marginLeft: 'auto',
-    transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest,
-    }),
-  }));
-
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
+function OrganizationHeader({ organization, cardStyles }) {
+  const { ExpandMore, handleExpandClick, expanded, setExpanded } = useExpand();
 
   console.log(organization);
 
