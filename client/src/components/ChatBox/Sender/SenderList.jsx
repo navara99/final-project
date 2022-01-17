@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import SenderListItem from './SenderListItem'
 import { List } from '@mui/material'
-const SenderList = () => {
+const SenderList = ({messages, currentUser}) => {
   const senders = [
     {
       name : 'Remy Sharp',
@@ -18,7 +18,8 @@ const SenderList = () => {
       imageUrl : "https://pickaface.net/gallery/avatar/unr_fake_190524_1549_9fgji7.png",
       last_message: "Wish I could come, but I'm out of town this"
     }
-  ]
+  ];
+
 
   const senderList = senders ? senders.map(sender => <SenderListItem key={sender.name}sender = {sender}/>) : null
 
