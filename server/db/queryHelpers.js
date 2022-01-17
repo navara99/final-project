@@ -57,6 +57,8 @@ const queryGenerator = (db) => {
         fairs.poster, 
         organizations.name AS host_name,
         organizations.id AS host_id,
+        start_time AS start,
+        end_time AS end,
         organizations.description AS host_description
         FROM fairs
         JOIN organizations ON (organizations.id = fairs.host_id)
