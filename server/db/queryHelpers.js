@@ -263,7 +263,27 @@ const queryGenerator = (db) => {
     `
     try {
       const result = await db.query(queryString,values);
-      return result.rows;
+      //getting other users 
+      const other_users = result.rows.reduce( (prev, curr) => {
+
+        if(curr.sender_id !== user_id && 
+          !prev.includes(curr.sender_id) ) {
+            prev.push(curr.sender_id)
+          }
+        if(curr.receiver_id !== user_id && !prev.includes(curr.receiver_id )) {
+          prev.push(curr.receiver_id)
+        }  
+        return prev;
+      },[])
+
+      const contacts =  await Promise.all(other_users.map(async (userId) => {
+        const userInfo = await getUserByValue('id',userId);
+        const userWithoutPassword = Object.assign({}, userInfo);
+        delete userWithoutPassword.password;
+        return userWithoutPassword ;
+      }))
+  
+      return {messagesArr : result.rows, contacts};
     } catch (error) {
       console.log(error)
     }
