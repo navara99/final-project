@@ -49,8 +49,10 @@ const queryGenerator = (db) => {
   };
 
   // Individual Fair
-  const getFairDetails = async (fairId) => {
+  const getFairDetails = async (fairId, userId) => {
     const values = [fairId];
+    const values2 = [fairId, userId];
+
     const fairDetailsString = `
       SELECT fairs.*,
         organizations.name AS host_name,
@@ -72,9 +74,18 @@ const queryGenerator = (db) => {
         WHERE fairs.id = $1
     `;
 
+    const userAddedString = `
+      SELECT id
+        FROM fairs_users
+        WHERE fair_id = $1
+        AND user_id = $2
+        ;
+    `;
+
     try {
       const fairResult = await db.query(fairDetailsString, values);
       const stallResult = await db.query(stallsString, values);
+      const userAddedResult = await db.query(userAddedString, values2);
 
       const fair = getData(fairResult).map((fair) => {
         const { host_name, host_id, host_description } = fair;
@@ -85,9 +96,11 @@ const queryGenerator = (db) => {
           hostDescription: host_description,
         };
       })[0];
+      
       const stalls = getData(stallResult);
+      const added = getData(userAddedResult);
 
-      return { fair, stalls };
+      return { fair, stalls, added: added.length > 0 };
     } catch (err) {
       console.log(err.message);
     }

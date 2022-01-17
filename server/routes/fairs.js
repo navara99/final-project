@@ -49,8 +49,10 @@ module.exports = (db) => {
 
   router.get("/:id", async (req, res) => {
     const { id }  = req.params;
+    const { user_id } = req.session;
+
     try {
-      const data = await getFairDetails(id);
+      const data = await getFairDetails(id, user_id);
       res.json(data);
     } catch (error) {
       console.log(error)
