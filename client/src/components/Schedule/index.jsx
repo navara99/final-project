@@ -194,6 +194,13 @@ const Schedule = () => {
         components={{
           event: Event,
         }}
+        eventPropGetter={(event, start, end, isSelected) => ({
+          event,
+          start,
+          end,
+          isSelected,
+          style: { backgroundColor: event.isInterview ? "#4274A8" : "#F19937" }
+        })}
       />
     </div>
   );

@@ -5,7 +5,8 @@ import { formatStartEndTime } from "../../helpers/date";
 import { Link } from "react-router-dom";
 
 const Event = ({ event }) => {
-  const { start, end, title } = event;
+  const { start, end, title, isInterview, asJobSeeker } = event;
+
   const time = formatStartEndTime(start, end);
   const content = (
     <>
@@ -29,7 +30,7 @@ const Event = ({ event }) => {
       hideOnClick={false}
       appendTo={document.body}
     >
-      <div className="event">
+      <div className="event" >
         <strong>{title}</strong>
       </div>
     </Tippy>
