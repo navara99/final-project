@@ -272,6 +272,11 @@ const queryGenerator = (db) => {
 
   };
 
+  const createNewFair = (name, description, host_id) => {
+    console.log(name, description, host_id);
+
+  }
+
   return {
     createNewUser,
     getUserByValue,
@@ -287,7 +292,8 @@ const queryGenerator = (db) => {
     getAllApplicationsByJobId,
     getOrganizationDetails,
     checkIfIAmMember,
-    addJobToOrganization
+    addJobToOrganization,
+    createNewFair
   };
 };
 
