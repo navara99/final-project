@@ -54,7 +54,7 @@ const queryGenerator = (db) => {
     const fairDetailsString = `
       SELECT fairs.description, 
         fairs.name, 
-        fairs.poster, 
+        fairs.poster,
         organizations.name AS host_name,
         organizations.id AS host_id,
         start_time AS start,
