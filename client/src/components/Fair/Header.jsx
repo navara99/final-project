@@ -11,7 +11,7 @@ const Header = ({fair}) => {
   return (
     <>
       {fair && (
-        <Card sx={{ maxWidth: 345 }}>
+        <Card>
           <CardMedia
             component="img"
             height="140"
