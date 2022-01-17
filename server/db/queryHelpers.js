@@ -49,7 +49,7 @@ const queryGenerator = (db) => {
   };
 
   // Individual Fair
-  const getFair = async (fair_id) => {
+  const getFairDetails = async (fair_id) => {
     const values = [fair_id];
     const queryString = `
     SELECT 
@@ -260,7 +260,7 @@ const queryGenerator = (db) => {
     getOrganizationsByUser,
     getAllOtherUsers,
     getAllFairs,
-    getFair,
+    getFairDetails,
     getAllJobsByOrganizationId,
     getAllMembersByOrganizationId,
     getAllFairsByOrganizationId,

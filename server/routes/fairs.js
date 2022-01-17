@@ -10,7 +10,7 @@ const router = express.Router();
 
 module.exports = (db) => {
   const queryGenerator = require("../db/queryHelpers");
-  const { getAllFairs, getFair } = queryGenerator(db);
+  const { getAllFairs, getFairDetails } = queryGenerator(db);
 
   router.get("/", async (req, res) => {
     try {
