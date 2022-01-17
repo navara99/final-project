@@ -34,21 +34,21 @@ const getUser = (userId) => {
 };
 
 io.on("connection", (socket) => {
-  console.log('a new user connected');
-  console.log("Connected socketId:", socket.id);
+  // console.log('a new user connected');
+  // console.log("Connected socketId:", socket.id);
 
   //take userId and socketId from user
   socket.on("addUser", (userId) => {
-    console.log("currentUserId", userId);
+    // console.log("currentUserId", userId);
     addUser(userId, socket.id);
-    console.log("users", users);
+    // console.log("users", users);
     // io.emit("getUsers", users);
   });
 
   socket.on("sendMessage", ({sender_id,receiver_id,message}) => {
     // console.log("new", newMessage);
     const user = getUser(receiver_id);
-    console.log("user", users);
+    // console.log("user", users);
     io.to(user.socketId).emit("getMessage", {
       sender_id,
       message
