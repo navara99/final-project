@@ -20,6 +20,26 @@ const makeConductInterviewData = (data) => {
       candidateId: candidate_id,
       applicationId: application_id,
       isInterview: true,
+      asJobSeeker: false,
+    };
+  });
+};
+
+const makeInterviewData = (data) => {
+  return getData(data).map((event) => {
+    const {
+      start,
+      end,
+      job_title,
+      employer
+    } = event;
+    const title = `Interview for ${job_title} at ${employer}`;
+    return {
+      start,
+      end,
+      title,
+      isInterview: true,
+      asJobSeeker: true,
     };
   });
 };
@@ -42,19 +62,16 @@ const queryGenerator = (db) => {
     WHERE interviewer_id = $1;
   `;
 
-  const interviewQueryString = `
+    const interviewQueryString = `
     SELECT interviews.start_time AS start,
     interviews.end_time AS end,
-    users.first_name AS candidate_first_name,
-    users.last_name AS candidate_last_name,
     jobs.name AS job_title,
-    users.id AS candidate_id,
-    applications.id AS application_id
+    organizations.name AS employer
     FROM interviews
     JOIN applications ON interviews.application_id = applications.id
-    JOIN users ON users.id = applications.user_id
     JOIN jobs ON applications.job_id = jobs.id
-    WHERE interviewer_id = $1;
+    JOIN organizations ON jobs.employer_id = organizations.id
+    WHERE applications.user_id = $1;
   `;
 
     try {
@@ -62,7 +79,12 @@ const queryGenerator = (db) => {
         conductInterviewQueryString,
         values
       );
+
+      const dataInterview = await db.query(interviewQueryString, values);
+
       let events = makeConductInterviewData(dataConductInterview);
+      events = events.concat(makeInterviewData(dataInterview));
+
       console.log("EVENTS", events);
       return events;
     } catch (err) {
