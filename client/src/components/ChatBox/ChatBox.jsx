@@ -37,7 +37,7 @@ const ChatBox = () => {
         })
     },[])
   return (
-    <Grid container xs={12}>
+    <Grid container >
         {/* List of user  */}
         <Grid item px={2} xs={3} component={Paper} variant='outlined' >
             <List >
@@ -51,7 +51,7 @@ const ChatBox = () => {
         </Grid>
         {/* Chatter Box */}
         <Grid item xs ={9}  px={2} sx={{backgroundColor:"#eff2f6"}} component={Paper} variant='outlined'>
-            <MessageList />
+            <MessageList messages={messages} />
             <Divider />
             <MessageForm />
         </Grid>
