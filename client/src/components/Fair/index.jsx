@@ -10,9 +10,10 @@ const Fair = () => {
 
   return (
     <div className="fair-details">
-      {fair && (
+      {fair && stalls && (
         <>
           <Header fair={fair} />
+          <h3>Employers ({stalls.length})</h3>
         </>
       )}
     </div>
