@@ -192,7 +192,8 @@ const queryGenerator = (db) => {
     const queryString = `
     SELECT users.*, users_organizations.admin FROM users
     JOIN users_organizations ON users.id = users_organizations.user_id
-    WHERE users_organizations.organization_id = $1;
+    WHERE users_organizations.organization_id = $1
+    ORDER BY users.first_name;
     `
 
     try {
