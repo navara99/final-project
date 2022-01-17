@@ -88,15 +88,17 @@ const queryGenerator = (db) => {
       const userAddedResult = await db.query(userAddedString, values2);
 
       const fair = getData(fairResult).map((fair) => {
-        const { host_name, host_id, host_description } = fair;
+        const { host_name, host_id, host_description, end, start } =
+          fair;
         return {
           ...fair,
           hostName: host_name,
           hostId: host_id,
           hostDescription: host_description,
+          live: end > Date.now() && start < Date.now(),
         };
       })[0];
-      
+
       const stalls = getData(stallResult);
       const added = getData(userAddedResult);
 

@@ -19,6 +19,7 @@ const Header = ({ id, fair, added, currentUser, add }) => {
     host_description,
     start_time,
     end_time,
+    live,
   } = fair;
 
   const clickHandler = () => {
@@ -56,19 +57,27 @@ const Header = ({ id, fair, added, currentUser, add }) => {
             </Typography>
           </CardContent>
           <CardActions>
-            <Link to={`/organizations/${host_id}`}>
-              <Button variant="contained" size="small">
-                Host Page
-              </Button>
-            </Link>
+            <div>
+              <Link to={`/organizations/${host_id}`}>
+                <Button variant="contained" size="small">
+                  Host Page
+                </Button>
+              </Link>
+              {currentUser && (
+                <Button
+                  variant="contained"
+                  size="small"
+                  disabled={added}
+                  onClick={clickHandler}
+                >
+                  {added ? "Added to Schedule" : "Add to Schedule"}
+                </Button>
+              )}
+            </div>
+
             {currentUser && (
-              <Button
-                variant="contained"
-                size="small"
-                disabled={added}
-                onClick={clickHandler}
-              >
-                {added ? "Added to Schedule" : "Add to Schedule"}
+              <Button variant="contained" size="small" disabled={!live}>
+                Join
               </Button>
             )}
           </CardActions>
