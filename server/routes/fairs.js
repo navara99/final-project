@@ -10,7 +10,7 @@ const router = express.Router();
 
 module.exports = (db) => {
   const queryGenerator = require("../db/queryHelpers");
-  const { getAllFairs, getFairDetails } = queryGenerator(db);
+  const { getAllFairs, getFairDetails, addFairToSchedule } = queryGenerator(db);
 
   router.get("/", async (req, res) => {
     try {
@@ -47,15 +47,27 @@ module.exports = (db) => {
     }
   });
 
+  router.post("/join/:id/", async (req, res) => {
+    const { id } = req.params;
+    const { user_id } = req.session;
+
+    try {
+      const data = await addFairToSchedule(id, user_id);
+      res.json(data);
+    } catch (error) {
+      console.log(error);
+    }
+  });
+
   router.get("/:id", async (req, res) => {
-    const { id }  = req.params;
+    const { id } = req.params;
     const { user_id } = req.session;
 
     try {
       const data = await getFairDetails(id, user_id);
       res.json(data);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   });
 
