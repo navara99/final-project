@@ -6,13 +6,13 @@ import "./Fair.css";
 
 const Fair = ({ currentUser }) => {
   let { id } = useParams();
-  const { fair, stalls, added } = useFairDetails(id);
+  const { fair, stalls, added, updateFairDetails } = useFairDetails(id);
 
   return (
     <div className="fair-details">
       {fair && stalls && (
         <>
-          <Header {...{ fair, added, currentUser }} />
+          <Header {...{ fair, added, currentUser, updateFairDetails }} />
           <h3>Employers ({stalls.length})</h3>
         </>
       )}

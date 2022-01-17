@@ -4,17 +4,24 @@ import axios from "axios";
 const useFairDetails = (id) => {
   const [stalls, setStalls] = useState();
   const [fair, setFair] = useState();
-  useEffect(() => {
+  const [added, setAdded] = useState();
+
+  const updateFairDetails = () => {
     axios.get(`/api/fairs/${id}`).then(({ data }) => {
-      const { stalls, fair } = data;
+      const { stalls, fair, added } = data;
       setFair(fair);
       setStalls(stalls);
-      console.log(fair)
-      console.log(stalls)
+      setAdded(added);
+    });
+  };
+
+  useEffect(() => {
+    axios.get(`/api/fairs/${id}`).then(({ data }) => {
+      updateFairDetails();
     });
   }, []);
 
-  return { stalls, fair };
+  return { stalls, fair, added, updateFairDetails };
 };
 
 export default useFairDetails;
