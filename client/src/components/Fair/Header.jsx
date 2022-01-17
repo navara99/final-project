@@ -14,9 +14,9 @@ const Header = ({fair}) => {
         <Card>
           <CardMedia
             component="img"
-            height="140"
+            height="350"
             image={poster}
-            alt="green iguana"
+            alt="fair poster"
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">

@@ -9,13 +9,13 @@ const Fair = () => {
   const { fair, stalls } = useFairDetails(id);
 
   return (
-    <>
+    <div className="fair-details">
       {fair && (
         <>
           <Header fair={fair} />
         </>
       )}
-    </>
+    </div>
   );
 };
 
