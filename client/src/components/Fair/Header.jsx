@@ -50,9 +50,15 @@ const Header = ({ fair, added, currentUser }) => {
           </CardContent>
           <CardActions>
             <Link to={`/organizations/${host_id}`}>
-              <Button variant="contained" size="small">Host Page</Button>
+              <Button variant="contained" size="small">
+                Host Page
+              </Button>
             </Link>
-            <Button variant="contained" size="small">Add to Schedule</Button>
+            {currentUser && (
+              <Button variant="contained" size="small">
+                Add to Schedule
+              </Button>
+            )}
           </CardActions>
         </Card>
       )}
