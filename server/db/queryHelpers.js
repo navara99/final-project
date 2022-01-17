@@ -255,6 +255,7 @@ const queryGenerator = (db) => {
 
   //Messages queryhelper functions
 
+  // Get All messages
   const getMessagesByUserId = async(user_id) => {
     const values = [user_id];
     const queryString = `
@@ -262,9 +263,26 @@ const queryGenerator = (db) => {
     `
     try {
       const result = await db.query(queryString,values);
-      return result.rows;s
+      return result.rows;
     } catch (error) {
       console.log(error)
+    }
+  }
+  
+  // create NewMessage
+
+  const createNewMessage = async({sender_id, receiver_id, message}) => {
+    try {
+      const values = [sender_id, receiver_id, message];
+      const queryString = `
+        INSERT INTO  messages (sender_id , receiver_id, message)
+        VALUES ($1, $2, $3)
+        RETURNING *;
+      `;
+      const result = await db.query(queryString,values);
+      return getFirstRecord(result);
+    } catch (error) {
+      console.log(error);
     }
   }
 
@@ -283,7 +301,8 @@ const queryGenerator = (db) => {
     getAllApplicationsByJobId,
     getOrganizationDetails,
     checkIfIAmMember,
-    getMessagesByUserId
+    getMessagesByUserId,
+    createNewMessage
   };
 };
 
