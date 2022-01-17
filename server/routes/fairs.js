@@ -48,8 +48,9 @@ module.exports = (db) => {
   });
 
   router.get("/:id", async (req, res) => {
+    const { id }  = req.params;
     try {
-      const fair = await getFair(req.params.id);
+      const fair = await getFair(id);
       const organizations = fair.map(f => {
         return ({
           organizations_name :f.organizations_name,
