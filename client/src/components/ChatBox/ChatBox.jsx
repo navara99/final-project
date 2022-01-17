@@ -12,14 +12,15 @@ import MessageForm from './MessageForm/MessageForm';
 import {io} from 'socket.io-client'
 import axios from 'axios';
 const ChatBox = ({currentUser}) => {
-  // intialize socket
-  const socket = io.connect("http://localhost:8080");
+ 
+  
   const [messages, setMessages] = useState(null);
-  const [sender, setSender] = useState(null);
+  const [senders, setSenders] = useState(null);
   const [messageText, setMessageText] = useState('');
   useEffect(() => {
     axios.get("/api/messages").then(res => {
-      setMessages(res.data)
+      setMessages(res.data.messagesArr);
+      setSenders(res.data.contacts)
     })
   }, []);
 
@@ -36,7 +37,9 @@ const ChatBox = ({currentUser}) => {
     setMessageText('');
   }
     
-  useEffect(() => {
+  useEffect(() => { 
+    // intialize socket
+    const socket = io.connect("http://localhost:8080");
     socket.on("connect", () => {
       console.log("connection made with socket", socket.id)
     })
@@ -50,7 +53,7 @@ const ChatBox = ({currentUser}) => {
                   <Typography variant='h5'>Message (12)</Typography>  
                 </ListItem>
                 <ListItem>
-                  <SenderList messages={messages} currentUser={currentUser}/>
+                  <SenderList messages={messages} currentUser={currentUser} senders = {senders}/>
                 </ListItem>
             </List>      
         </Grid>

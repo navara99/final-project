@@ -2,15 +2,16 @@ import React from 'react'
 import { List, ListItem, ListItemAvatar, Avatar,ListItemText, Typography, Divider, ListItemButton} from '@mui/material'
 
 const SenderListItem = ({sender}) => {
-  const {name, imageUrl, last_message} = sender;
+  const {first_name, last_name, profile_picture, username} = sender;
+  console.log(sender);
   return (  
     <>
       <ListItemButton alignItems="flex-start">
           <ListItemAvatar>
-          <Avatar alt={name} src={imageUrl} />
+          <Avatar alt={first_name} src={profile_picture} />
           </ListItemAvatar>
           <ListItemText
-          primary={name}
+          primary={first_name + last_name}
           secondary={
               <>
               <Typography
@@ -19,7 +20,7 @@ const SenderListItem = ({sender}) => {
                   variant="body2"
                   color="text.secondary"
               >
-                {last_message}
+                {username}
               </Typography>
              
               </>
