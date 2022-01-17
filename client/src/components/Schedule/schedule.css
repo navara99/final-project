@@ -15,3 +15,9 @@
   text-overflow: ellipsis;
   overflow: hidden;
 }
+
+.event-tooltips {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}

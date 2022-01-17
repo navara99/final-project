@@ -5,7 +5,7 @@ import { formatStartEndTime } from "../../helpers/date";
 import { Link } from "react-router-dom";
 
 const Event = ({ event }) => {
-  const { start, end, title, isInterview, asJobSeeker } = event;
+  const { start, end, title, isInterview, asJobSeeker, fairId } = event;
   const Button = () => {
     return isInterview ? (
       asJobSeeker ? (
@@ -17,13 +17,9 @@ const Event = ({ event }) => {
           <button>test button</button>
         </Link>
       )
-    ) : asJobSeeker ? (
-      <Link to="/">
-        <button>test button</button>
-      </Link>
     ) : (
-      <Link to="/">
-        <button>test button</button>
+      <Link to={`/fairs/${fairId}`}>
+        <button>Details</button>
       </Link>
     );
   };
@@ -33,9 +29,9 @@ const Event = ({ event }) => {
     <>
       {title}
       <br />
-      {time}
-      <br />
-      <Button />
+      <div className="event-tooltips">
+        {time}<Button />
+      </div>
     </>
   );
   return (
