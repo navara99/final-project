@@ -96,7 +96,7 @@ const queryGenerator = (db) => {
           hostDescription: host_description,
         };
       })[0];
-      
+
       const stalls = getData(stallResult);
       const added = getData(userAddedResult);
 
@@ -283,7 +283,24 @@ const queryGenerator = (db) => {
     }
   };
 
+  const addFairToSchedule = async (fairId, userId) => {
+    const values = [fairId, userId];
+    const queryString = `
+      INSERT INTO fairs_users (fair_id, user_id)
+      VALUES ($1, $2)
+      RETURNING *;
+    `;
+
+    try {
+      const result = await db.query(queryString, values);
+      return getData(result);
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
   return {
+    addFairToSchedule,
     createNewUser,
     getUserByValue,
     createNewOrganization,
