@@ -7,5 +7,5 @@ CREATE TABLE fairs (
   description varchar NOT NULL,
   start_time timestamp NOT NULL,
   end_time timestamp NOT NULL,
-  poster varchar DEFAULT '/public/fairs/something.jpg'
+  poster varchar DEFAULT 'https://communityimpact.com/uploads/images/2020/07/13/67515.jpg'
 );
