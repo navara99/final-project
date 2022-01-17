@@ -36,12 +36,6 @@ function Groups({ setSnackBarDetails }) {
 
   return (
     <div className="groups-container">
-      {/* {openAddMembersModal && <AddMemberForm
-        // {...{ openAddMembersModal }}
-        // {...{ setOpenAddMembersModal }}
-        {...{ selectedGroup }}
-        {...{ setSnackBarDetails }}
-      />} */}
       <div className="organization-header">
         <h1>Your Organizations</h1>
         <Button style={{ height: "50%" }} variant="contained" startIcon={<Add />} onClick={() => setOpenForm(!openForm)}>Add Organization</Button>

@@ -1,6 +1,6 @@
 import React from "react";
 import useExpand from "../../hooks/useExpand";
-import { ListItemText, Card, IconButton, Collapse, CardActions } from "@mui/material";
+import { ListItemText, Card, Collapse, CardActions } from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MembersList from "./MembersList";
 import { useParams } from "react-router";
@@ -31,23 +31,23 @@ function OrganizationMembers({ organization, cardStyles, setSnackBarDetails }) {
             primary={<h2 className="organization-card-name">Members</h2>}
             secondary={`${organization.details.name} has ${organization.members.length} member(s).`}
           />
-          <GroupsBtn
-            text="Add member"
-            variant="contained"
-            icon={<Person />}
-            onClick={handleAddMemberBtn}
-          />
+          <CardActions>
+            <GroupsBtn
+              text="Add"
+              variant="contained"
+              icon={<Person />}
+              onClick={handleAddMemberBtn}
+            />
+            <ExpandMore
+              expand={expanded}
+              onClick={handleExpandClick}
+              aria-expanded={expanded}
+              aria-label="show more"
+            >
+              <ExpandMoreIcon />
+            </ExpandMore>
+          </CardActions>
         </div>
-        <CardActions>
-          <ExpandMore
-            expand={expanded}
-            onClick={handleExpandClick}
-            aria-expanded={expanded}
-            aria-label="show more"
-          >
-            <ExpandMoreIcon />
-          </ExpandMore>
-        </CardActions>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           <MembersList members={organization.members} />
         </Collapse>
