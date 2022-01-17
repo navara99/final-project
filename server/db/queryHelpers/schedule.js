@@ -1,6 +1,5 @@
 const getData = ({ rows }) => rows;
 const getFirstRecord = (result) => getData(result)[0];
-const makeDateObject = (timestamp) => (timestamp);
 
 const makeConductInterviewData = (data) => {
   return getData(data).map((event) => {
@@ -16,8 +15,8 @@ const makeConductInterviewData = (data) => {
     } = event;
     const title = `Interview ${candidate_first_name} ${candidate_last_name} for ${job_title} (${organization_name})`;
     return {
-      start: makeDateObject(start),
-      end: makeDateObject(end),
+      start,
+      end,
       title,
       candidateId: candidate_id,
       applicationId: application_id,
@@ -32,8 +31,8 @@ const makeInterviewData = (data) => {
     const { start, end, job_title, employer } = event;
     const title = `Interview for ${job_title} at ${employer}`;
     return {
-      start: makeDateObject(start),
-      end: makeDateObject(end),
+      start,
+      end,
       title,
       isInterview: true,
       asJobSeeker: true,
@@ -46,8 +45,8 @@ const makeStallData = (data) => {
     const { start, end, fair_name, organization_name, fair_id } = event;
     const title = `${fair_name} (${organization_name})`;
     return {
-      start: makeDateObject(start),
-      end: makeDateObject(end),
+      start,
+      end,
       title,
       fairId: fair_id,
       isInterview: false,
@@ -60,8 +59,8 @@ const makeFairData = (data) => {
   return getData(data).map((event) => {
     const { start, end, fair_name, fair_id } = event;
     return {
-      start: makeDateObject(start),
-      end: makeDateObject(end),
+      start,
+      end,
       title: fair_name,
       fairId: fair_id,
       isInterview: false,
