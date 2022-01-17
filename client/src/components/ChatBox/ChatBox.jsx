@@ -30,11 +30,9 @@ const ChatBox = ({currentUser}) => {
       receiver_id: 2, 
       message: messageText
     }
-    console.log("new", newMessage);
     axios.post("/api/messages/", newMessage).then(res => {
-        
-    })
-      
+      setMessages((prev) => [...prev, res.data])
+    }) 
     setMessageText('');
   }
     
