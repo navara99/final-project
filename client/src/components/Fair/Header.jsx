@@ -8,7 +8,7 @@ import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
 import { formatStartEndTime, formatDate } from "../../helpers/date";
 
-const Header = ({ fair }) => {
+const Header = ({ fair, added, currentUser }) => {
   const {
     name,
     description,

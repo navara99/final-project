@@ -83,7 +83,7 @@ function App() {
           <Route path="/schedule" element={<Schedule />} />
           <Route path="/messages" element={<ChatBox/>} />
           <Route path="/settings" element={<>Settings</>} />
-          <Route path="/fairs/:id" element={<Fair />} />
+          <Route path="/fairs/:id" element={<Fair currentUser={currentUser} />} />
           <Route path="/organizations/:id" element={<OrganizationDetails />} />
         </Routes>
       </div>

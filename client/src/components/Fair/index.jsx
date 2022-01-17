@@ -4,15 +4,15 @@ import useFairDetails from "../../hooks/useFairDetails";
 import Header from "./Header";
 import "./Fair.css";
 
-const Fair = () => {
+const Fair = ({ currentUser }) => {
   let { id } = useParams();
-  const { fair, stalls } = useFairDetails(id);
+  const { fair, stalls, added } = useFairDetails(id);
 
   return (
     <div className="fair-details">
       {fair && stalls && (
         <>
-          <Header fair={fair} />
+          <Header {...{ fair, added, currentUser }} />
           <h3>Employers ({stalls.length})</h3>
         </>
       )}
