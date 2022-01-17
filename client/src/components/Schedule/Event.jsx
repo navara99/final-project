@@ -3,23 +3,30 @@ import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
 import { formatStartEndTime } from "../../helpers/date";
 import { Link } from "react-router-dom";
+import Button from "@mui/material/Button";
 
 const Event = ({ event }) => {
   const { start, end, title, isInterview, asJobSeeker, fairId } = event;
-  const Button = () => {
+  const LinkButton = () => {
     return isInterview ? (
       asJobSeeker ? (
         <Link to="/">
-          <button>test button</button>
+          <Button variant="contained" size="small">
+            test button
+          </Button>
         </Link>
       ) : (
         <Link to="/">
-          <button>test button</button>
+          <Button variant="contained" size="small">
+            test button
+          </Button>
         </Link>
       )
     ) : (
       <Link to={`/fairs/${fairId}`}>
-        <button>Details</button>
+        <Button variant="contained" size="small">
+          Details
+        </Button>
       </Link>
     );
   };
@@ -27,10 +34,10 @@ const Event = ({ event }) => {
   const time = formatStartEndTime(start, end);
   const content = (
     <>
-      {title}
-      <br />
+      <h3>{title}</h3>
       <div className="event-tooltips">
-        {time}<Button />
+        {time}
+        <LinkButton />
       </div>
     </>
   );
@@ -41,7 +48,6 @@ const Event = ({ event }) => {
       placement="bottom"
       theme="material"
       arrow={true}
-      interactiveDebounce={20}
       hideOnClick={false}
       appendTo={document.body}
     >
