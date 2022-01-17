@@ -5,12 +5,17 @@ import GroupsBtn from "./GroupsBtn";
 import Add from "@mui/icons-material/Add";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import FairsList from "./FairsList";
+import { useState } from "react";
+import FairsForm from "./FairsForm";
 
 function OrganizationFairs({ organization, cardStyles }) {
   const { ExpandMore, handleExpandClick, expanded } = useExpand();
+  const [fairsFormOpen, setFairsFormOpen] = useState(false);
+
 
   return (
     <div>
+      <FairsForm {...{ fairsFormOpen }} {...{ setFairsFormOpen }} />
       <Card alignItems="flex-start" style={cardStyles}>
         <div className="organization-card">
           <ListItemText
@@ -22,7 +27,7 @@ function OrganizationFairs({ organization, cardStyles }) {
               text="New"
               variant="contained"
               icon={<Add />}
-              onClick={() => { }}
+              onClick={() => setFairsFormOpen(!fairsFormOpen) }
             />}
             <ExpandMore
               expand={expanded}
