@@ -48,6 +48,7 @@ const ChatBox = ({currentUser}) => {
     socket.current.on("getMessage", (data) => {
         console.log("data", data);
         setIncomingMessage({
+          receiver_id : data.receiver_id,
           sender_id: data.sender_id,
           message: data.message,
           created_at: new Date().toISOString()

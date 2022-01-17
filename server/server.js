@@ -39,9 +39,9 @@ io.on("connection", (socket) => {
 
   //take userId and socketId from user
   socket.on("addUser", (userId) => {
-    // console.log("currentUserId", userId);
+    console.log("currentUserId", userId);
     addUser(userId, socket.id);
-    // console.log("users", users);
+    console.log("users", users);
     // io.emit("getUsers", users);
   });
 
@@ -50,6 +50,7 @@ io.on("connection", (socket) => {
     const user = getUser(receiver_id);
     // console.log("user", users);
     io.to(user.socketId).emit("getMessage", {
+      receiver_id,
       sender_id,
       message
     });
