@@ -16,15 +16,49 @@ const io = new Server(httpServer, {
     origin: "http://localhost:3000",
     methods: ["GET", "POST"],
   },
-}); 
+});
+
+let users = [];
+
+const addUser = (userId, socketId) => {
+  !users.some((user) => user.userId === userId) &&
+    users.push({ userId, socketId });
+};
+
+const removeUser = (socketId) => {
+  users = users.filter((user) => user.socketId !== socketId);
+};
+
+const getUser = (userId) => {
+  return users.find((user) => user.userId === userId);
+};
 
 io.on("connection", (socket) => {
   console.log('a new user connected');
   console.log("Connected socketId:", socket.id);
 
+  //take userId and socketId from user
+  socket.on("addUser", (userId) => {
+    console.log("currentUserId", userId);
+    addUser(userId, socket.id);
+    console.log("users", users);
+    // io.emit("getUsers", users);
+  });
+
+  socket.on("sendMessage", ({sender_id,receiver_id,message}) => {
+    // console.log("new", newMessage);
+    const user = getUser(receiver_id);
+    console.log("user", users);
+    io.to(user.socketId).emit("getMessage", {
+      sender_id,
+      message
+    });
+  });
+
   //client disconnect 
   socket.on("disconnect", () => {
-    console.log("user disconnected!")
+    console.log("user disconnected!");
+    removeUser(socket.id)
   })
 })
 
