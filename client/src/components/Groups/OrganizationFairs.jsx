@@ -8,7 +8,7 @@ import FairsList from "./FairsList";
 
 function OrganizationFairs({ organization, cardStyles }) {
   const { ExpandMore, handleExpandClick, expanded } = useExpand();
-  
+
   return (
     <div>
       <Card alignItems="flex-start" style={cardStyles}>
@@ -18,12 +18,12 @@ function OrganizationFairs({ organization, cardStyles }) {
             secondary={`${organization.details.name} is a part of ${organization.fairs.length} fair(s).`}
           />
           <CardActions>
-            <GroupsBtn
+            {organization.isMember && <GroupsBtn
               text="New"
               variant="contained"
               icon={<Add />}
               onClick={() => { }}
-            />
+            />}
             <ExpandMore
               expand={expanded}
               onClick={handleExpandClick}

@@ -22,7 +22,7 @@ function OrganizationJobs({ cardStyles, organization, setSnackBarDetails }) {
             secondary={`${organization.details.name} has ${organization.jobs.length} jobs listed.`}
           />
           <CardActions>
-            <GroupsBtn text="New" variant="contained" icon={<AddIcon />} onClick={() => setJobFormOpen(!jobFormOpen)} />
+            {organization.isMember && <GroupsBtn text="New" variant="contained" icon={<AddIcon />} onClick={() => setJobFormOpen(!jobFormOpen)} />}
             <ExpandMore
               style={{ marginLeft: "1em" }}
               expand={expanded}
