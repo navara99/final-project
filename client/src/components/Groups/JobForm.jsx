@@ -11,7 +11,7 @@ import useInput from "../../hooks/useInput";
 import axios from "axios";
 import { useParams } from "react-router";
 
-function JobForm({ jobFormOpen, setJobFormOpen, setSnackBarDetails }) {
+function JobForm({ jobFormOpen, setJobFormOpen, setSnackBarDetails, setOrganizationDetails }) {
   const [title, setTitle] = useInput();
   const [description, setDescription] = useInput();
   const [experience, setExperience] = useInput();
@@ -29,7 +29,8 @@ function JobForm({ jobFormOpen, setJobFormOpen, setSnackBarDetails }) {
     };
 
     try {
-      await axios.post(`/api/organizations/${id}/jobs`, jobDetails);
+      const { data } = await axios.post(`/api/organizations/${id}/jobs`, jobDetails);
+      setOrganizationDetails((prev) => ({ ...prev, jobs: [{ ...data, applications: [] }, ...prev.jobs] }));
       setJobFormOpen(!jobFormOpen);
       setSnackBarDetails({
         open: true,
