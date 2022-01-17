@@ -272,9 +272,21 @@ const queryGenerator = (db) => {
 
   };
 
-  const createNewFair = (name, description, host_id) => {
-    console.log(name, description, host_id);
+  const createNewFair = async (name, description, startTime, endTime, hostId) => {
+    const values = [name, description, startTime, endTime, hostId];
+    const queryString = `
+      INSERT INTO fairs (name, description, start_time, end_time, host_id)
+      VALUES ($1, $2, $3, $4, $5)
+      RETURNING *;
+    `;
 
+    try {
+      const result = await db.query(queryString, values);
+      const newFair = getFirstRecord(result);
+      return newFair;
+    } catch (err) {
+      console.log(err.message);
+    };
   }
 
   return {
