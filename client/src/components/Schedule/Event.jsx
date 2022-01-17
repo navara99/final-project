@@ -6,6 +6,27 @@ import { Link } from "react-router-dom";
 
 const Event = ({ event }) => {
   const { start, end, title, isInterview, asJobSeeker } = event;
+  const Button = () => {
+    return isInterview ? (
+      asJobSeeker ? (
+        <Link to="/">
+          <button>test button</button>
+        </Link>
+      ) : (
+        <Link to="/">
+          <button>test button</button>
+        </Link>
+      )
+    ) : asJobSeeker ? (
+      <Link to="/">
+        <button>test button</button>
+      </Link>
+    ) : (
+      <Link to="/">
+        <button>test button</button>
+      </Link>
+    );
+  };
 
   const time = formatStartEndTime(start, end);
   const content = (
@@ -14,9 +35,7 @@ const Event = ({ event }) => {
       <br />
       {time}
       <br />
-      <Link to="/">
-        <button>test button</button>
-      </Link>
+      <Button />
     </>
   );
   return (
@@ -30,7 +49,7 @@ const Event = ({ event }) => {
       hideOnClick={false}
       appendTo={document.body}
     >
-      <div className="event" >
+      <div className="event">
         <strong>{title}</strong>
       </div>
     </Tippy>
