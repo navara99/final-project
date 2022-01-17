@@ -19,6 +19,7 @@ const ChatBox = ({currentUser}) => {
   const [incomingMessage, setIncomingMessage] = useState(null);
   const [receiverId, setReceiverId,handleOnClick] = useMessageReceiver(null)
   const socket = useRef();
+  
   useEffect(() => {
     axios.get("/api/messages").then(res => {
       setMessages(res.data.messagesArr);
@@ -38,7 +39,6 @@ const ChatBox = ({currentUser}) => {
     });
     //sending message to socket server
     socket.current.emit("sendMessage", newMessage);
-    
     setMessageText('');
   }
     
@@ -54,6 +54,7 @@ const ChatBox = ({currentUser}) => {
           created_at: new Date().toISOString()
         });
       });
+ 
   },[]);
 
   useEffect(() => {
@@ -62,9 +63,9 @@ const ChatBox = ({currentUser}) => {
   }, [incomingMessage]);
 
   useEffect(() => {
-      if(currentUser) {
+      if(currentUser && socket) {
         //sending user id
-        socket.current.emit("addUser", currentUser.id)
+        socket.current.emit("addUser", currentUser.id);
       }
   },[currentUser])
 
@@ -105,3 +106,4 @@ const ChatBox = ({currentUser}) => {
 export default ChatBox;
 
 
+// 
