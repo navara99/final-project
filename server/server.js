@@ -37,11 +37,13 @@ app.use(express.urlencoded({ extended: true }));
 // Note: Feel free to replace the example routes below with your own
 
 const usersRoutes = require("./routes/users");
+const jobRoutes = require("./routes/jobs");
 const fairsRoutes = require("./routes/fairs");
 const organizationRoutes = require("./routes/organizations");
 const scheduleRoutes = require("./routes/schedule");
 
 app.use("/api/users", usersRoutes(db));
+app.use("/api/jobs", jobRoutes(db));
 app.use("/api/fairs", fairsRoutes(db));
 app.use("/api/organizations", organizationRoutes(db));
 app.use("/api/schedule", scheduleRoutes(db));
