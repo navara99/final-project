@@ -15,7 +15,7 @@ function OrganizationDetails({ setSnackBarDetails }) {
   const { id } = useParams();
   const [organization, setOrganizationDetails] = useOrganizationDetails(id);
 
-  console.log(organization);
+
   return (
     <div className="organization-details-wrapper">
       {organization && <OrganizationHeader {...{ organization }} {...{ cardStyles }} />}

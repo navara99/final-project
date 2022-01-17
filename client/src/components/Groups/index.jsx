@@ -21,7 +21,6 @@ function Groups({ setSnackBarDetails }) {
   const renderMyGroups = (myGroups) => {
 
     return myGroups.sort((a, b) => b.id - a.id).map((group) => {
-      console.log(group);
       return <GroupListItem
         key={group.id}
         {...{ group }}

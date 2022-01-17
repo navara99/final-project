@@ -24,7 +24,6 @@ const AddMemberForm = ({ openAddMembersModal, setOpenAddMembersModal, id, setSna
 
     try {
       const { data } = await axios.post(`/api/organizations/${id}/users`, { usersIdToAdd });
-      console.log(data);
       setOrganizationDetails((prev) => ({ ...prev, members: [...data] }))
       setOpenAddMembersModal(!openAddMembersModal);
       setSnackBarDetails({
