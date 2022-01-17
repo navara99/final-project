@@ -1,5 +1,4 @@
 const getData = ({ rows }) => rows;
-const getFirstRecord = (result) => getData(result)[0];
 
 const makeConductInterviewData = (data) => {
   return getData(data).map((event) => {
