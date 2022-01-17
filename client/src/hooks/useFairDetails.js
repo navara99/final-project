@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const useEachFair = (id) => {
+const useFairDetails = (id) => {
   const [organizations, setOrganizations] = useState([]);
   const [fair_name, setFairName] = useState('');
   const [fair_desc, setFairDesc] = useState('');
@@ -22,4 +22,4 @@ const useEachFair = (id) => {
 
 }
 
-export default useEachFair;
+export default useFairDetails;

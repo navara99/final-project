@@ -3,11 +3,11 @@ import Grid from "@mui/material/Grid";
 import CompanyList from "./Companies/CompanyList";
 import FairHeader from "./FairHeader";
 import { useParams } from "react-router-dom";
-import useEachFair from "../../hooks/useEachFair";
+import useFairDetails from "../../hooks/useFairDetails";
 
 const CareerFair = () => {
   let { id } = useParams();
-  const {organizations, fair_name, fair_desc, host_name, poster} = useEachFair(id)
+  const { organizations, fair_name, fair_desc, host_name, poster } = useFairDetails(id)
   return (
     <Grid container spacing={2}>
       {fair_name && (
