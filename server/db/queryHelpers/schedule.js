@@ -1,6 +1,5 @@
 const getData = ({ rows }) => rows;
 const getFirstRecord = (result) => getData(result)[0];
-const dateConverter = (date) => new Date(date);
 
 const makeConductInterviewData = (data) => {
   return getData(data).map((event) => {
@@ -15,9 +14,11 @@ const makeConductInterviewData = (data) => {
       organization_name,
     } = event;
     const title = `Interview ${candidate_first_name} ${candidate_last_name} for ${job_title} (${organization_name})`;
+    
+    console.log(typeof start);
     return {
-      start: dateConverter(start),
-      end: dateConverter(end),
+      start,
+      end,
       title,
       candidateId: candidate_id,
       applicationId: application_id,
@@ -32,10 +33,9 @@ const makeInterviewData = (data) => {
     const { start, end, job_title, employer } = event;
     const title = `Interview for ${job_title} at ${employer}`;
     return {
-      start: dateConverter(start),
-      end: dateConverter(end),
+      start,
+      end,
       title,
-      allDay: false,
       isInterview: true,
       asJobSeeker: true,
     };
@@ -47,10 +47,9 @@ const makeStallData = (data) => {
     const { start, end, fair_name, organization_name, fair_id } = event;
     const title = `${fair_name} (${organization_name})`;
     return {
-      start: dateConverter(start),
-      end: dateConverter(end),
+      start,
+      end,
       title,
-      allDay: false,
       fairId: fair_id,
       isInterview: false,
       asJobSeeker: false,
@@ -62,9 +61,8 @@ const makeFairData = (data) => {
   return getData(data).map((event) => {
     const { start, end, fair_name, fair_id } = event;
     return {
-      start: dateConverter(start),
-      end: dateConverter(end),
-      allDay: false,
+      start,
+      end,
       title: fair_name,
       fairId: fair_id,
       isInterview: false,
@@ -142,8 +140,6 @@ const queryGenerator = (db) => {
       events = events.concat(makeInterviewData(dataInterview));
       events = events.concat(makeStallData(dataStall));
       events = events.concat(makeFairData(dataFair));
-
-      console.log("EVENTS", events);
       return events;
     } catch (err) {
       console.log(err.message);
