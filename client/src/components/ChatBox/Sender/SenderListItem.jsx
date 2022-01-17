@@ -3,7 +3,6 @@ import { List, ListItem, ListItemAvatar, Avatar,ListItemText, Typography, Divide
 
 const SenderListItem = ({sender}) => {
   const {first_name, last_name, profile_picture, username} = sender;
-  console.log(sender);
   return (  
     <>
       <ListItemButton alignItems="flex-start">
