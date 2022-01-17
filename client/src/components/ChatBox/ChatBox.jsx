@@ -61,8 +61,10 @@ const ChatBox = ({currentUser}) => {
   }, [incomingMessage]);
 
   useEffect(() => {
-      //sending users id for online user list
-      socket.current.emit("addUser", currentUser.id)
+      if(currentUser) {
+        //sending user id
+        socket.current.emit("addUser", currentUser.id)
+      }
   },[currentUser])
 
   return (
@@ -81,10 +83,11 @@ const ChatBox = ({currentUser}) => {
         {/* Chatter Box */}
         <Grid item xs ={9}  px={2} sx={{backgroundColor:"#eff2f6"}} component={Paper} variant='outlined'>
             {
-                receiverId ? (<>
-                    <MessageList messages={messages} currentUser={currentUser} />
-                    <Divider />
-                    <MessageForm messageText={messageText} handleSubmit={handleSubmit} setMessageText={setMessageText} />
+                receiverId && currentUser ? (
+                    <>
+                      <MessageList messages={messages.filter(message => (message.sender_id === receiverId && message.receiver_id === currentUser.id) || (message.sender_id === currentUser.id && message.receiver_id === receiverId))} currentUser={currentUser} />
+                      <Divider />
+                      <MessageForm messageText={messageText} handleSubmit={handleSubmit} setMessageText={setMessageText} />
                     </>
                 ) : (
                     <>
