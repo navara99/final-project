@@ -10,7 +10,7 @@ import { Routes, Route } from "react-router-dom";
 import useCurrentUser from "./hooks/useCurrentUser";
 import Groups from "./components/Groups/index";
 import { Snackbar, Alert } from "@mui/material";
-import CareerFair from "./components/CareerFair/CareerFair";
+import Fair from "./components/Fair";
 import ChatBox from "./components/ChatBox/ChatBox";
 
 import OrganizationDetails from "./components/Groups/OrganizationDetails";
@@ -83,7 +83,7 @@ function App() {
           <Route path="/schedule" element={<Schedule />} />
           <Route path="/messages" element={<ChatBox/>} />
           <Route path="/settings" element={<>Settings</>} />
-          <Route path="/fairs/:id" element={<CareerFair />} />
+          <Route path="/fairs/:id" element={<Fair />} />
           <Route path="/organizations/:id" element={<OrganizationDetails />} />
         </Routes>
       </div>

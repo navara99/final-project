@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
-import CompanyList from "./Companies/CompanyList";
+import CompanyList from "./CompanyList";
 import FairHeader from "./FairHeader";
 import { useParams } from "react-router-dom";
 import useFairDetails from "../../hooks/useFairDetails";
 
-const CareerFair = () => {
+const Fair = () => {
   let { id } = useParams();
   const { organizations, fair_name, fair_desc, host_name, poster } = useFairDetails(id)
   return (
@@ -24,4 +24,4 @@ const CareerFair = () => {
   );
 };
 
-export default CareerFair;
+export default Fair;

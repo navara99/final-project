@@ -52,19 +52,20 @@ const queryGenerator = (db) => {
   const getFairDetails = async (fair_id) => {
     const values = [fair_id];
     const queryString = `
-    SELECT 
-    fairs.id as Fair_Id, 
-    fairs.description as Fair_Desc, 
-    fairs.name as Fair_Name, 
-    fairs.poster as POSTER, 
-    (SELECT organizations.name FROM organizations WHERE host_id = organizations.id)as Host_Name, 
-    organizations.id as Organizations_Id, 
-    organizations.name as Organizations_Name, 
-    organizations.description as Organizations_Desc 
-    FROM fairs
-    JOIN fairs_organizations ON (fairs.id = fairs_organizations.fair_id) 
-    JOIN organizations ON (organizations.id = fairs_organizations.organization_id)
-    WHERE fairs.id = $1
+    SELECT fairs.description, 
+      fairs.name, 
+      fairs.poster, 
+      y.name AS host_name,
+      y.id AS host_id,
+      y.description AS host_description,
+      x.id as stall_id, 
+      x.name as stall_Name, 
+      x.description as stall_description 
+      FROM fairs
+      JOIN fairs_organizations ON (fairs.id = fairs_organizations.fair_id) 
+      JOIN organizations x ON (x.id = fairs_organizations.organization_id)
+      JOIN organizations y ON (y.id = fairs.host_id)
+      WHERE fairs.id = $1
     `;
 
     try {
