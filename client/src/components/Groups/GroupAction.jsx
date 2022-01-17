@@ -1,26 +1,11 @@
 import React from "react";
 import GroupsBtn from "./GroupsBtn";
-import { Delete, Edit, Add, Person, Event, EventAvailableSharp } from "@mui/icons-material";
+import { Delete, Edit, Person } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
-function GroupAction({ openAddMembersModal, setOpenAddMembersModal, group, selectedGroup, setSelectedGroup }) {
+function GroupAction({ openAddMembersModal, setOpenAddMembersModal, group }) {
 
   const btnInfo = [
-    // {
-    //   text: "Add Member",
-    //   variant: "contained",
-    //   icon: <Add />
-    // },
-    // {
-    //   text: "View Members",
-    //   variant: "contained",
-    //   icon: <Person />
-    // },
-    // {
-    //   text: "View Fairs",
-    //   variant: "contained",
-    //   icon: <Event />
-    // },
     {
       text: "Edit",
       variant: "outlined",
@@ -38,29 +23,9 @@ function GroupAction({ openAddMembersModal, setOpenAddMembersModal, group, selec
     return <GroupsBtn key={i} text={info.text} variant={info.variant} icon={info.icon} />
   });
 
-  const handleAddMemberBtn = () => {
-    setSelectedGroup(group);
-    setOpenAddMembersModal(!openAddMembersModal)
-  }
-
   return (
-    <div className="organization-action-btn">
-      <div className="action-btns">
-        <div>
-          <Link to={`/organizations/${group.id}`} style={{ textDecoration: 'none' }}>
-            <GroupsBtn text="Details" variant="contained" />
-          </Link>
-          <GroupsBtn
-            text="Add member"
-            variant="contained"
-            icon={<Person />}
-            onClick={handleAddMemberBtn}
-          />
-        </div>
-        <div>
-          {btns}
-        </div>
-      </div>
+    <div className="organization-action-btns">
+      {btns}
     </div>
   );
 };

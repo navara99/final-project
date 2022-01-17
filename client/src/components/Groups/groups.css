@@ -21,9 +21,9 @@
   margin-bottom: 1em;
 }
 
-.action-btns {
+.organization-action-btns {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
 }
 
 .organization-details-header {

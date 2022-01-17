@@ -19,7 +19,7 @@ function OrganizationDetails({ setSnackBarDetails }) {
     <div className="organization-details-wrapper">
       <div className="organization-details-left-wrapper">
         {organization && <OrganizationHeader {...{ organization }} {...{ cardStyles }} />}
-        {organization && <OrganizationMembers {...{ organization }} {...{ cardStyles }} />}
+        {organization && <OrganizationMembers {...{ organization }} {...{ cardStyles }} {...{ setSnackBarDetails }} />}
       </div>
       {organization && <OrganizationJobs {...{ organization }} {...{ cardStyles }} {...{ setSnackBarDetails }} />}
 
