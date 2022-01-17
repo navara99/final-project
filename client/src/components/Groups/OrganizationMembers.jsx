@@ -9,7 +9,7 @@ import { useState } from "react";
 import AddMemberForm from "./AddMemberForm";
 import { Person } from "@mui/icons-material";
 
-function OrganizationMembers({ organization, cardStyles, setSnackBarDetails }) {
+function OrganizationMembers({ organization, cardStyles, setSnackBarDetails, setOrganizationDetails }) {
   const { ExpandMore, handleExpandClick, expanded } = useExpand();
   const [openAddMembersModal, setOpenAddMembersModal] = useState(false);
   const { id } = useParams();
@@ -24,7 +24,9 @@ function OrganizationMembers({ organization, cardStyles, setSnackBarDetails }) {
         {...{ openAddMembersModal }}
         {...{ setOpenAddMembersModal }}
         {...{ id }}
-        {...{ setSnackBarDetails }} />
+        {...{ setSnackBarDetails }}
+        {...{ setOrganizationDetails }}
+      />
       <Card alignItems="flex-start" style={cardStyles}>
         <div className="organization-card">
           <ListItemText

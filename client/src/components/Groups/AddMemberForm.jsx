@@ -15,7 +15,7 @@ import useAllUsers from "../../hooks/useAllUsers";
 import { useState } from "react";
 import axios from "axios";
 
-const AddMemberForm = ({ openAddMembersModal, setOpenAddMembersModal, id, setSnackBarDetails }) => {
+const AddMemberForm = ({ openAddMembersModal, setOpenAddMembersModal, id, setSnackBarDetails, setOrganizationDetails }) => {
   const allUsers = useAllUsers();
   const [selectedUsers, setSelectedUsers] = useState(new Array(allUsers.length).fill(false));
 
@@ -23,7 +23,9 @@ const AddMemberForm = ({ openAddMembersModal, setOpenAddMembersModal, id, setSna
     const usersIdToAdd = allUsers.filter((users, i) => selectedUsers[i]).map((user) => user.id);
 
     try {
-      await axios.post(`/api/organizations/${id}/users`, { usersIdToAdd });
+      const { data } = await axios.post(`/api/organizations/${id}/users`, { usersIdToAdd });
+      console.log(data);
+      setOrganizationDetails((prev) => ({ ...prev, members: [...data] }))
       setOpenAddMembersModal(!openAddMembersModal);
       setSnackBarDetails({
         open: true,

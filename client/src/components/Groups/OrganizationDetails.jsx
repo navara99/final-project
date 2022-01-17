@@ -21,9 +21,8 @@ function OrganizationDetails({ setSnackBarDetails }) {
       {organization && <OrganizationHeader {...{ organization }} {...{ cardStyles }} />}
       {organization && <OrganizationJobs {...{ organization }} {...{ setOrganizationDetails }} {...{ cardStyles }} {...{ setSnackBarDetails }} />}
       {organization && <OrganizationFairs {...{ organization }} {...{ setOrganizationDetails }} {...{ cardStyles }} {...{ setSnackBarDetails }} />}
-      {organization && <OrganizationMembers {...{ organization }} {...{ cardStyles }} />}
+      {organization && <OrganizationMembers {...{ organization }} {...{ setOrganizationDetails }} {...{ cardStyles }}  {...{ setSnackBarDetails }}/>}
     </div>
-
   );
 };
 
