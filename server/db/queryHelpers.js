@@ -207,7 +207,6 @@ const queryGenerator = (db) => {
 
   const checkIfIAmMember = async (organization_id, user_id) => {
     const values = [organization_id, user_id];
-    console.log(user_id, organization_id);
     const queryString = `
     SELECT COUNT(*)
     FROM users_organizations
