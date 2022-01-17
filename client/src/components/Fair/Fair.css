@@ -5,3 +5,7 @@
 .fair-details .MuiTypography-h6 {
   margin: 1em 0 0em;
 }
+
+.fair-details a {
+  text-decoration: none;
+}

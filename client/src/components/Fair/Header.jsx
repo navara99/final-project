@@ -5,6 +5,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import { Link } from "react-router-dom";
 
 const Header = ({ fair }) => {
   const { name, description, poster, host_id, host_name, host_description } =
@@ -34,7 +35,9 @@ const Header = ({ fair }) => {
             </Typography>
           </CardContent>
           <CardActions>
-            <Button size="small">Host Page</Button>
+            <Link to={`/organizations/${host_id}`}>
+              <Button size="small">Host Page</Button>
+            </Link>
             <Button size="small">Learn More</Button>
           </CardActions>
         </Card>
