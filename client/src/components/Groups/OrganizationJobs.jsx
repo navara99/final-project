@@ -13,7 +13,7 @@ function OrganizationJobs({ cardStyles, organization, setSnackBarDetails }) {
   const [jobFormOpen, setJobFormOpen] = useState(false);
 
   return (
-    <div className="organization-details-header">
+    <div>
       <JobForm {...{ jobFormOpen }} {...{ setJobFormOpen }} {...{ setSnackBarDetails }} />
       <Card alignItems="flex-start" style={cardStyles}>
         <div className="organization-card">
@@ -22,7 +22,7 @@ function OrganizationJobs({ cardStyles, organization, setSnackBarDetails }) {
             secondary={`${organization.details.name} has ${organization.jobs.length} jobs listed.`}
           />
           <CardActions>
-            <GroupsBtn text="New Job" variant="contained" icon={<AddIcon />} onClick={() => setJobFormOpen(!jobFormOpen)} />
+            <GroupsBtn text="New" variant="contained" icon={<AddIcon />} onClick={() => setJobFormOpen(!jobFormOpen)} />
             <ExpandMore
               style={{ marginLeft: "1em" }}
               expand={expanded}

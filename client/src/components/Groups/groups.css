@@ -43,8 +43,6 @@
 
 .organization-details-wrapper {
   display: flex;
+  flex-direction: column;
 }
 
-.organization-details-left-wrapper {
-  width: 70%;
-}

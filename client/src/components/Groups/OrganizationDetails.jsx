@@ -18,12 +18,10 @@ function OrganizationDetails({ setSnackBarDetails }) {
   console.log(organization);
   return (
     <div className="organization-details-wrapper">
-      <div className="organization-details-left-wrapper">
-        {organization && <OrganizationHeader {...{ organization }} {...{ cardStyles }} />}
-        {organization && <OrganizationMembers {...{ organization }} {...{ cardStyles }} />}
-      </div>
+      {organization && <OrganizationHeader {...{ organization }} {...{ cardStyles }} />}
       {organization && <OrganizationJobs {...{ organization }} {...{ cardStyles }} {...{ setSnackBarDetails }} />}
-      {organization && <OrganizationFairs {...{ organization }} {...{ cardStyles }} {...{ setSnackBarDetails }}/>}
+      {organization && <OrganizationFairs {...{ organization }} {...{ cardStyles }} {...{ setSnackBarDetails }} />}
+      {organization && <OrganizationMembers {...{ organization }} {...{ cardStyles }} />}
     </div>
 
   );
