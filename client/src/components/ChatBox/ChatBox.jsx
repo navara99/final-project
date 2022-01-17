@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef} from 'react';
 
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
@@ -9,14 +9,15 @@ import ListItem from '@mui/material/ListItem';
 import SenderList from './Sender/SenderList';
 import MessageList from './Messages/MessageList';
 import MessageForm from './MessageForm/MessageForm';
-import {io} from 'socket.io-client'
+import {io} from 'socket.io-client';
 import axios from 'axios';
+import moment from 'moment';
 const ChatBox = ({currentUser}) => {
- 
-  
   const [messages, setMessages] = useState(null);
   const [senders, setSenders] = useState(null);
   const [messageText, setMessageText] = useState('');
+  const [incomingMessage, setIncomingMessage] = useState(null)
+  const socket = useRef();
   useEffect(() => {
     axios.get("/api/messages").then(res => {
       setMessages(res.data.messagesArr);
