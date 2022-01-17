@@ -7,7 +7,7 @@ const Home = () => {
   const { onGoingFairs, upcomingFairs, pastFairs } = useFairs();
 
   return (
-    <>
+    <div className="Home">
       <FairList items={onGoingFairs} text="Career Fairs LIVE" isOngoing={true} />
       <FairList
         items={upcomingFairs}
@@ -15,7 +15,7 @@ const Home = () => {
         showDate={true}
       />
       <FairList items={pastFairs} text="Past Career Fairs" showDate={true} />
-    </>
+    </div>
   );
 };
 
