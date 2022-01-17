@@ -4,6 +4,7 @@ import useOrganizationDetails from "../../hooks/useOrganizationDetails";
 import OrganizationHeader from "./OrganizationHeader";
 import OrganizationJobs from "./OrganizationJobs";
 import OrganizationMembers from "./OrganizationMembers";
+import OrganizationFairs from "./OrganizationFairs";
 
 const cardStyles = {
   padding: "2em",
@@ -22,7 +23,7 @@ function OrganizationDetails({ setSnackBarDetails }) {
         {organization && <OrganizationMembers {...{ organization }} {...{ cardStyles }} />}
       </div>
       {organization && <OrganizationJobs {...{ organization }} {...{ cardStyles }} {...{ setSnackBarDetails }} />}
-
+      {organization && <OrganizationFairs {...{ organization }} {...{ cardStyles }} {...{ setSnackBarDetails }}/>}
     </div>
 
   );
