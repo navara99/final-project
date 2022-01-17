@@ -45,9 +45,6 @@ const ChatBox = ({currentUser}) => {
   useEffect(() => { 
     // intialize socket
     socket.current = io.connect("http://localhost:8080");
-    // socket.current.on("connect", () => {
-    //   console.log("connection made with socket", socket.current.id)
-    // });
     socket.current.on("getMessage", (data) => {
         console.log("data", data);
         setIncomingMessage({
@@ -83,9 +80,19 @@ const ChatBox = ({currentUser}) => {
         </Grid>
         {/* Chatter Box */}
         <Grid item xs ={9}  px={2} sx={{backgroundColor:"#eff2f6"}} component={Paper} variant='outlined'>
-            <MessageList messages={messages} currentUser={currentUser} />
-            <Divider />
-            <MessageForm messageText={messageText} handleSubmit={handleSubmit} setMessageText={setMessageText} />
+            {
+                receiverId ? (<>
+                    <MessageList messages={messages} currentUser={currentUser} />
+                    <Divider />
+                    <MessageForm messageText={messageText} handleSubmit={handleSubmit} setMessageText={setMessageText} />
+                    </>
+                ) : (
+                    <>
+                        <Typography variant='h3'> Open chat conversation</Typography>
+                    </>
+                )
+            }
+          
         </Grid>
     </Grid>
   );
