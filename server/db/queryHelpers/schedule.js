@@ -10,8 +10,8 @@ const queryGenerator = (db) => {
     users.first_name AS candidate_first_name,
     users.last_name AS candidate_last_name,
     jobs.name AS job_title,
-    users.id AS candidateId,
-    applications.id AS applicationId
+    users.id AS candidate_id,
+    applications.id AS application_id
     FROM interviews
     JOIN applications ON interviews.application_id = applications.id
     JOIN users ON users.id = applications.user_id
@@ -25,18 +25,23 @@ const queryGenerator = (db) => {
         values
       );
       const events = getData(dataConductInterview).map((event) => {
-        console.log("HI");
         const {
           start,
           end,
           candidate_first_name,
           candidate_last_name,
           job_title,
-          candidateId,
-          applicationId
+          candidate_id,
+          application_id,
         } = event;
         const title = `Interview ${candidate_first_name} ${candidate_last_name} for ${job_title}`;
-        return { start, end, title, candidateId, applicationId };
+        return {
+          start,
+          end,
+          title,
+          candidateId: candidate_id,
+          applicationId: application_id,
+        };
       });
       console.log("EVENTS", events);
       return events;

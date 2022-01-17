@@ -2,6 +2,7 @@ import React from "react";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
 import { formatStartEndTime } from "../../helpers/date";
+import { Link } from "react-router-dom";
 
 const Event = ({ event }) => {
   const { start, end, title } = event;
@@ -11,6 +12,10 @@ const Event = ({ event }) => {
       {title}
       <br />
       {time}
+      <br />
+      <Link to="/">
+        <button>test button</button>
+      </Link>
     </>
   );
   return (
@@ -22,10 +27,10 @@ const Event = ({ event }) => {
       arrow={true}
       interactiveDebounce={20}
       hideOnClick={false}
+      appendTo={document.body}
     >
       <div className="event">
-        <strong>{event.title}</strong>
-        {event.desc && ":  " + event.desc}
+        <strong>{title}</strong>
       </div>
     </Tippy>
   );
