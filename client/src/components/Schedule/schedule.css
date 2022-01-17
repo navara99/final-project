@@ -1,14 +1,9 @@
 .schedule {
-  width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.schedule > div {
-  width: 95%;
-  height: 95%;
+  flex: 1 1 auto;
 }
 
 .rbc-event-content > div.event {
