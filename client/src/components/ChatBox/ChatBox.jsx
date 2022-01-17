@@ -13,7 +13,7 @@ import MessageList from './Messages/MessageList';
 import MessageForm from './MessageForm/MessageForm';
 import {io} from 'socket.io-client'
 import axios from 'axios';
-const ChatBox = () => {
+const ChatBox = ({currentUser}) => {
     // intialize socket
     const socket = io.connect("http://localhost:8080");
     const [messages, setMessages] = useState(null);
@@ -45,13 +45,13 @@ const ChatBox = () => {
                   <Typography variant='h5'>Message (12)</Typography>  
                 </ListItem>
                 <ListItem>
-                  <SenderList />
+                  <SenderList messages={messages} currentUser={currentUser}/>
                 </ListItem>
             </List>      
         </Grid>
         {/* Chatter Box */}
         <Grid item xs ={9}  px={2} sx={{backgroundColor:"#eff2f6"}} component={Paper} variant='outlined'>
-            <MessageList messages={messages} />
+            <MessageList messages={messages} currentUser={currentUser} />
             <Divider />
             <MessageForm />
         </Grid>

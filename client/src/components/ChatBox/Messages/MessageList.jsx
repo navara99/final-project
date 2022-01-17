@@ -2,8 +2,8 @@ import React from 'react'
 import { Grid, List } from '@mui/material'
 import MessageListItem from './MessageListItem';
 
-const MessageList = ({messages}) => {
-  const messageList = messages ? messages.map(message => <MessageListItem key = {message.id}message = {message}/>) : null
+const MessageList = ({messages, currentUser}) => {
+  const messageList = messages ? messages.map(message => <MessageListItem key = {message.id} message = {message} currentUser={currentUser}/>) : null
   return (
     <List >
         {messageList}
