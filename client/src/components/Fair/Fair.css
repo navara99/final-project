@@ -9,3 +9,7 @@
 .fair-details a {
   text-decoration: none;
 }
+
+.fair-details button.MuiButton-root {
+  margin: 0 0.2em;
+}

@@ -6,10 +6,20 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
+import { formatStartEndTime, formatDate } from "../../helpers/date";
 
 const Header = ({ fair }) => {
-  const { name, description, poster, host_id, host_name, host_description } =
-    fair;
+  const {
+    name,
+    description,
+    poster,
+    host_id,
+    host_name,
+    host_description,
+    start_time,
+    end_time,
+  } = fair;
+
   return (
     <>
       {fair && (
@@ -25,6 +35,10 @@ const Header = ({ fair }) => {
               {name}
             </Typography>
             <Typography variant="body2" color="text.secondary">
+              Date: {formatDate(start_time)}
+              <br />
+              Time: {formatStartEndTime(start_time, end_time)}
+              <br />
               {description}
             </Typography>
             <Typography gutterBottom variant="h6" component="div">
@@ -36,9 +50,9 @@ const Header = ({ fair }) => {
           </CardContent>
           <CardActions>
             <Link to={`/organizations/${host_id}`}>
-              <Button size="small">Host Page</Button>
+              <Button variant="contained" size="small">Host Page</Button>
             </Link>
-            <Button size="small">Learn More</Button>
+            <Button variant="contained" size="small">Add to Schedule</Button>
           </CardActions>
         </Card>
       )}

@@ -52,11 +52,8 @@ const queryGenerator = (db) => {
   const getFairDetails = async (fairId) => {
     const values = [fairId];
     const fairDetailsString = `
-      SELECT fairs.description, 
-        fairs.name, 
-        fairs.poster, 
+      SELECT fairs.*,
         organizations.name AS host_name,
-        organizations.id AS host_id,
         organizations.description AS host_description,
         start_time AS start,
         end_time AS end,
