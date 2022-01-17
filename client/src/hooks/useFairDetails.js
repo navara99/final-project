@@ -2,17 +2,19 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 const useFairDetails = (id) => {
-  const [organizations, setOrganizations] = useState();
+  const [stalls, setStalls] = useState();
   const [fair, setFair] = useState();
   useEffect(() => {
     axios.get(`/api/fairs/${id}`).then(({ data }) => {
-      const { organizations, fair } = data;
+      const { stalls, fair } = data;
       setFair(fair);
-      setOrganizations(organizations);
+      setStalls(stalls);
+      console.log(fair)
+      console.log(stalls)
     });
   }, []);
 
-  return { organizations, fair };
+  return { stalls, fair };
 };
 
 export default useFairDetails;

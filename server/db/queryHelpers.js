@@ -84,11 +84,8 @@ const queryGenerator = (db) => {
           hostId: host_id,
           hostDescription: host_description,
         };
-      });
-
+      })[0];
       const stalls = getData(stallResult);
-      console.log(fair);
-      console.log(stalls);
 
       return { fair, stalls };
     } catch (err) {
