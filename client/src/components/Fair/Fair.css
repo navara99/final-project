@@ -13,3 +13,8 @@
 .fair-details button.MuiButton-root {
   margin: 0 0.2em;
 }
+
+.fair-details .MuiCardActions-root {
+  display: flex;
+  justify-content: space-between;
+}
