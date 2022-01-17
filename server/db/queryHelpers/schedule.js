@@ -7,9 +7,11 @@ const queryGenerator = (db) => {
     const conductInterviewQueryString = `
     SELECT interviews.start_time AS start,
     interviews.end_time AS end,
-    users.first_name as candidate_first_name,
-    users.last_name as candidate_last_name,
-    jobs.name as job_title
+    users.first_name AS candidate_first_name,
+    users.last_name AS candidate_last_name,
+    jobs.name AS job_title,
+    users.id AS candidateId,
+    applications.id AS applicationId
     FROM interviews
     JOIN applications ON interviews.application_id = applications.id
     JOIN users ON users.id = applications.user_id
@@ -30,9 +32,11 @@ const queryGenerator = (db) => {
           candidate_first_name,
           candidate_last_name,
           job_title,
+          candidateId,
+          applicationId
         } = event;
-        const title = `Interviewing ${candidate_first_name} ${candidate_last_name} for ${job_title}`;
-        return { start, end, title };
+        const title = `Interview ${candidate_first_name} ${candidate_last_name} for ${job_title}`;
+        return { start, end, title, candidateId, applicationId };
       });
       console.log("EVENTS", events);
       return events;

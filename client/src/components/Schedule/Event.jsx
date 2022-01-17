@@ -22,7 +22,6 @@ const Event = ({ event }) => {
       arrow={true}
       interactiveDebounce={20}
       hideOnClick={false}
-      maxWidth={100}
     >
       <div className="event">
         <strong>{event.title}</strong>
