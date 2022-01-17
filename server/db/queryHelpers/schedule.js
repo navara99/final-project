@@ -11,7 +11,7 @@ const makeConductInterviewData = (data) => {
       job_title,
       candidate_id,
       application_id,
-      organization_name
+      organization_name,
     } = event;
     const title = `Interview ${candidate_first_name} ${candidate_last_name} for ${job_title} (${organization_name})`;
     return {
@@ -28,12 +28,7 @@ const makeConductInterviewData = (data) => {
 
 const makeInterviewData = (data) => {
   return getData(data).map((event) => {
-    const {
-      start,
-      end,
-      job_title,
-      employer
-    } = event;
+    const { start, end, job_title, employer } = event;
     const title = `Interview for ${job_title} at ${employer}`;
     return {
       start,
@@ -47,13 +42,7 @@ const makeInterviewData = (data) => {
 
 const makeStallData = (data) => {
   return getData(data).map((event) => {
-    const {
-      start,
-      end,
-      fair_name,
-      organization_name,
-      fair_id
-    } = event;
+    const { start, end, fair_name, organization_name, fair_id } = event;
     const title = `${fair_name} (${organization_name})`;
     return {
       start,
@@ -64,7 +53,21 @@ const makeStallData = (data) => {
       asJobSeeker: false,
     };
   });
-}
+};
+
+const makeFairData = (data) => {
+  return getData(data).map((event) => {
+    const { start, end, fair_name, fair_id } = event;
+    return {
+      start,
+      end,
+      title: fair_name,
+      fairId: fair_id,
+      isInterview: false,
+      asJobSeeker: true,
+    };
+  });
+};
 
 const queryGenerator = (db) => {
   const getSchedule = async (id) => {
@@ -112,6 +115,16 @@ const queryGenerator = (db) => {
       WHERE user_id = $1;;
     `;
 
+    const fairQueryString = `
+      SELECT fairs.name AS fair_name,
+      fairs.start_time AS start,
+      fairs.end_time AS end,
+      fair_id
+      FROM fairs
+      JOIN fairs_users ON fairs.id = fair_id
+      WHERE user_id = $1;
+    `;
+
     try {
       const dataConductInterview = await db.query(
         interviewerQueryString,
@@ -119,10 +132,12 @@ const queryGenerator = (db) => {
       );
       const dataInterview = await db.query(intervieweeQueryString, values);
       const dataStall = await db.query(stallQueryString, values);
+      const dataFair = await db.query(fairQueryString, values);
 
       let events = makeConductInterviewData(dataConductInterview);
       events = events.concat(makeInterviewData(dataInterview));
       events = events.concat(makeStallData(dataStall));
+      events = events.concat(makeFairData(dataFair));
 
       console.log("EVENTS", events);
       return events;
