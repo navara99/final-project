@@ -12,25 +12,24 @@ import { combineDateTimes } from "../../helpers/date";
 function FairsForm({ fairsFormOpen, setFairsFormOpen }) {
   const [name, setName] = useInput();
   const [description, setDescription] = useInput();
-  const [date, setDate] = useState(Date.now());
-  const [startTime, setStartTime] = useState(Date.now());
-  const [endTime, setEndTime] = useState(Date.now());
+  const [date, setDate] = useState(new Date());
+  const [startTime, setStartTime] = useState(new Date());
+  const [endTime, setEndTime] = useState(new Date());
   const { id } = useParams();
 
   const handleFairSubmit = async () => {
+    const [startTimeStamp, endTimeStamp] = combineDateTimes(date, startTime, endTime);
     const newFair = {
       name,
       description,
       hostId: id,
+      startTimeStamp,
+      endTimeStamp
     };
 
-    const [startTimeStamp, endTimeStamp] = combineDateTimes(date, startTime, endTime);
-
-    console.log(startTimeStamp, endTimeStamp);
-
     try {
-      // const { data } = await axios.post("/api/fairs", newFair);
-      // console.log(data);
+      const { data } = await axios.post("/api/fairs", newFair);
+      console.log(data);
     } catch (err) {
       console.log(err.message);
     }
