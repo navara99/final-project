@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid, List } from '@mui/material'
+import { List } from '@mui/material'
 import MessageListItem from './MessageListItem';
 
 const MessageList = ({messages, currentUser}) => {

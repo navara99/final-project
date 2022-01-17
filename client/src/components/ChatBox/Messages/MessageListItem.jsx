@@ -1,5 +1,5 @@
 import React from 'react';
-import {ListItem,Grid,ListItemText,Paper } from "@mui/material";
+import {ListItem,Grid,ListItemText} from "@mui/material";
 import moment from "moment"
 
 
@@ -13,7 +13,7 @@ const MessageListItem = (props) => {
     <ListItem >
       <Grid container>
           <Grid item xs={12} >
-              <ListItemText align={sender_id === currentUser.id? "right" : "left"} primary={message}></ListItemText>
+              <ListItemText align={sender_id === currentUser.id? "right" : "left"} primary={message} ></ListItemText>
           </Grid>
           <Grid item xs={12}>
               <ListItemText align={sender_id === currentUser.id ? "right" : "left"} secondary={moment(`${created_at}`).fromNow()}></ListItemText>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { List, ListItem, ListItemAvatar, Avatar,ListItemText, Typography, Divider, ListItemButton} from '@mui/material'
+import { ListItemAvatar, Avatar,ListItemText, Typography, Divider, ListItemButton} from '@mui/material'
 
 const SenderListItem = ({sender, setReceiverId}) => {
   const {first_name, last_name, profile_picture, username, id} = sender;

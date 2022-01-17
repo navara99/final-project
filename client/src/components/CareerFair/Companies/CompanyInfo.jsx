@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Avatar, List, ListItem} from '@mui/material';
+import {Button, Avatar} from '@mui/material';
 import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';

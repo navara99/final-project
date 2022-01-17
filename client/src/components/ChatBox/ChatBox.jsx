@@ -11,7 +11,6 @@ import MessageList from './Messages/MessageList';
 import MessageForm from './MessageForm/MessageForm';
 import {io} from 'socket.io-client';
 import axios from 'axios';
-import moment from 'moment';
 import useMessageReceiver from '../../hooks/useMessageReceiver';
 const ChatBox = ({currentUser}) => {
   const [messages, setMessages] = useState(null);
