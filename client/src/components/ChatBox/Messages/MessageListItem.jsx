@@ -6,6 +6,7 @@ import moment from "moment"
 const MessageListItem = (props) => {
   const {message, created_at, sender_id} = props.message;
   const currentUser = props.currentUser;
+
   return (
     <>
    {currentUser && 

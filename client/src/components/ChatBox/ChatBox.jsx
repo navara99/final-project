@@ -12,11 +12,13 @@ import MessageForm from './MessageForm/MessageForm';
 import {io} from 'socket.io-client';
 import axios from 'axios';
 import moment from 'moment';
+import useMessageReceiver from '../../hooks/useMessageReceiver';
 const ChatBox = ({currentUser}) => {
   const [messages, setMessages] = useState(null);
   const [senders, setSenders] = useState(null);
   const [messageText, setMessageText] = useState('');
-  const [incomingMessage, setIncomingMessage] = useState(null)
+  const [incomingMessage, setIncomingMessage] = useState(null);
+  const [receiverId, setReceiverId,handleOnClick] = useMessageReceiver(null)
   const socket = useRef();
   useEffect(() => {
     axios.get("/api/messages").then(res => {
@@ -29,7 +31,7 @@ const ChatBox = ({currentUser}) => {
     e.preventDefault();
     const newMessage = {
       sender_id: currentUser.id, 
-      receiver_id: 2, 
+      receiver_id: receiverId, 
       message: messageText
     }
     axios.post("/api/messages/", newMessage).then(res => {
@@ -52,7 +54,7 @@ const ChatBox = ({currentUser}) => {
         setIncomingMessage({
           sender_id: data.sender_id,
           message: data.message,
-          created_at: moment.now()
+          created_at: new Date().toISOString()
         });
       });
   },[]);
@@ -76,7 +78,7 @@ const ChatBox = ({currentUser}) => {
                   <Typography variant='h5'>Message (12)</Typography>  
                 </ListItem>
                 <ListItem>
-                  <SenderList messages={messages} currentUser={currentUser} senders = {senders}/>
+                  <SenderList messages={messages} currentUser={currentUser} senders = {senders} setReceiverId = {setReceiverId} handleOnClick = {handleOnClick} />
                 </ListItem>
             </List>      
         </Grid>
