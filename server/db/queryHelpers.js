@@ -51,26 +51,46 @@ const queryGenerator = (db) => {
   // Individual Fair
   const getFairDetails = async (fair_id) => {
     const values = [fair_id];
-    const queryString = `
-    SELECT fairs.description, 
-      fairs.name, 
-      fairs.poster, 
-      y.name AS host_name,
-      y.id AS host_id,
-      y.description AS host_description,
-      x.id as stall_id, 
-      x.name as stall_Name, 
-      x.description as stall_description 
-      FROM fairs
-      JOIN fairs_organizations ON (fairs.id = fairs_organizations.fair_id) 
-      JOIN organizations x ON (x.id = fairs_organizations.organization_id)
-      JOIN organizations y ON (y.id = fairs.host_id)
-      WHERE fairs.id = $1
+    const fairDetailsString = `
+      SELECT fairs.description, 
+        fairs.name, 
+        fairs.poster, 
+        organizations.name AS host_name,
+        organizations.id AS host_id,
+        organizations.description AS host_description
+        FROM fairs
+        JOIN organizations ON (organizations.id = fairs.host_id)
+        WHERE fairs.id = $1
+    `;
+    const stallsString = `
+      SELECT organizations.id, 
+        organizations.name, 
+        organizations.description 
+        FROM fairs
+        JOIN fairs_organizations ON (fairs.id = fairs_organizations.fair_id) 
+        JOIN organizations ON (organizations.id = fairs_organizations.organization_id)
+        WHERE fairs.id = $1
     `;
 
     try {
-      const result = await db.query(queryString, values);
-      return getData(result);
+      const fairResult = await db.query(fairDetailsString, values);
+      const stallResult = await db.query(stallsString, values);
+
+      const fair = getData(fairResult).map((fair) => {
+        const { host_name, host_id, host_description } = fair;
+        return {
+          ...fair,
+          hostName: host_name,
+          hostId: host_id,
+          hostDescription: host_description,
+        };
+      });
+
+      const stalls = getData(stallResult);
+      console.log(fair);
+      console.log(stalls);
+
+      return { fair, stalls };
     } catch (err) {
       console.log(err.message);
     }

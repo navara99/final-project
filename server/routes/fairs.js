@@ -50,16 +50,8 @@ module.exports = (db) => {
   router.get("/:id", async (req, res) => {
     const { id }  = req.params;
     try {
-      const fair = await getFair(id);
-      const organizations = fair.map(f => {
-        return ({
-          organizations_name :f.organizations_name,
-          organizations_id : f.organizations_id,
-          organizations_desc : f.organizations_desc
-        })
-      });
-      const {fair_name, fair_desc, host_name,poster} = fair[0];
-      res.status(200).json({organizations, fair_name, fair_desc, host_name, poster});
+      const data = await getFairDetails(id);
+      res.json(data);
     } catch (error) {
       console.log(error)
     }

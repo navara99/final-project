@@ -10,6 +10,7 @@ const useFairDetails = (id) => {
   useEffect(() => {
     axios.get(`/api/fairs/${id}`).then(({ data }) => {
       const { organizations, fair_name, fair_desc, host_name, poster } = data;
+      console.log(data);
       setOrganizations(organizations);
       setFairName(fair_name);
       setFairDesc(fair_desc);
