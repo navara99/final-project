@@ -34,17 +34,39 @@ const ChatBox = ({currentUser}) => {
     }
     axios.post("/api/messages/", newMessage).then(res => {
       setMessages((prev) => [...prev, res.data])
-    }) 
+    });
+    //sending message to socket server
+    socket.current.emit("sendMessage", newMessage);
+    
     setMessageText('');
   }
     
   useEffect(() => { 
     // intialize socket
-    const socket = io.connect("http://localhost:8080");
-    socket.on("connect", () => {
-      console.log("connection made with socket", socket.id)
-    })
-  },[])
+    socket.current = io.connect("http://localhost:8080");
+    // socket.current.on("connect", () => {
+    //   console.log("connection made with socket", socket.current.id)
+    // });
+    socket.current.on("getMessage", (data) => {
+        console.log("data", data);
+        setIncomingMessage({
+          sender_id: data.sender_id,
+          message: data.message,
+          created_at: moment.now()
+        });
+      });
+  },[]);
+
+  useEffect(() => {
+    incomingMessage &&
+      setMessages((prev) => [...prev, incomingMessage]);
+  }, [incomingMessage]);
+
+  useEffect(() => {
+      //sending users id for online user list
+      socket.current.emit("addUser", currentUser.id)
+  },[currentUser])
+
   return (
     <Grid container >
         {/* List of user  */}
