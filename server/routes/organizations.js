@@ -45,13 +45,10 @@ module.exports = (db) => {
 
   router.post("/:id/jobs", async (req, res) => {
     const { id } = req.params;
-    console.log(req.body);
-    
+
     try {
-      await addJobToOrganization(id, req.body);
-      res.json({
-        status: "success"
-      });
+      const newJob = await addJobToOrganization(id, req.body);
+      res.json(newJob);
     } catch (err) {
       console.log(err.message);
     };

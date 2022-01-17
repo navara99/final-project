@@ -264,8 +264,9 @@ const queryGenerator = (db) => {
     `;
 
     try {
-      await db.query(queryString, values);
-      console.log("here");
+      const result = await db.query(queryString, values);
+      const newJob = getFirstRecord(result);
+      return newJob;
     } catch (err) {
       console.log(err.message);
     };
