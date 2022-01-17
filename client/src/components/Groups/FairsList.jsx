@@ -3,13 +3,13 @@ import FairListItem from "./FairListItem";
 import { List } from "@mui/material";
 import { Divider } from "@mui/material";
 
-function FairsList({ fairs }) {
+function FairsList({ fairs, isMember }) {
 
   const renderFairs = () => {
     return fairs.map((fair, i) => {
       return (
         <>
-          <FairListItem {...{ fair }} key={fair.id} />
+          <FairListItem {...{ fair }} key={fair.id} {...{ isMember }} />
           {i === fairs.length - 1 ? "" : < Divider />}
         </>
       )

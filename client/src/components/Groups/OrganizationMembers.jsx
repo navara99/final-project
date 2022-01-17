@@ -32,12 +32,12 @@ function OrganizationMembers({ organization, cardStyles, setSnackBarDetails }) {
             secondary={`${organization.details.name} has ${organization.members.length} member(s).`}
           />
           <CardActions>
-            <GroupsBtn
+            {organization.isMember && <GroupsBtn
               text="Add"
               variant="contained"
               icon={<Person />}
               onClick={handleAddMemberBtn}
-            />
+            />}
             <ExpandMore
               expand={expanded}
               onClick={handleExpandClick}
