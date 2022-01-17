@@ -8,14 +8,14 @@ const app = express();
 const morgan = require("morgan");
 
 //SocketIo config
-const {createServer} = require("http");
-const {Server} = require("socket.io");
+const { createServer } = require("http");
+const { Server } = require("socket.io");
 const httpServer = createServer(app);
 const io = new Server(httpServer); //need cors
 
 io.on("connection", (socket) => {
-  console.log('a new user connected')
-})
+  console.log("a new user connected");
+});
 
 // Set up cookie-session
 const cookieSession = require("cookie-session");
@@ -39,11 +39,12 @@ app.use(express.urlencoded({ extended: true }));
 const usersRoutes = require("./routes/users");
 const fairsRoutes = require("./routes/fairs");
 const organizationRoutes = require("./routes/organizations");
+const scheduleRoutes = require("./routes/schedule");
 
 app.use("/api/users", usersRoutes(db));
 app.use("/api/fairs", fairsRoutes(db));
 app.use("/api/organizations", organizationRoutes(db));
-
+app.use("/api/schedule", scheduleRoutes(db));
 
 httpServer.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);

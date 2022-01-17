@@ -48,7 +48,6 @@ const queryGenerator = (db) => {
     }
   };
 
-
   // Individual Fair
   const getFair = async (fair_id) => {
     const values = [fair_id];
@@ -69,15 +68,20 @@ const queryGenerator = (db) => {
     `;
 
     try {
-      const result = await db.query(queryString, values)
-      return getData(result)
+      const result = await db.query(queryString, values);
+      return getData(result);
     } catch (err) {
-      console.log(err.message)
+      console.log(err.message);
     }
-  }
+  };
 
-
-  const createNewOrganization = async ({ name, description, email, industry, website }) => {
+  const createNewOrganization = async ({
+    name,
+    description,
+    email,
+    industry,
+    website,
+  }) => {
     const values = [name, description, email, industry, website];
     const queryString = `
       INSERT INTO organizations (name, description, email, industry, website)
@@ -91,8 +95,8 @@ const queryGenerator = (db) => {
       return newOrganizationInfo;
     } catch (err) {
       console.log(err);
-    };
-  }
+    }
+  };
 
   const addUserToOrganization = async (user_id, organization_id, admin) => {
     const values = [user_id, organization_id, admin];
@@ -106,8 +110,7 @@ const queryGenerator = (db) => {
       await db.query(queryString, values);
     } catch (err) {
       console.log(err.message);
-    };
-
+    }
   };
 
   const getOrganizationsByUser = async (user_id) => {
@@ -126,7 +129,7 @@ const queryGenerator = (db) => {
       return rows;
     } catch (err) {
       console.log(err.message);
-    };
+    }
   };
 
   const getAllOtherUsers = async (user_id) => {
@@ -134,7 +137,7 @@ const queryGenerator = (db) => {
     const queryString = `
     SELECT * FROM users
     WHERE users.id <> $1;
-    `
+    `;
 
     try {
       const result = await db.query(queryString, values);
@@ -142,8 +145,7 @@ const queryGenerator = (db) => {
       return rows;
     } catch (err) {
       console.log(err.message);
-    };
-
+    }
   };
 
   const getAllApplicationsByJobId = async (job_id) => {
@@ -153,15 +155,14 @@ const queryGenerator = (db) => {
     JOIN jobs ON jobs.id = applications.user_id
     JOIN users ON applications.user_id = users.id
     WHERE jobs.id = $1;
-    `
+    `;
 
     try {
       const result = await db.query(queryString, values);
       return result.rows;
     } catch (err) {
       console.log(err.message);
-    };
-
+    }
   };
 
   const getAllJobsByOrganizationId = async (organization_id) => {
@@ -175,16 +176,16 @@ const queryGenerator = (db) => {
 
     try {
       const result = await db.query(queryString, values);
-      const jobs = await Promise.all(result.rows.map(async (job) => {
-        const jobWithApplicationArr = await getAllApplicationsByJobId(job.id);
-        return { ...job, applications: jobWithApplicationArr };
-      }));
+      const jobs = await Promise.all(
+        result.rows.map(async (job) => {
+          const jobWithApplicationArr = await getAllApplicationsByJobId(job.id);
+          return { ...job, applications: jobWithApplicationArr };
+        })
+      );
       return jobs;
-
     } catch (err) {
       console.log(err.message);
-    };
-
+    }
   };
 
   const getAllMembersByOrganizationId = async (organization_id) => {
@@ -201,8 +202,7 @@ const queryGenerator = (db) => {
       return result.rows;
     } catch (err) {
       console.log(err.message);
-    };
-
+    }
   };
 
   const checkIfIAmMember = async (organization_id, user_id) => {
@@ -219,7 +219,7 @@ const queryGenerator = (db) => {
       return Number(count) ? true : false;
     } catch (err) {
       console.log(err.message);
-    };
+    }
   };
 
   const getOrganizationDetails = async (organization_id) => {
@@ -235,8 +235,8 @@ const queryGenerator = (db) => {
       return getFirstRecord(result);
     } catch (err) {
       console.log(err.message);
-    };
-  }
+    }
+  };
 
   const getAllFairsByOrganizationId = async (organization_id) => {
     const values = [organization_id];
@@ -244,15 +244,14 @@ const queryGenerator = (db) => {
     SELECT fairs.* FROM fairs
     JOIN fairs_organizations ON fairs.host_id = fairs_organizations.fair_id
     WHERE fairs_organizations.organization_id = $1;
-    `
+    `;
 
     try {
       const result = await db.query(queryString, values);
       return result.rows;
     } catch (err) {
       console.log(err.message);
-    };
-
+    }
   };
 
   const addJobToOrganization = async (organization_id, { title, description, experience, location, salary }) => {

@@ -10,6 +10,7 @@
     "@tippyjs/react": "^4.2.6",
     "axios": "^0.24.0",
     "moment": "^2.29.1",
+    "moment-timezone": "^0.5.34",
     "react": "^17.0.2",
     "react-alice-carousel": "^2.5.1",
     "react-big-calendar": "^0.38.4",
