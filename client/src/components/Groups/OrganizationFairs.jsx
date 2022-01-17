@@ -4,11 +4,11 @@ import useExpand from "../../hooks/useExpand";
 import GroupsBtn from "./GroupsBtn";
 import Add from "@mui/icons-material/Add";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-
+import FairsList from "./FairsList";
 
 function OrganizationFairs({ organization, cardStyles }) {
   const { ExpandMore, handleExpandClick, expanded } = useExpand();
-
+  
   return (
     <div>
       <Card alignItems="flex-start" style={cardStyles}>
@@ -35,7 +35,7 @@ function OrganizationFairs({ organization, cardStyles }) {
           </CardActions>
         </div>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
-          {/* <MembersList members={organization.members} /> */}
+          {<FairsList fairs={organization.fairs} isMember={organization.isMember} />}
         </Collapse>
       </Card >
     </div>
