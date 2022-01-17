@@ -12,7 +12,7 @@ const Fair = ({ currentUser }) => {
     <div className="fair-details">
       {fair && stalls && (
         <>
-          <Header {...{ fair, added, currentUser, add }} />
+          <Header {...{ fair, added, currentUser, add, id }} />
           <h3>Employers ({stalls.length})</h3>
         </>
       )}

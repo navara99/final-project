@@ -5,10 +5,11 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import { formatStartEndTime, formatDate } from "../../helpers/date";
 
-const Header = ({ fair, added, currentUser, add }) => {
+const Header = ({ id, fair, added, currentUser, add }) => {
   const {
     name,
     description,
@@ -19,6 +20,12 @@ const Header = ({ fair, added, currentUser, add }) => {
     start_time,
     end_time,
   } = fair;
+
+  const clickHandler = () => {
+    axios.post(`/api/fairs/join/${id}`).then(() => {
+      add();
+    });
+  };
 
   return (
     <>
@@ -55,8 +62,13 @@ const Header = ({ fair, added, currentUser, add }) => {
               </Button>
             </Link>
             {currentUser && (
-              <Button variant="contained" size="small">
-                Add to Schedule
+              <Button
+                variant="contained"
+                size="small"
+                disabled={added}
+                onClick={clickHandler}
+              >
+                {added ? "Added to Schedule" : "Add to Schedule"}
               </Button>
             )}
           </CardActions>
