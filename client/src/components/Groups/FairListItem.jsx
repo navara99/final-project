@@ -1,6 +1,6 @@
 import React from "react";
 import { ListItem, ListItemText } from "@mui/material";
-import { formatDate } from "../../helpers/date";
+import { formatStartEndTime, formatDate } from "../../helpers/date";
 import FairsAction from "./FairsActions";
 
 function FairListItem({ fair, isMember }) {
@@ -18,8 +18,7 @@ function FairListItem({ fair, isMember }) {
             <>
               <p>Description: {fair.description}</p>
               <p>Date: {formatDate(fair.start_time)}</p>
-              <p>Start Time: {new Date(fair.start_time).toTimeString()}</p>
-              <p>End Time: {new Date(fair.end_time).toTimeString()}</p>
+              <p>Time: {formatStartEndTime(fair.start_time, fair.end_time)}</p>
             </>}
         />
         <FairsAction id={fair.id} {...{ isMember }} />
