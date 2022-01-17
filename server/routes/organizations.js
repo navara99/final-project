@@ -32,11 +32,11 @@ module.exports = (db) => {
 
     try {
       await Promise.all(usersIdToAdd.map(async (id) => {
-        return await addUserToOrganization(id, req.params.id, false);
+        await addUserToOrganization(id, req.params.id, false);
       }));
-      res.json({
-        status: "success"
-      });
+
+      const members = await getAllMembersByOrganizationId(req.params.id);
+      res.json(members);
     } catch (err) {
       console.log(err.message);
     }
