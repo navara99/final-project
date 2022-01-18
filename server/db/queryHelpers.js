@@ -319,7 +319,15 @@ const queryGenerator = (db) => {
         RETURNING *;
       `;
       const result = await db.query(queryString,values);
-      return getFirstRecord(result);
+      const userInfo = await getUserByValue('id',receiver_id);
+      const userWithoutPassword = Object.assign({}, userInfo);
+      delete userWithoutPassword.password;
+      const newMessage = {
+        message_text : getFirstRecord(result),
+        receiver : userWithoutPassword,
+      }
+      return newMessage
+      // return getFirstRecord(result);
     } catch (error) {
       console.log(error);
     }
