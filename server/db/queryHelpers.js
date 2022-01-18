@@ -347,11 +347,14 @@ const queryGenerator = (db) => {
   // Get jobs by search
 
   const getJobsBySearch = async (searchTerm) => {
-    const values = [searchTerm];
-    const queryString = `SELECT * FROM jobs`;
+    const values = searchTerm ? ["%" + searchTerm + "%"] : null;
+    const queryString = searchTerm ? `
+    SELECT * FROM jobs
+    WHERE title ILIKE $1 OR description ILIKE $1 OR location ILIKE $1;
+    `: "SELECT * FROM jobs;";
 
     try {
-      const result = await db.query(queryString);
+      const result = await db.query(queryString, values);
       return result.rows;
     } catch (error) {
       console.log(error);

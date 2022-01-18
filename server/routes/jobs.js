@@ -18,15 +18,12 @@ module.exports = (db) => {
   });
 
 
-  router.get("/", async (req, res) => {
+  router.get("/:search?", async (req, res) => {
     const { search } = req.params;
 
     try {
-
       const jobs = await getJobsBySearch(search);
-      console.log(jobs)
       res.json(jobs);
-
     } catch (err) {
       console.log(err.message);
     };
