@@ -303,12 +303,28 @@ const queryGenerator = (db) => {
     }
   };
 
+  const addFairToOrganizationSchedule = async (fair_id, organization_id) => {
+    const values = [fair_id, organization_id];
+    const queryString = `
+      INSERT INTO fairs_organizations (fair_id, organization_id)
+      VALUES ($1, $2)
+      RETURNING *;
+    `;
+
+    try {
+      const result = await db.query(queryString, values);
+      return getData(result);
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
   const getUserOrganizations = async (fairId, userId) => {
     const values = [fairId, userId];
     const queryString = `
       SELECT organizations.name,
       organizations.id,
-      (SELECT count(*) FROM fairs_organizations WHERE fair_id = $1) > 0 AS added
+      (SELECT count(*) FROM fairs_organizations WHERE fair_id = $1 AND organizations.id = organization_id) > 0 AS added
       FROM organizations
       JOIN users_organizations ON organizations.id = users_organizations.organization_id
       WHERE user_id = $2;
@@ -339,6 +355,7 @@ const queryGenerator = (db) => {
     getAllApplicationsByJobId,
     getOrganizationDetails,
     checkIfIAmMember,
+    addFairToOrganizationSchedule,
   };
 };
 

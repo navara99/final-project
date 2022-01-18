@@ -29,7 +29,15 @@ const ScheduleButton = ({ live, added, upcoming, id, add }) => {
   };
 
   const handleMenuItemClick = (event, index) => {
-    console.info(`You clicked ${options[index]}`);
+    axios
+      .post(`/api/fairs/join/${id}/organizations/${options[index].id}`)
+      .then(() => {
+        setOptions((prev) => {
+          const newState = [...prev];
+          newState[index] = { ...newState[index], added: true };
+          return newState;
+        });
+      });
     setOpen(false);
   };
 

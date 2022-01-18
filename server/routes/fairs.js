@@ -15,6 +15,7 @@ module.exports = (db) => {
     getFairDetails,
     addFairToSchedule,
     getUserOrganizations,
+    addFairToOrganizationSchedule,
   } = queryGenerator(db);
 
   router.get("/", async (req, res) => {
@@ -54,6 +55,24 @@ module.exports = (db) => {
       console.log(e);
     }
   });
+
+  router.post(
+    "/join/:fair_id/organizations/:organization_id",
+    async (req, res) => {
+      const { fair_id, organization_id } = req.params;
+
+      try {
+        const data = await addFairToOrganizationSchedule(
+          fair_id,
+          organization_id
+        );
+        console.log(data);
+        res.json(data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  );
 
   router.post("/join/:id/", async (req, res) => {
     const { id } = req.params;
