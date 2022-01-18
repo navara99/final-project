@@ -62,6 +62,19 @@ module.exports = (db) => {
     }
   });
 
+  router.get("/organizations/:id", async (req, res) => {
+    const { user_id } = req.session;
+    const { id } = req.params;
+
+    try {
+      const organizations = await getUserOrganizations(user_id);
+
+      res.json(organizations);
+    } catch (err) {
+      console.log(err.message);
+    }
+  });
+
   router.get("/:id", async (req, res) => {
     const { id } = req.params;
     const { user_id } = req.session;

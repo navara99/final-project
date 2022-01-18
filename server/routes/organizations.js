@@ -11,20 +11,7 @@ module.exports = (db) => {
     getAllFairsByOrganizationId,
     getOrganizationDetails,
     checkIfIAmMember,
-    getUserOrganizations,
   } = queryGenerator(db);
-
-  router.get("/", async (req, res) => {
-    const { user_id } = req.session;
-
-    try {
-      const organizations = await getUserOrganizations(user_id);
-
-      res.json(organizations);
-    } catch (err) {
-      console.log(err.message);
-    }
-  });
 
   router.post("/", async (req, res) => {
     const { user_id } = req.session;
