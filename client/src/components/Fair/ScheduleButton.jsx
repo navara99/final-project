@@ -1,27 +1,31 @@
-import * as React from 'react';
-import Button from '@mui/material/Button';
-import ButtonGroup from '@mui/material/ButtonGroup';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import ClickAwayListener from '@mui/material/ClickAwayListener';
-import Grow from '@mui/material/Grow';
-import Paper from '@mui/material/Paper';
-import Popper from '@mui/material/Popper';
-import MenuItem from '@mui/material/MenuItem';
-import MenuList from '@mui/material/MenuList';
+import React, { useRef, useState } from "react";
+import Button from "@mui/material/Button";
+import ButtonGroup from "@mui/material/ButtonGroup";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import ClickAwayListener from "@mui/material/ClickAwayListener";
+import Grow from "@mui/material/Grow";
+import Paper from "@mui/material/Paper";
+import Popper from "@mui/material/Popper";
+import MenuItem from "@mui/material/MenuItem";
+import MenuList from "@mui/material/MenuList";
+import axios from "axios";
 
-const options = ['Create a merge commit', 'Squash and merge', 'Rebase and merge'];
+const ScheduleButton = ({ added, upcoming, id, add }) => {
+  const [open, setOpen] = useState(false);
+  const anchorRef = useRef(null);
+  const [options, setOptions] = useState([
+    "Squash and merge",
+    "Rebase and merge",
+  ]);
 
-const ScheduleButton = () => {
-  const [open, setOpen] = React.useState(false);
-  const anchorRef = React.useRef(null);
-  const [selectedIndex, setSelectedIndex] = React.useState(1);
-
-  const handleClick = () => {
-    console.info(`You clicked ${options[selectedIndex]}`);
+  const joinAsJobSeeker = () => {
+    axios.post(`/api/fairs/join/${id}`).then(() => {
+      add();
+    });
   };
 
   const handleMenuItemClick = (event, index) => {
-    setSelectedIndex(index);
+    console.info(`You clicked ${options[index]}`);
     setOpen(false);
   };
 
@@ -38,15 +42,22 @@ const ScheduleButton = () => {
   };
 
   return (
-    <React.Fragment>
-      <ButtonGroup variant="contained" ref={anchorRef} aria-label="split button">
-        <Button onClick={handleClick}>{options[selectedIndex]}</Button>
+    <>
+      <ButtonGroup
+        variant="contained"
+        ref={anchorRef}
+        aria-label="split button"
+      >
+        <Button onClick={joinAsJobSeeker} disabled={!upcoming || added}>
+          {added ? "Added to Schedule" : "Add to Schedule"}
+        </Button>
         <Button
-          aria-controls={open ? 'split-button-menu' : undefined}
-          aria-expanded={open ? 'true' : undefined}
+          aria-controls={open ? "split-button-menu" : undefined}
+          aria-expanded={open ? "true" : undefined}
           aria-label="select merge strategy"
           aria-haspopup="menu"
           onClick={handleToggle}
+          disabled={!options}
         >
           <ArrowDropDownIcon />
         </Button>
@@ -63,7 +74,7 @@ const ScheduleButton = () => {
             {...TransitionProps}
             style={{
               transformOrigin:
-                placement === 'bottom' ? 'center top' : 'center bottom',
+                placement === "bottom" ? "center top" : "center bottom",
             }}
           >
             <Paper>
@@ -72,8 +83,8 @@ const ScheduleButton = () => {
                   {options.map((option, index) => (
                     <MenuItem
                       key={option}
-                      disabled={index === 2}
-                      selected={index === selectedIndex}
+                      disabled={false}
+                      selected={false}
                       onClick={(event) => handleMenuItemClick(event, index)}
                     >
                       {option}
@@ -85,7 +96,7 @@ const ScheduleButton = () => {
           </Grow>
         )}
       </Popper>
-    </React.Fragment>
+    </>
   );
-}
+};
 export default ScheduleButton;
