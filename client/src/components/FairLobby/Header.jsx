@@ -2,7 +2,6 @@ import React from "react";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
@@ -28,12 +27,6 @@ const Header = ({ id, fair, added, currentUser, add, updateFairDetails }) => {
     <>
       {fair && (
         <Card>
-          <CardMedia
-            component="img"
-            height="350"
-            image={poster}
-            alt="fair poster"
-          />
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
               {name}
@@ -45,32 +38,7 @@ const Header = ({ id, fair, added, currentUser, add, updateFairDetails }) => {
               <br />
               {description}
             </Typography>
-            <Typography gutterBottom variant="h6" component="div">
-              About the host: {host_name}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              {host_description}
-            </Typography>
           </CardContent>
-          <CardActions>
-            <Button
-              component={Link}
-              to={`/organizations/${host_id}`}
-              variant="contained"
-              size="small"
-            >
-              Host Details
-            </Button>
-
-            {currentUser && (
-              <div>
-                <ScheduleButton
-                  {...{ add, added, upcoming, id, live, updateFairDetails }}
-                />
-                <JoinButton {...{ added, upcoming, id, live }} />
-              </div>
-            )}
-          </CardActions>
         </Card>
       )}
     </>
