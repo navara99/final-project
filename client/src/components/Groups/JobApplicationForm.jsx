@@ -18,7 +18,7 @@ function JobApplicationForm({ job, openApplicationForm, setOpenApplicationForm, 
       const formData = new FormData(this);
       await axios.post("/api/applications", formData);
       setSnackBarDetails({
-        open:true,
+        open: true,
         message: "Application Submitted"
       });
     } catch (err) {
@@ -28,8 +28,6 @@ function JobApplicationForm({ job, openApplicationForm, setOpenApplicationForm, 
 
   };
 
-  console.log(job);
-
   return (
     <Dialog open={openApplicationForm} onClose={() => { }}>
       <DialogTitle>Apply To Posting: {job.title}</DialogTitle>
@@ -38,13 +36,7 @@ function JobApplicationForm({ job, openApplicationForm, setOpenApplicationForm, 
           <Button
             variant="contained"
             component="label"
-          >
-            Upload Resume
-            <input
-              type="file"
-              hidden
-              fullWidth
-            />
+          >Upload Resume<input type="file" hidden />
           </Button>
           <TextField
             autoFocus
