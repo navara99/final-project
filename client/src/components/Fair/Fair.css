@@ -42,3 +42,9 @@
   display: flex;
   flex-direction: column;
 }
+
+.fair-details .organization-details {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
