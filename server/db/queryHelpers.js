@@ -436,7 +436,69 @@ const queryGenerator = (db) => {
     }
   };
 
+  const getFairDetails = async (fairId, userId) => {
+    const values = [fairId];
+    const values2 = [fairId, userId];
+
+    const fairDetailsString = `
+      SELECT fairs.*,
+        organizations.name AS host_name,
+        organizations.description AS host_description,
+        start_time AS start,
+        end_time AS end,
+        organizations.description AS host_description
+        FROM fairs
+        JOIN organizations ON (organizations.id = fairs.host_id)
+        WHERE fairs.id = $1
+    `;
+    const stallsString = `
+      SELECT organizations.id, 
+        organizations.name, 
+        organizations.description,
+        industry,
+        website
+        FROM fairs
+        JOIN fairs_organizations ON (fairs.id = fairs_organizations.fair_id) 
+        JOIN organizations ON (organizations.id = fairs_organizations.organization_id)
+        WHERE fairs.id = $1
+    `;
+
+    const userAddedString = `
+      SELECT id
+        FROM fairs_users
+        WHERE fair_id = $1
+        AND user_id = $2
+        ;
+    `;
+
+    try {
+      const fairResult = await db.query(fairDetailsString, values);
+      const stallResult = await db.query(stallsString, values);
+      const userAddedResult = await db.query(userAddedString, values2);
+
+      const fair = getData(fairResult).map((fair) => {
+        const { host_name, host_id, host_description, end, start } = fair;
+        return {
+          ...fair,
+          hostName: host_name,
+          hostId: host_id,
+          hostDescription: host_description,
+          live: end > Date.now() && start < Date.now(),
+          upcoming: start > Date.now(),
+        };
+      })[0];
+
+      const stalls = getData(stallResult);
+      const added = getData(userAddedResult);
+
+      return { fair, stalls, added: added.length > 0 };
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
   return {
+    getFairDetails,
     addFairToSchedule,
     addFairToOrganizationSchedule,
     getUserOrganizations,

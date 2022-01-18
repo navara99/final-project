@@ -16,6 +16,7 @@ module.exports = (db) => {
     addFairToSchedule,
     getUserOrganizations,
     addFairToOrganizationSchedule,
+    createNewFair,
   } = queryGenerator(db);
 
   router.get("/", async (req, res) => {
@@ -112,16 +113,21 @@ module.exports = (db) => {
   });
 
   router.post("/", async (req, res) => {
-    const { name, description, startTimeStamp, endTimeStamp, hostId } = req.body;
+    const { name, description, startTimeStamp, endTimeStamp, hostId } =
+      req.body;
 
     try {
-      const newFair = await createNewFair(name, description, startTimeStamp, endTimeStamp, hostId);
-      res.json(newFair)
+      const newFair = await createNewFair(
+        name,
+        description,
+        startTimeStamp,
+        endTimeStamp,
+        hostId
+      );
+      res.json(newFair);
     } catch (err) {
       console.log(err.message);
     }
-
-
   });
 
   return router;

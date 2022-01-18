@@ -7,7 +7,9 @@ const useOrganizationDetails = (id) => {
   useEffect(() => {
     axios.get(`/api/organizations/${id}`).then(({ data }) => {
       setOrganizationDetails(data);
+      console.log(data);
     });
+    console.log("USE organization details")
   }, [id]);
 
   return [organizationDetails, setOrganizationDetails];
