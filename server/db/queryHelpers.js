@@ -344,6 +344,21 @@ const queryGenerator = (db) => {
     }
   }
 
+  // Get jobs by search
+
+  const getJobsBySearch = async (searchTerm) => {
+    const values = [searchTerm];
+    const queryString = `SELECT * FROM jobs`;
+
+    try {
+      const result = await db.query(queryString);
+      return result.rows;
+    } catch (error) {
+      console.log(error);
+    };
+
+  }
+
   return {
     createNewUser,
     getUserByValue,
@@ -363,7 +378,8 @@ const queryGenerator = (db) => {
     createNewFair,
     getMessagesByUserId,
     createNewMessage,
-    addJobToOrganization
+    addJobToOrganization,
+    getJobsBySearch
   };
 };
 
