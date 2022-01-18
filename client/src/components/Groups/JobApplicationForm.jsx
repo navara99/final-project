@@ -30,6 +30,7 @@ function JobApplicationForm({ job, openApplicationForm, setOpenApplicationForm, 
           "Content-Type": "multipart/formdata"
         }
       });
+      setOpenApplicationForm(!openApplicationForm);
       setSnackBarDetails({
         open: true,
         message: "Application Submitted"
