@@ -9,6 +9,7 @@ import ListItem from '@mui/material/ListItem';
 import SenderList from './Sender/SenderList';
 import MessageList from './Messages/MessageList';
 import MessageForm from './MessageForm/MessageForm';
+import { Box } from '@mui/material';
 import {io} from 'socket.io-client';
 import axios from 'axios';
 import useMessageReceiver from '../../hooks/useMessageReceiver';
@@ -23,8 +24,8 @@ const ChatBox = ({currentUser}) => {
   const [receiverId, setReceiverId,handleOnClick] = useMessageReceiver(null)
   const [ socket , setSocket] = useState(null)
   const location = useLocation();
-  const {contactId} = location.state;
-  console.log("ContactId :", contactId);
+  const {contactId, contactFirstName, contactLastName, contactProfilePicture} = location.state;
+ 
   useEffect(() => {
     axios.get("/api/messages").then(res => {
       setMessages(res.data.messagesArr);
@@ -110,13 +111,17 @@ const ChatBox = ({currentUser}) => {
             </List>      
         </Grid>
         {/* Chatter Box */}
-        <Grid item xs ={9}  px={2} sx={{backgroundColor:"#eff2f6"}} component={Paper} variant='outlined'>
+        <Grid item xs ={9}   sx={{backgroundColor:"#eff2f6"}} component={Paper} variant='outlined'>
             {
                 receiverId && currentUser ? (
                     <>
-                      <MessageList messages={messages && messages.filter(message => (message.sender_id === receiverId && message.receiver_id === currentUser.id) || (message.sender_id === currentUser.id && message.receiver_id === receiverId))} currentUser={currentUser} />
+                      <Box sx={{width:'100%', height:"50px", backgroundColor:"#bdc7df", display:"flex", justifyContent:"center", alignItems:"center"}} >
+                          <Avatar alt={`${contactFirstName}`} src={`${contactProfilePicture}`}/>
+                          <Typography variant='body2'sx={{ml:2}}>{contactFirstName} {contactLastName}</Typography>
+                      </Box>
+                      <MessageList messages={messages && messages.filter(message => (message.sender_id === receiverId && message.receiver_id === currentUser.id) || (message.sender_id === currentUser.id && message.receiver_id === receiverId))} currentUser={currentUser} px={2}/>
                       <Divider />
-                      <MessageForm messageText={messageText} handleSubmit={handleSubmit} setMessageText={setMessageText} />
+                      <MessageForm messageText={messageText} handleSubmit={handleSubmit} setMessageText={setMessageText} px={2}/>
                     </>
                 ) : (
                     <>
