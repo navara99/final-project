@@ -23,7 +23,7 @@ function JobApplicationForm({ job, openApplicationForm, setOpenApplicationForm, 
 
       formData.append("jobId", job.id);
       formData.append("message", message);
-      formData.append("resume", resume);
+      formData.append("resume", resume[0]);
 
       await axios.post("/api/applications", formData, {
         headers: {
