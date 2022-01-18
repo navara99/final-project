@@ -2,7 +2,7 @@ import React from "react";
 import { List, Divider } from "@mui/material"
 import JobListItem from "./JobListItem";
 
-function JobsList({ jobs, isMember }) {
+function JobsList({ jobs, isMember, setSnackBarDetails }) {
 
   const renderJobs = () => {
     return jobs.map((job, i) => {

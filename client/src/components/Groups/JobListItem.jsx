@@ -3,7 +3,7 @@ import { ListItem, ListItemText } from "@mui/material"
 import JobActions from "./JobActions";
 import TimeAgo from "timeago-react";
 
-function JobListItem({ job, isMember }) {
+function JobListItem({ job, isMember, setSnackBarDetails }) {
 
   return (
     <>
