@@ -7,11 +7,14 @@ const useFairs = () => {
   const [pastFairs, setpastFairs] = useState([]);
 
   useEffect(() => {
-    axios.get("/api/fairs/").then(({ data }) => {
+    axios.get("/api/fairs").then(({ data }) => {
       const { past, ongoing, upcoming } = data;
       setOnGoingFairs(ongoing);
       setUpcomingFairs(upcoming);
       setpastFairs(past);
+      console.log(past);
+      console.log(ongoing);
+      console.log(upcoming);
     });
   }, []);
   return { onGoingFairs, upcomingFairs, pastFairs };

@@ -17,28 +17,31 @@ module.exports = (db) => {
       const fairs = await getAllFairs();
       const fairsWithValidDate = fairs.map((fair) => {
         const { start_time, end_time } = fair;
-        const parsedStart = Date.parse(start_time);
-        const parsedEnd = Date.parse(end_time);
-        return { ...fair, start_time: parsedStart, end_time: parsedEnd };
+        const start = new Date(Date.parse(start_time));
+        const end = new Date(Date.parse(end_time));
+        delete fair.start_time;
+        delete fair.end_time;
+        return { ...fair, start, end };
       });
+
       const past = fairsWithValidDate
-        .filter(({ end_time }) => end_time < Date.now())
+        .filter(({ end }) => end < Date.now())
         .sort((a, b) => {
-          return b.start_time - a.start_time;
+          return b.start - a.start;
         });
 
       const ongoing = fairsWithValidDate
-        .filter(({ end_time, start_time }) => {
-          return end_time > Date.now() && start_time < Date.now();
+        .filter(({ end, start }) => {
+          return end > Date.now() && start < Date.now();
         })
         .sort((a, b) => {
-          return b.end_time - a.end_time;
+          return b.end - a.end;
         });
 
       const upcoming = fairsWithValidDate
-        .filter(({ start_time }) => start_time > Date.now())
+        .filter(({ start }) => start > Date.now())
         .sort((a, b) => {
-          return a.start_time - b.start_time;
+          return a.start - b.start;
         });
 
       res.json({ past, ongoing, upcoming });
