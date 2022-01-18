@@ -10,33 +10,33 @@ import MenuItem from "@mui/material/MenuItem";
 import MenuList from "@mui/material/MenuList";
 import axios from "axios";
 
-const ScheduleButton = ({ added, upcoming, id, add }) => {
+const JoinButton = ({ live, added, upcoming, id, add }) => {
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
   const [options, setOptions] = useState();
 
   useEffect(() => {
     axios.get(`/api/fairs/organizations/${id}`).then(({ data }) => {
-      if (data.length > 0) setOptions(data);
+      if (data.length > 0) setOptions(data.filter(({ added }) => added));
     });
   }, []);
 
   const joinAsJobSeeker = () => {
-    axios.post(`/api/fairs/join/${id}`).then(() => {
-      add();
-    });
+    // axios.post(`/api/fairs/join/${id}`).then(() => {
+    //   add();
+    // });
   };
 
   const handleMenuItemClick = (event, index) => {
-    axios
-      .post(`/api/fairs/join/${id}/organizations/${options[index].id}`)
-      .then(() => {
-        setOptions((prev) => {
-          const newState = [...prev];
-          newState[index] = { ...newState[index], added: true };
-          return newState;
-        });
-      });
+    // axios
+    //   .post(`/api/fairs/join/${id}/organizations/${options[index].id}`)
+    //   .then(() => {
+    //     setOptions((prev) => {
+    //       const newState = [...prev];
+    //       newState[index] = { ...newState[index], added: true };
+    //       return newState;
+    //     });
+    //   });
     setOpen(false);
   };
 
@@ -59,18 +59,20 @@ const ScheduleButton = ({ added, upcoming, id, add }) => {
         ref={anchorRef}
         aria-label="split button"
       >
-        <Button onClick={joinAsJobSeeker} disabled={!upcoming || added}>
-          {added ? "Added to Schedule" : "Add to Schedule"}
+        <Button onClick={joinAsJobSeeker} disabled={!live}>
+          Join
         </Button>
-        <Button
-          aria-controls={open ? "split-button-menu" : undefined}
-          aria-expanded={open ? "true" : undefined}
-          aria-haspopup="menu"
-          onClick={handleToggle}
-          disabled={!options || !upcoming}
-        >
-          <ArrowDropDownIcon />
-        </Button>
+        {options && options.length > 0 && (
+          <Button
+            aria-controls={open ? "split-button-menu" : undefined}
+            aria-expanded={open ? "true" : undefined}
+            aria-haspopup="menu"
+            onClick={handleToggle}
+            disabled={!live}
+          >
+            <ArrowDropDownIcon />
+          </Button>
+        )}
       </ButtonGroup>
       <Popper
         open={open}
@@ -93,10 +95,10 @@ const ScheduleButton = ({ added, upcoming, id, add }) => {
                   {options.map((option, index) => (
                     <MenuItem
                       key={option.id}
-                      disabled={option.added}
                       onClick={(event) => handleMenuItemClick(event, index)}
+                      disabled={!live}
                     >
-                      {option.added ? "Added" : "Add"} to {option.name}
+                      Join as {option.name}
                     </MenuItem>
                   ))}
                 </MenuList>
@@ -108,4 +110,4 @@ const ScheduleButton = ({ added, upcoming, id, add }) => {
     </>
   );
 };
-export default ScheduleButton;
+export default JoinButton;
