@@ -19,18 +19,26 @@
   justify-content: space-between;
 }
 
+.fair-details .MuiBox-root {
+  margin-bottom: 1em;
+}
+
 .fair-details .MuiBox-root .MuiPaper-root {
   display: flex;
-  margin: 0.5em 0;
   align-items: center;
 }
 
 .fair-details .MuiBox-root .MuiPaper-root img {
-  width: 25%;
+  max-width: 25%;
   max-height: 5em;
   margin: 0.5em;
 }
 
-.fair-details .MuiBox-root .MuiPaper-root > div {
-  width: 75%;
+.fair-details .MuiBox-root .MuiPaper-root .MuiCardContent-root {
+  flex: 1;
+}
+
+.fair-details .MuiBox-root .MuiCardActions-root {
+  display: flex;
+  flex-direction: column;
 }

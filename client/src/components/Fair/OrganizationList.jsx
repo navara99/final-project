@@ -7,6 +7,7 @@ const OrganizationList = () => {
       <OrganizationListItem />
       <OrganizationListItem />
       <OrganizationListItem />
+      <br />
     </>
   );
 };
