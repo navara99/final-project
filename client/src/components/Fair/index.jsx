@@ -7,13 +7,13 @@ import OrganizationList from "./OrganizationList";
 
 const Fair = ({ currentUser }) => {
   let { id } = useParams();
-  const { fair, stalls, added, add } = useFairDetails(id);
+  const { fair, stalls, added, add, updateFairDetails } = useFairDetails(id);
 
   return (
     <div className="fair-details">
       {fair && stalls && (
         <>
-          <Header {...{ fair, added, currentUser, add, id }} />
+          <Header {...{ fair, added, currentUser, add, id, updateFairDetails }} />
           <h3>Employers ({stalls.length})</h3>
           <OrganizationList stalls={stalls} />
         </>

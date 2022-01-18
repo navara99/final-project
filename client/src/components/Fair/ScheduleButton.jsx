@@ -10,7 +10,7 @@ import MenuItem from "@mui/material/MenuItem";
 import MenuList from "@mui/material/MenuList";
 import axios from "axios";
 
-const ScheduleButton = ({ added, upcoming, id, add }) => {
+const ScheduleButton = ({ added, upcoming, id, add, updateFairDetails }) => {
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
   const [options, setOptions] = useState();
@@ -36,6 +36,7 @@ const ScheduleButton = ({ added, upcoming, id, add }) => {
           newState[index] = { ...newState[index], added: true };
           return newState;
         });
+        updateFairDetails();
       });
     setOpen(false);
   };

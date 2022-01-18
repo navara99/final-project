@@ -10,7 +10,7 @@ import ScheduleButton from "./ScheduleButton";
 import JoinButton from "./JoinButton";
 import { formatStartEndTime, formatDate } from "../../helpers/date";
 
-const Header = ({ id, fair, added, currentUser, add }) => {
+const Header = ({ id, fair, added, currentUser, add, updateFairDetails }) => {
   const {
     name,
     description,
@@ -64,7 +64,9 @@ const Header = ({ id, fair, added, currentUser, add }) => {
 
             {currentUser && (
               <div>
-                <ScheduleButton {...{ add, added, upcoming, id, live }} />
+                <ScheduleButton
+                  {...{ add, added, upcoming, id, live, updateFairDetails }}
+                />
                 <JoinButton {...{ added, upcoming, id, live }} />
               </div>
             )}
