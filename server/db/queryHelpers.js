@@ -97,6 +97,7 @@ const queryGenerator = (db) => {
           hostId: host_id,
           hostDescription: host_description,
           live: end > Date.now() && start < Date.now(),
+          upcoming: start > Date.now(),
         };
       })[0];
 

@@ -20,6 +20,7 @@ const Header = ({ id, fair, added, currentUser, add }) => {
     start_time,
     end_time,
     live,
+    upcoming,
   } = fair;
 
   const clickHandler = () => {
@@ -73,6 +74,7 @@ const Header = ({ id, fair, added, currentUser, add }) => {
                   size="small"
                   disabled={added}
                   onClick={clickHandler}
+                  disabled={!upcoming || added}
                 >
                   {added ? "Added to Schedule" : "Add to Schedule"}
                 </Button>
