@@ -12,7 +12,8 @@ import MessageForm from './MessageForm/MessageForm';
 import {io} from 'socket.io-client';
 import axios from 'axios';
 import useMessageReceiver from '../../hooks/useMessageReceiver';
-import { Avatar, ListItemAvatar, ListItemText } from '@mui/material';
+import { Avatar, ListItemAvatar } from '@mui/material';
+
 const ChatBox = ({currentUser}) => {
   const [messages, setMessages] = useState(null);
   const [senders, setSenders] = useState(null);
