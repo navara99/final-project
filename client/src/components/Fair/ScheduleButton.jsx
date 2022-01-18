@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
@@ -14,6 +14,12 @@ const ScheduleButton = ({ added, upcoming, id, add }) => {
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
   const [options, setOptions] = useState();
+
+  useEffect(() => {
+    axios.tge(`/api/organizations`).then((data) => {
+      if (data.length > 0) setOptions(data);
+    });
+  }, []);
 
   const joinAsJobSeeker = () => {
     axios.post(`/api/fairs/join/${id}`).then(() => {
