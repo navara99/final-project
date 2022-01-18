@@ -10,7 +10,7 @@ import MenuItem from "@mui/material/MenuItem";
 import MenuList from "@mui/material/MenuList";
 import axios from "axios";
 
-const ScheduleButton = ({ added, upcoming, id, add }) => {
+const ScheduleButton = ({ live, added, upcoming, id, add }) => {
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
   const [options, setOptions] = useState();
@@ -58,10 +58,9 @@ const ScheduleButton = ({ added, upcoming, id, add }) => {
         <Button
           aria-controls={open ? "split-button-menu" : undefined}
           aria-expanded={open ? "true" : undefined}
-          aria-label="select merge strategy"
           aria-haspopup="menu"
           onClick={handleToggle}
-          disabled={!options}
+          disabled={!options || live}
         >
           <ArrowDropDownIcon />
         </Button>
@@ -87,10 +86,10 @@ const ScheduleButton = ({ added, upcoming, id, add }) => {
                   {options.map((option, index) => (
                     <MenuItem
                       key={option.id}
-                      disabled={false}
+                      disabled={option.added}
                       onClick={(event) => handleMenuItemClick(event, index)}
                     >
-                      Add to {option.name}
+                      {option.added ? "Added" : "Add"} to {option.name}
                     </MenuItem>
                   ))}
                 </MenuList>

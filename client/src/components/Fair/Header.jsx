@@ -63,7 +63,7 @@ const Header = ({ id, fair, added, currentUser, add }) => {
 
             {currentUser && (
               <div>
-                <ScheduleButton {...{ add, added, upcoming, id }} />
+                <ScheduleButton {...{ add, added, upcoming, id, live }} />
                 <Button variant="contained" disabled={!live}>
                   Join
                 </Button>
