@@ -11,17 +11,18 @@ function MembersListItem({ member }) {
         <Avatar alt="Travis Howard" src={`${member.profile_picture}`} />
       </ListItemAvatar>
       <ListItemText
-        primary={`${member.first_name} ${member.last_name}`}
+        primary={`${member.first_name} ${member.last_name} ${currentUser && currentUser.id === member.id ? '  ( You )' : ''}`}
         secondary={
           <>
             <Typography component="span" variant="body2" sx={{display:"block",my:1}}>Username: @{member.username}</Typography>
             <Typography component="span" variant="body2" sx={{display:"block", my:1}}>Email: {member.email}</Typography>
           </>}
       />
-      <IconButton color="primary" component="span" edge="start">
-        <MessageIcon />
-      </IconButton>
-
+      { currentUser && currentUser.id !== member.id && (
+        <IconButton color="primary" component="span" edge="start">
+          <MessageIcon />
+        </IconButton>
+      )}
     </ListItem>
   )
 
