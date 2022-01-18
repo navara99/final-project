@@ -79,7 +79,7 @@ function App() {
             path="/organizations"
             element={<Groups {...{ setSnackBarDetails }} />}
           />
-          <Route path="/jobs" element={<Jobs />} />
+          <Route path="/jobs" element={<Jobs  {...{ setSnackBarDetails }}/>} />
           <Route path="/schedule" element={<Schedule />} />
           <Route path="/messages" element={<ChatBox currentUser = {currentUser}/>} />
           <Route path="/settings" element={<>Settings</>} />
