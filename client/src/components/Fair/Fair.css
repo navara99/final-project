@@ -11,10 +11,26 @@
 }
 
 .fair-details button.MuiButton-root {
-  margin: 0 0.2em;
+  margin: 0 0.4em;
 }
 
 .fair-details .MuiCardActions-root {
   display: flex;
   justify-content: space-between;
+}
+
+.fair-details .MuiBox-root .MuiPaper-root {
+  display: flex;
+  margin: 0.5em 0;
+  align-items: center;
+}
+
+.fair-details .MuiBox-root .MuiPaper-root img {
+  width: 25%;
+  max-height: 5em;
+  margin: 0.5em;
+}
+
+.fair-details .MuiBox-root .MuiPaper-root > div {
+  width: 75%;
 }

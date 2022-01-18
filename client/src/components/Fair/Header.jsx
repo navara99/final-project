@@ -57,16 +57,17 @@ const Header = ({ id, fair, added, currentUser, add }) => {
             </Typography>
           </CardContent>
           <CardActions>
-            <div>
-              <Button
-                component={Link}
-                to={`/organizations/${host_id}`}
-                variant="contained"
-                size="small"
-              >
-                Host Page
-              </Button>
-              {currentUser && (
+            <Button
+              component={Link}
+              to={`/organizations/${host_id}`}
+              variant="contained"
+              size="small"
+            >
+              Host Details
+            </Button>
+
+            {currentUser && (
+              <div>
                 <Button
                   variant="contained"
                   size="small"
@@ -75,13 +76,10 @@ const Header = ({ id, fair, added, currentUser, add }) => {
                 >
                   {added ? "Added to Schedule" : "Add to Schedule"}
                 </Button>
-              )}
-            </div>
-
-            {currentUser && (
-              <Button variant="contained" size="small" disabled={!live}>
-                Join
-              </Button>
+                <Button variant="contained" size="small" disabled={!live}>
+                  Join
+                </Button>
+              </div>
             )}
           </CardActions>
         </Card>
