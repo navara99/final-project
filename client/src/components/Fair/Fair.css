@@ -29,8 +29,7 @@
 }
 
 .fair-details .MuiBox-root .MuiPaper-root img {
-  max-width: 25%;
-  max-height: 5em;
+  max-width: 7.5em;
   margin: 0.5em;
 }
 
@@ -41,6 +40,7 @@
 .fair-details .MuiBox-root .MuiCardActions-root {
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
 }
 
 .fair-details .organization-details {
