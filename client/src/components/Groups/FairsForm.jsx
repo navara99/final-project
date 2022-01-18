@@ -9,7 +9,7 @@ import { useState } from "react";
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { combineDateTimes } from "../../helpers/date";
 
-function FairsForm({ fairsFormOpen, setFairsFormOpen }) {
+function FairsForm({ fairsFormOpen, setFairsFormOpen, setOrganizationDetails }) {
   const [name, setName] = useInput();
   const [description, setDescription] = useInput();
   const [date, setDate] = useState(new Date());
@@ -29,7 +29,7 @@ function FairsForm({ fairsFormOpen, setFairsFormOpen }) {
 
     try {
       const { data } = await axios.post("/api/fairs", newFair);
-      console.log(data);
+      setOrganizationDetails((prev) => (({ ...prev, fairs: [data, ...prev.fairs] })))
     } catch (err) {
       console.log(err.message);
     }
