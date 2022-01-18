@@ -1,9 +1,10 @@
 import React from "react";
-import { ListItem, Avatar, ListItemAvatar, ListItemText, IconButton } from "@mui/material";
+import { ListItem, Avatar, ListItemAvatar, ListItemText, IconButton, Typography } from "@mui/material";
 import MessageIcon from '@mui/icons-material/Message';
+import useCurrentUser from "../../hooks/useCurrentUser";
 
 function MembersListItem({ member }) {
-
+  const {currentUser} = useCurrentUser();
   return (
     <ListItem>
       <ListItemAvatar>
@@ -13,8 +14,8 @@ function MembersListItem({ member }) {
         primary={`${member.first_name} ${member.last_name}`}
         secondary={
           <>
-            <p>Username: @{member.username}</p>
-            <p>Email: {member.email}</p>
+            <Typography component="span" variant="body2" sx={{display:"block",my:1}}>Username: @{member.username}</Typography>
+            <Typography component="span" variant="body2" sx={{display:"block", my:1}}>Email: {member.email}</Typography>
           </>}
       />
       <IconButton color="primary" component="span" edge="start">
