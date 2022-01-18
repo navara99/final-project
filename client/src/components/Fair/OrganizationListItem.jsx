@@ -41,6 +41,9 @@ const OrganizationListItem = ({ id, website, industry, description, name }) => {
                     Website
                   </Button>
                 )}
+                <Button size="small" onClick={() => console.log("job post")}>
+                  Show Job Post
+                </Button>
                 <Button
                   size="small"
                   component={Link}
@@ -51,9 +54,7 @@ const OrganizationListItem = ({ id, website, industry, description, name }) => {
               </CardActions>
             </div>
           </div>
-          <Typography variant="body2">
-            {description}
-          </Typography>
+          <Typography variant="body2">{description}</Typography>
         </CardContent>
       </Card>
     </Box>
