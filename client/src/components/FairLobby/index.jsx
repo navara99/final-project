@@ -14,7 +14,7 @@ const FairLobby = ({ currentUser }) => {
       {fair && stalls && (
         <>
           <Header {...{ fair, added, currentUser, add, id, updateFairDetails }} />
-          <h3>Employers ({stalls.length})</h3>
+          <h3>Stalls ({stalls.length})</h3>
           <OrganizationList stalls={stalls} />
         </>
       )}
