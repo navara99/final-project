@@ -2,6 +2,7 @@ import React from "react";
 import { ListItem, Avatar, ListItemAvatar, ListItemText, IconButton, Typography } from "@mui/material";
 import MessageIcon from '@mui/icons-material/Message';
 import useCurrentUser from "../../hooks/useCurrentUser";
+import { Link } from "react-router-dom";
 
 function MembersListItem({ member }) {
   const {currentUser} = useCurrentUser();
@@ -20,7 +21,7 @@ function MembersListItem({ member }) {
       />
       { currentUser && currentUser.id !== member.id && (
         <IconButton color="primary" component="span" edge="start">
-          <MessageIcon />
+          <Link to="/messages"><MessageIcon /></Link>
         </IconButton>
       )}
     </ListItem>
