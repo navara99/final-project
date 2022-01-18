@@ -58,11 +58,14 @@ const Header = ({ id, fair, added, currentUser, add }) => {
           </CardContent>
           <CardActions>
             <div>
-              <Link to={`/organizations/${host_id}`}>
-                <Button variant="contained" size="small">
-                  Host Page
-                </Button>
-              </Link>
+              <Button
+                component={Link}
+                to={`/organizations/${host_id}`}
+                variant="contained"
+                size="small"
+              >
+                Host Page
+              </Button>
               {currentUser && (
                 <Button
                   variant="contained"
