@@ -1,11 +1,15 @@
 import React from 'react'
 import { ListItemAvatar, Avatar,ListItemText, Typography, Divider, ListItemButton} from '@mui/material'
 
-const SenderListItem = ({sender, setReceiverId}) => {
+const SenderListItem = ({sender, setReceiverId, setReceiver}) => {
   const {first_name, last_name, profile_picture, username, id} = sender;
+  const handleClick = (e) => {
+    setReceiverId(id);
+    setReceiver({...sender})
+  }
   return (  
     <>
-      <ListItemButton alignItems="flex-start" onClick={(e) => setReceiverId(id)}>
+      <ListItemButton alignItems="flex-start" onClick={handleClick}>
           <ListItemAvatar>
           <Avatar alt={first_name} src={profile_picture} />
           </ListItemAvatar>
