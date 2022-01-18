@@ -47,10 +47,10 @@ io.on("connection", (socket) => {
 
   socket.on("sendMessage", ({sender_id,receiver_id,message}) => {
  
-    // console.log("data", message);
     const user = getUser(receiver_id);
     // console.log("user", users);
     if(user) {
+     
       io.to(user.socketId).emit("getMessage", {
         receiver_id,
         sender_id,
