@@ -10,7 +10,8 @@ module.exports = (db) => {
     getAllMembersByOrganizationId,
     getAllFairsByOrganizationId,
     getOrganizationDetails,
-    checkIfIAmMember
+    checkIfIAmMember,
+    addJobToOrganization
   } = queryGenerator(db);
 
   router.post("/", async (req, res) => {
@@ -31,14 +32,26 @@ module.exports = (db) => {
 
     try {
       await Promise.all(usersIdToAdd.map(async (id) => {
-        return await addUserToOrganization(id, req.params.id, false);
+        await addUserToOrganization(id, req.params.id, false);
       }));
-      res.json({
-        status: "success"
-      });
+
+      const members = await getAllMembersByOrganizationId(req.params.id);
+      res.json(members);
     } catch (err) {
       console.log(err.message);
     }
+
+  });
+
+  router.post("/:id/jobs", async (req, res) => {
+    const { id } = req.params;
+
+    try {
+      const newJob = await addJobToOrganization(id, req.body);
+      res.json(newJob);
+    } catch (err) {
+      console.log(err.message);
+    };
 
   });
 

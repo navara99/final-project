@@ -3,7 +3,6 @@ INSERT INTO users_organizations
 VALUES
   (1, 1, true),
   (2, 1, true),
-  (3, 1, true),
   (4, 1, false),
   (2, 2, true),
   (3, 2, false),

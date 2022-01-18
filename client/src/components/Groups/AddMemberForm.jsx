@@ -15,7 +15,7 @@ import useAllUsers from "../../hooks/useAllUsers";
 import { useState } from "react";
 import axios from "axios";
 
-const AddMemberForm = ({ openAddMembersModal, setOpenAddMembersModal, selectedGroup, setSnackBarDetails }) => {
+const AddMemberForm = ({ openAddMembersModal, setOpenAddMembersModal, id, setSnackBarDetails, setOrganizationDetails }) => {
   const allUsers = useAllUsers();
   const [selectedUsers, setSelectedUsers] = useState(new Array(allUsers.length).fill(false));
 
@@ -23,7 +23,8 @@ const AddMemberForm = ({ openAddMembersModal, setOpenAddMembersModal, selectedGr
     const usersIdToAdd = allUsers.filter((users, i) => selectedUsers[i]).map((user) => user.id);
 
     try {
-      await axios.post(`/api/organizations/${selectedGroup.id}/users`, { usersIdToAdd });
+      const { data } = await axios.post(`/api/organizations/${id}/users`, { usersIdToAdd });
+      setOrganizationDetails((prev) => ({ ...prev, members: [...data] }))
       setOpenAddMembersModal(!openAddMembersModal);
       setSnackBarDetails({
         open: true,
@@ -61,7 +62,7 @@ const AddMemberForm = ({ openAddMembersModal, setOpenAddMembersModal, selectedGr
 
   return (
     <Dialog open={openAddMembersModal} onClose={() => { }}>
-      <DialogTitle>Add users to group: {selectedGroup.name}</DialogTitle>
+      <DialogTitle>Add users to group</DialogTitle>
       <DialogContent>
         <TextField
           autoFocus

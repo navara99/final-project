@@ -3,17 +3,44 @@ import {
   Dialog,
   DialogTitle,
   DialogContent,
-  DialogContentText,
   DialogActions,
   TextField,
   Button
 } from "@mui/material";
 import useInput from "../../hooks/useInput";
 import axios from "axios";
+import { useParams } from "react-router";
 
-function JobForm({ jobFormOpen, setJobFormOpen }) {
+function JobForm({ jobFormOpen, setJobFormOpen, setSnackBarDetails, setOrganizationDetails }) {
+  const [title, setTitle] = useInput();
+  const [description, setDescription] = useInput();
+  const [experience, setExperience] = useInput();
+  const [location, setLocation] = useInput();
+  const [salary, setSalary] = useInput();
+  const { id } = useParams();
 
+  const handleJobSubmit = async () => {
+    const jobDetails = {
+      title,
+      description,
+      experience,
+      location,
+      salary
+    };
 
+    try {
+      const { data } = await axios.post(`/api/organizations/${id}/jobs`, jobDetails);
+      setOrganizationDetails((prev) => ({ ...prev, jobs: [{ ...data, applications: [] }, ...prev.jobs] }));
+      setJobFormOpen(!jobFormOpen);
+      setSnackBarDetails({
+        open: true,
+        message: "Job successfully posted"
+      });
+    } catch (err) {
+      console.log(err.message);
+    };
+
+  };
 
   return (
     <Dialog open={jobFormOpen} onClose={() => { }}>
@@ -22,11 +49,11 @@ function JobForm({ jobFormOpen, setJobFormOpen }) {
         <TextField
           autoFocus
           margin="dense"
-          id="name"
+          id="title"
           label="Title"
           fullWidth
           required
-          onChange={() => { }}
+          onChange={setTitle}
         />
         <TextField
           multiline
@@ -36,7 +63,7 @@ function JobForm({ jobFormOpen, setJobFormOpen }) {
           label="Description"
           fullWidth
           required
-          onChange={() => { }}
+          onChange={setDescription}
         />
         <TextField
           margin="dense"
@@ -44,8 +71,7 @@ function JobForm({ jobFormOpen, setJobFormOpen }) {
           label="Years Of Experience"
           fullWidth
           required
-          onChange={() => { }}
-          type="number"
+          onChange={setExperience}
         />
         <TextField
           margin="dense"
@@ -53,12 +79,20 @@ function JobForm({ jobFormOpen, setJobFormOpen }) {
           label="Location"
           fullWidth
           required
-          onChange={() => { }}
+          onChange={setLocation}
+        />
+        <TextField
+          margin="dense"
+          id="salary"
+          label="Salary"
+          fullWidth
+          required
+          onChange={setSalary}
         />
       </DialogContent>
       <DialogActions>
         <Button onClick={() => { setJobFormOpen(!jobFormOpen) }}>Cancel</Button>
-        <Button onClick={() => { }}>Create</Button>
+        <Button onClick={handleJobSubmit}>Create</Button>
       </DialogActions>
     </Dialog>
   )

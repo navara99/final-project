@@ -8,8 +8,8 @@ const app = express();
 const morgan = require("morgan");
 
 //SocketIo config
-const {createServer} = require("http");
-const {Server} = require("socket.io");
+const { createServer } = require("http");
+const { Server } = require("socket.io");
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
   cors: {
@@ -92,6 +92,7 @@ const fairsRoutes = require("./routes/fairs");
 const organizationRoutes = require("./routes/organizations");
 const messagesRoutes = require("./routes/messages");
 
+const scheduleRoutes = require("./routes/schedule");
 
 app.use("/api/users", usersRoutes(db));
 app.use("/api/fairs", fairsRoutes(db));
@@ -99,6 +100,7 @@ app.use("/api/organizations", organizationRoutes(db));
 app.use("/api/messages", messagesRoutes(db));
 
 
+app.use("/api/schedule", scheduleRoutes(db));
 
 httpServer.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);

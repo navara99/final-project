@@ -7,7 +7,6 @@ import useExpand from "../../hooks/useExpand";
 function OrganizationHeader({ organization, cardStyles }) {
   const { ExpandMore, handleExpandClick, expanded } = useExpand();
 
-  console.log(organization);
 
   return (
     <div >

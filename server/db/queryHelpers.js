@@ -48,8 +48,7 @@ const queryGenerator = (db) => {
     }
   };
 
-
-    // Individual Fair
+  // Individual Fair
   const getFair = async (fair_id) => {
     const values = [fair_id];
     const queryString = `
@@ -67,17 +66,22 @@ const queryGenerator = (db) => {
     JOIN organizations ON (organizations.id = fairs_organizations.organization_id)
     WHERE fairs.id = $1
     `;
-  
-      try {
-        const result  = await db.query(queryString, values)
-        return getData(result)
-      } catch (err) {
-        console.log(err.message)
-      }
-  }
-  
 
-  const createNewOrganization = async ({ name, description, email, industry, website }) => {
+    try {
+      const result = await db.query(queryString, values);
+      return getData(result);
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
+  const createNewOrganization = async ({
+    name,
+    description,
+    email,
+    industry,
+    website,
+  }) => {
     const values = [name, description, email, industry, website];
     const queryString = `
       INSERT INTO organizations (name, description, email, industry, website)
@@ -91,8 +95,8 @@ const queryGenerator = (db) => {
       return newOrganizationInfo;
     } catch (err) {
       console.log(err);
-    };
-  }
+    }
+  };
 
   const addUserToOrganization = async (user_id, organization_id, admin) => {
     const values = [user_id, organization_id, admin];
@@ -106,18 +110,18 @@ const queryGenerator = (db) => {
       await db.query(queryString, values);
     } catch (err) {
       console.log(err.message);
-    };
-
+    }
   };
 
   const getOrganizationsByUser = async (user_id) => {
     const values = [user_id];
     const queryString = `
-    SELECT users_organizations.admin, organizations.id, organizations.name, organizations.description, organizations.email, organizations.industry, organizations.website FROM users_organizations 
+    SELECT organizations.*
+    FROM users_organizations
     JOIN users ON users.id = users_organizations.user_id
-    JOIN organizations ON organization_id = users_organizations.organization_id
+    JOIN organizations ON organizations.id = users_organizations.organization_id
     GROUP BY organizations.id, users_organizations.user_id, users_organizations.admin
-    HAVING user_id = $1;`;
+    HAVING users_organizations.user_id = $1;`;
 
     try {
       const result = await db.query(queryString, values);
@@ -125,7 +129,7 @@ const queryGenerator = (db) => {
       return rows;
     } catch (err) {
       console.log(err.message);
-    };
+    }
   };
 
   const getAllOtherUsers = async (user_id) => {
@@ -133,7 +137,7 @@ const queryGenerator = (db) => {
     const queryString = `
     SELECT * FROM users
     WHERE users.id <> $1;
-    `
+    `;
 
     try {
       const result = await db.query(queryString, values);
@@ -141,8 +145,7 @@ const queryGenerator = (db) => {
       return rows;
     } catch (err) {
       console.log(err.message);
-    };
-
+    }
   };
 
   const getAllApplicationsByJobId = async (job_id) => {
@@ -152,37 +155,37 @@ const queryGenerator = (db) => {
     JOIN jobs ON jobs.id = applications.user_id
     JOIN users ON applications.user_id = users.id
     WHERE jobs.id = $1;
-    `
+    `;
 
     try {
       const result = await db.query(queryString, values);
       return result.rows;
     } catch (err) {
       console.log(err.message);
-    };
-
+    }
   };
 
   const getAllJobsByOrganizationId = async (organization_id) => {
     const values = [organization_id];
     const queryString = `
     SELECT jobs.* FROM jobs
-    JOIN organizations ON jobs.employer_id = organizations.id
-    WHERE organizations.id = $1;
+    JOIN organizations ON jobs.organization_id = organizations.id
+    WHERE organizations.id = $1
+    ORDER BY jobs.created_at DESC;
     `
 
     try {
       const result = await db.query(queryString, values);
-      const jobs = await Promise.all(result.rows.map(async (job) => {
-        const jobWithApplicationArr = await getAllApplicationsByJobId(job.id);
-        return { ...job, applications: jobWithApplicationArr };
-      }));
+      const jobs = await Promise.all(
+        result.rows.map(async (job) => {
+          const jobWithApplicationArr = await getAllApplicationsByJobId(job.id);
+          return { ...job, applications: jobWithApplicationArr };
+        })
+      );
       return jobs;
-
     } catch (err) {
       console.log(err.message);
-    };
-
+    }
   };
 
   const getAllMembersByOrganizationId = async (organization_id) => {
@@ -190,7 +193,8 @@ const queryGenerator = (db) => {
     const queryString = `
     SELECT users.*, users_organizations.admin FROM users
     JOIN users_organizations ON users.id = users_organizations.user_id
-    WHERE users_organizations.organization_id = $1;
+    WHERE users_organizations.organization_id = $1
+    ORDER BY users.first_name;
     `
 
     try {
@@ -198,13 +202,11 @@ const queryGenerator = (db) => {
       return result.rows;
     } catch (err) {
       console.log(err.message);
-    };
-
+    }
   };
 
   const checkIfIAmMember = async (organization_id, user_id) => {
     const values = [organization_id, user_id];
-    console.log(user_id, organization_id);
     const queryString = `
     SELECT COUNT(*)
     FROM users_organizations
@@ -217,7 +219,7 @@ const queryGenerator = (db) => {
       return Number(count) ? true : false;
     } catch (err) {
       console.log(err.message);
-    };
+    }
   };
 
   const getOrganizationDetails = async (organization_id) => {
@@ -233,8 +235,8 @@ const queryGenerator = (db) => {
       return getFirstRecord(result);
     } catch (err) {
       console.log(err.message);
-    };
-  }
+    }
+  };
 
   const getAllFairsByOrganizationId = async (organization_id) => {
     const values = [organization_id];
@@ -242,11 +244,28 @@ const queryGenerator = (db) => {
     SELECT fairs.* FROM fairs
     JOIN fairs_organizations ON fairs.host_id = fairs_organizations.fair_id
     WHERE fairs_organizations.organization_id = $1;
-    `
+    `;
 
     try {
       const result = await db.query(queryString, values);
       return result.rows;
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
+  const addJobToOrganization = async (organization_id, { title, description, experience, location, salary }) => {
+    const values = [organization_id, title, description, experience, location, salary];
+    const queryString = `
+      INSERT INTO jobs (organization_id, title, description, experience, location, salary)
+      VALUES ($1, $2, $3, $4, $5, $6)
+      RETURNING *;
+    `;
+
+    try {
+      const result = await db.query(queryString, values);
+      const newJob = getFirstRecord(result);
+      return newJob;
     } catch (err) {
       console.log(err.message);
     };
@@ -321,8 +340,12 @@ const queryGenerator = (db) => {
     getAllApplicationsByJobId,
     getOrganizationDetails,
     checkIfIAmMember,
+<<<<<<< HEAD
     getMessagesByUserId,
     createNewMessage
+=======
+    addJobToOrganization
+>>>>>>> master
   };
 };
 
