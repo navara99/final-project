@@ -8,14 +8,19 @@ import FairsList from "./FairsList";
 import { useState } from "react";
 import FairsForm from "./FairsForm";
 
-function OrganizationFairs({ organization, cardStyles, setOrganizationDetails }) {
+function OrganizationFairs({ organization, cardStyles, setOrganizationDetails, setSnackBarDetails }) {
   const { ExpandMore, handleExpandClick, expanded } = useExpand();
   const [fairsFormOpen, setFairsFormOpen] = useState(false);
 
 
   return (
     <div>
-      <FairsForm {...{ fairsFormOpen }} {...{ setFairsFormOpen }} {...{ setOrganizationDetails }} />
+      <FairsForm
+        {...{ fairsFormOpen }}
+        {...{ setFairsFormOpen }}
+        {...{ setOrganizationDetails }}
+        {...{ setSnackBarDetails }}
+      />
       <Card alignItems="flex-start" style={cardStyles}>
         <div className="organization-card">
           <ListItemText
