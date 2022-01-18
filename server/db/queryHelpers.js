@@ -303,14 +303,15 @@ const queryGenerator = (db) => {
     }
   };
 
-  const getUserOrganizations = async (id) => {
-    const values = [id];
+  const getUserOrganizations = async (fairId, userId) => {
+    const values = [fairId, userId];
     const queryString = `
       SELECT organizations.name,
-      organizations.id 
+      organizations.id,
+      (SELECT count(*) FROM fairs_organizations WHERE fair_id = $1) > 0 AS added
       FROM organizations
-      JOIN users_organizations ON organizations.id = organization_id
-      WHERE user_id = $1;
+      JOIN users_organizations ON organizations.id = users_organizations.organization_id
+      WHERE user_id = $2;
     `;
 
     try {

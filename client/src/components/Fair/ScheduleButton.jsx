@@ -18,6 +18,7 @@ const ScheduleButton = ({ added, upcoming, id, add }) => {
   useEffect(() => {
     axios.get(`/api/fairs/organizations/${id}`).then(({ data }) => {
       if (data.length > 0) setOptions(data);
+      console.log(data);
     });
   }, []);
 
@@ -85,12 +86,11 @@ const ScheduleButton = ({ added, upcoming, id, add }) => {
                 <MenuList id="split-button-menu">
                   {options.map((option, index) => (
                     <MenuItem
-                      key={option}
+                      key={option.id}
                       disabled={false}
-                      selected={false}
                       onClick={(event) => handleMenuItemClick(event, index)}
                     >
-                      {option.name}
+                      Add to {option.name}
                     </MenuItem>
                   ))}
                 </MenuList>

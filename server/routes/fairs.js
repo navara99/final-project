@@ -72,7 +72,7 @@ module.exports = (db) => {
     const { id } = req.params;
 
     try {
-      const organizations = await getUserOrganizations(user_id);
+      const organizations = await getUserOrganizations(id, user_id);
 
       res.json(organizations);
     } catch (err) {
