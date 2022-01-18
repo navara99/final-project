@@ -360,9 +360,29 @@ const queryGenerator = (db) => {
       console.log(error);
     };
 
-  }
+  };
+
+
+  // Job Applications
+
+  const applyForJob = async (userId, message, jobId, filePath) => {
+    
+    try {
+      const values = [userId, message, jobId, filePath];
+      const queryString = `
+        INSERT INTO  applications (user_id, message, job_id, resume)
+        VALUES ($1, $2, $3, $4)
+        RETURNING *;
+      `;
+      await db.query(queryString, values);
+    } catch (error) {
+      console.log(error);
+    };
+
+  };
 
   return {
+    applyForJob,
     createNewUser,
     getUserByValue,
     createNewOrganization,

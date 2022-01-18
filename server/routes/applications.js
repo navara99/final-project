@@ -3,7 +3,6 @@ const router = express.Router();
 const multer = require("multer");
 const storage = multer.diskStorage({
   destination: function (req, res, cb) {
-    console.log("raeched")
     cb(null, "./public/uploads");
   },
   filename: function (req, file, cb) {
@@ -19,16 +18,16 @@ module.exports = (db) => {
   router.post("/", upload.single("resume"), async (req, res) => {
     const { user_id } = req.session;
     const { jobId, message } = req.body;
-    console.log(jobId, message);
-    console.log(req.body);
+
     try {
-      console.log(req.file.path);
+      const filePath = req.file.path;
+      await applyForJob(user_id, message, jobId, filePath);
       res.json({
         status: "success"
       });
     } catch (err) {
       console.log(err.message);
-    }
+    };
 
   });
 
