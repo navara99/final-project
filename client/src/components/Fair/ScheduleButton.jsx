@@ -68,7 +68,7 @@ const ScheduleButton = ({ live, added, upcoming, id, add }) => {
           aria-expanded={open ? "true" : undefined}
           aria-haspopup="menu"
           onClick={handleToggle}
-          disabled={!options || live}
+          disabled={!options || !upcoming}
         >
           <ArrowDropDownIcon />
         </Button>
