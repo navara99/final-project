@@ -10,9 +10,9 @@
 
 * users should be able to attend a video interview where they can open up a whiteboard
 
-* users should be able to see a calender that shows their schedules job fairs and interviews
+* (done) users should be able to see a calender that shows their schedules job fairs and interviews
 
-* users should be able to send messages to another user
+* (done) users should be able to send messages to another user
 
 * users should be able to upload a resume to their profiles
 
@@ -20,25 +20,21 @@
 
 * users should be able to see a pinned list of jobs during career fair
 
-* users should be able to create an organization/business
+* (done) users should be able to create an organization/business
 
 ### Members of organization
 
-* admin can add users into the organization
+* (done) member could add or remove members from the organization
 
-* admin could add or remove users from the organization
+* (done) members of the organization should be able to create a job fair, including time/date
 
-* members of the organization should be able to create a job fair, including time/date
-
-* members of the organization can create jobs postings
+* (done) members of the organization can create jobs postings
 
 * members of the organization can view job application and send an interview request
 
-* members of the organization can add jobs to the career fair
+* (done) members of the organization can add jobs to the career fair
 
 * members of the organization can attend the career fair as a host of a stall
-
-* members of the organization can update the description of the organization
 
 
 
