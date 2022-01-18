@@ -340,12 +340,9 @@ const queryGenerator = (db) => {
     getAllApplicationsByJobId,
     getOrganizationDetails,
     checkIfIAmMember,
-<<<<<<< HEAD
     getMessagesByUserId,
-    createNewMessage
-=======
+    createNewMessage,
     addJobToOrganization
->>>>>>> master
   };
 };
 
