@@ -25,11 +25,12 @@ function JobForm({ jobFormOpen, setJobFormOpen, setSnackBarDetails, setOrganizat
       description,
       experience,
       location,
-      salary
+      salary,
+      organizationId: id
     };
 
     try {
-      const { data } = await axios.post(`/api/organizations/${id}/jobs`, jobDetails);
+      const { data } = await axios.post(`/api/jobs`, jobDetails);
       setOrganizationDetails((prev) => ({ ...prev, jobs: [{ ...data, applications: [] }, ...prev.jobs] }));
       setJobFormOpen(!jobFormOpen);
       setSnackBarDetails({

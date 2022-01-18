@@ -14,7 +14,7 @@ import CareerFair from "./components/CareerFair/CareerFair";
 import ChatBox from "./components/ChatBox/ChatBox";
 
 import OrganizationDetails from "./components/Groups/OrganizationDetails";
-import Jobs from "./components/Jobs/index";
+import Jobs from "./components/JobBoard/index";
 import Schedule from "./components/Schedule";
 
 function App() {

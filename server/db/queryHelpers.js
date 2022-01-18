@@ -243,7 +243,8 @@ const queryGenerator = (db) => {
     const queryString = `
     SELECT fairs.* FROM fairs
     JOIN fairs_organizations ON fairs.host_id = fairs_organizations.fair_id
-    WHERE fairs_organizations.organization_id = $1;
+    WHERE fairs_organizations.organization_id = $1
+    ORDER BY fairs.start_time DESC;
     `;
 
     try {
@@ -272,45 +273,63 @@ const queryGenerator = (db) => {
 
   };
 
+  const createNewFair = async (name, description, startTime, endTime, hostId) => {
+    const values = [name, description, startTime, endTime, hostId];
+    const queryString = `
+      INSERT INTO fairs (name, description, start_time, end_time, host_id)
+      VALUES ($1, $2, $3, $4, $5)
+      RETURNING *;
+    `;
+
+    try {
+      const result = await db.query(queryString, values);
+      const newFair = getFirstRecord(result);
+      return newFair;
+    } catch (err) {
+      console.log(err.message);
+    };
+
+  };
+
   //Messages queryhelper functions
 
   // Get All messages
-  const getMessagesByUserId = async(user_id) => {
+  const getMessagesByUserId = async (user_id) => {
     const values = [user_id];
     const queryString = `
     SELECT * FROM messages WHERE sender_id = $1 OR receiver_id = $1
     `
     try {
-      const result = await db.query(queryString,values);
+      const result = await db.query(queryString, values);
       //getting other users 
-      const other_users = result.rows.reduce( (prev, curr) => {
+      const other_users = result.rows.reduce((prev, curr) => {
 
-        if(curr.sender_id !== user_id && 
-          !prev.includes(curr.sender_id) ) {
-            prev.push(curr.sender_id)
-          }
-        if(curr.receiver_id !== user_id && !prev.includes(curr.receiver_id )) {
+        if (curr.sender_id !== user_id &&
+          !prev.includes(curr.sender_id)) {
+          prev.push(curr.sender_id)
+        }
+        if (curr.receiver_id !== user_id && !prev.includes(curr.receiver_id)) {
           prev.push(curr.receiver_id)
-        }  
+        }
         return prev;
-      },[])
+      }, [])
 
-      const contacts =  await Promise.all(other_users.map(async (userId) => {
-        const userInfo = await getUserByValue('id',userId);
+      const contacts = await Promise.all(other_users.map(async (userId) => {
+        const userInfo = await getUserByValue('id', userId);
         const userWithoutPassword = Object.assign({}, userInfo);
         delete userWithoutPassword.password;
-        return userWithoutPassword ;
+        return userWithoutPassword;
       }))
-  
-      return {messagesArr : result.rows, contacts};
+
+      return { messagesArr: result.rows, contacts };
     } catch (error) {
       console.log(error)
     }
   }
-  
+
   // create NewMessage
 
-  const createNewMessage = async({sender_id, receiver_id, message}) => {
+  const createNewMessage = async ({ sender_id, receiver_id, message }) => {
     try {
       const values = [sender_id, receiver_id, message];
       const queryString = `
@@ -333,6 +352,24 @@ const queryGenerator = (db) => {
     }
   }
 
+  // Get jobs by search
+
+  const getJobsBySearch = async (searchTerm) => {
+    const values = searchTerm ? ["%" + searchTerm + "%"] : null;
+    const queryString = searchTerm ? `
+    SELECT * FROM jobs
+    WHERE title ILIKE $1 OR description ILIKE $1 OR location ILIKE $1;
+    `: "SELECT * FROM jobs;";
+
+    try {
+      const result = await db.query(queryString, values);
+      return result.rows;
+    } catch (error) {
+      console.log(error);
+    };
+
+  }
+
   return {
     createNewUser,
     getUserByValue,
@@ -348,9 +385,12 @@ const queryGenerator = (db) => {
     getAllApplicationsByJobId,
     getOrganizationDetails,
     checkIfIAmMember,
+    addJobToOrganization,
+    createNewFair,
     getMessagesByUserId,
     createNewMessage,
-    addJobToOrganization
+    addJobToOrganization,
+    getJobsBySearch
   };
 };
 
