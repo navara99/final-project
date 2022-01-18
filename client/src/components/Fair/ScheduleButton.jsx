@@ -16,9 +16,8 @@ const ScheduleButton = ({ added, upcoming, id, add }) => {
   const [options, setOptions] = useState();
 
   useEffect(() => {
-    axios.get(`/api/fairs/organizations/${id}`).then((data) => {
+    axios.get(`/api/fairs/organizations/${id}`).then(({ data }) => {
       if (data.length > 0) setOptions(data);
-      console.log(data);
     });
   }, []);
 
@@ -91,7 +90,7 @@ const ScheduleButton = ({ added, upcoming, id, add }) => {
                       selected={false}
                       onClick={(event) => handleMenuItemClick(event, index)}
                     >
-                      {option}
+                      {option.name}
                     </MenuItem>
                   ))}
                 </MenuList>
