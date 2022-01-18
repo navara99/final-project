@@ -13,6 +13,7 @@ import {io} from 'socket.io-client';
 import axios from 'axios';
 import useMessageReceiver from '../../hooks/useMessageReceiver';
 import { Avatar, ListItemAvatar } from '@mui/material';
+import { useLocation } from 'react-router-dom';
 
 const ChatBox = ({currentUser}) => {
   const [messages, setMessages] = useState(null);
@@ -21,8 +22,9 @@ const ChatBox = ({currentUser}) => {
   const [incomingMessage, setIncomingMessage] = useState(null);
   const [receiverId, setReceiverId,handleOnClick] = useMessageReceiver(null)
   const [ socket , setSocket] = useState(null)
-
-  
+  const location = useLocation();
+  const {contactId} = location.state;
+  console.log("ContactId :", contactId);
   useEffect(() => {
     axios.get("/api/messages").then(res => {
       setMessages(res.data.messagesArr);
@@ -30,6 +32,11 @@ const ChatBox = ({currentUser}) => {
     })
   }, []);
 
+  useEffect(() => {
+    if(contactId){
+        setReceiverId(contactId)
+    }
+  },[contactId]);
   const handleSubmit = (e) => {
     e.preventDefault();
     const newMessage = {
@@ -100,7 +107,7 @@ const ChatBox = ({currentUser}) => {
             {
                 receiverId && currentUser ? (
                     <>
-                      <MessageList messages={messages.filter(message => (message.sender_id === receiverId && message.receiver_id === currentUser.id) || (message.sender_id === currentUser.id && message.receiver_id === receiverId))} currentUser={currentUser} />
+                      <MessageList messages={messages && messages.filter(message => (message.sender_id === receiverId && message.receiver_id === currentUser.id) || (message.sender_id === currentUser.id && message.receiver_id === receiverId))} currentUser={currentUser} />
                       <Divider />
                       <MessageForm messageText={messageText} handleSubmit={handleSubmit} setMessageText={setMessageText} />
                     </>
