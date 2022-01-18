@@ -49,62 +49,27 @@ const queryGenerator = (db) => {
   };
 
   // Individual Fair
-  const getFairDetails = async (fairId, userId) => {
-    const values = [fairId];
-    const values2 = [fairId, userId];
-
-    const fairDetailsString = `
-      SELECT fairs.*,
-        organizations.name AS host_name,
-        organizations.description AS host_description,
-        start_time AS start,
-        end_time AS end,
-        organizations.description AS host_description
-        FROM fairs
-        JOIN organizations ON (organizations.id = fairs.host_id)
-        WHERE fairs.id = $1
-    `;
-    const stallsString = `
-      SELECT organizations.id, 
-        organizations.name, 
-        organizations.description,
-        industry,
-        website
-        FROM fairs
-        JOIN fairs_organizations ON (fairs.id = fairs_organizations.fair_id) 
-        JOIN organizations ON (organizations.id = fairs_organizations.organization_id)
-        WHERE fairs.id = $1
-    `;
-
-    const userAddedString = `
-      SELECT id
-        FROM fairs_users
-        WHERE fair_id = $1
-        AND user_id = $2
-        ;
+  const getFair = async (fair_id) => {
+    const values = [fair_id];
+    const queryString = `
+    SELECT 
+    fairs.id as Fair_Id, 
+    fairs.description as Fair_Desc, 
+    fairs.name as Fair_Name, 
+    fairs.poster as POSTER, 
+    (SELECT organizations.name FROM organizations WHERE host_id = organizations.id)as Host_Name, 
+    organizations.id as Organizations_Id, 
+    organizations.name as Organizations_Name, 
+    organizations.description as Organizations_Desc 
+    FROM fairs
+    JOIN fairs_organizations ON (fairs.id = fairs_organizations.fair_id) 
+    JOIN organizations ON (organizations.id = fairs_organizations.organization_id)
+    WHERE fairs.id = $1
     `;
 
     try {
-      const fairResult = await db.query(fairDetailsString, values);
-      const stallResult = await db.query(stallsString, values);
-      const userAddedResult = await db.query(userAddedString, values2);
-
-      const fair = getData(fairResult).map((fair) => {
-        const { host_name, host_id, host_description, end, start } = fair;
-        return {
-          ...fair,
-          hostName: host_name,
-          hostId: host_id,
-          hostDescription: host_description,
-          live: end > Date.now() && start < Date.now(),
-          upcoming: start > Date.now(),
-        };
-      })[0];
-
-      const stalls = getData(stallResult);
-      const added = getData(userAddedResult);
-
-      return { fair, stalls, added: added.length > 0 };
+      const result = await db.query(queryString, values);
+      return getData(result);
     } catch (err) {
       console.log(err.message);
     }
@@ -151,11 +116,12 @@ const queryGenerator = (db) => {
   const getOrganizationsByUser = async (user_id) => {
     const values = [user_id];
     const queryString = `
-    SELECT users_organizations.admin, organizations.id, organizations.name, organizations.description, organizations.email, organizations.industry, organizations.website FROM users_organizations 
+    SELECT organizations.*
+    FROM users_organizations
     JOIN users ON users.id = users_organizations.user_id
-    JOIN organizations ON organization_id = users_organizations.organization_id
+    JOIN organizations ON organizations.id = users_organizations.organization_id
     GROUP BY organizations.id, users_organizations.user_id, users_organizations.admin
-    HAVING user_id = $1;`;
+    HAVING users_organizations.user_id = $1;`;
 
     try {
       const result = await db.query(queryString, values);
@@ -203,8 +169,9 @@ const queryGenerator = (db) => {
     const values = [organization_id];
     const queryString = `
     SELECT jobs.* FROM jobs
-    JOIN organizations ON jobs.employer_id = organizations.id
-    WHERE organizations.id = $1;
+    JOIN organizations ON jobs.organization_id = organizations.id
+    WHERE organizations.id = $1
+    ORDER BY jobs.created_at DESC;
     `;
 
     try {
@@ -226,7 +193,8 @@ const queryGenerator = (db) => {
     const queryString = `
     SELECT users.*, users_organizations.admin FROM users
     JOIN users_organizations ON users.id = users_organizations.user_id
-    WHERE users_organizations.organization_id = $1;
+    WHERE users_organizations.organization_id = $1
+    ORDER BY users.first_name;
     `;
 
     try {
@@ -239,7 +207,6 @@ const queryGenerator = (db) => {
 
   const checkIfIAmMember = async (organization_id, user_id) => {
     const values = [organization_id, user_id];
-    console.log(user_id, organization_id);
     const queryString = `
     SELECT COUNT(*)
     FROM users_organizations
@@ -276,7 +243,8 @@ const queryGenerator = (db) => {
     const queryString = `
     SELECT fairs.* FROM fairs
     JOIN fairs_organizations ON fairs.host_id = fairs_organizations.fair_id
-    WHERE fairs_organizations.organization_id = $1;
+    WHERE fairs_organizations.organization_id = $1
+    ORDER BY fairs.start_time DESC;
     `;
 
     try {
@@ -287,12 +255,145 @@ const queryGenerator = (db) => {
     }
   };
 
-  const addFairToSchedule = async (fairId, userId) => {
+  const addJobToOrganization = async (
+    organization_id,
+    { title, description, experience, location, salary }
+  ) => {
+    const values = [
+      organization_id,
+      title,
+      description,
+      experience,
+      location,
+      salary,
+    ];
+    const queryString = `
+      INSERT INTO jobs (organization_id, title, description, experience, location, salary)
+      VALUES ($1, $2, $3, $4, $5, $6)
+      RETURNING *;
+    `;
+
+    try {
+      const result = await db.query(queryString, values);
+      const newJob = getFirstRecord(result);
+      return newJob;
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
+  const createNewFair = async (
+    name,
+    description,
+    startTime,
+    endTime,
+    hostId
+  ) => {
+    const values = [name, description, startTime, endTime, hostId];
+    const queryString = `
+      INSERT INTO fairs (name, description, start_time, end_time, host_id)
+      VALUES ($1, $2, $3, $4, $5)
+      RETURNING *;
+    `;
+
+    try {
+      const result = await db.query(queryString, values);
+      const newFair = getFirstRecord(result);
+      return newFair;
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
+  //Messages queryhelper functions
+
+  // Get All messages
+  const getMessagesByUserId = async (user_id) => {
+    const values = [user_id];
+    const queryString = `
+    SELECT * FROM messages WHERE sender_id = $1 OR receiver_id = $1
+    `;
+    try {
+      const result = await db.query(queryString, values);
+      //getting other users
+      const other_users = result.rows.reduce((prev, curr) => {
+        if (curr.sender_id !== user_id && !prev.includes(curr.sender_id)) {
+          prev.push(curr.sender_id);
+        }
+        if (curr.receiver_id !== user_id && !prev.includes(curr.receiver_id)) {
+          prev.push(curr.receiver_id);
+        }
+        return prev;
+      }, []);
+
+      const contacts = await Promise.all(
+        other_users.map(async (userId) => {
+          const userInfo = await getUserByValue("id", userId);
+          const userWithoutPassword = Object.assign({}, userInfo);
+          delete userWithoutPassword.password;
+          return userWithoutPassword;
+        })
+      );
+
+      return { messagesArr: result.rows, contacts };
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // create NewMessage
+
+  const createNewMessage = async ({ sender_id, receiver_id, message }) => {
+    try {
+      const values = [sender_id, receiver_id, message];
+      const queryString = `
+        INSERT INTO  messages (sender_id , receiver_id, message)
+        VALUES ($1, $2, $3)
+        RETURNING *;
+      `;
+      const result = await db.query(queryString, values);
+      const userInfo = await getUserByValue("id", receiver_id);
+      const userWithoutPassword = Object.assign({}, userInfo);
+      delete userWithoutPassword.password;
+      const newMessage = {
+        messageObj: getFirstRecord(result),
+        receiver: userWithoutPassword,
+      };
+      return newMessage;
+      // return getFirstRecord(result);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // Get jobs by search
+
+  const getJobsBySearch = async (searchTerm) => {
+    const values = searchTerm ? ["%" + searchTerm + "%"] : null;
+    const queryString = searchTerm
+      ? `
+    SELECT * FROM jobs
+    WHERE title ILIKE $1 OR description ILIKE $1 OR location ILIKE $1;
+    `
+      : "SELECT * FROM jobs;";
+
+    try {
+      const result = await db.query(queryString, values);
+      return result.rows;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getUserOrganizations = async (fairId, userId) => {
     const values = [fairId, userId];
     const queryString = `
-      INSERT INTO fairs_users (fair_id, user_id)
-      VALUES ($1, $2)
-      RETURNING *;
+      SELECT organizations.name,
+      organizations.id,
+      (SELECT count(*) FROM fairs_organizations WHERE fair_id = $1 AND organizations.id = organization_id) > 0 AS added
+      FROM organizations
+      JOIN users_organizations ON organizations.id = users_organizations.organization_id
+      WHERE user_id = $2;
     `;
 
     try {
@@ -319,15 +420,12 @@ const queryGenerator = (db) => {
     }
   };
 
-  const getUserOrganizations = async (fairId, userId) => {
+  const addFairToSchedule = async (fairId, userId) => {
     const values = [fairId, userId];
     const queryString = `
-      SELECT organizations.name,
-      organizations.id,
-      (SELECT count(*) FROM fairs_organizations WHERE fair_id = $1 AND organizations.id = organization_id) > 0 AS added
-      FROM organizations
-      JOIN users_organizations ON organizations.id = users_organizations.organization_id
-      WHERE user_id = $2;
+      INSERT INTO fairs_users (fair_id, user_id)
+      VALUES ($1, $2)
+      RETURNING *;
     `;
 
     try {
@@ -339,8 +437,9 @@ const queryGenerator = (db) => {
   };
 
   return {
-    getUserOrganizations,
     addFairToSchedule,
+    addFairToOrganizationSchedule,
+    getUserOrganizations,
     createNewUser,
     getUserByValue,
     createNewOrganization,
@@ -348,14 +447,19 @@ const queryGenerator = (db) => {
     getOrganizationsByUser,
     getAllOtherUsers,
     getAllFairs,
-    getFairDetails,
+    getFair,
     getAllJobsByOrganizationId,
     getAllMembersByOrganizationId,
     getAllFairsByOrganizationId,
     getAllApplicationsByJobId,
     getOrganizationDetails,
     checkIfIAmMember,
-    addFairToOrganizationSchedule,
+    addJobToOrganization,
+    createNewFair,
+    getMessagesByUserId,
+    createNewMessage,
+    addJobToOrganization,
+    getJobsBySearch,
   };
 };
 

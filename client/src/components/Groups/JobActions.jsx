@@ -3,7 +3,7 @@ import GroupsBtn from "./GroupsBtn";
 
 function JobActions({ job, isMember }) {
 
-  console.log(job);
+
   return (
     <>
       {!isMember && <GroupsBtn text={"Apply"} />}

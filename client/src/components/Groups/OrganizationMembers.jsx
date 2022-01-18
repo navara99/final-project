@@ -1,14 +1,32 @@
 import React from "react";
 import useExpand from "../../hooks/useExpand";
-import { ListItemText, Card, IconButton, Collapse, CardActions } from "@mui/material";
+import { ListItemText, Card, Collapse, CardActions } from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MembersList from "./MembersList";
+import { useParams } from "react-router";
+import GroupsBtn from "./GroupsBtn";
+import { useState } from "react";
+import AddMemberForm from "./AddMemberForm";
+import { Person } from "@mui/icons-material";
 
-function OrganizationMembers({ organization, cardStyles }) {
+function OrganizationMembers({ organization, cardStyles, setSnackBarDetails, setOrganizationDetails }) {
   const { ExpandMore, handleExpandClick, expanded } = useExpand();
+  const [openAddMembersModal, setOpenAddMembersModal] = useState(false);
+  const { id } = useParams();
+
+  const handleAddMemberBtn = () => {
+    setOpenAddMembersModal(!openAddMembersModal)
+  };
 
   return (
     <div>
+      <AddMemberForm
+        {...{ openAddMembersModal }}
+        {...{ setOpenAddMembersModal }}
+        {...{ id }}
+        {...{ setSnackBarDetails }}
+        {...{ setOrganizationDetails }}
+      />
       <Card alignItems="flex-start" style={cardStyles}>
         <div className="organization-card">
           <ListItemText
@@ -16,6 +34,12 @@ function OrganizationMembers({ organization, cardStyles }) {
             secondary={`${organization.details.name} has ${organization.members.length} member(s).`}
           />
           <CardActions>
+            {organization.isMember && <GroupsBtn
+              text="Add"
+              variant="contained"
+              icon={<Person />}
+              onClick={handleAddMemberBtn}
+            />}
             <ExpandMore
               expand={expanded}
               onClick={handleExpandClick}
@@ -30,7 +54,7 @@ function OrganizationMembers({ organization, cardStyles }) {
           <MembersList members={organization.members} />
         </Collapse>
       </Card >
-    </div>
+    </div >
   )
 };
 

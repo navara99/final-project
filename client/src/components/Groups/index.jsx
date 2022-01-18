@@ -15,22 +15,19 @@ const cardStyles = {
 
 function Groups({ setSnackBarDetails }) {
   const [openForm, setOpenForm] = useState(false);
-  const [openAddMembersModal, setOpenAddMembersModal] = useState(false);
   const { myGroups, setMyGroups } = useMyGroups();
   const [selectedGroup, setSelectedGroup] = useState();
 
   const renderMyGroups = (myGroups) => {
 
     return myGroups.sort((a, b) => b.id - a.id).map((group) => {
-      console.log(group);
       return <GroupListItem
         key={group.id}
         {...{ group }}
-        {...{ openAddMembersModal }}
-        {...{ setOpenAddMembersModal }}
         {...{ selectedGroup }}
         {...{ setSelectedGroup }}
         {...{ cardStyles }}
+        {...{ setSnackBarDetails }}
       />
     });
 
@@ -38,12 +35,6 @@ function Groups({ setSnackBarDetails }) {
 
   return (
     <div className="groups-container">
-      {openAddMembersModal && <AddMemberForm
-        {...{ openAddMembersModal }}
-        {...{ setOpenAddMembersModal }}
-        {...{ selectedGroup }}
-        {...{ setSnackBarDetails }}
-      />}
       <div className="organization-header">
         <h1>Your Organizations</h1>
         <Button style={{ height: "50%" }} variant="contained" startIcon={<Add />} onClick={() => setOpenForm(!openForm)}>Add Organization</Button>

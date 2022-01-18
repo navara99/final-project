@@ -29,14 +29,12 @@ module.exports = (db) => {
     const { usersIdToAdd } = req.body;
 
     try {
-      await Promise.all(
-        usersIdToAdd.map(async (id) => {
-          return await addUserToOrganization(id, req.params.id, false);
-        })
-      );
-      res.json({
-        status: "success",
-      });
+      await Promise.all(usersIdToAdd.map(async (id) => {
+        await addUserToOrganization(id, req.params.id, false);
+      }));
+
+      const members = await getAllMembersByOrganizationId(req.params.id);
+      res.json(members);
     } catch (err) {
       console.log(err.message);
     }

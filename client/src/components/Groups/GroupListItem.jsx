@@ -1,39 +1,27 @@
-import React, { useState } from "react";
-import { ListItemText, Card, IconButton, Collapse, CardActions } from "@mui/material";
+import React from "react";
+import { ListItemText, Card, Collapse, CardActions } from "@mui/material";
 import GroupAction from "./GroupAction";
-import { styled } from '@mui/material/styles';
+import { Link } from "react-router-dom";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-
+import useExpand from "../../hooks/useExpand";
 
 function GroupListItem({ group, openAddMembersModal, setOpenAddMembersModal, selectedGroup, setSelectedGroup, cardStyles }) {
-  const [expanded, setExpanded] = useState(false)
-
-  const ExpandMore = styled((props) => {
-    const { expand, ...other } = props;
-    return <IconButton {...other} />;
-  })(({ theme, expand }) => ({
-    transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-    marginLeft: 'auto',
-    transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest,
-    }),
-  }));
-
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
+  const { ExpandMore, handleExpandClick, expanded } = useExpand();
 
   return (
     <Card alignItems="flex-start" style={cardStyles}>
       <div className="organization-card">
-        <img
-          className="organization-logo"
-          src="https://assets.brand.microsites.netflix.io/assets/7dc497e2-4975-11ec-a9ce-066b49664af6_cm_1440w.jpg?v=1"
-        />
-        <ListItemText
-          primary={<h3 className="organization-card-name">{group.name}</h3>}
-          secondary={group.admin && <p>Admin</p>}
-        />
+        <Link to={`/organizations/${group.id}`} style={{ textDecoration: 'none', display: "flex", color: "black" }}>
+          <img
+            alt={group.name}
+            className="organization-logo"
+            src="https://assets.brand.microsites.netflix.io/assets/7dc497e2-4975-11ec-a9ce-066b49664af6_cm_1440w.jpg?v=1"
+          />
+          <ListItemText
+            primary={<h3 className="organization-card-name">{group.name}</h3>}
+            secondary={<p>{group.description}</p>}
+          />
+        </Link>
         <CardActions>
           <ExpandMore
             expand={expanded}
@@ -46,9 +34,6 @@ function GroupListItem({ group, openAddMembersModal, setOpenAddMembersModal, sel
         </CardActions>
       </div>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <ListItemText
-          secondary={group.description}
-        />
         <GroupAction
           {...{ openAddMembersModal }}
           {...{ setOpenAddMembersModal }}

@@ -10,7 +10,7 @@ const useOrganizationDetails = (id) => {
     });
   }, [id]);
 
-  return organizationDetails;
+  return [organizationDetails, setOrganizationDetails];
 };
 
 export default useOrganizationDetails;

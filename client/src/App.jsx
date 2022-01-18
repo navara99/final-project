@@ -14,7 +14,7 @@ import Fair from "./components/Fair";
 import ChatBox from "./components/ChatBox/ChatBox";
 
 import OrganizationDetails from "./components/Groups/OrganizationDetails";
-import Jobs from "./components/Jobs/index";
+import Jobs from "./components/JobBoard/index";
 import Schedule from "./components/Schedule";
 
 function App() {
@@ -81,10 +81,10 @@ function App() {
           />
           <Route path="/jobs" element={<Jobs />} />
           <Route path="/schedule" element={<Schedule />} />
-          <Route path="/messages" element={<ChatBox/>} />
+          <Route path="/messages" element={<ChatBox currentUser = {currentUser}/>} />
           <Route path="/settings" element={<>Settings</>} />
           <Route path="/fairs/:id" element={<Fair currentUser={currentUser} />} />
-          <Route path="/organizations/:id" element={<OrganizationDetails />} />
+          <Route path="/organizations/:id" element={<OrganizationDetails {...{ setSnackBarDetails }}/>} />
         </Routes>
       </div>
     </div>
