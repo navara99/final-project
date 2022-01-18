@@ -13,10 +13,7 @@ import axios from "axios";
 const ScheduleButton = ({ added, upcoming, id, add }) => {
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
-  const [options, setOptions] = useState([
-    "Squash and merge",
-    "Rebase and merge",
-  ]);
+  const [options, setOptions] = useState();
 
   const joinAsJobSeeker = () => {
     axios.post(`/api/fairs/join/${id}`).then(() => {

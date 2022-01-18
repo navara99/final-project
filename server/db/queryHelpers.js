@@ -303,7 +303,26 @@ const queryGenerator = (db) => {
     }
   };
 
+  const getUserOrganizations = async (id) => {
+    const values = [id];
+    const queryString = `
+      SELECT organizations.name,
+      organizations.id 
+      FROM organizations
+      JOIN users_organizations ON organizations_id = organization_id
+      WHERE user_id = $1;
+    `;
+
+    try {
+      const result = await db.query(queryString, values);
+      return getData(result);
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
   return {
+    getUserOrganizations,
     addFairToSchedule,
     createNewUser,
     getUserByValue,

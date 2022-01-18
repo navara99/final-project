@@ -1,4 +1,4 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
 module.exports = (db) => {
@@ -10,8 +10,21 @@ module.exports = (db) => {
     getAllMembersByOrganizationId,
     getAllFairsByOrganizationId,
     getOrganizationDetails,
-    checkIfIAmMember
+    checkIfIAmMember,
+    getUserOrganizations,
   } = queryGenerator(db);
+
+  router.get("/", async (req, res) => {
+    const { user_id } = req.session;
+
+    try {
+      const organizations = await getUserOrganizations(user_id);
+
+      res.json(organizations);
+    } catch (err) {
+      console.log(err.message);
+    }
+  });
 
   router.post("/", async (req, res) => {
     const { user_id } = req.session;
@@ -22,24 +35,24 @@ module.exports = (db) => {
       res.json(newOrganization);
     } catch (err) {
       console.log(err.message);
-    };
-
+    }
   });
 
   router.post("/:id/users", async (req, res) => {
     const { usersIdToAdd } = req.body;
 
     try {
-      await Promise.all(usersIdToAdd.map(async (id) => {
-        return await addUserToOrganization(id, req.params.id, false);
-      }));
+      await Promise.all(
+        usersIdToAdd.map(async (id) => {
+          return await addUserToOrganization(id, req.params.id, false);
+        })
+      );
       res.json({
-        status: "success"
+        status: "success",
       });
     } catch (err) {
       console.log(err.message);
     }
-
   });
 
   router.get("/:id", async (req, res) => {
@@ -56,8 +69,7 @@ module.exports = (db) => {
       res.json({ jobs, members, fairs, details, isMember });
     } catch (err) {
       console.log(err.message);
-    };
-
+    }
   });
 
   return router;
