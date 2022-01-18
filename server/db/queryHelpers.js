@@ -323,10 +323,10 @@ const queryGenerator = (db) => {
       const userWithoutPassword = Object.assign({}, userInfo);
       delete userWithoutPassword.password;
       const newMessage = {
-        message_text : getFirstRecord(result),
+        messageObj: getFirstRecord(result),
         receiver : userWithoutPassword,
       }
-      return newMessage
+      return newMessage;
       // return getFirstRecord(result);
     } catch (error) {
       console.log(error);
