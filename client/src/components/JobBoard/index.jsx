@@ -8,7 +8,7 @@ import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import axios from "axios";
 
-const Jobs = () => {
+const Jobs = ({ setSnackBarDetails }) => {
   const [jobs, setJobs] = useJobs();
 
   const handleSearch = (e) => {
@@ -35,7 +35,7 @@ const Jobs = () => {
           <SearchIcon />
         </IconButton>
       </Paper>
-      <JobsList {...{ jobs }} />
+      <JobsList {...{ jobs }}  {...{ setSnackBarDetails }} />
     </div>
   );
 };
