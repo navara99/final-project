@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import axios from "axios";
 
 const useJobs = () => {
@@ -6,8 +6,9 @@ const useJobs = () => {
 
   useEffect(() => {
     axios.get("/api/jobs").then(({ data }) => {
+      console.log(data);
       setJobs(data);
-    })
+    });
   });
 
   return [jobs, setJobs];
