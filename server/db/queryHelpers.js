@@ -288,6 +288,60 @@ const queryGenerator = (db) => {
     } catch (err) {
       console.log(err.message);
     };
+
+  };
+
+  //Messages queryhelper functions
+
+  // Get All messages
+  const getMessagesByUserId = async (user_id) => {
+    const values = [user_id];
+    const queryString = `
+    SELECT * FROM messages WHERE sender_id = $1 OR receiver_id = $1
+    `
+    try {
+      const result = await db.query(queryString, values);
+      //getting other users 
+      const other_users = result.rows.reduce((prev, curr) => {
+
+        if (curr.sender_id !== user_id &&
+          !prev.includes(curr.sender_id)) {
+          prev.push(curr.sender_id)
+        }
+        if (curr.receiver_id !== user_id && !prev.includes(curr.receiver_id)) {
+          prev.push(curr.receiver_id)
+        }
+        return prev;
+      }, [])
+
+      const contacts = await Promise.all(other_users.map(async (userId) => {
+        const userInfo = await getUserByValue('id', userId);
+        const userWithoutPassword = Object.assign({}, userInfo);
+        delete userWithoutPassword.password;
+        return userWithoutPassword;
+      }))
+
+      return { messagesArr: result.rows, contacts };
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  // create NewMessage
+
+  const createNewMessage = async ({ sender_id, receiver_id, message }) => {
+    try {
+      const values = [sender_id, receiver_id, message];
+      const queryString = `
+        INSERT INTO  messages (sender_id , receiver_id, message)
+        VALUES ($1, $2, $3)
+        RETURNING *;
+      `;
+      const result = await db.query(queryString, values);
+      return getFirstRecord(result);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return {
@@ -306,7 +360,10 @@ const queryGenerator = (db) => {
     getOrganizationDetails,
     checkIfIAmMember,
     addJobToOrganization,
-    createNewFair
+    createNewFair,
+    getMessagesByUserId,
+    createNewMessage,
+    addJobToOrganization
   };
 };
 

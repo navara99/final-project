@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Grid from "@mui/material/Grid";
 import CompanyList from "./Companies/CompanyList";
 import FairHeader from "./FairHeader";

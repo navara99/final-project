@@ -16,7 +16,7 @@ const useEachFair = (id) => {
       setHostName(host_name);
       setPoster(poster); 
     });
-  }, []);
+  }, [id]);
 
   return {organizations, fair_name, fair_desc, host_name, poster}
 
