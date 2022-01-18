@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import ScheduleButton from "./ScheduleButton";
 import { formatStartEndTime, formatDate } from "../../helpers/date";
 
 const Header = ({ id, fair, added, currentUser, add }) => {
@@ -69,16 +70,16 @@ const Header = ({ id, fair, added, currentUser, add }) => {
 
             {currentUser && (
               <div>
+                <ScheduleButton />
                 <Button
                   variant="contained"
-                  size="small"
                   disabled={added}
                   onClick={clickHandler}
                   disabled={!upcoming || added}
                 >
                   {added ? "Added to Schedule" : "Add to Schedule"}
                 </Button>
-                <Button variant="contained" size="small" disabled={!live}>
+                <Button variant="contained" disabled={!live}>
                   Join
                 </Button>
               </div>

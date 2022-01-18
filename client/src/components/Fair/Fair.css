@@ -6,13 +6,17 @@
   text-decoration: none;
 }
 
-.fair-details button.MuiButton-root {
-  margin: 0 0.4em;
-}
-
 .fair-details .MuiCardActions-root {
   display: flex;
   justify-content: space-between;
+}
+
+.fair-details .MuiCardActions-root > div > * {
+  margin: 0 0.3em;
+}
+
+.fair-details h3 {
+  padding: 0 0.4em;
 }
 
 .fair-details .MuiBox-root .MuiPaper-root {
@@ -45,8 +49,4 @@
   display: flex;
   width: 100%;
   justify-content: space-between;
-}
-
-.fair-details .organization-details button {
-  margin: 0;
 }

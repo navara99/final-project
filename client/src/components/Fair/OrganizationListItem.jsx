@@ -41,9 +41,9 @@ const OrganizationListItem = ({ id, website, industry, description, name }) => {
                     Website
                   </Button>
                 )}
-                <Button size="small" onClick={() => console.log("job post")}>
+                {/* <Button size="small" onClick={() => console.log("job post")}>
                   Show Job Post
-                </Button>
+                </Button> */}
                 <Button
                   size="small"
                   component={Link}
