@@ -22,9 +22,11 @@ const ChatBox = ({currentUser}) => {
   const [messageText, setMessageText] = useState('');
   const [incomingMessage, setIncomingMessage] = useState(null);
   const [receiverId, setReceiverId,handleOnClick] = useMessageReceiver(null)
-  const [ socket , setSocket] = useState(null)
+  const [ socket , setSocket] = useState(null);
+  const [receiver, setReceiver] = useState(null);
   const location = useLocation();
-  const {contactId, contactFirstName, contactLastName, contactProfilePicture} = location.state;
+  
+  
  
   useEffect(() => {
     axios.get("/api/messages").then(res => {
@@ -34,10 +36,12 @@ const ChatBox = ({currentUser}) => {
   }, []);
 
   useEffect(() => {
-    if(contactId){
+    if(location.state){
+        const {contactId, contactFirstName, contactLastName, contactProfilePicture} = location.state;
         setReceiverId(contactId)
+        setReceiver({id: contactId, first_name: contactFirstName, last_name: contactLastName, profile_picture : contactProfilePicture})
     }
-  },[contactId]);
+  },[location.state]);
   const handleSubmit = (e) => {
     e.preventDefault();
     const newMessage = {
@@ -106,18 +110,18 @@ const ChatBox = ({currentUser}) => {
                 </ListItem>
                 <Divider/>
                 <ListItem>
-                  <SenderList messages={messages} currentUser={currentUser} senders = {senders} setReceiverId = {setReceiverId} handleOnClick = {handleOnClick} />
+                  <SenderList messages={messages} currentUser={currentUser} senders = {senders} setReceiverId = {setReceiverId} handleOnClick = {handleOnClick} setReceiver={setReceiver}/>
                 </ListItem>
             </List>      
         </Grid>
         {/* Chatter Box */}
         <Grid item xs ={9}   sx={{backgroundColor:"#eff2f6"}} component={Paper} variant='outlined'>
             {
-                receiverId && currentUser ? (
+                receiverId && currentUser? (
                     <>
                       <Box sx={{width:'100%', height:"50px", backgroundColor:"#bdc7df", display:"flex", justifyContent:"center", alignItems:"center"}} >
-                          <Avatar alt={`${contactFirstName}`} src={`${contactProfilePicture}`}/>
-                          <Typography variant='body2'sx={{ml:2}}>{contactFirstName} {contactLastName}</Typography>
+                          <Avatar alt={`${receiver.id}`} src={`${receiver.profile_picture}`}/>
+                          <Typography variant='body2'sx={{ml:2}}>{receiver.first_name} {receiver.last_name}</Typography>
                       </Box>
                       <MessageList messages={messages && messages.filter(message => (message.sender_id === receiverId && message.receiver_id === currentUser.id) || (message.sender_id === currentUser.id && message.receiver_id === receiverId))} currentUser={currentUser} px={2}/>
                       <Divider />
