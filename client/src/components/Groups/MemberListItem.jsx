@@ -20,7 +20,7 @@ function MembersListItem({ member }) {
           </>}
       />
       { currentUser && currentUser.id !== member.id && (
-        <Link to="/messages" state = {{contactId : member.id}}>
+        <Link to="/messages" state = {{contactId : member.id, contactFirstName : member.first_name, contactLastName : member.last_name, contactProfilePicture : member.profile_picture}}>
           <IconButton color="primary" component="span" edge="start">
             <MessageIcon />
           </IconButton>
