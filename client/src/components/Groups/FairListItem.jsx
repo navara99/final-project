@@ -10,7 +10,7 @@ function FairListItem({ fair, isMember }) {
   return (
     <ListItem>
       <div>
-        <img src={fair.poster} style={{ width: "15%", height: 150 }} alt={fair.name}>
+        <img src={fair.poster} style={{ width: 250, height: 150 }} alt={fair.name}>
         </img>
         <ListItemText
           primary={fair.name}
