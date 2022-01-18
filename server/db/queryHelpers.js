@@ -309,7 +309,7 @@ const queryGenerator = (db) => {
       SELECT organizations.name,
       organizations.id 
       FROM organizations
-      JOIN users_organizations ON organizations_id = organization_id
+      JOIN users_organizations ON organization_id = organization_id
       WHERE user_id = $1;
     `;
 

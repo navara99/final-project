@@ -16,7 +16,7 @@ const ScheduleButton = ({ added, upcoming, id, add }) => {
   const [options, setOptions] = useState();
 
   useEffect(() => {
-    axios.tge(`/api/organizations`).then((data) => {
+    axios.get(`/api/organizations`).then((data) => {
       if (data.length > 0) setOptions(data);
     });
   }, []);
