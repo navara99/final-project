@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import useFairDetails from "../../hooks/useFairDetails";
 import Header from "./Header";
 import "./Fair.css";
+import OrganizationList from "./OrganizationList";
 
 const Fair = ({ currentUser }) => {
   let { id } = useParams();
@@ -14,6 +15,7 @@ const Fair = ({ currentUser }) => {
         <>
           <Header {...{ fair, added, currentUser, add, id }} />
           <h3>Employers ({stalls.length})</h3>
+          <OrganizationList />
         </>
       )}
     </div>
