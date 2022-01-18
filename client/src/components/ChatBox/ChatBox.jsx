@@ -119,4 +119,3 @@ const ChatBox = ({currentUser}) => {
 export default ChatBox;
 
 
-// 
