@@ -243,7 +243,8 @@ const queryGenerator = (db) => {
     const queryString = `
     SELECT fairs.* FROM fairs
     JOIN fairs_organizations ON fairs.host_id = fairs_organizations.fair_id
-    WHERE fairs_organizations.organization_id = $1;
+    WHERE fairs_organizations.organization_id = $1
+    ORDER BY fairs.start_time DESC;
     `;
 
     try {
