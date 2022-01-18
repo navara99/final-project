@@ -12,13 +12,15 @@ import MessageForm from './MessageForm/MessageForm';
 import {io} from 'socket.io-client';
 import axios from 'axios';
 import useMessageReceiver from '../../hooks/useMessageReceiver';
+import { Avatar, ListItemAvatar, ListItemText } from '@mui/material';
 const ChatBox = ({currentUser}) => {
   const [messages, setMessages] = useState(null);
   const [senders, setSenders] = useState(null);
   const [messageText, setMessageText] = useState('');
   const [incomingMessage, setIncomingMessage] = useState(null);
   const [receiverId, setReceiverId,handleOnClick] = useMessageReceiver(null)
-  const socket = useRef();
+  const [ socket , setSocket] = useState(null)
+
   
   useEffect(() => {
     axios.get("/api/messages").then(res => {
@@ -38,14 +40,14 @@ const ChatBox = ({currentUser}) => {
       setMessages((prev) => [...prev, res.data])
     });
     //sending message to socket server
-    socket.current.emit("sendMessage", newMessage);
+    socket.emit("sendMessage", newMessage);
     setMessageText('');
   }
     
   useEffect(() => { 
     // intialize socket
-    socket.current = io.connect("http://localhost:8080");
-    socket.current.on("getMessage", (data) => {
+    const socket = io.connect("http://localhost:8080");
+    socket.on("getMessage", (data) => {
         console.log("data", data);
         setIncomingMessage({
           receiver_id : data.receiver_id,
@@ -54,7 +56,8 @@ const ChatBox = ({currentUser}) => {
           created_at: new Date().toISOString()
         });
       });
- 
+    //   console.log("Intializing socket")
+      setSocket(socket);
   },[]);
 
   useEffect(() => {
@@ -65,9 +68,9 @@ const ChatBox = ({currentUser}) => {
   useEffect(() => {
       if(currentUser && socket) {
         //sending user id
-        socket.current.emit("addUser", currentUser.id);
+        socket.emit("addUser", currentUser.id);
       }
-  },[currentUser])
+  },[currentUser,socket])
 
   return (
     <Grid container >
@@ -75,8 +78,17 @@ const ChatBox = ({currentUser}) => {
         <Grid item px={2} xs={3} component={Paper} variant='outlined' >
             <List >
                 <ListItem>
-                  <Typography variant='h5'>Message (12)</Typography>  
+                    <ListItemAvatar>
+                        <Avatar alt ={currentUser && currentUser.username} src={currentUser && currentUser.profile_picture} />
+                    </ListItemAvatar>
+                    {/* <ListItemText primary={currentUser && currentUser.first_name}>
+                    </ListItemText>
+                    <ListItemText secondary="You">
+                    </ListItemText> */}
+                  <Typography variant='h4'>{currentUser && currentUser.first_name}</Typography>
+                  
                 </ListItem>
+                <Divider/>
                 <ListItem>
                   <SenderList messages={messages} currentUser={currentUser} senders = {senders} setReceiverId = {setReceiverId} handleOnClick = {handleOnClick} />
                 </ListItem>
