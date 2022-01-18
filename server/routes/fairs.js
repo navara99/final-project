@@ -10,7 +10,7 @@ const router = express.Router();
 
 module.exports = (db) => {
   const queryGenerator = require("../db/queryHelpers");
-  const { getAllFairs, getFair } = queryGenerator(db);
+  const { getAllFairs, getFair, createNewFair } = queryGenerator(db);
 
   router.get("/", async (req, res) => {
     try {
@@ -52,16 +52,29 @@ module.exports = (db) => {
       const fair = await getFair(req.params.id);
       const organizations = fair.map(f => {
         return ({
-          organizations_name :f.organizations_name,
-          organizations_id : f.organizations_id,
-          organizations_desc : f.organizations_desc
+          organizations_name: f.organizations_name,
+          organizations_id: f.organizations_id,
+          organizations_desc: f.organizations_desc
         })
       });
-      const {fair_name, fair_desc, host_name,poster} = fair[0];
-      res.status(200).json({organizations, fair_name, fair_desc, host_name, poster});
+      const { fair_name, fair_desc, host_name, poster } = fair[0];
+      res.status(200).json({ organizations, fair_name, fair_desc, host_name, poster });
     } catch (error) {
       console.log(error)
     }
+  });
+
+  router.post("/", async (req, res) => {
+    const { name, description, startTimeStamp, endTimeStamp, hostId } = req.body;
+
+    try {
+      const newFair = await createNewFair(name, description, startTimeStamp, endTimeStamp, hostId);
+      res.json(newFair)
+    } catch (err) {
+      console.log(err.message);
+    }
+
+
   });
 
   return router;

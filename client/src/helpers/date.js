@@ -14,3 +14,11 @@ export const formatStartEndTime = (start, end) => {
 
   return startTime.slice(0, -3) + " - " + endTime;
 };
+
+export const combineDateTimes = (date, startTime, endTime) => {
+  const UTCDate = new Date(date).toUTCString().split(" ").slice(0, 4).join(" ");
+  const UTCStart = new Date(startTime).toUTCString().split(" ").slice(4).join(" ");
+  const UTCEnd = new Date(endTime).toUTCString().split(" ").slice(4).join(" ");
+
+  return [`${UTCDate} ${UTCStart}`, `${UTCDate} ${UTCEnd}`];
+};
