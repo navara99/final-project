@@ -21,7 +21,7 @@ business profile:
       - upload flyer pdf for the whole fair (stretch)
     - filter (stretch)
 
-- only for employers/college/headhunter company (yagnesh)
+- only for employers/college/headhunter company
   - posting career fair & ask to join
   - joining career fair
   - posting job
