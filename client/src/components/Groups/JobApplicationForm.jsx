@@ -14,6 +14,7 @@ function JobApplicationForm({ job, openApplicationForm, setOpenApplicationForm, 
   async function handleApplicationSubmissions(e) {
     e.preventDefault();
 
+    console.log(e);
     try {
       const formData = new FormData(this);
       await axios.post("/api/applications", formData);
@@ -30,31 +31,32 @@ function JobApplicationForm({ job, openApplicationForm, setOpenApplicationForm, 
 
   return (
     <Dialog open={openApplicationForm} onClose={() => { }}>
+      <form onSubmit={handleApplicationSubmissions}>
       <DialogTitle>Apply To Posting: {job.title}</DialogTitle>
       <DialogContent>
-        <form onSubmit={handleApplicationSubmissions}>
-          <Button
-            variant="contained"
-            component="label"
-          >Upload Resume<input type="file" hidden />
-          </Button>
-          <TextField
-            autoFocus
-            multiline
-            rows="6"
-            id="cover-letter"
-            label="Cover Letter/Message"
-            fullWidth
-            sx={{ mt: "1em" }}
-            onChange={() => { }}
-          />
-        </form>
+        <Button
+          variant="contained"
+          component="label"
+        >Upload Resume<input type="file" hidden />
+        </Button>
+        <TextField
+          autoFocus
+          multiline
+          rows="6"
+          id="cover-letter"
+          label="Cover Letter/Message"
+          fullWidth
+          sx={{ mt: "1em" }}
+          onChange={() => { }}
+        />
+
       </DialogContent>
       <DialogActions>
         <Button onClick={() => setOpenApplicationForm(!openApplicationForm)}>Cancel</Button>
-        <Button >Create</Button>
+        <Button type="submit">Create</Button>
       </DialogActions>
-    </Dialog>
+      </form>
+    </Dialog >
   )
 }
 
