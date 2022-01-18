@@ -45,7 +45,14 @@ const ChatBox = ({currentUser}) => {
       message: messageText
     }
     axios.post("/api/messages/", newMessage).then(res => {
-      setMessages((prev) => [...prev, res.data])
+      console.log("data", res);
+      setMessages((prev) => [...prev, res.data.messageObj]);
+      setSenders((prev) => {
+          if(prev.some(el => el.id === res.data.receiver.id)) {
+              return prev;
+          }
+          return [...prev, res.data.receiver];
+      })
     });
     //sending message to socket server
     socket.emit("sendMessage", newMessage);
