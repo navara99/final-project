@@ -1,15 +1,15 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 const useJobs = () => {
-  const [jobs, setJobs] = useState();
+  const [jobs, setJobs] = useState([]);
 
   useEffect(() => {
     axios.get("/api/jobs").then(({ data }) => {
       console.log(data);
       setJobs(data);
     });
-  });
+  },[]);
 
   return [jobs, setJobs];
 };
