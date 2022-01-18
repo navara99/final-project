@@ -20,9 +20,11 @@ function MembersListItem({ member }) {
           </>}
       />
       { currentUser && currentUser.id !== member.id && (
-        <IconButton color="primary" component="span" edge="start">
-          <Link to="/messages"><MessageIcon /></Link>
-        </IconButton>
+        <Link to="/messages">
+          <IconButton color="primary" component="span" edge="start">
+            <MessageIcon />
+          </IconButton>
+        </Link>
       )}
     </ListItem>
   )
