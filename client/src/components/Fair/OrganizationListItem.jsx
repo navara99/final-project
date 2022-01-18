@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -6,15 +6,16 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import { Link } from "react-router-dom";
 
-const OrganizationListItem = () => {
+const OrganizationListItem = ({ id, website, industry, description, name }) => {
   return (
     <Box>
       <Card variant="outlined">
         <CardMedia
           component="img"
           image="https://mui.com/static/images/cards/contemplative-reptile.jpg"
-          alt="green iguana"
+          alt={name + "_logo"}
         />
         <CardContent>
           <div className="organization-details">
@@ -24,25 +25,34 @@ const OrganizationListItem = () => {
                 color="text.secondary"
                 gutterBottom
               >
-                industry
+                {industry}
               </Typography>
               <Typography variant="h5" component="div">
-                name
+                {name}
               </Typography>
-              <Typography sx={{ mb: 1.5 }} color="text.secondary">
+              {/* <Typography sx={{ mb: 1.5 }} color="text.secondary">
                 adjective
-              </Typography>
+              </Typography> */}
             </div>
             <div>
               <CardActions>
-                <Button size="small">Website</Button>
-                <Button size="small">Learn More</Button>
+                {website && (
+                  <Button size="small" component={Link} to={website}>
+                    Website
+                  </Button>
+                )}
+                <Button
+                  size="small"
+                  component={Link}
+                  to={`/organizations/${id}`}
+                >
+                  Stall Details
+                </Button>
               </CardActions>
             </div>
           </div>
           <Typography variant="body2">
-            description description description description description
-            description description description description
+            {description}
           </Typography>
         </CardContent>
       </Card>

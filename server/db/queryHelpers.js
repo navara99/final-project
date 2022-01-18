@@ -67,7 +67,9 @@ const queryGenerator = (db) => {
     const stallsString = `
       SELECT organizations.id, 
         organizations.name, 
-        organizations.description 
+        organizations.description,
+        industry,
+        website
         FROM fairs
         JOIN fairs_organizations ON (fairs.id = fairs_organizations.fair_id) 
         JOIN organizations ON (organizations.id = fairs_organizations.organization_id)
@@ -88,8 +90,7 @@ const queryGenerator = (db) => {
       const userAddedResult = await db.query(userAddedString, values2);
 
       const fair = getData(fairResult).map((fair) => {
-        const { host_name, host_id, host_description, end, start } =
-          fair;
+        const { host_name, host_id, host_description, end, start } = fair;
         return {
           ...fair,
           hostName: host_name,

@@ -15,7 +15,7 @@ const Fair = ({ currentUser }) => {
         <>
           <Header {...{ fair, added, currentUser, add, id }} />
           <h3>Employers ({stalls.length})</h3>
-          <OrganizationList />
+          <OrganizationList stalls={stalls} />
         </>
       )}
     </div>
