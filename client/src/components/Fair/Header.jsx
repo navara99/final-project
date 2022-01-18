@@ -6,8 +6,6 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
-import ScheduleButton from "./ScheduleButton";
-import JoinButton from "./JoinButton";
 import { formatStartEndTime, formatDate } from "../../helpers/date";
 
 const Header = ({ id, fair, added, currentUser, add, updateFairDetails }) => {
