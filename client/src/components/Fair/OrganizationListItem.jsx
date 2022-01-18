@@ -46,7 +46,7 @@ const OrganizationListItem = ({ id, website, industry, description, name }) => {
                   component={Link}
                   to={`/organizations/${id}`}
                 >
-                  Stall Details
+                  Details
                 </Button>
               </CardActions>
             </div>

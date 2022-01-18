@@ -15,13 +15,15 @@
   justify-content: space-between;
 }
 
-.fair-details .MuiBox-root {
-  margin-bottom: 1em;
-}
-
 .fair-details .MuiBox-root .MuiPaper-root {
   display: flex;
   align-items: center;
+}
+
+.fair-details .MuiBox-root.css-0 {
+  display: inline-block;
+  margin-bottom: 0.8em;
+  width: 100%;
 }
 
 .fair-details .MuiBox-root .MuiPaper-root img {
