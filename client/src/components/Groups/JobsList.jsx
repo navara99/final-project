@@ -8,7 +8,7 @@ function JobsList({ jobs, isMember }) {
     return jobs.map((job, i) => {
       return (
         <>
-          <JobListItem {...{ job }} {...{ isMember }} />
+          <JobListItem {...{ job }} {...{ isMember }}  {...{ setSnackBarDetails }} />
           {i === jobs.length - 1 ? "" : < Divider />}
         </>
       )

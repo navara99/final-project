@@ -23,7 +23,7 @@ function JobListItem({ job, isMember }) {
                 /></p>
               </>}
           />
-          <JobActions {...{ isMember }} {...{ job }} />
+          <JobActions {...{ isMember }} {...{ job }}  {...{ setSnackBarDetails }} />
         </div>
       </ListItem>
     </>
