@@ -6,14 +6,16 @@ import {
   DialogActions,
   Button
 } from "@mui/material";
+import ApplicantsList from "./ApplicantsList";
 
 function JobApplications({ job, openApplicants, setOpenApplicants }) {
 
 
   return (
-    <Dialog open={openApplicants} >
+    <Dialog open={openApplicants} fullWidth={true}>
       <DialogTitle>Applications for {job.title}</DialogTitle>
       <DialogContent>
+        <ApplicantsList applications={job.applications} />
       </DialogContent>
       <DialogActions>
         <Button onClick={() => { setOpenApplicants(!openApplicants) }}>Cancel</Button>
