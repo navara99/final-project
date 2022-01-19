@@ -3,25 +3,37 @@ import { Box } from '@mui/system'
 import React, { useEffect, useState } from 'react'
 
 const EditProfile = ({currentUser}) => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
-  const [profilePicture, setProfilePicture] = useState("");
-  const [bio, setBio] = useState("");
+  const [userInfo, setUserInfo] = useState({
+    firstName : "",
+    lastName: "",
+    email: "",
+    username: "",
+    profilePicture:"",
+    bio:""
+  });
 
   useEffect(() => {
     if(currentUser) {
       const {first_name, last_name, email, username, profile_picture, bio} = currentUser;
-      setFirstName(first_name);
-      setLastName(last_name);
-      setEmail(email);
-      setUsername(username);
-      setProfilePicture(profile_picture);
-      setBio(bio);
+      setUserInfo({
+        firstName : first_name,
+        lastName: last_name,
+        email: email,
+        username: username,
+        profilePicture: profile_picture,
+        bio: bio
+      })
     }
 
-  },[currentUser])
+  },[currentUser]);
+
+  const handleChange = (e) => {
+    setUserInfo({
+      ...userInfo,
+      [e.target.name] : e.target.value
+    })
+    
+  }
 
   return (
     <>
@@ -33,16 +45,16 @@ const EditProfile = ({currentUser}) => {
               </Grid>
               <Grid item container component="form" direction="column" sx={{flexGrow: 1}} justifyContent="space-evenly">
                 <Box sx={{display:"flex", justifyContent:"space-between", alignItems:"center"}}> 
-                    <TextField id="firstName" label="First name" variant="outlined" sx={{flexGrow:1,mr:2, bgcolor:"white"}}  value={firstName} required/>
-                    <TextField id="lastName" label="Last name" variant="outlined" sx={{flexGrow:1,bgcolor:"white"}} value={ lastName} required/>
+                    <TextField id="firstName" name="firstName" label="First name" variant="outlined" sx={{flexGrow:1,mr:2, bgcolor:"white"}}  value={userInfo.firstName} required onChange={handleChange}/>
+                    <TextField id="lastName" name="lastName"label="Last name" variant="outlined" sx={{flexGrow:1,bgcolor:"white"}} value={userInfo.lastName} required onChange={handleChange}/>
                 </Box>
-                <TextField id="email" label="Email" variant="outlined" sx={{bgcolor:"white"}} value={email} required/>
-                <TextField id="userName" label="User name" variant="outlined" sx={{bgcolor:"white"}} value={username} required/>
+                <TextField id="email" name="email" label="Email" variant="outlined" sx={{bgcolor:"white"}} value={userInfo.email} required onChange={handleChange}/>
+                <TextField id="userName" name="username" label="User name" variant="outlined" sx={{bgcolor:"white"}} value={userInfo.username} required onChange={handleChange}/>
                 <Box sx={{display:"flex", justifyContent:"space-between", alignItems:"center"}}>
-                  <Avatar alt={ username} src={profilePicture}/>
-                  <TextField sx={{flexGrow:1, ml:2, bgcolor:"white"}}id="profile_picture" label="Picture URL" variant="outlined" value={profilePicture} required />
+                  <Avatar alt={userInfo.username} src={userInfo.profilePicture}/>
+                  <TextField sx={{flexGrow:1, ml:2, bgcolor:"white"}}id="profile_picture" name="profilePicture" label="Picture URL" variant="outlined" value={userInfo.profilePicture} required onChange={handleChange} />
                 </Box>
-                <TextField id="bio" multiline label="Bio"variant="outlined" sx={{bgcolor:"white"}} value={bio}/>
+                <TextField id="bio" name="bio" multiline label="Bio"variant="outlined" sx={{bgcolor:"white"}} value={userInfo.bio}/>
                 <Divider/>
                 <Grid item>
                   <Button variant='contained'size='large'>Save</Button>
