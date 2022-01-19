@@ -5,7 +5,9 @@ import {
   DialogContent,
   DialogActions,
   TextField,
-  Button
+  Button,
+  Switch,
+  FormControlLabel
 } from "@mui/material";
 import axios from "axios";
 import useInput from "../../hooks/useInput";
@@ -14,6 +16,7 @@ import { useState } from "react";
 function JobApplicationForm({ job, openApplicationForm, setOpenApplicationForm, setSnackBarDetails }) {
   const [message, setMessage] = useInput();
   const [resume, setResume] = useState();
+  const [showResumeInput, setResumeInput] = useState(false);
 
   async function handleApplicationSubmissions(e) {
     e.preventDefault();
@@ -41,24 +44,39 @@ function JobApplicationForm({ job, openApplicationForm, setOpenApplicationForm, 
 
   };
 
+  const handleResumeToggle = () => {
+    console.log(showResumeInput);
+    setResumeInput(!showResumeInput);
+  };
+
+
   return (
-    <Dialog open={openApplicationForm} onClose={() => { }}>
+    <Dialog open={openApplicationForm} fullWidth maxWidth="md">
       <form onSubmit={handleApplicationSubmissions} >
         <DialogTitle>Apply To Posting: {job.title}</DialogTitle>
         <DialogContent>
-          <Button
-            variant="contained"
-            component="label"
-          >Upload Resume<input
-              type="file"
-              onChange={(e) => setResume(e.target.files)}
-              name="resume"
-              hidden />
-          </Button>
+          <div >
+            <FormControlLabel control={<Switch defaultChecked onChange={handleResumeToggle} />} label={"Use resume from profile"} />
+            {showResumeInput &&
+              <>
+                <Button
+                  variant="contained"
+                  component="label"
+                >Upload Resume<input
+                    type="file"
+                    onChange={(e) => setResume(e.target.files)}
+                    name="resume"
+                    hidden />
+                </Button>
+                <label>{resume && resume[0].name}</label>
+              </>
+            }
+
+          </div>
           <TextField
             autoFocus
             multiline
-            rows="6"
+            rows="7"
             id="cover-letter"
             name="message"
             label="Cover Letter/Message"
