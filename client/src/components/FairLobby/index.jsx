@@ -10,7 +10,7 @@ const FairLobby = ({ currentUser }) => {
   const { fair, stalls, added, add, updateFairDetails } = useFairDetails(id);
 
   return (
-    <div className="fair-details">
+    <div className="live">
       {fair && stalls && (
         <>
           <Header {...{ fair, added, currentUser, add, id, updateFairDetails }} />
