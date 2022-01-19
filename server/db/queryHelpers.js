@@ -152,9 +152,10 @@ const queryGenerator = (db) => {
     const values = [job_id];
     const queryString = `
     SELECT applications.*, users.* FROM applications
-    JOIN jobs ON jobs.id = applications.user_id
+    JOIN jobs ON jobs.id = applications.job_id
     JOIN users ON applications.user_id = users.id
-    WHERE jobs.id = $1;
+    WHERE jobs.id = $1
+    ORDER BY applications.created_at DESC;
     `;
 
     try {
