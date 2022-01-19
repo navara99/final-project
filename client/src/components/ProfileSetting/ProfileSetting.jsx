@@ -1,6 +1,5 @@
 import { Grid } from '@mui/material'
 import React,{useState} from 'react'
-import { Outlet } from 'react-router-dom'
 import EditPassword from './EditPassword'
 import EditProfile from './EditProfile'
 import NavColumn from './NavColumn'
@@ -12,7 +11,6 @@ const ProfileSetting = () => {
       <NavColumn selectedIndex = {selectedIndex} setSelectedIndex = {setSelectedIndex}/>
       {selectedIndex === 0 && <EditProfile/>}
       {selectedIndex === 1 && <EditPassword/>}
-      <Outlet/>
     </Grid>
   )
 }
