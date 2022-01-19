@@ -13,7 +13,7 @@ function ApplicantsList({ applications }) {
 
   return (
     <>
-      <List>
+      <List style={{ width: "80vw" }}>
         {renderApplicants()}
       </List>
     </>
