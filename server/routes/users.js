@@ -11,7 +11,7 @@ const bcrypt = require("bcryptjs");
 
 module.exports = (db) => {
   const queryGenerator = require("../db/queryHelpers");
-  const { createNewUser, getUserByValue, getOrganizationsByUser, getAllOtherUsers } = queryGenerator(db);
+  const { createNewUser, getUserByValue, getOrganizationsByUser, getAllOtherUsers,updateUser } = queryGenerator(db);
 
   router.get("/", async (req, res) => {
     const { user_id } = req.session;
@@ -110,10 +110,37 @@ module.exports = (db) => {
     };
 
   });
-
+  //Edit User Route
   router.post("/edit", async (req,res) => {
-    console.log("body", req.body);
-    console.log("UserId", req.session)
+
+      const userId = req.session.userId;
+      const { username, email } = req.body;
+  
+      try {
+        //check if username is not empty
+        const userWithSameUsername = await getUserByValue("username", username);
+  
+        if (userWithSameUsername && userWithSameUsername.id !== userId) {
+          return res
+            .status(400)
+            .json({ error: "This username is already taken." });
+        }
+  
+        const userWithSameEmail = await getUserByValue("email", email);
+  
+        if (userWithSameEmail && userWithSameEmail.id !== userId) {
+          return res.status(400).json({ error: "This email is already taken." });
+        }
+  
+        const newUserInfo = { userId, ...req.body };
+  
+        const updatedInfo = await updateUser(newUserInfo);
+       
+        res.json(req.body);
+      } catch (err) {
+        res.status(500).json({ error: err.message });
+      }
+
   })
 
   return router;
