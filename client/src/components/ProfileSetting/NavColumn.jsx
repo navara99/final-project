@@ -1,9 +1,9 @@
 import { Divider, Grid, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar, Typography } from '@mui/material'
-import React, { useState } from 'react'
+import React from 'react'
 import EditIcon from '@mui/icons-material/Edit';
 import SecurityIcon from '@mui/icons-material/Security';
-const NavColumn = () => {
-  const [ selectedIndex, setSelectedIndex] = useState(0);
+const NavColumn = ({selectedIndex, setSelectedIndex}) => {
+  
   return (
     <Grid item xs ={3} >
       <List>

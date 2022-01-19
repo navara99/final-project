@@ -18,6 +18,7 @@ import Jobs from "./components/JobBoard/index";
 import Schedule from "./components/Schedule";
 import ProfileSetting from "./components/ProfileSetting/ProfileSetting";
 
+
 function App() {
   const [errorMessage, setErrorMessage] = useState("");
   const [showError, setShowError] = useState(false);
@@ -83,7 +84,7 @@ function App() {
           <Route path="/jobs" element={<Jobs />} />
           <Route path="/schedule" element={<Schedule />} />
           <Route path="/messages" element={<ChatBox currentUser = {currentUser}/>} />
-          <Route path="/settings" element={<ProfileSetting/>} />
+          <Route path="/settings" element={<ProfileSetting/>}/>
           <Route path="/fairs/:id" element={<Fair currentUser={currentUser} />} />
           <Route path="/organizations/:id" element={<OrganizationDetails {...{ setSnackBarDetails }}/>} />
         </Routes>

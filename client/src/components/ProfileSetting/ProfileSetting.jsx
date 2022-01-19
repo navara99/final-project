@@ -1,15 +1,18 @@
 import { Grid } from '@mui/material'
-import React from 'react'
+import React,{useState} from 'react'
+import { Outlet } from 'react-router-dom'
 import EditPassword from './EditPassword'
 import EditProfile from './EditProfile'
 import NavColumn from './NavColumn'
 
 const ProfileSetting = () => {
+  const [selectedIndex, setSelectedIndex] = useState(0);
   return (
     <Grid container justifyContent="flex-start" alignItems="stretch">
-      <NavColumn/>
+      <NavColumn selectedIndex = {selectedIndex} setSelectedIndex = {setSelectedIndex}/>
       <EditProfile/>
-      {/* <EditPassword/> */}
+      <EditPassword/>
+      <Outlet/>
     </Grid>
   )
 }
