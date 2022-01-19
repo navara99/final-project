@@ -20,6 +20,7 @@ import ProfileSetting from "./components/ProfileSetting/ProfileSetting";
 
 
 import JobApplications from "./components/Groups/JobApplications";
+import UserProfile from "./components/UserProfile/UserProfile";
 
 function App() {
   const [errorMessage, setErrorMessage] = useState("");
@@ -86,6 +87,7 @@ function App() {
           <Route path="/jobs" element={<Jobs  {...{ setSnackBarDetails }} />} />
           <Route path="/schedule" element={<Schedule />} />
           <Route path="/messages" element={<ChatBox currentUser = {currentUser}/>} />
+          <Route path="/profile" element={<UserProfile currentUser = {currentUser}/>} />
           <Route path="/settings" element={<ProfileSetting setCurrentUser={setCurrentUser} currentUser={currentUser}/>}/>
           <Route path="/jobs/:id/applications" element={<JobApplications />} />
           <Route path="/live/:id" element={<FairLobby currentUser={currentUser} />} />
