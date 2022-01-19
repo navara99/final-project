@@ -4,7 +4,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import useCurrentUser from '../../hooks/useCurrentUser';
 
-const EditProfile = () => {
+const EditProfile = ({setCurrentUser, currentUser}) => {
   const [userInfo, setUserInfo] = useState({
     firstName : "",
     lastName: "",
@@ -13,7 +13,6 @@ const EditProfile = () => {
     profilePicture:"",
     bio:""
   });
-  const {currentUser, setCurrentUser} = useCurrentUser()
   useEffect(() => {
     if(currentUser) {
       const {first_name, last_name, email, username, profile_picture, bio} = currentUser;
