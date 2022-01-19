@@ -1,10 +1,11 @@
+import { Grid } from '@mui/material'
 import React from 'react'
 
 const EditProfile = () => {
   return (
-    <div>
+    <Grid xs={8}style={{backgroundColor:"lemonchiffon"}}>
       <h1>Edit profile Form</h1>
-    </div>
+    </Grid>
   )
 }
 

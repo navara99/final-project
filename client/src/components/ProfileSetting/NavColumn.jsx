@@ -1,10 +1,31 @@
-import React from 'react'
-
+import { Divider, Grid, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar, Typography } from '@mui/material'
+import React, { useState } from 'react'
+import EditIcon from '@mui/icons-material/Edit';
+import SecurityIcon from '@mui/icons-material/Security';
 const NavColumn = () => {
+  const [ selectedIndex, setSelectedIndex] = useState(0);
   return (
-    <div>
-      
-    </div>
+    <Grid item xs ={3} >
+      <List>
+        <ListItem sx={{backgroundColor:"#ffffff"}}>
+          <ListItemText primary="Settings" primaryTypographyProps={{variant:"h6"}}/>
+          {/* <Typography variant='h5' >Settings</Typography> */}
+        </ListItem>
+        <Divider/>
+        <ListItemButton selected={selectedIndex === 0} onClick={(e) => setSelectedIndex(0)}>
+          <ListItemIcon>
+            <EditIcon/>
+          </ListItemIcon>
+          <ListItemText primary= "Profile"/>
+        </ListItemButton>
+        <ListItemButton selected={selectedIndex === 1} onClick={(e) => setSelectedIndex(1)}>
+          <ListItemIcon>
+            <SecurityIcon/>
+          </ListItemIcon>
+          <ListItemText primary= "Security"/>
+        </ListItemButton>
+      </List>
+    </Grid>
   )
 }
 

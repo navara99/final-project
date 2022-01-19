@@ -1,14 +1,16 @@
+import { Grid } from '@mui/material'
 import React from 'react'
+import EditPassword from './EditPassword'
 import EditProfile from './EditProfile'
 import NavColumn from './NavColumn'
 
 const ProfileSetting = () => {
   return (
-    <div>
+    <Grid container justifyContent="flex-start" alignItems="stretch">
       <NavColumn/>
       <EditProfile/>
-      <EditProfile/>
-    </div>
+      {/* <EditPassword/> */}
+    </Grid>
   )
 }
 
