@@ -11,9 +11,9 @@ const EditPassword = () => {
               </Grid>
               <Grid item container component="form" direction="column" sx={{flexGrow: 1}} justifyContent="space-evenly">
 
-                <TextField id="currentPassword" label="Current Password" variant="outlined" sx={{bgcolor:"white"}}/>
-                <TextField id="newPassword" label="New Password" variant="outlined" sx={{bgcolor:"white"}}/>
-                <TextField id="confirmPassword" label="Confirm Password "variant="outlined" sx={{bgcolor:"white"}}/>
+                <TextField id="currentPassword" label="Current Password" variant="outlined" sx={{bgcolor:"white"}} required/>
+                <TextField id="newPassword" label="New Password" variant="outlined" sx={{bgcolor:"white"}} required/>
+                <TextField id="confirmPassword" label="Confirm Password "variant="outlined" sx={{bgcolor:"white"}} required/>
                 <Divider/>
                 <Grid item>
                   <Button variant='contained'size='large'>Save</Button>
