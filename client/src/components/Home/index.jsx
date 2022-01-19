@@ -14,7 +14,7 @@ const Home = () => {
         text="Upcoming Career Fairs"
         showDate={true}
       />
-      <FairList items={pastFairs} text="Past Career Fairs" showDate={true} />
+      <FairList items={pastFairs} text="Past Career Fairs" showDate={true} /> 
     </div>
   );
 };

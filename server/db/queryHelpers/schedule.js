@@ -1,5 +1,4 @@
 const getData = ({ rows }) => rows;
-const getFirstRecord = (result) => getData(result)[0];
 
 const makeConductInterviewData = (data) => {
   return getData(data).map((event) => {
@@ -78,7 +77,7 @@ const queryGenerator = (db) => {
       interviews.end_time AS end,
       users.first_name AS candidate_first_name,
       users.last_name AS candidate_last_name,
-      jobs.name AS job_title,
+      jobs.title AS job_title,
       users.id AS candidate_id,
       applications.id AS application_id,
       organizations.name AS organization_name
@@ -86,19 +85,19 @@ const queryGenerator = (db) => {
       JOIN applications ON interviews.application_id = applications.id
       JOIN users ON users.id = applications.user_id
       JOIN jobs ON applications.job_id = jobs.id
-      JOIN organizations ON jobs.employer_id = organizations.id
+      JOIN organizations ON jobs.organization_id = organizations.id
       WHERE interviewer_id = $1;
     `;
 
     const intervieweeQueryString = `
       SELECT interviews.start_time AS start,
       interviews.end_time AS end,
-      jobs.name AS job_title,
+      jobs.title AS job_title,
       organizations.name AS employer
       FROM interviews
       JOIN applications ON interviews.application_id = applications.id
       JOIN jobs ON applications.job_id = jobs.id
-      JOIN organizations ON jobs.employer_id = organizations.id
+      JOIN organizations ON jobs.organization_id = organizations.id
       WHERE applications.user_id = $1;
     `;
 
@@ -138,8 +137,6 @@ const queryGenerator = (db) => {
       events = events.concat(makeInterviewData(dataInterview));
       events = events.concat(makeStallData(dataStall));
       events = events.concat(makeFairData(dataFair));
-
-      console.log("EVENTS", events);
       return events;
     } catch (err) {
       console.log(err.message);

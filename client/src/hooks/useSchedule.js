@@ -6,7 +6,12 @@ const useSchedule = () => {
 
   useEffect(() => {
     axios.get("/api/schedule/").then(({ data }) => {
-      setEvents(data);
+      setEvents(
+        data.map((event) => {
+          const { start, end } = event;
+          return { ...event, start: new Date(start), end: new Date(end) };
+        })
+      );
     });
   }, []);
   return events;

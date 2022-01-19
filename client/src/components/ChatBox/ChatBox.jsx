@@ -9,10 +9,12 @@ import ListItem from '@mui/material/ListItem';
 import SenderList from './Sender/SenderList';
 import MessageList from './Messages/MessageList';
 import MessageForm from './MessageForm/MessageForm';
+import { Box } from '@mui/material';
 import {io} from 'socket.io-client';
 import axios from 'axios';
 import useMessageReceiver from '../../hooks/useMessageReceiver';
 import { Avatar, ListItemAvatar } from '@mui/material';
+import { useLocation } from 'react-router-dom';
 
 const ChatBox = ({currentUser}) => {
   const [messages, setMessages] = useState(null);
@@ -20,9 +22,12 @@ const ChatBox = ({currentUser}) => {
   const [messageText, setMessageText] = useState('');
   const [incomingMessage, setIncomingMessage] = useState(null);
   const [receiverId, setReceiverId,handleOnClick] = useMessageReceiver(null)
-  const [ socket , setSocket] = useState(null)
-
+  const [ socket , setSocket] = useState(null);
+  const [receiver, setReceiver] = useState(null);
+  const location = useLocation();
   
+  
+ 
   useEffect(() => {
     axios.get("/api/messages").then(res => {
       setMessages(res.data.messagesArr);
@@ -30,6 +35,13 @@ const ChatBox = ({currentUser}) => {
     })
   }, []);
 
+  useEffect(() => {
+    if(location.state){
+        const {contactId, contactFirstName, contactLastName, contactProfilePicture} = location.state;
+        setReceiverId(contactId)
+        setReceiver({id: contactId, first_name: contactFirstName, last_name: contactLastName, profile_picture : contactProfilePicture})
+    }
+  },[location.state]);
   const handleSubmit = (e) => {
     e.preventDefault();
     const newMessage = {
@@ -38,7 +50,14 @@ const ChatBox = ({currentUser}) => {
       message: messageText
     }
     axios.post("/api/messages/", newMessage).then(res => {
-      setMessages((prev) => [...prev, res.data])
+      console.log("data", res);
+      setMessages((prev) => [...prev, res.data.messageObj]);
+      setSenders((prev) => {
+          if(prev.some(el => el.id === res.data.receiver.id)) {
+              return prev;
+          }
+          return [...prev, res.data.receiver];
+      })
     });
     //sending message to socket server
     socket.emit("sendMessage", newMessage);
@@ -91,18 +110,22 @@ const ChatBox = ({currentUser}) => {
                 </ListItem>
                 <Divider/>
                 <ListItem>
-                  <SenderList messages={messages} currentUser={currentUser} senders = {senders} setReceiverId = {setReceiverId} handleOnClick = {handleOnClick} />
+                  <SenderList messages={messages} currentUser={currentUser} senders = {senders} setReceiverId = {setReceiverId} handleOnClick = {handleOnClick} setReceiver={setReceiver}/>
                 </ListItem>
             </List>      
         </Grid>
         {/* Chatter Box */}
-        <Grid item xs ={9}  px={2} sx={{backgroundColor:"#eff2f6"}} component={Paper} variant='outlined'>
+        <Grid item xs ={9}   sx={{backgroundColor:"#eff2f6"}} component={Paper} variant='outlined'>
             {
-                receiverId && currentUser ? (
+                receiverId && currentUser? (
                     <>
-                      <MessageList messages={messages.filter(message => (message.sender_id === receiverId && message.receiver_id === currentUser.id) || (message.sender_id === currentUser.id && message.receiver_id === receiverId))} currentUser={currentUser} />
+                      <Box sx={{width:'100%', height:"50px", backgroundColor:"#bdc7df", display:"flex", justifyContent:"center", alignItems:"center"}} >
+                          <Avatar alt={`${receiver.id}`} src={`${receiver.profile_picture}`}/>
+                          <Typography variant='body2'sx={{ml:2}}>{receiver.first_name} {receiver.last_name}</Typography>
+                      </Box>
+                      <MessageList messages={messages && messages.filter(message => (message.sender_id === receiverId && message.receiver_id === currentUser.id) || (message.sender_id === currentUser.id && message.receiver_id === receiverId))} currentUser={currentUser} px={2}/>
                       <Divider />
-                      <MessageForm messageText={messageText} handleSubmit={handleSubmit} setMessageText={setMessageText} />
+                      <MessageForm messageText={messageText} handleSubmit={handleSubmit} setMessageText={setMessageText} px={2}/>
                     </>
                 ) : (
                     <>
@@ -119,4 +142,3 @@ const ChatBox = ({currentUser}) => {
 export default ChatBox;
 
 
-// 

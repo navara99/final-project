@@ -12,13 +12,12 @@ const FairListItem = ({
   name,
   description,
   poster,
-  start_time,
-  end_time,
+  start,
   showDate,
   isOngoing,
 }) => {
   const height = isOngoing ? onGoingMediaHeight : otherMediaHeight;
-  const formattedDate = formatDate(start_time);
+  const formattedDate = formatDate(start);
 
   return (
     <div>

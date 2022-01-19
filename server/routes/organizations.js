@@ -1,4 +1,4 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
 module.exports = (db) => {
@@ -10,7 +10,7 @@ module.exports = (db) => {
     getAllMembersByOrganizationId,
     getAllFairsByOrganizationId,
     getOrganizationDetails,
-    checkIfIAmMember
+    checkIfIAmMember,
   } = queryGenerator(db);
 
   router.post("/", async (req, res) => {
@@ -22,8 +22,7 @@ module.exports = (db) => {
       res.json(newOrganization);
     } catch (err) {
       console.log(err.message);
-    };
-
+    }
   });
 
   router.post("/:id/users", async (req, res) => {
@@ -39,7 +38,6 @@ module.exports = (db) => {
     } catch (err) {
       console.log(err.message);
     }
-
   });
 
   router.get("/:id", async (req, res) => {
@@ -56,8 +54,7 @@ module.exports = (db) => {
       res.json({ jobs, members, fairs, details, isMember });
     } catch (err) {
       console.log(err.message);
-    };
-
+    }
   });
 
   return router;

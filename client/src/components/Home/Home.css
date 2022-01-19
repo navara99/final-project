@@ -1,10 +1,10 @@
 .Home {
-  width: 97%;
+  width: 100%;
 }
 
 .fair-list {
   width: 100%;
-  overflow: scroll;
+  overflow: hidden;
   display: flex;
   padding-bottom: 0.4em;
   text-align: justify;

@@ -10,35 +10,45 @@ const router = express.Router();
 
 module.exports = (db) => {
   const queryGenerator = require("../db/queryHelpers");
-  const { getAllFairs, getFair, createNewFair } = queryGenerator(db);
+  const {
+    getAllFairs,
+    getFairDetails,
+    addFairToSchedule,
+    getUserOrganizations,
+    addFairToOrganizationSchedule,
+    createNewFair,
+  } = queryGenerator(db);
 
   router.get("/", async (req, res) => {
     try {
       const fairs = await getAllFairs();
       const fairsWithValidDate = fairs.map((fair) => {
         const { start_time, end_time } = fair;
-        const parsedStart = Date.parse(start_time);
-        const parsedEnd = Date.parse(end_time);
-        return { ...fair, start_time: parsedStart, end_time: parsedEnd };
+        const start = new Date(Date.parse(start_time));
+        const end = new Date(Date.parse(end_time));
+        delete fair.start_time;
+        delete fair.end_time;
+        return { ...fair, start, end };
       });
+
       const past = fairsWithValidDate
-        .filter(({ end_time }) => end_time < Date.now())
+        .filter(({ end }) => end < Date.now())
         .sort((a, b) => {
-          return b.start_time - a.start_time;
+          return b.start - a.start;
         });
 
       const ongoing = fairsWithValidDate
-        .filter(({ end_time, start_time }) => {
-          return end_time > Date.now() && start_time < Date.now();
+        .filter(({ end, start }) => {
+          return end > Date.now() && start < Date.now();
         })
         .sort((a, b) => {
-          return b.end_time - a.end_time;
+          return b.end - a.end;
         });
 
       const upcoming = fairsWithValidDate
-        .filter(({ start_time }) => start_time > Date.now())
+        .filter(({ start }) => start > Date.now())
         .sort((a, b) => {
-          return a.start_time - b.start_time;
+          return a.start - b.start;
         });
 
       res.json({ past, ongoing, upcoming });
@@ -47,34 +57,77 @@ module.exports = (db) => {
     }
   });
 
-  router.get("/:id", async (req, res) => {
+  router.post(
+    "/join/:fair_id/organizations/:organization_id",
+    async (req, res) => {
+      const { fair_id, organization_id } = req.params;
+
+      try {
+        const data = await addFairToOrganizationSchedule(
+          fair_id,
+          organization_id
+        );
+        console.log(data);
+        res.json(data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  );
+
+  router.post("/join/:id/", async (req, res) => {
+    const { id } = req.params;
+    const { user_id } = req.session;
+
     try {
-      const fair = await getFair(req.params.id);
-      const organizations = fair.map(f => {
-        return ({
-          organizations_name: f.organizations_name,
-          organizations_id: f.organizations_id,
-          organizations_desc: f.organizations_desc
-        })
-      });
-      const { fair_name, fair_desc, host_name, poster } = fair[0];
-      res.status(200).json({ organizations, fair_name, fair_desc, host_name, poster });
+      const data = await addFairToSchedule(id, user_id);
+      res.json(data);
     } catch (error) {
-      console.log(error)
+      console.log(error);
+    }
+  });
+
+  router.get("/organizations/:id", async (req, res) => {
+    const { user_id } = req.session;
+    const { id } = req.params;
+
+    try {
+      const organizations = await getUserOrganizations(id, user_id);
+
+      res.json(organizations);
+    } catch (err) {
+      console.log(err.message);
+    }
+  });
+
+  router.get("/:id", async (req, res) => {
+    const { id } = req.params;
+    const { user_id } = req.session;
+
+    try {
+      const data = await getFairDetails(id, user_id);
+      res.json(data);
+    } catch (error) {
+      console.log(error);
     }
   });
 
   router.post("/", async (req, res) => {
-    const { name, description, startTimeStamp, endTimeStamp, hostId } = req.body;
+    const { name, description, startTimeStamp, endTimeStamp, hostId } =
+      req.body;
 
     try {
-      const newFair = await createNewFair(name, description, startTimeStamp, endTimeStamp, hostId);
-      res.json(newFair)
+      const newFair = await createNewFair(
+        name,
+        description,
+        startTimeStamp,
+        endTimeStamp,
+        hostId
+      );
+      res.json(newFair);
     } catch (err) {
       console.log(err.message);
     }
-
-
   });
 
   return router;

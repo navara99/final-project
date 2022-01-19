@@ -7,7 +7,7 @@ function MembersList({ members }) {
   const generateMembers = () => {
 
     return members.map((member) => {
-      return <MembersListItem {...{ member }} />
+      return <MembersListItem key={member.id} {...{ member }} />
     });
 
   };

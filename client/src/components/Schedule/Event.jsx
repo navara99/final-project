@@ -4,6 +4,8 @@ import "tippy.js/dist/tippy.css";
 import { formatStartEndTime } from "../../helpers/date";
 import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
+import "tippy.js/themes/light-border.css"
+import "tippy.js/themes/translucent.css"
 
 const Event = ({ event }) => {
   const { start, end, title, isInterview, asJobSeeker, fairId } = event;
@@ -31,6 +33,8 @@ const Event = ({ event }) => {
     );
   };
 
+  const theme = isInterview ? "light-border" : "translucent";
+
   const time = formatStartEndTime(start, end);
   const content = (
     <>
@@ -46,8 +50,9 @@ const Event = ({ event }) => {
       interactive={true}
       content={content}
       placement="bottom"
-      theme="material"
+      theme={theme}
       arrow={true}
+      maxWidth={250}
       hideOnClick={false}
       appendTo={document.body}
     >
