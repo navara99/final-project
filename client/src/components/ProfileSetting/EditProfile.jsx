@@ -2,7 +2,7 @@ import { Grid, TextField, Typography,InputLabel, Avatar, Divider, Button } from 
 import { Box } from '@mui/system'
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import useCurrentUser from '../../hooks/useCurrentUser';
+
 
 const EditProfile = ({setCurrentUser, currentUser}) => {
   const [userInfo, setUserInfo] = useState({
