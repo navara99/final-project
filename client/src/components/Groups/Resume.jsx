@@ -6,7 +6,7 @@ function Resume({ resume }) {
 
   return (
     <>
-      <embed src={resume} width="800px" height="2100px" />
+      <embed src={"http://localhost:8080/" + resume} width="800px" height="2100px" />
     </>
   )
 
