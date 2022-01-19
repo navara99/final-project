@@ -1,18 +1,17 @@
 import React from "react";
-import { ListItemText, Card, IconButton, Collapse, CardActions, CardMedia } from "@mui/material";
+import { ListItemText, Card, Collapse, CardActions } from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import useExpand from "../../hooks/useExpand";
 
-
 function OrganizationHeader({ organization, cardStyles }) {
   const { ExpandMore, handleExpandClick, expanded } = useExpand();
-
 
   return (
     <div >
       <Card alignItems="flex-start" style={cardStyles}>
         <div className="organization-card">
           <img
+            alt={organization.name}
             className="organization-logo"
             src="https://assets.brand.microsites.netflix.io/assets/7dc497e2-4975-11ec-a9ce-066b49664af6_cm_1440w.jpg?v=1"
           />

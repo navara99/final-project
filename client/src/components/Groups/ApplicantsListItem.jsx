@@ -4,13 +4,16 @@ import MessageIcon from '@mui/icons-material/Message';
 import { formatDate } from "../../helpers/date";
 import Resume from "./Resume";
 import { useState } from "react";
+import CoverLetter from "./CoverLetter";
 
 function ApplicantsListItem({ application }) {
   const [openResume, setOpenResume] = useState(false);
+  const [openCoverLetter, setOpenCoverLetter] = useState(false);
 
 
   return (
     <>
+      <CoverLetter {...{ application }} {...{ setOpenCoverLetter }} {...{ openCoverLetter }} />
       <Resume {...{ application }} {...{ setOpenResume }} {...{ openResume }} />
       <ListItem
         alignItems="flex-start"
@@ -19,7 +22,7 @@ function ApplicantsListItem({ application }) {
             <Button onClick={() => setOpenResume(!openResume)}>
               Resume
             </Button>
-            <Button>
+            <Button onClick={() => setOpenCoverLetter(!openCoverLetter)}>
               Cover Letter
             </Button>
             <IconButton>
@@ -33,14 +36,8 @@ function ApplicantsListItem({ application }) {
         </ListItemAvatar>
         <ListItemText
           primary={`${application.first_name} ${application.last_name} (${application.username})`}
-          secondary={
-            <>
-              <p>Email: {application.email}</p>
-              <p>Submission Date: {formatDate(application.created_at)}</p>
-            </>
-          }
+          secondary={`Email: ${application.email} ~ Submission Date: ${formatDate(application.created_at)}`}
         />
-
       </ListItem>
       <Divider variant="inset" component="li" />
     </>

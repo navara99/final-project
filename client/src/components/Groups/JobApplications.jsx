@@ -1,7 +1,5 @@
 import React from "react";
 import ApplicantsList from "./ApplicantsList";
-import Resume from "./Resume";
-import { useState } from "react";
 import { useParams } from "react-router";
 import useApplications from "../../hooks/useApplications";
 import useEachJob from "../../hooks/useEachJob";

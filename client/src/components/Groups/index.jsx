@@ -6,7 +6,6 @@ import GroupListItem from "./GroupListItem";
 import GroupForm from "./GroupForm";
 import { useState } from "react";
 import useMyGroups from "../../hooks/useMyGroups";
-import AddMemberForm from "./AddMemberForm";
 
 const cardStyles = {
   padding: "2em",
