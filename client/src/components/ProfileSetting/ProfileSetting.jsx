@@ -10,8 +10,8 @@ const ProfileSetting = () => {
   return (
     <Grid container justifyContent="flex-start" alignItems="stretch">
       <NavColumn selectedIndex = {selectedIndex} setSelectedIndex = {setSelectedIndex}/>
-      <EditProfile/>
-      <EditPassword/>
+      {selectedIndex === 0 && <EditProfile/>}
+      {selectedIndex === 1 && <EditPassword/>}
       <Outlet/>
     </Grid>
   )
