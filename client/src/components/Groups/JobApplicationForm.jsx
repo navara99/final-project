@@ -45,7 +45,6 @@ function JobApplicationForm({ job, openApplicationForm, setOpenApplicationForm, 
   };
 
   const handleResumeToggle = () => {
-    console.log(showResumeInput);
     setResumeInput(!showResumeInput);
   };
 
@@ -73,7 +72,7 @@ function JobApplicationForm({ job, openApplicationForm, setOpenApplicationForm, 
                     name="resume"
                     hidden />
                 </Button>
-                <label>{resume && resume[0].name}</label>
+                <span class="filename">{resume && resume[0].name}</span>
               </>
             }
 
