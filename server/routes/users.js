@@ -111,5 +111,10 @@ module.exports = (db) => {
 
   });
 
+  router.post("/edit", async (req,res) => {
+    console.log("body", req.body);
+    console.log("UserId", req.session)
+  })
+
   return router;
 };
