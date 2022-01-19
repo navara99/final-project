@@ -25,14 +25,14 @@ const UserButtons = ({ logout, currentUser }) => {
         }}
       />
       <Tippy content="Settings" placement="right" theme="material" arrow={true}>
-        <span className="navbar-button">
+        <div className="navbar-button">
           <Avatar
             component={Link}
             to="/settings"
             alt={currentUser.username}
             src={currentUser.profile_picture}
           />
-        </span>
+        </div>
       </Tippy>
       <Tippy content="Logout" placement="right" theme="material" arrow={true}>
         <span onClick={logout} className="navbar-button">
