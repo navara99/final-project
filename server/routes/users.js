@@ -113,9 +113,9 @@ module.exports = (db) => {
   //Edit User Route
   router.post("/edit", async (req,res) => {
 
-      const userId = req.session.userId;
+      const userId = req.session.user_id;
       const { username, email } = req.body;
-  
+      console.log("userId", userId);
       try {
         //check if username is not empty
         const userWithSameUsername = await getUserByValue("username", username);
