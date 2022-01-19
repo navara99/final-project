@@ -55,9 +55,7 @@ const queryGenerator = (db) => {
 
     try {
       const result = await db.query(queryString, values);
-      const userInfo = getFirstRecord(result);
-
-      assignProfilePic(userInfo, "profile_picture_url");
+      const userInfo = getFirstRecord(result);   
       return userInfo;
     } catch (err) {
       console.log(err);
