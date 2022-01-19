@@ -7,5 +7,6 @@ CREATE TABLE applications
   message varchar,
   user_id int NOT NULL REFERENCES users(id) ON DELETE CASCADE,
   job_id int NOT NULL REFERENCES jobs(id) ON DELETE CASCADE,
-  resume varchar NOT NULL
+  resume varchar NOT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT NOW()
 );
