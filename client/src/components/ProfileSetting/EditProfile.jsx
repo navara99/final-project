@@ -54,7 +54,7 @@ const EditProfile = ({currentUser}) => {
                   <Avatar alt={userInfo.username} src={userInfo.profilePicture}/>
                   <TextField sx={{flexGrow:1, ml:2, bgcolor:"white"}}id="profile_picture" name="profilePicture" label="Picture URL" variant="outlined" value={userInfo.profilePicture} required onChange={handleChange} />
                 </Box>
-                <TextField id="bio" name="bio" multiline label="Bio"variant="outlined" sx={{bgcolor:"white"}} value={userInfo.bio}/>
+                <TextField id="bio" name="bio" multiline label="Bio"variant="outlined" sx={{bgcolor:"white"}} value={userInfo.bio} onChange={handleChange}/>
                 <Divider/>
                 <Grid item>
                   <Button variant='contained'size='large'>Save</Button>
