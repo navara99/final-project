@@ -55,6 +55,7 @@ const Header = ({ id, fair, added, currentUser, add }) => {
           <CardActions>
             <Button
               component={Link}
+              target="_blank"
               to={`/organizations/${host_id}`}
               variant="contained"
               size="small"

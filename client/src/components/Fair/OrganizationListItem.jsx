@@ -37,7 +37,12 @@ const OrganizationListItem = ({ id, website, industry, description, name }) => {
             <div>
               <CardActions>
                 {website && (
-                  <Button size="small" component={Link} to={website}>
+                  <Button
+                    target="_blank"
+                    size="small"
+                    component={Link}
+                    to={website}
+                  >
                     Website
                   </Button>
                 )}
@@ -47,6 +52,7 @@ const OrganizationListItem = ({ id, website, industry, description, name }) => {
                 <Button
                   size="small"
                   component={Link}
+                  target="_blank"
                   to={`/organizations/${id}`}
                 >
                   Details
