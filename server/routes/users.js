@@ -115,7 +115,6 @@ module.exports = (db) => {
 
       const userId = req.session.user_id;
       const { username, email } = req.body;
-      console.log("userId", userId);
       try {
         //check if username is not empty
         const userWithSameUsername = await getUserByValue("username", username);
@@ -135,8 +134,8 @@ module.exports = (db) => {
         const newUserInfo = { userId, ...req.body };
   
         const updatedInfo = await updateUser(newUserInfo);
-       
-        res.json(req.body);
+       console.log("updateInfo", updatedInfo);
+        res.json(updatedInfo);
       } catch (err) {
         res.status(500).json({ error: err.message });
       }
