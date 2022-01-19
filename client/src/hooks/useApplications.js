@@ -4,10 +4,11 @@ import axios from "axios";
 const useApplications = (id) => {
   const [applications, setApplications] = useState();
 
-
   useEffect(() => {
-    axios.get(`/applications/${id}`).then(({ data }) => {
+    axios.get(`/api/jobs/${id}/applications`).then(({ data }) => {
       setApplications(data);
+    }).catch((err) => {
+      console.log(err);
     });
   }, []);
 
