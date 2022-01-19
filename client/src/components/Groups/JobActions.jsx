@@ -11,7 +11,7 @@ function JobActions({ job, isMember, setSnackBarDetails }) {
     <>
       <JobApplicationForm {...{ job }} {...{ openApplicationForm }} {...{ setOpenApplicationForm }} {...{ setSnackBarDetails }} />
       {!isMember && <GroupsBtn text={"Apply"} onClick={() => setOpenApplicationForm(!openApplicationForm)} />}
-      {isMember && <Link to={`/jobs/${job.id}/applications`}><GroupsBtn text={`View Applications (${job.applications.length})`} /></Link>}
+      {isMember && <Link to={`/jobs/${job.id}/applications`} style={{ textDecoration: "none" }}><GroupsBtn text={`View Applications (${job.applications.length})`} /></Link>}
       <GroupsBtn text={"Details"} />
     </>
   )
