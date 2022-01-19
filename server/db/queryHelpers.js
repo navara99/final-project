@@ -362,6 +362,18 @@ const queryGenerator = (db) => {
 
   };
 
+  const getJobById = async (id) => {
+    const values = [id];
+    const queryString = "SELECT * FROM jobs WHERE id = $1"
+
+    try {
+      const result = await db.query(queryString, values);
+      return getFirstRecord(result);
+    } catch (error) {
+      console.log(error);
+    };
+
+  };
 
   // Job Applications
 
@@ -383,6 +395,7 @@ const queryGenerator = (db) => {
 
 
   return {
+    getJobById,
     applyForJob,
     createNewUser,
     getUserByValue,
