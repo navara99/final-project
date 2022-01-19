@@ -16,6 +16,7 @@ import FairLobby from "./components/FairLobby";
 import OrganizationDetails from "./components/Groups/OrganizationDetails";
 import Jobs from "./components/JobBoard/index";
 import Schedule from "./components/Schedule";
+import Stall from "./components/Stall";
 
 function App() {
   const [errorMessage, setErrorMessage] = useState("");
@@ -80,6 +81,7 @@ function App() {
             element={<Groups {...{ setSnackBarDetails }} />}
           />
           <Route path="/jobs" element={<Jobs />} />
+          <Route path="/stall" element={<Stall />} />
           <Route path="/schedule" element={<Schedule />} />
           <Route path="/messages" element={<ChatBox currentUser = {currentUser}/>} />
           <Route path="/settings" element={<>Settings</>} />
