@@ -7,6 +7,7 @@ import {
   Button
 } from "@mui/material";
 import ApplicantsList from "./ApplicantsList";
+import Resume from "./Resume";
 
 function JobApplications({ job, openApplicants, setOpenApplicants }) {
 
@@ -16,6 +17,7 @@ function JobApplications({ job, openApplicants, setOpenApplicants }) {
       <DialogTitle>Applications for {job.title}</DialogTitle>
       <DialogContent>
         <ApplicantsList applications={job.applications} />
+        <Resume resume={job.applications[0].resume} />
       </DialogContent>
       <DialogActions>
         <Button onClick={() => { setOpenApplicants(!openApplicants) }}>Cancel</Button>
