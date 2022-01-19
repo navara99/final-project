@@ -35,6 +35,35 @@ const queryGenerator = (db) => {
     }
   };
 
+  const updateUser = async (newUserInfo) => {
+
+    const { firstName, lastName, username, email, bio, profilePicture, userId } =
+      newUserInfo;
+    const values = [firstName, lastName, username, email, bio, profilePicture, userId];
+
+    const queryString = `
+        UPDATE users
+        SET first_name = $1,
+        last_name = $2,
+        username = $3,
+        email = $4,
+        bio = $5,
+        profile_picture= $6
+        WHERE id = $7
+        RETURNING *;
+    `;
+
+    try {
+      const result = await db.query(queryString, values);
+      const userInfo = getFirstRecord(result);
+
+      assignProfilePic(userInfo, "profile_picture_url");
+      return userInfo;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const getAllFairs = async () => {
     const queryString = `SELECT * FROM fairs;`;
 
@@ -522,6 +551,7 @@ const queryGenerator = (db) => {
     createNewMessage,
     addJobToOrganization,
     getJobsBySearch,
+    updateUser
   };
 };
 
