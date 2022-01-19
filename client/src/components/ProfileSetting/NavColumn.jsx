@@ -7,7 +7,7 @@ const NavColumn = () => {
   return (
     <Grid item xs ={3} >
       <List>
-        <ListItem sx={{backgroundColor:"#ffffff"}}>
+        <ListItem sx={{backgroundColor:"#edecec"}}>
           <ListItemText primary="Settings" primaryTypographyProps={{variant:"h6"}}/>
           {/* <Typography variant='h5' >Settings</Typography> */}
         </ListItem>
