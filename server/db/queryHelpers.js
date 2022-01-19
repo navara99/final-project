@@ -151,7 +151,7 @@ const queryGenerator = (db) => {
   const getAllApplicationsByJobId = async (job_id) => {
     const values = [job_id];
     const queryString = `
-    SELECT applications.*, users.first_name, users.last_name FROM applications
+    SELECT applications.*, users.* FROM applications
     JOIN jobs ON jobs.id = applications.user_id
     JOIN users ON applications.user_id = users.id
     WHERE jobs.id = $1;
@@ -381,26 +381,9 @@ const queryGenerator = (db) => {
 
   };
 
-  // Get Applications from job id
-
-  const getApplicationsFromJobId = async (jobId) => {
-
-    try {
-      const values = [jobId];
-      const queryString = `SELECT * FROM applications WHERE job_id = $1;`
-
-      const results = await db.query(queryString, values);
-      return results.rows;
-    } catch (error) {
-      console.log(error);
-    };
-
-
-  };
 
   return {
     applyForJob,
-    getApplicationsFromJobId,
     createNewUser,
     getUserByValue,
     createNewOrganization,

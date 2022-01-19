@@ -3,13 +3,13 @@ const router = express.Router();
 
 module.exports = (db) => {
   const queryGenerator = require("../db/queryHelpers");
-  const { addJobToOrganization, getJobsBySearch, getApplicationsFromJobId } = queryGenerator(db);
+  const { addJobToOrganization, getJobsBySearch, getAllApplicationsByJobId } = queryGenerator(db);
 
   router.get(`/:id/applications`, async (req, res) => {
     const { id } = req.params;
-    console.log(id);
+   
     try {
-      const applications = await getApplicationsFromJobId(id);
+      const applications = await getAllApplicationsByJobId(id);
       res.json(applications);
     } catch (err) {
       console.log(err.message);
