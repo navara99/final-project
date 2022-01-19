@@ -2,6 +2,10 @@
   width: 100%;
 }
 
+.live .MuiBadge-root {
+  width: 100%;
+}
+
 .live .MuiTypography-h6 {
   margin: 1em 0 0em;
 }
@@ -47,7 +51,7 @@
   display: flex;
 }
 
-.live .MuiBox-root .MuiCardActions-root > *{
+.live .MuiBox-root .MuiCardActions-root > * {
   margin: 0 0.5em;
 }
 
@@ -55,4 +59,11 @@
   display: flex;
   width: 100%;
   justify-content: space-between;
+}
+
+.MuiBadge-root .MuiBadge-anchorOriginTopLeftRectangular {
+  left: 2.5em;
+  top: 0.4em;
+  font-size: 2em;
+  height: auto;
 }

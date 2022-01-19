@@ -8,7 +8,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
 
-const OrganizationListItem = ({
+const ExpandedOrganizationListItem = ({
   setExpanded,
   id,
   website,
@@ -74,4 +74,4 @@ const OrganizationListItem = ({
   );
 };
 
-export default OrganizationListItem;
+export default ExpandedOrganizationListItem;
