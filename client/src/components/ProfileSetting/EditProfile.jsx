@@ -14,14 +14,14 @@ const EditProfile = ({currentUser}) => {
               </Grid>
               <Grid item container component="form" direction="column" sx={{flexGrow: 1}} justifyContent="space-evenly">
                 <Box sx={{display:"flex", justifyContent:"space-between", alignItems:"center"}}> 
-                    <TextField id="firstName" label="First name" variant="outlined" sx={{flexGrow:1,mr:2, bgcolor:"white"}}  value={currentUser.first_name}/>
-                    <TextField id="lastName" label="Last name" variant="outlined" sx={{flexGrow:1,bgcolor:"white"}} value={ currentUser.last_name}/>
+                    <TextField id="firstName" label="First name" variant="outlined" sx={{flexGrow:1,mr:2, bgcolor:"white"}}  value={currentUser.first_name} required/>
+                    <TextField id="lastName" label="Last name" variant="outlined" sx={{flexGrow:1,bgcolor:"white"}} value={ currentUser.last_name} required/>
                 </Box>
-                <TextField id="email" label="Email" variant="outlined" sx={{bgcolor:"white"}} value={ currentUser.email}/>
-                <TextField id="userName" label="User name" variant="outlined" sx={{bgcolor:"white"}} value={ currentUser.username}/>
+                <TextField id="email" label="Email" variant="outlined" sx={{bgcolor:"white"}} value={ currentUser.email} required/>
+                <TextField id="userName" label="User name" variant="outlined" sx={{bgcolor:"white"}} value={ currentUser.username} required/>
                 <Box sx={{display:"flex", justifyContent:"space-between", alignItems:"center"}}>
                   <Avatar alt={ currentUser.username} src={ currentUser.profile_picture}/>
-                  <TextField sx={{flexGrow:1, ml:2, bgcolor:"white"}}id="profile_picture" label="Picture URL" variant="outlined" value={currentUser.profile_picture} />
+                  <TextField sx={{flexGrow:1, ml:2, bgcolor:"white"}}id="profile_picture" label="Picture URL" variant="outlined" value={currentUser.profile_picture} required />
                 </Box>
                 <TextField id="bio" multiline label="Bio"variant="outlined" sx={{bgcolor:"white"}} value={ currentUser.bio}/>
                 <Divider/>
