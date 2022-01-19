@@ -10,7 +10,7 @@ const useApplications = (id) => {
     }).catch((err) => {
       console.log(err);
     });
-  }, []);
+  }, [id]);
 
   return [applications, setApplications];
 };

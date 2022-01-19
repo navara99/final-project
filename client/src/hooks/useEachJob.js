@@ -8,7 +8,7 @@ const useEachJob = (id) => {
     axios.get(`/api/jobs/${id}`).then(({ data }) => {
       setJob(data);
     });
-  }, []);
+  }, [id]);
 
   return [job, setJob];
 };
