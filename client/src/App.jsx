@@ -17,6 +17,8 @@ import OrganizationDetails from "./components/Groups/OrganizationDetails";
 import Jobs from "./components/JobBoard/index";
 import Schedule from "./components/Schedule";
 
+import JobApplications from "./components/Groups/JobApplications";
+
 function App() {
   const [errorMessage, setErrorMessage] = useState("");
   const [showError, setShowError] = useState(false);
@@ -79,12 +81,13 @@ function App() {
             path="/organizations"
             element={<Groups {...{ setSnackBarDetails }} />}
           />
-          <Route path="/jobs" element={<Jobs  {...{ setSnackBarDetails }}/>} />
+          <Route path="/jobs" element={<Jobs  {...{ setSnackBarDetails }} />} />
           <Route path="/schedule" element={<Schedule />} />
-          <Route path="/messages" element={<ChatBox currentUser = {currentUser}/>} />
+          <Route path="/messages" element={<ChatBox currentUser={currentUser} />} />
           <Route path="/settings" element={<>Settings</>} />
           <Route path="/fairs/:id" element={<CareerFair />} />
-          <Route path="/organizations/:id" element={<OrganizationDetails {...{ setSnackBarDetails }}/>} />
+          <Route path="/organizations/:id" element={<OrganizationDetails {...{ setSnackBarDetails }} />} />
+          <Route path="/jobs/:id/applications" element={<JobApplications />} />
         </Routes>
       </div>
     </div>

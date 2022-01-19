@@ -49,3 +49,7 @@
 .filename {
   margin-left: 1em;
 }
+
+.applicants-resume-wrapper {
+  display: flex;
+}
