@@ -2,8 +2,9 @@ import { Grid, TextField, Typography,InputLabel, Avatar, Divider, Button } from 
 import { Box } from '@mui/system'
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import useCurrentUser from '../../hooks/useCurrentUser';
 
-const EditProfile = ({currentUser}) => {
+const EditProfile = () => {
   const [userInfo, setUserInfo] = useState({
     firstName : "",
     lastName: "",
@@ -12,7 +13,7 @@ const EditProfile = ({currentUser}) => {
     profilePicture:"",
     bio:""
   });
-
+  const {currentUser, setCurrentUser} = useCurrentUser()
   useEffect(() => {
     if(currentUser) {
       const {first_name, last_name, email, username, profile_picture, bio} = currentUser;
@@ -37,7 +38,10 @@ const EditProfile = ({currentUser}) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post("/api/users/edit", userInfo).then(res => console.log("res",res))
+    axios.post("/api/users/edit", userInfo).then(res =>{
+      console.log("res",res)
+      setCurrentUser(res.data)
+    } )
   }
   return (
     <>
