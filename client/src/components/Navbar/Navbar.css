@@ -16,6 +16,11 @@
   height: 2em;
 }
 
+.navbar-button img {
+  width: 90%;
+  height: 90%;
+}
+
 .navbar-button:hover,
 .navbar-text-button:hover {
   background-color: #13293d;

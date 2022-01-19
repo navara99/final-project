@@ -59,7 +59,7 @@ const JoinButton = ({ live, added, upcoming, id, add }) => {
         ref={anchorRef}
         aria-label="split button"
       >
-        <Button onClick={joinLive} disabled={!live}>
+        <Button onClick={joinLive} disabled={!live} >
           Join
         </Button>
         {options && options.length > 0 && (

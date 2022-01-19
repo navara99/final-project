@@ -7,6 +7,8 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
+import { Link } from "react-router-dom";
+import Avatar from "@mui/material/Avatar";
 
 const UserButtons = ({ logout, currentUser }) => {
   return (
@@ -15,9 +17,24 @@ const UserButtons = ({ logout, currentUser }) => {
         {...{ to: "/schedule", Icon: DateRangeIcon, text: "My Schedule" }}
       />
       <Button {...{ to: "/messages", Icon: ForumIcon, text: "Messages" }} />
-      <Button {...{ to: "/organizations", Icon: GroupsIcon, text: "My Organizations" }} />
-      <Button {...{ to: "/settings", Icon: SettingsIcon, text: "Settings" }} />
-      <Tippy content="Logout" placement="right" theme="material" arrow={true} >
+      <Button
+        {...{
+          to: "/organizations",
+          Icon: GroupsIcon,
+          text: "My Organizations",
+        }}
+      />
+      <Tippy content="Settings" placement="right" theme="material" arrow={true}>
+        <span className="navbar-button">
+          <Avatar
+            component={Link}
+            to="/settings"
+            alt={currentUser.username}
+            src={currentUser.profile_picture}
+          />
+        </span>
+      </Tippy>
+      <Tippy content="Logout" placement="right" theme="material" arrow={true}>
         <span onClick={logout} className="navbar-button">
           <LogoutIcon />
         </span>
