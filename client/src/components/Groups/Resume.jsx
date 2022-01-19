@@ -1,12 +1,20 @@
 import React from "react";
+import { Dialog, DialogTitle, DialogContent, DialogActions, Button } from "@mui/material";
 
-function Resume({ resume }) {
+function Resume({ application, openResume, setOpenResume }) {
 
-  console.log(resume);
 
   return (
     <>
-      <embed src={"http://localhost:8080/" + resume + "#toolbar=0"}  width="100%" height="80%"/>
+      <Dialog open={openResume} onClose={() => { }}>
+        <DialogTitle>{application.first_name}'s Resume</DialogTitle>
+        <DialogContent>
+          <embed src={"http://localhost:8080/" + application.resume + "#toolbar=0"} width="100%" height="80%" />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => { setOpenResume(!openResume) }}>Cancel</Button>
+        </DialogActions>
+      </Dialog>
     </>
   )
 

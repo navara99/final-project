@@ -2,18 +2,21 @@ import React from "react";
 import { ListItem, IconButton, ListItemAvatar, ListItemText, Divider, Avatar, Button } from "@mui/material";
 import MessageIcon from '@mui/icons-material/Message';
 import { formatDate } from "../../helpers/date";
+import Resume from "./Resume";
+import { useState } from "react";
 
 function ApplicantsListItem({ application }) {
+  const [openResume, setOpenResume] = useState(false);
 
-  console.log(application);
 
   return (
     <>
+      <Resume {...{ application }} {...{ setOpenResume }} {...{ openResume }} />
       <ListItem
         alignItems="flex-start"
         secondaryAction={
           <>
-            <Button>
+            <Button onClick={() => setOpenResume(!openResume)}>
               Resume
             </Button>
             <Button>

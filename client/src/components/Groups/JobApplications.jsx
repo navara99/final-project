@@ -8,16 +8,13 @@ import useEachJob from "../../hooks/useEachJob";
 
 function JobApplications() {
   const { id } = useParams();
-  const [applications, setApplications] = useApplications(id);
-  const [job, setJob] = useEachJob(id);
-  const [currentResume, setCurrentResume] = useState(applications ? applications[0].resume : "");
-
-  console.log(job);
+  const [applications] = useApplications(id);
+  const [job] = useEachJob(id);
 
   return (
     <div>
       {job && <h2>Applications for {job.title}</h2>}
-      {applications && <ApplicantsList {...{ applications }} {...{ setCurrentResume }} />}
+      {applications && <ApplicantsList {...{ applications }} />}
     </div>
   )
 }
