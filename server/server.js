@@ -82,7 +82,7 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// app.use(express.static("public"));
+app.use("/public", express.static(__dirname + "/public"));
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
