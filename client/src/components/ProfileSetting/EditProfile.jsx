@@ -37,7 +37,7 @@ const EditProfile = ({currentUser}) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.put("/", userInfo)
+    axios.post("/api/users/edit", userInfo).then(res => console.log("res",res))
   }
   return (
     <>
@@ -47,7 +47,7 @@ const EditProfile = ({currentUser}) => {
               <Grid item sx={{flexGrow: "auto", my:3}}>
                 <Typography variant='h4'>Edit Profile</Typography>
               </Grid>
-              <Grid item container component="form" direction="column" sx={{flexGrow: 1}} justifyContent="space-evenly">
+              <Grid item container component="form" direction="column" sx={{flexGrow: 1}} justifyContent="space-evenly" onSubmit={handleSubmit}>
                 <Box sx={{display:"flex", justifyContent:"space-between", alignItems:"center"}}> 
                     <TextField id="firstName" name="firstName" label="First name" variant="outlined" sx={{flexGrow:1,mr:2, bgcolor:"white"}}  value={userInfo.firstName} required onChange={handleChange}/>
                     <TextField id="lastName" name="lastName"label="Last name" variant="outlined" sx={{flexGrow:1,bgcolor:"white"}} value={userInfo.lastName} required onChange={handleChange}/>
@@ -61,7 +61,7 @@ const EditProfile = ({currentUser}) => {
                 <TextField id="bio" name="bio" multiline label="Bio"variant="outlined" sx={{bgcolor:"white"}} value={userInfo.bio} onChange={handleChange}/>
                 <Divider/>
                 <Grid item>
-                  <Button variant='contained'size='large'>Save</Button>
+                  <Button variant='contained'size='large' type="submit">Save</Button>
                   {/* <Button variant='contained' size='small' sx={{height:30}}>Cancel</Button> */}
                 </Grid>
               </Grid>
