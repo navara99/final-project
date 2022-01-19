@@ -3,10 +3,10 @@ import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
+import CardMedia from "@mui/material/CardMedia";
 
 const OrganizationListItem = ({
   setExpanded,
@@ -18,7 +18,7 @@ const OrganizationListItem = ({
 }) => {
   return (
     <Box onClick={setExpanded}>
-      <Card variant="outlined">
+      <Card variant="outlined" className="not-expanded">
         <CardMedia
           component="img"
           image="https://mui.com/static/images/cards/contemplative-reptile.jpg"
@@ -26,48 +26,15 @@ const OrganizationListItem = ({
         />
         <CardContent>
           <div className="organization-details">
-            <div>
-              <Typography
-                sx={{ fontSize: 14 }}
-                color="text.secondary"
-                gutterBottom
-              >
-                {industry}
-              </Typography>
-              <Typography variant="h5" component="div">
-                {name}
-              </Typography>
-              {/* <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                adjective
-              </Typography> */}
-            </div>
-            <div>
-              <CardActions>
-                {website && (
-                  <Button
-                    size="small"
-                    target="_blank"
-                    component={Link}
-                    to={website}
-                  >
-                    Website
-                  </Button>
-                )}
-                <Button
-                  size="small"
-                  component={Link}
-                  to={`/organizations/${id}`}
-                  target="_blank"
-                >
-                  Details
-                </Button>
-                <Button size="small" variant="outlined">
-                  Join this stall
-                </Button>
-              </CardActions>
-            </div>
+            <Typography variant="h5" component="div">
+              {name}
+            </Typography>
+            <CardActions>
+              <Button size="small" variant="outlined">
+                Join this stall
+              </Button>
+            </CardActions>
           </div>
-          <Typography variant="body2">{description}</Typography>
         </CardContent>
       </Card>
     </Box>
