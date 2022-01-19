@@ -10,7 +10,7 @@ import ScheduleButton from "./ScheduleButton";
 import JoinButton from "./JoinButton";
 import { formatStartEndTime, formatDate } from "../../helpers/date";
 
-const Header = ({ id, fair, added, currentUser, add, updateFairDetails }) => {
+const Header = ({ id, fair, added, currentUser, add }) => {
   const {
     name,
     description,
@@ -55,6 +55,7 @@ const Header = ({ id, fair, added, currentUser, add, updateFairDetails }) => {
           <CardActions>
             <Button
               component={Link}
+              target="_blank"
               to={`/organizations/${host_id}`}
               variant="contained"
               size="small"
@@ -64,10 +65,8 @@ const Header = ({ id, fair, added, currentUser, add, updateFairDetails }) => {
 
             {currentUser && (
               <div>
-                <ScheduleButton
-                  {...{ add, added, upcoming, id, live, updateFairDetails }}
-                />
-                <JoinButton {...{ added, upcoming, id, live }} />
+                <ScheduleButton {...{ add, added, upcoming, id, live }} />
+                <JoinButton {...{ add, added, upcoming, id, live }} />
               </div>
             )}
           </CardActions>

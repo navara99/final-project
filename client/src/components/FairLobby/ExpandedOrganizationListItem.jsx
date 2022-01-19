@@ -8,9 +8,16 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
 
-const OrganizationListItem = ({ id, website, industry, description, name }) => {
+const ExpandedOrganizationListItem = ({
+  setExpanded,
+  id,
+  website,
+  industry,
+  description,
+  name,
+}) => {
   return (
-    <Box>
+    <Box onClick={setExpanded}>
       <Card variant="outlined">
         <CardMedia
           component="img"
@@ -38,24 +45,24 @@ const OrganizationListItem = ({ id, website, industry, description, name }) => {
               <CardActions>
                 {website && (
                   <Button
-                    target="_blank"
                     size="small"
+                    target="_blank"
                     component={Link}
                     to={website}
                   >
                     Website
                   </Button>
                 )}
-                {/* <Button size="small" onClick={() => console.log("job post")}>
-                  Show Job Post
-                </Button> */}
                 <Button
                   size="small"
                   component={Link}
-                  target="_blank"
                   to={`/organizations/${id}`}
+                  target="_blank"
                 >
                   Details
+                </Button>
+                <Button size="small" variant="outlined">
+                  Join this stall
                 </Button>
               </CardActions>
             </div>
@@ -67,4 +74,4 @@ const OrganizationListItem = ({ id, website, industry, description, name }) => {
   );
 };
 
-export default OrganizationListItem;
+export default ExpandedOrganizationListItem;

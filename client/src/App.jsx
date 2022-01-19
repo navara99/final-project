@@ -12,12 +12,14 @@ import Groups from "./components/Groups/index";
 import { Snackbar, Alert } from "@mui/material";
 import Fair from "./components/Fair";
 import ChatBox from "./components/ChatBox/ChatBox";
-
+import FairLobby from "./components/FairLobby";
 import OrganizationDetails from "./components/Groups/OrganizationDetails";
 import Jobs from "./components/JobBoard/index";
 import Schedule from "./components/Schedule";
 import ProfileSetting from "./components/ProfileSetting/ProfileSetting";
 
+
+import JobApplications from "./components/Groups/JobApplications";
 
 function App() {
   const [errorMessage, setErrorMessage] = useState("");
@@ -81,10 +83,12 @@ function App() {
             path="/organizations"
             element={<Groups {...{ setSnackBarDetails }} />}
           />
-          <Route path="/jobs" element={<Jobs />} />
+          <Route path="/jobs" element={<Jobs  {...{ setSnackBarDetails }} />} />
           <Route path="/schedule" element={<Schedule />} />
           <Route path="/messages" element={<ChatBox currentUser = {currentUser}/>} />
           <Route path="/settings" element={<ProfileSetting/>}/>
+          <Route path="/jobs/:id/applications" element={<JobApplications />} />
+          <Route path="/live/:id" element={<FairLobby currentUser={currentUser} />} />
           <Route path="/fairs/:id" element={<Fair currentUser={currentUser} />} />
           <Route path="/organizations/:id" element={<OrganizationDetails {...{ setSnackBarDetails }}/>} />
         </Routes>

@@ -1,7 +1,6 @@
 import React from "react";
 import GroupsBtn from "./GroupsBtn";
-import { Delete, Edit, Person } from "@mui/icons-material";
-import { Link } from "react-router-dom";
+import { Delete, Edit } from "@mui/icons-material";
 
 function GroupAction({ openAddMembersModal, setOpenAddMembersModal, group }) {
 

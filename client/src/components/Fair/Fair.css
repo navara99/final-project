@@ -1,3 +1,7 @@
+.fair-details {
+  width: 100%;
+}
+
 .fair-details .MuiTypography-h6 {
   margin: 1em 0 0em;
 }
@@ -41,8 +45,6 @@
 
 .fair-details .MuiBox-root .MuiCardActions-root {
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
 }
 
 .fair-details .organization-details {

@@ -9,8 +9,10 @@ import Popper from "@mui/material/Popper";
 import MenuItem from "@mui/material/MenuItem";
 import MenuList from "@mui/material/MenuList";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const JoinButton = ({ live, added, upcoming, id, add }) => {
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
   const [options, setOptions] = useState();
@@ -21,10 +23,8 @@ const JoinButton = ({ live, added, upcoming, id, add }) => {
     });
   }, []);
 
-  const joinAsJobSeeker = () => {
-    // axios.post(`/api/fairs/join/${id}`).then(() => {
-    //   add();
-    // });
+  const joinLive = () => {
+    navigate(`/live/${id}`);
   };
 
   const handleMenuItemClick = (event, index) => {
@@ -59,7 +59,7 @@ const JoinButton = ({ live, added, upcoming, id, add }) => {
         ref={anchorRef}
         aria-label="split button"
       >
-        <Button onClick={joinAsJobSeeker} disabled={!live}>
+        <Button onClick={joinLive} disabled={!live} >
           Join
         </Button>
         {options && options.length > 0 && (

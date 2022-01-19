@@ -15,13 +15,14 @@ function OrganizationDetails({ setSnackBarDetails }) {
   const { id } = useParams();
   const [organization, setOrganizationDetails] = useOrganizationDetails(id);
 
+  console.log(organization);
 
   return (
     <div className="organization-details-wrapper">
       {organization && <OrganizationHeader {...{ organization }} {...{ cardStyles }} />}
       {organization && <OrganizationJobs {...{ organization }} {...{ setOrganizationDetails }} {...{ cardStyles }} {...{ setSnackBarDetails }} />}
       {organization && <OrganizationFairs {...{ organization }} {...{ setOrganizationDetails }} {...{ cardStyles }} {...{ setSnackBarDetails }} />}
-      {organization && <OrganizationMembers {...{ organization }} {...{ setOrganizationDetails }} {...{ cardStyles }}  {...{ setSnackBarDetails }}/>}
+      {organization && <OrganizationMembers {...{ organization }} {...{ setOrganizationDetails }} {...{ cardStyles }}  {...{ setSnackBarDetails }} />}
     </div>
   );
 };

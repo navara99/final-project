@@ -1,13 +1,17 @@
 import React from "react";
 import GroupsBtn from "./GroupsBtn";
+import JobApplicationForm from "./JobApplicationForm";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
-function JobActions({ job, isMember }) {
-
+function JobActions({ job, isMember, setSnackBarDetails }) {
+  const [openApplicationForm, setOpenApplicationForm] = useState(false);
 
   return (
     <>
-      {!isMember && <GroupsBtn text={"Apply"} />}
-      {isMember && <GroupsBtn text={`Applications (${job.applications.length})`} />}
+      <JobApplicationForm {...{ job }} {...{ openApplicationForm }} {...{ setOpenApplicationForm }} {...{ setSnackBarDetails }} />
+      {!isMember && <GroupsBtn text={"Apply"} onClick={() => setOpenApplicationForm(!openApplicationForm)} />}
+      {isMember && <Link to={`/jobs/${job.id}/applications`} style={{ textDecoration: "none" }}><GroupsBtn text={`View Applications (${job.applications.length})`} /></Link>}
       <GroupsBtn text={"Details"} />
     </>
   )
