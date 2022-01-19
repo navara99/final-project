@@ -73,6 +73,6 @@
   padding: 0 0.4em;
 }
 
-.not-expanded img {
-  width: 15%;
+.live .MuiBox-root .MuiPaper-root.not-expanded img {
+  max-width: 5em;
 }
