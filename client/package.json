@@ -10,6 +10,7 @@
     "@mui/lab": "^5.0.0-alpha.64",
     "@mui/material": "^5.2.8",
     "@tippyjs/react": "^4.2.6",
+    "agora-rtc-react": "^1.1.0",
     "axios": "^0.24.0",
     "moment": "^2.29.1",
     "moment-timezone": "^0.5.34",

@@ -1,18 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import useFairDetails from "../../hooks/useFairDetails";
-import Header from "./Header";
-import "./Fair.css";
-import OrganizationList from "./OrganizationList";
 
 const Stall = ({ currentUser }) => {
   let { fairId, organizationId } = useParams();
-
-  return (
-    <div>
-      Hello
-    </div>
-  );
+  const [inCall, setInCall] = useState(false);
+  
+  return <div>{inCall ? "we are in call" : "waiting to join call!"}</div>;
 };
 
 export default Stall;
