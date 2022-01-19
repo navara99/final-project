@@ -83,6 +83,7 @@ function App() {
           <Route path="/schedule" element={<Schedule />} />
           <Route path="/messages" element={<ChatBox currentUser = {currentUser}/>} />
           <Route path="/settings" element={<>Settings</>} />
+          <Route path="/live/:fairId/:organizationId" element={<OrganizationDetails {...{ setSnackBarDetails }}/>} />
           <Route path="/live/:id" element={<FairLobby currentUser={currentUser} />} />
           <Route path="/fairs/:id" element={<Fair currentUser={currentUser} />} />
           <Route path="/organizations/:id" element={<OrganizationDetails {...{ setSnackBarDetails }}/>} />
