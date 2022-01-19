@@ -22,27 +22,25 @@ const OrganizationListItem = ({
 
   return (
     <Box onClick={setExpanded}>
-      {fair.live && (
-        <Card variant="outlined" className="not-expanded">
-          <CardMedia
-            component="img"
-            image="https://mui.com/static/images/cards/contemplative-reptile.jpg"
-            alt={name + "_logo"}
-          />
-          <CardContent>
-            <div className="organization-details">
-              <Typography variant="h5" component="div">
-                {name}
-              </Typography>
-              <CardActions>
-                <Button size="small" onClick={clickHandler} variant="outlined">
-                  Join this stall
-                </Button>
-              </CardActions>
-            </div>
-          </CardContent>
-        </Card>
-      )}
+      <Card variant="outlined" className="not-expanded">
+        <CardMedia
+          component="img"
+          image="https://mui.com/static/images/cards/contemplative-reptile.jpg"
+          alt={name + "_logo"}
+        />
+        <CardContent>
+          <div className="organization-details">
+            <Typography variant="h5" component="div">
+              {name}
+            </Typography>
+            <CardActions>
+              <Button size="small" onClick={clickHandler} variant="outlined">
+                Join this stall
+              </Button>
+            </CardActions>
+          </div>
+        </CardContent>
+      </Card>
     </Box>
   );
 };
