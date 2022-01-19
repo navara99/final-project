@@ -7,22 +7,21 @@ const NavColumn = () => {
   return (
     <Grid item xs ={3} >
       <List>
-        <ListItem sx={{backgroundColor:"#edecec"}}>
+        <ListItem >
           <ListItemText primary="Settings" primaryTypographyProps={{variant:"h6"}}/>
-          {/* <Typography variant='h5' >Settings</Typography> */}
         </ListItem>
         <Divider/>
         <ListItemButton selected={selectedIndex === 0} onClick={(e) => setSelectedIndex(0)}>
           <ListItemIcon>
             <EditIcon/>
           </ListItemIcon>
-          <ListItemText primary= "Profile"/>
+          <ListItemText primary= "Edit Profile"/>
         </ListItemButton>
         <ListItemButton selected={selectedIndex === 1} onClick={(e) => setSelectedIndex(1)}>
           <ListItemIcon>
             <SecurityIcon/>
           </ListItemIcon>
-          <ListItemText primary= "Security"/>
+          <ListItemText primary= "Password & Security"/>
         </ListItemButton>
       </List>
     </Grid>
