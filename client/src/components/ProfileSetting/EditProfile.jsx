@@ -14,7 +14,7 @@ const EditProfile = () => {
                   <TextField id="firstName" label="First name" variant="outlined" sx={{flexGrow:1,mr:2, bgcolor:"white"}} />
                   <TextField id="lastName" label="Last name" variant="outlined" sx={{flexGrow:1,bgcolor:"white"}} />
               </Box>
-    
+              <TextField id="email" label="Email" variant="outlined" sx={{bgcolor:"white"}}/>
               <TextField id="userName" label="User name" variant="outlined" sx={{bgcolor:"white"}}/>
               <Box sx={{display:"flex", justifyContent:"space-between", alignItems:"center"}}>
                 <Avatar />
