@@ -47,6 +47,10 @@
   display: flex;
 }
 
+.live .MuiBox-root .MuiCardActions-root > *{
+  margin: 0 0.5em;
+}
+
 .live .organization-details {
   display: flex;
   width: 100%;
