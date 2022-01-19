@@ -49,9 +49,14 @@ function JobApplicationForm({ job, openApplicationForm, setOpenApplicationForm, 
     setResumeInput(!showResumeInput);
   };
 
+  const handleCancel = () => {
+    setResume(null);
+    setResumeInput(false)
+    setOpenApplicationForm(!openApplicationForm);
+  };
 
   return (
-    <Dialog open={openApplicationForm} fullWidth maxWidth="md">
+    <Dialog open={openApplicationForm} fullWidth maxWidth="md" >
       <form onSubmit={handleApplicationSubmissions} >
         <DialogTitle>Apply To Posting: {job.title}</DialogTitle>
         <DialogContent>
@@ -87,7 +92,7 @@ function JobApplicationForm({ job, openApplicationForm, setOpenApplicationForm, 
 
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setOpenApplicationForm(!openApplicationForm)}>Cancel</Button>
+          <Button onClick={handleCancel}>Cancel</Button>
           <Button type="submit">Create</Button>
         </DialogActions>
       </form>
