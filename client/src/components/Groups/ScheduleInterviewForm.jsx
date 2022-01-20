@@ -35,13 +35,13 @@ function ScheduleInterviewForm({
       startTime,
       endTime
     );
-    const newFair = {
+    const newInterview = {
       startTimeStamp,
       endTimeStamp,
     };
 
     try {
-      const { data } = await axios.post("/api/fairs", newFair);
+      const { data } = await axios.post("/api/messages/interview", newInterview);
       setOrganizationDetails((prev) => ({
         ...prev,
         fairs: [data, ...prev.fairs],

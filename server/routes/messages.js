@@ -24,5 +24,14 @@ module.exports = (db) => {
     }
   })
 
+  router.post("/interview", async(req,res) => {
+    try {
+      console.log("interview");
+      res.status(200).json({});
+    } catch (error) {
+      console.log(error);
+    }
+  })
+
   return router;
 }
