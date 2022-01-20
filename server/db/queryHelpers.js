@@ -62,6 +62,23 @@ const queryGenerator = (db) => {
     }
   };
 
+  const updatePasswordById = async (id, password) => {
+    const values = [id, password];
+    const queryString = `
+      UPDATE users SET password = $2 WHERE id = $1
+      RETURNING *;
+      `;
+
+    try {
+      const result = await db.query(queryString, values);
+      const userInfo = getFirstRecord(result);
+
+      return userInfo;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const getAllFairs = async () => {
     const queryString = `SELECT * FROM fairs;`;
 
@@ -583,7 +600,8 @@ const queryGenerator = (db) => {
     createNewMessage,
     addJobToOrganization,
     getJobsBySearch,
-    updateUser
+    updateUser,
+    updatePasswordById 
   };
 };
 
