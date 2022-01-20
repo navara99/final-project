@@ -29,10 +29,16 @@ module.exports = (db) => {
 
   router.post("/interview", async (req, res) => {
     const { user_id } = req.session;
-    const { start, end, applicationId } = req.body;
+    const { start, end, applicationId, receiverId } = req.body;
 
     try {
-      await sendInterviewInvitation(start, end, user_id, applicationId);
+      await sendInterviewInvitation(
+        start,
+        end,
+        user_id,
+        receiverId,
+        applicationId
+      );
       res.status(200).json({});
     } catch (error) {
       console.log(error);

@@ -1,7 +1,7 @@
 const getData = ({ rows }) => rows;
 
 const interviewQueryGenerator = (db) => {
-  const sendInterviewInvitation = async () => {
+  const sendInterviewInvitation = async (start, end, user_id, applicationId) => {
 
   }
 
