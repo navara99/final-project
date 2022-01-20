@@ -87,7 +87,7 @@ function App() {
           <Route path="/schedule" element={<Schedule />} />
           <Route path="/messages" element={<ChatBox currentUser = {currentUser}/>} />
           <Route path="/settings" element={<ProfileSetting setCurrentUser={setCurrentUser} currentUser={currentUser}/>}/>
-          <Route path="/jobs/:id/applications" element={<JobApplications setSnackBarDetails={setSnackBarDetails} />} />
+          <Route path="/jobs/:id/applications" element={<JobApplications setSnackBarDetails={setSnackBarDetails} currentUser={currentUser} />} />
           <Route path="/live/:id" element={<FairLobby currentUser={currentUser} />} />
           <Route path="/fairs/:id" element={<Fair currentUser={currentUser} />} />
           <Route path="/organizations/:id" element={<OrganizationDetails {...{ setSnackBarDetails }}/>} />

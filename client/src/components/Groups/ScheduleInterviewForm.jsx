@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Dialog,
   DialogTitle,
@@ -17,6 +17,7 @@ import {
   formatDate,
   formatStartEndTime,
 } from "../../helpers/date";
+import { io } from "socket.io-client";
 
 function ScheduleInterviewForm({
   interviewFormOpen,
@@ -24,10 +25,24 @@ function ScheduleInterviewForm({
   application,
   jobTitle,
   setSnackBarDetails,
+  currentUser
 }) {
   const [date, setDate] = useState(new Date());
   const [startTime, setStartTime] = useState(new Date());
   const [endTime, setEndTime] = useState(new Date());
+  const [socket, setSocket] = useState(null);
+
+  useEffect(() => {
+    const socket = io.connect("http://localhost:8080");
+    setSocket(socket);
+  }, []);
+
+  useEffect(() => {
+    if(currentUser && socket) {
+      //sending user id
+      socket.emit("addUser", currentUser.id);
+    }
+},[currentUser,socket])
 
   const handleFairSubmit = async () => {
     const [start, end] = combineDateTimes(date, startTime, endTime);
@@ -43,11 +58,16 @@ function ScheduleInterviewForm({
     };
 
     try {
-      await axios.post("/api/messages/interview", newInterview);
+      const newMessage = await axios.post(
+        "/api/messages/interview",
+        newInterview
+      );
       setSnackBarDetails({
         open: true,
         message: "Interview invitation has been sent",
       });
+      console.log(newMessage)
+      socket.emit("sendMessage", newMessage);
     } catch (err) {
       console.log(err.message);
     }

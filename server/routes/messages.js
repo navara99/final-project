@@ -32,8 +32,7 @@ module.exports = (db) => {
     const { start, end, applicationId, receiverId, message } = req.body;
 
     try {
-      console.log(message);
-      await sendInterviewInvitation(
+      const data = await sendInterviewInvitation(
         start,
         end,
         user_id,
@@ -41,7 +40,7 @@ module.exports = (db) => {
         applicationId,
         message
       );
-      res.status(200).json({});
+      res.status(200).json(data);
     } catch (error) {
       console.log(error);
     }
