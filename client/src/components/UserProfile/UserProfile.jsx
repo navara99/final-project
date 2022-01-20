@@ -1,7 +1,7 @@
 import { Avatar, Grid, Stack, Typography, Box, Badge, Divider, ListItemText , List} from '@mui/material';
-// import { styled } from '@mui/system';
 import { styled } from '@mui/material/styles';
 import React from 'react';
+import useMyGroups from '../../hooks/useMyGroups';
 
 const ProfilePic = styled(Avatar)(({ theme }) => ({
   width:150, 
@@ -11,10 +11,12 @@ const ProfilePic = styled(Avatar)(({ theme }) => ({
 }));
 
 const UserProfile = ({currentUser}) => {
+  const {myGroups} = useMyGroups();
+  console.log("myGroupp", myGroups);
   return ( <>{
     currentUser &&
     (
-    <Grid xs={12} container sx={{backgroundColor:"#eff2f6"}} justifyContent="space-around">
+    <Grid item xs={12} container sx={{backgroundColor:"#eff2f6"}} justifyContent="space-around">
       <Stack spacing={3} >
           <Box sx={{bgcolor:'#1f78b1'}}>
             <Badge
