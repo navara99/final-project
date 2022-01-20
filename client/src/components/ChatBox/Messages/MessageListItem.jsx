@@ -1,5 +1,5 @@
 import React from "react";
-import { ListItem, Grid, ListItemText } from "@mui/material";
+import { ListItem, Grid, ListItemText, Button } from "@mui/material";
 import moment from "moment";
 import BasicScrollToBottom from "react-scroll-to-bottom/lib/BasicScrollToBottom";
 
@@ -10,11 +10,26 @@ const MessageListItem = (props) => {
   return (
     <>
       {currentUser && (
-        <ListItem>
+        <ListItem
+          style={{
+            justifyContent:
+              sender_id === currentUser.id ? "flex-end" : "flex-start",
+          }}
+        >
           <Grid container>
             <Grid item xs={12}>
-              {is_invitation ? (
-                <>INVITATION</>
+              {is_invitation && sender_id !== currentUser.id ? (
+                <ListItemText
+                  align="left"
+                  primary={
+                    <>
+                      <h6>Invitation</h6>
+                      <div>{message}</div>
+                      <Button>Accept</Button>
+                      <Button>Reject</Button>
+                    </>
+                  }
+                ></ListItemText>
               ) : (
                 <ListItemText
                   align={sender_id === currentUser.id ? "right" : "left"}

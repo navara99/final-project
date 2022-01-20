@@ -15,6 +15,7 @@ import axios from "axios";
 import useMessageReceiver from "../../hooks/useMessageReceiver";
 import { Avatar, ListItemAvatar } from "@mui/material";
 import { useLocation } from "react-router-dom";
+import "./ChatBox.css";
 
 const ChatBox = ({ currentUser }) => {
   const [messages, setMessages] = useState(null);
@@ -100,7 +101,7 @@ const ChatBox = ({ currentUser }) => {
   }, [currentUser, socket]);
 
   return (
-    <Grid container>
+    <Grid container className="chat-box">
       {/* List of user  */}
       <Grid item px={2} xs={3} component={Paper} variant="outlined">
         <List>
