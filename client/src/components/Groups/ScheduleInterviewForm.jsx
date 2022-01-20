@@ -29,7 +29,7 @@ function ScheduleInterviewForm({
 
   const handleFairSubmit = async () => {
     const [start, end] = combineDateTimes(date, startTime, endTime);
-    const newInterview = { start, end, application };
+    const newInterview = { start, end, applicationId: application.id };
 
     try {
       await axios.post("/api/messages/interview", newInterview);
