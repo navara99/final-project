@@ -2,9 +2,11 @@ import { Grid, TextField, Typography,InputLabel, Avatar, Divider, Button } from 
 import { Box } from '@mui/system'
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 
 const EditProfile = ({setCurrentUser, currentUser, setErrorMessage, setShowError}) => {
+  let navigate = useNavigate();
   const [userInfo, setUserInfo] = useState({
     firstName : "",
     lastName: "",
@@ -40,6 +42,7 @@ const EditProfile = ({setCurrentUser, currentUser, setErrorMessage, setShowError
     axios.post("/api/users/edit", userInfo).then(res =>{
       console.log("res",res)
       setCurrentUser(res.data)
+      navigate("/profile")
     }).catch(error => {
      setErrorMessage(error.response.data.error);
      setShowError(true);
