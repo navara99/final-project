@@ -9,8 +9,8 @@ export const formatDate = (timestamp) => {
 
 export const formatStartEndTime = (start, end) => {
   const timezone = moment.tz.guess();
-  const startTime = moment.tz(start, timezone).format('ha z');
-  const endTime = moment.tz(end, timezone).format('ha z');
+  const startTime = moment.tz(start, timezone).format('hh:mm a');
+  const endTime = moment.tz(end, timezone).format('hh:mm a');
 
   return startTime.slice(0, -3) + " - " + endTime;
 };
