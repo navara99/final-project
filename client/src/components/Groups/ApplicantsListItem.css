@@ -1,0 +1,8 @@
+.view-application-buttons {
+  display: flex;
+  flex-direction: column;
+}
+
+.view-application-buttons > span > * {
+  margin: 0 1em;
+}

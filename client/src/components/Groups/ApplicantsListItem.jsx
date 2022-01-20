@@ -14,6 +14,7 @@ import Resume from "./Resume";
 import { useState } from "react";
 import CoverLetter from "./CoverLetter";
 import { Link } from "react-router-dom";
+import "./ApplicantsListItem.css";
 
 function ApplicantsListItem({ application }) {
   const [openResume, setOpenResume] = useState(false);
@@ -29,14 +30,23 @@ function ApplicantsListItem({ application }) {
       />
       <Resume {...{ application }} {...{ setOpenResume }} {...{ openResume }} />
       <ListItem
+        style={{ padding: "1.5em 0" }}
         alignItems="flex-start"
         secondaryAction={
-          <>
-            <Button onClick={() => setOpenResume(!openResume)}>Resume</Button>
-            <Button onClick={() => setOpenCoverLetter(!openCoverLetter)}>
-              Cover Letter
-            </Button>
-            <IconButton>
+          <div class="view-application-buttons">
+            <span>
+              <Button onClick={() => setOpenResume(!openResume)}>Resume</Button>
+              <Button onClick={() => setOpenCoverLetter(!openCoverLetter)}>
+                Cover Letter
+              </Button>
+            </span>
+            <span>
+              <Button
+                variant="outlined"
+                onClick={() => console.log("invitation")}
+              >
+                Schedule Interview
+              </Button>
               <Link
                 to="/messages"
                 state={{
@@ -50,8 +60,8 @@ function ApplicantsListItem({ application }) {
                   <MessageIcon />
                 </IconButton>
               </Link>
-            </IconButton>
-          </>
+            </span>
+          </div>
         }
       >
         <ListItemAvatar>
