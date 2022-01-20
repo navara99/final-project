@@ -23,7 +23,7 @@ module.exports = () => {
       error: "Missing channel name."
     })
     // get uid
-    const uid = req.query.uid;
+    let uid = req.query.uid;
     if (!uid) uid = 0;
     // get role
     const role = RtcRole.SUBSCRIBER;
@@ -31,7 +31,7 @@ module.exports = () => {
       role = RtcRole.PUBLISHER;
     };
     // get expiration time for token
-    const expireTime = req.query.expireTime;
+    let expireTime = req.query.expireTime;
     if (!expireTime) {
       expireTime = 3600; // Default is an hour
     } else {
@@ -42,9 +42,9 @@ module.exports = () => {
     const currentTime = Math.floor(Date.now() / 1000);
     const privilageExpireTime = currentTime + expireTime;
     // build the token
-
-
+    const token = RtcTokenBuilder.buildTokenWithUid(appId, appCertificate, channelName, uid, role, privilageExpireTime);
     // return token
+    res.json({ token });
   };
 
   router.get("/", nocache, generateAccessToken);
