@@ -48,7 +48,7 @@ const EditProfile = ({setCurrentUser, currentUser, setErrorMessage, setShowError
     updateUserInfo.append("username", userInfo.username);
     updateUserInfo.append("profilePicture", userInfo.profilePicture);
     updateUserInfo.append("bio",userInfo.bio )
-    updateUserInfo.append("resume", resume);
+    resume && updateUserInfo.append("resume", resume);
     console.log("resume",resume)
     axios.post("/api/users/edit", updateUserInfo).then(res =>{
       setCurrentUser(res.data)
