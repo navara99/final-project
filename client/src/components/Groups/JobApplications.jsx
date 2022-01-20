@@ -12,9 +12,11 @@ function JobApplications() {
   return (
     <div>
       {job && <h2>Applications for {job.title}</h2>}
-      {applications && <ApplicantsList {...{ applications }} />}
+      {applications && (
+        <ApplicantsList {...{ applications, jobTitle: job.title }} />
+      )}
     </div>
-  )
+  );
 }
 
 export default JobApplications;

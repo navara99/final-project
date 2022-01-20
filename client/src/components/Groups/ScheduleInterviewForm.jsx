@@ -19,11 +19,11 @@ import { combineDateTimes } from "../../helpers/date";
 function ScheduleInterviewForm({
   interviewFormOpen,
   setInterviewFormOpen,
+  application,
+  jobTitle,
   setOrganizationDetails,
   setSnackBarDetails,
 }) {
-  const [name, setName] = useInput();
-  const [description, setDescription] = useInput();
   const [date, setDate] = useState(new Date());
   const [startTime, setStartTime] = useState(new Date());
   const [endTime, setEndTime] = useState(new Date());
@@ -36,9 +36,6 @@ function ScheduleInterviewForm({
       endTime
     );
     const newFair = {
-      name,
-      description,
-      hostId: id,
       startTimeStamp,
       endTimeStamp,
     };
@@ -60,30 +57,16 @@ function ScheduleInterviewForm({
     setInterviewFormOpen(!interviewFormOpen);
   };
 
-  console.log(interviewFormOpen);
   return (
-    <Dialog open={interviewFormOpen} onClose={() => {}}>
-      <DialogTitle>Create A New Fair</DialogTitle>
+    <Dialog
+      open={interviewFormOpen}
+      onClose={() => setInterviewFormOpen(!interviewFormOpen)}
+    >
+      <DialogTitle>
+        Schedule Interview with
+        {` ${application.first_name} ${application.last_name[0]}. for ${jobTitle}`}
+      </DialogTitle>
       <DialogContent>
-        <TextField
-          autoFocus
-          margin="dense"
-          id="name"
-          label="Name"
-          fullWidth
-          required
-          onChange={setName}
-        />
-        <TextField
-          multiline
-          rows="6"
-          margin="dense"
-          id="description"
-          label="Description"
-          fullWidth
-          required
-          onChange={setDescription}
-        />
         <LocalizationProvider dateAdapter={DateAdapter}>
           <DatePicker
             renderInput={(props) => (
