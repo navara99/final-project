@@ -8,7 +8,7 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require("bcryptjs");
-
+const salt = 12;
 module.exports = (db) => {
   const queryGenerator = require("../db/queryHelpers");
   const { createNewUser, getUserByValue, getOrganizationsByUser, getAllOtherUsers,updateUser } = queryGenerator(db);
@@ -140,7 +140,56 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       }
 
-  })
+  });
+
+  // Edit password
+
+  router.post("/password", async(req, res) => {
+    const { user_id } = req.session;
+    const { currentPassword, newPassword, confirmPassword } = req.body;
+
+    try {
+
+      const user = await getUserByValue("id", user_id);
+
+      const { password: hashedPassword } = user;
+
+      const correctPassword = await bcrypt.compare(
+        currentPassword,
+        hashedPassword
+      );
+
+      if (!correctPassword) {
+        return res
+          .status(400)
+          .json({ error: "Current password is incorrect." });
+      }
+
+      const newPasswordIsConfirmed = newPassword === confirmPassword;
+
+      if (!newPasswordIsConfirmed) {
+        return res
+          .status(400)
+          .json({ error: "Different inputs for new password." });
+      }
+
+      const sameNewAndOldPassword = currentPassword === newPassword;
+
+      if (sameNewAndOldPassword) {
+        return res
+          .status(400)
+          .json({ error: "The new password is same with the current password." });
+      }
+
+      const newHashedPassword = await bcrypt.hash(newPassword, salt);
+
+      const newUserInfo = await updatePasswordById(user_id, newHashedPassword);
+
+      res.json(newUserInfo);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  });
 
   return router;
 };
