@@ -8,5 +8,6 @@ CREATE TABLE users (
   profile_picture varchar,
   password varchar NOT NULL,
   username varchar UNIQUE NOT NULL,
-  bio varchar
+  bio varchar,
+  resume varchar
 );
