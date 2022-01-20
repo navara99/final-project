@@ -5,13 +5,13 @@ import EditPassword from './EditPassword'
 import EditProfile from './EditProfile'
 import NavColumn from './NavColumn'
 
-const ProfileSetting = ({setCurrentUser, currentUser}) => {
+const ProfileSetting = ({setCurrentUser, currentUser, setErrorMessage, setShowError}) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
  
   return (
     <Grid container justifyContent="flex-start" alignItems="stretch">
       <NavColumn selectedIndex = {selectedIndex} setSelectedIndex = {setSelectedIndex}/>
-      {selectedIndex === 0 && <EditProfile currentUser={currentUser} setCurrentUser={setCurrentUser}/>}
+      {selectedIndex === 0 && <EditProfile {...{setCurrentUser, currentUser, setErrorMessage, setShowError}}/>}
       {selectedIndex === 1 && <EditPassword/>}
     </Grid>
   )
