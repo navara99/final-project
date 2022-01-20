@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from "react";
-import useChannel from "./useChannel";
+import useChannel from "../../hooks/useChannel";
 import { Grid } from "@mui/material";
 import Controls from "./Controls";
 import Video from "./Video";
 
 export default function VideoCall(props) {
+  const { setInCall, userId, channelName } = props;
   const {
     config,
     useClient,
-    useMicrophoneAndCameraTracks,
-    channelName,
-  } = useChannel("test");
-  const { setInCall } = props;
+    useMicrophoneAndCameraTracks
+  } = useChannel(channelName, userId);
   const [users, setUsers] = useState([]);
   const [start, setStart] = useState(false);
   const client = useClient();
@@ -49,12 +48,13 @@ export default function VideoCall(props) {
       });
 
       try {
-        await client.join(config.appId, name, config.token, null);
+        await client.join(config.appId, name, config.token, userId);
       } catch (error) {
         console.log("error");
       }
 
       if (tracks) await client.publish([tracks[0], tracks[1]]);
+
       setStart(true);
     };
 
