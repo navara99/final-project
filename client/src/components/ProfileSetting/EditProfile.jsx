@@ -40,12 +40,11 @@ const EditProfile = ({setCurrentUser, currentUser, setErrorMessage, setShowError
   const handleSubmit = (e) => {
     e.preventDefault();
     axios.post("/api/users/edit", userInfo).then(res =>{
-      console.log("res",res)
       setCurrentUser(res.data)
       navigate("/profile")
     }).catch(error => {
-     setErrorMessage(error.response.data.error);
-     setShowError(true);
+      setErrorMessage(error.response.data.error);
+      setShowError(true);
     })
   }
   return (
