@@ -13,6 +13,32 @@ const Controls = ({ tracks, setStart, setInCall }) => {
   const [trackState, setTrackState] = useState({ video: true, audio: true });
 
   return (
-    <Grid></Grid>
-  )
+    <Grid container spacing={2} alignItems="center">
+      <Grid item>
+        <Button
+          variant="contained"
+          onClick={() => mute("audio")}
+          color={trackState.audio ? "primary" : "secondary"}
+        >
+          {trackState.audio ? <MicIcon /> : <MicOffIcon />}
+        </Button>
+        <Button
+          variant="contained"
+          onClick={() => mute("video")}
+          color={trackState.video ? "primary" : "secondary"}
+        >
+          {trackState.video ? <VideocamIcon /> : <VideocamOffIcon />}
+        </Button>
+        <Button
+          variant="contained"
+          onClick={() => mute("audio")}
+          color={trackState.audio ? "primary" : "secondary"}
+        >
+          {trackState.audio ? <MicIcon /> : <MicOffIcon />}
+        </Button>
+      </Grid>
+      <Grid item></Grid>
+      <Grid item></Grid>
+    </Grid>
+  );
 };
