@@ -52,7 +52,6 @@ const UserProfile = ({currentUser}) => {
           </Box>
           <Box><Button onClick={(e) => setOpenResume(true)}>YourResume</Button></Box>
           <Box>
-            <>
               <Dialog open={openResume} fullWidth={true} maxWidth={"lg"} onClose={() => { }} >
                 
                 <DialogContent>
@@ -63,7 +62,6 @@ const UserProfile = ({currentUser}) => {
                   <Button onClick={() => { setOpenResume(!openResume) }}>Close</Button>
                 </DialogActions>
               </Dialog>
-            </>
           </Box>
 
           <Box sx={{px:3}}>
