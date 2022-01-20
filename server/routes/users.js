@@ -11,7 +11,7 @@ const bcrypt = require("bcryptjs");
 const salt = 12;
 module.exports = (db) => {
   const queryGenerator = require("../db/queryHelpers");
-  const { createNewUser, getUserByValue, getOrganizationsByUser, getAllOtherUsers,updateUser } = queryGenerator(db);
+  const { createNewUser, getUserByValue, getOrganizationsByUser, getAllOtherUsers,updateUser,updatePasswordById } = queryGenerator(db);
 
   router.get("/", async (req, res) => {
     const { user_id } = req.session;
@@ -145,7 +145,9 @@ module.exports = (db) => {
   // Edit password
 
   router.post("/password", async(req, res) => {
+    
     const { user_id } = req.session;
+    console.log("geet req", user_id);
     const { currentPassword, newPassword, confirmPassword } = req.body;
 
     try {
