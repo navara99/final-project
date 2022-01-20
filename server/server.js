@@ -45,12 +45,12 @@ io.on("connection", (socket) => {
     // io.emit("getUsers", users);
   });
 
-  socket.on("sendMessage", ({sender_id,receiver_id,message}) => {
- 
+  socket.on("sendMessage", ({ sender_id, receiver_id, message }) => {
+
     const user = getUser(receiver_id);
     // console.log("user", users);
-    if(user) {
-     
+    if (user) {
+
       io.to(user.socketId).emit("getMessage", {
         receiver_id,
         sender_id,
@@ -82,7 +82,7 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// app.use(express.static("public"));
+app.use("/public", express.static(__dirname + "/public"));
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -92,11 +92,13 @@ const jobRoutes = require("./routes/jobs");
 const fairsRoutes = require("./routes/fairs");
 const organizationRoutes = require("./routes/organizations");
 const messagesRoutes = require("./routes/messages");
+const applicationRoutes = require("./routes/applications");
 
 const scheduleRoutes = require("./routes/schedule");
 
 app.use("/api/users", usersRoutes(db));
 app.use("/api/jobs", jobRoutes(db));
+app.use("/api/applications", applicationRoutes(db));
 app.use("/api/fairs", fairsRoutes(db));
 app.use("/api/organizations", organizationRoutes(db));
 app.use("/api/messages", messagesRoutes(db));

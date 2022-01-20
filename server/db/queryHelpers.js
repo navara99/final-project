@@ -35,6 +35,33 @@ const queryGenerator = (db) => {
     }
   };
 
+  const updateUser = async (newUserInfo) => {
+
+    const { firstName, lastName, username, email, bio, profilePicture, userId } =
+      newUserInfo;
+    const values = [firstName, lastName, username, email, bio, profilePicture, userId];
+
+    const queryString = `
+        UPDATE users
+        SET first_name = $1,
+        last_name = $2,
+        username = $3,
+        email = $4,
+        bio = $5,
+        profile_picture= $6
+        WHERE id = $7
+        RETURNING *;
+    `;
+
+    try {
+      const result = await db.query(queryString, values);
+      const userInfo = getFirstRecord(result);   
+      return userInfo;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const getAllFairs = async () => {
     const queryString = `SELECT * FROM fairs;`;
 
@@ -151,8 +178,8 @@ const queryGenerator = (db) => {
   const getAllApplicationsByJobId = async (job_id) => {
     const values = [job_id];
     const queryString = `
-    SELECT applications.*, users.first_name, users.last_name FROM applications
-    JOIN jobs ON jobs.id = applications.user_id
+    SELECT applications.*, users.* FROM applications
+    JOIN jobs ON jobs.id = applications.job_id
     JOIN users ON applications.user_id = users.id
     WHERE jobs.id = $1;
     `;
@@ -497,7 +524,41 @@ const queryGenerator = (db) => {
     }
   };
 
+  // Job Applications
+
+  const applyForJob = async (userId, message, jobId, filePath) => {
+
+    try {
+      const values = [userId, message, jobId, filePath];
+      const queryString = `
+        INSERT INTO  applications (user_id, message, job_id, resume)
+        VALUES ($1, $2, $3, $4)
+        RETURNING *;
+      `;
+      await db.query(queryString, values);
+    } catch (error) {
+      console.log(error);
+    };
+
+  };
+
+  const getJobById = async (id) => {
+    const values = [id];
+    const queryString = "SELECT * FROM jobs WHERE id = $1"
+
+    try {
+      const result = await db.query(queryString, values);
+      return getFirstRecord(result);
+    } catch (error) {
+      console.log(error);
+    };
+
+  };
+
+
   return {
+    getJobById,
+    applyForJob,
     getFairDetails,
     addFairToSchedule,
     addFairToOrganizationSchedule,
@@ -522,6 +583,7 @@ const queryGenerator = (db) => {
     createNewMessage,
     addJobToOrganization,
     getJobsBySearch,
+    updateUser
   };
 };
 

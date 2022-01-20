@@ -17,6 +17,10 @@ import OrganizationDetails from "./components/Groups/OrganizationDetails";
 import Jobs from "./components/JobBoard/index";
 import Schedule from "./components/Schedule";
 import Stall from "./components/Stall";
+import ProfileSetting from "./components/ProfileSetting/ProfileSetting";
+
+
+import JobApplications from "./components/Groups/JobApplications";
 
 function App() {
   const [errorMessage, setErrorMessage] = useState("");
@@ -84,8 +88,9 @@ function App() {
           <Route path="/stall" element={<Stall />} />
           <Route path="/schedule" element={<Schedule />} />
           <Route path="/messages" element={<ChatBox currentUser = {currentUser}/>} />
-          <Route path="/settings" element={<>Settings</>} />
           <Route path="/live/:fairId/:organizationId" element={<OrganizationDetails {...{ setSnackBarDetails }}/>} />
+          <Route path="/settings" element={<ProfileSetting setCurrentUser={setCurrentUser} currentUser={currentUser}/>}/>
+          <Route path="/jobs/:id/applications" element={<JobApplications />} />
           <Route path="/live/:id" element={<FairLobby currentUser={currentUser} />} />
           <Route path="/fairs/:id" element={<Fair currentUser={currentUser} />} />
           <Route path="/organizations/:id" element={<OrganizationDetails {...{ setSnackBarDetails }}/>} />
