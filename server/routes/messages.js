@@ -33,14 +33,14 @@ module.exports = (db) => {
 
     try {
       console.log(message);
-      // await sendInterviewInvitation(
-      //   start,
-      //   end,
-      //   user_id,
-      //   receiverId,
-      //   applicationId,
-      //   messages
-      // );
+      await sendInterviewInvitation(
+        start,
+        end,
+        user_id,
+        receiverId,
+        applicationId,
+        message
+      );
       res.status(200).json({});
     } catch (error) {
       console.log(error);
