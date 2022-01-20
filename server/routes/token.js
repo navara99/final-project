@@ -30,9 +30,17 @@ module.exports = () => {
     if (req.query.role === "publisher") {
       role = RtcRole.PUBLISHER;
     };
-
     // get expiration time for token
+    const expireTime = req.query.expireTime;
+    if (!expireTime) {
+      expireTime = 3600; // Default is an hour
+    } else {
+      expireTime = parseInt(expireTime, 10);
+    }
 
+    // Calculate privilege expire time
+    const currentTime = Math.floor(Date.now() / 1000);
+    const privilageExpireTime = currentTime + expireTime;
     // build the token
 
 
