@@ -178,9 +178,10 @@ const queryGenerator = (db) => {
   const getAllApplicationsByJobId = async (job_id) => {
     const values = [job_id];
     const queryString = `
-    SELECT applications.*, users.* FROM applications
+    SELECT applications.*, users.*, organizations.name AS organization_name FROM applications
     JOIN jobs ON jobs.id = applications.job_id
     JOIN users ON applications.user_id = users.id
+    JOIN organizations ON jobs.organization_id = organizations.id
     WHERE jobs.id = $1;
     `;
 

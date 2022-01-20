@@ -7,14 +7,16 @@ import {
   Button,
   DialogActions,
 } from "@mui/material";
-import useInput from "../../hooks/useInput";
 import axios from "axios";
-import { useParams } from "react-router";
 import DateAdapter from "@mui/lab/AdapterMoment";
 import { DatePicker, TimePicker } from "@mui/lab";
 import { useState } from "react";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
-import { combineDateTimes } from "../../helpers/date";
+import {
+  combineDateTimes,
+  formatDate,
+  formatStartEndTime,
+} from "../../helpers/date";
 
 function ScheduleInterviewForm({
   interviewFormOpen,
@@ -29,7 +31,11 @@ function ScheduleInterviewForm({
 
   const handleFairSubmit = async () => {
     const [start, end] = combineDateTimes(date, startTime, endTime);
+    const message = `You are invited to an interview for ${jobTitle} (${
+      application.organization_name
+    }) at ${formatStartEndTime(start, end)} on ${formatDate(start)}`;
     const newInterview = {
+      message,
       start,
       end,
       applicationId: application.id,
