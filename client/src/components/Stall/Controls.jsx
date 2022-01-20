@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useClient } from "./setting";
+// import { useClient } from "./useChannel";
 import { Button } from "@mui/material";
 import MicIcon from "@mui/icons-material/Mic";
 import MicOffIcon from "@mui/icons-material/MicOff";
@@ -9,7 +9,7 @@ import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import { Grid } from "@mui/material";
 
 export default function Controls(props) {
-  const client = useClient();
+  const client = props.useClient();
   const { tracks, setStart, setInCall } = props;
   const [trackState, setTrackState] = useState({ video: true, audio: true });
 

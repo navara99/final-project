@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
-import {
-  config,
-  useClient,
-  useMicrophoneAndCameraTracks,
-  channelName,
-} from "./setting";
+import useChannel from "./useChannel";
 import { Grid } from "@mui/material";
 import Controls from "./Controls";
 import Video from "./Video";
 
 export default function VideoCall(props) {
+  const {
+    config,
+    useClient,
+    useMicrophoneAndCameraTracks,
+    channelName,
+  } = useChannel("test");
   const { setInCall } = props;
   const [users, setUsers] = useState([]);
   const [start, setStart] = useState(false);
@@ -70,7 +71,7 @@ export default function VideoCall(props) {
     <Grid container direction="column" style={{ height: "100%" }}>
       <Grid item style={{ height: "5%" }}>
         {ready && tracks && (
-          <Controls tracks={tracks} setStart={setStart} setInCall={setInCall} />
+          <Controls tracks={tracks} setStart={setStart} setInCall={setInCall} {...{ useClient }} />
         )}
       </Grid>
       <Grid item style={{ height: "95%" }}>
