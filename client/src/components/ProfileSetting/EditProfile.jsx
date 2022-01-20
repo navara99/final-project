@@ -66,7 +66,17 @@ const EditProfile = ({setCurrentUser, currentUser, setErrorMessage, setShowError
                   <Avatar alt={userInfo.username} src={userInfo.profilePicture}/>
                   <TextField sx={{flexGrow:1, ml:2, bgcolor:"white"}}id="profile_picture" name="profilePicture" label="Picture URL" variant="outlined" value={userInfo.profilePicture} onChange={handleChange} />
                 </Box>
-                <TextField id="bio" name="bio" multiline label="Bio"variant="outlined" sx={{bgcolor:"white"}} value={userInfo.bio} onChange={handleChange}/>
+                <Button
+                  variant="contained"
+                  component="label"
+                  sx={{width:'20%', mt:2}}
+                >Upload Resume<input
+                    type="file"
+                   
+                    name="resume"
+                    hidden />
+                </Button>
+                <TextField id="bio" name="bio" multiline label="Bio"variant="outlined" sx={{bgcolor:"white", mt:2}} value={userInfo.bio} onChange={handleChange}/>
                 <Divider/>
                 <Grid item>
                   <Button variant='contained'size='large' type="submit">Save</Button>
