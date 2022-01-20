@@ -4,7 +4,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 
 
-const EditProfile = ({setCurrentUser, currentUser}) => {
+const EditProfile = ({setCurrentUser, currentUser, setErrorMessage, setShowError}) => {
   const [userInfo, setUserInfo] = useState({
     firstName : "",
     lastName: "",
@@ -40,7 +40,10 @@ const EditProfile = ({setCurrentUser, currentUser}) => {
     axios.post("/api/users/edit", userInfo).then(res =>{
       console.log("res",res)
       setCurrentUser(res.data)
-    } )
+    }).catch(error => {
+     setErrorMessage(error.response.data.error);
+     setShowError(true);
+    })
   }
   return (
     <>
