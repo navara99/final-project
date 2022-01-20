@@ -6,7 +6,7 @@ module.exports = (db) => {
   const interviewQueryGenerator = require("../db/queryHelpers/interview");
   const { sendInterviewInvitation } = interviewQueryGenerator(db);
   const { getMessagesByUserId, createNewMessage } = queryGenerator(db);
-  
+
   //Get All Messages for users
   router.get("/", async (req, res) => {
     try {
@@ -32,10 +32,7 @@ module.exports = (db) => {
     const { start, end, applicationId } = req.body;
 
     try {
-      // console.log("interview", user_id);
-      console.log(JSON.stringify(start));
-      console.log(JSON.stringify(end));
-      console.log(JSON.stringify(applicationId));
+      await sendInterviewInvitation(start, end, user_id, applicationId);
       res.status(200).json({});
     } catch (error) {
       console.log(error);
