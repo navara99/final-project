@@ -33,7 +33,7 @@ function ScheduleInterviewForm({
     const [start, end] = combineDateTimes(date, startTime, endTime);
     const message = `You are invited to an interview for ${jobTitle} (${
       application.organization_name
-    }) at ${formatStartEndTime(start, end)} on ${formatDate(start)}`;
+    }) at ${formatStartEndTime(start, end)} on ${formatDate(start)}.`;
     const newInterview = {
       message,
       start,
