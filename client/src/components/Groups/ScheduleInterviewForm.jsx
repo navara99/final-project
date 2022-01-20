@@ -21,27 +21,18 @@ function ScheduleInterviewForm({
   setInterviewFormOpen,
   application,
   jobTitle,
-  setOrganizationDetails,
   setSnackBarDetails,
 }) {
   const [date, setDate] = useState(new Date());
   const [startTime, setStartTime] = useState(new Date());
   const [endTime, setEndTime] = useState(new Date());
-  const { id } = useParams();
 
   const handleFairSubmit = async () => {
-    const [startTimeStamp, endTimeStamp] = combineDateTimes(
-      date,
-      startTime,
-      endTime
-    );
-    const newInterview = {
-      startTimeStamp,
-      endTimeStamp,
-    };
+    const [start, end] = combineDateTimes(date, startTime, endTime);
+    const newInterview = { start, end, application };
 
     try {
-      const { data } = await axios.post("/api/messages/interview", newInterview);
+      await axios.post("/api/messages/interview", newInterview);
       setSnackBarDetails({
         open: true,
         message: "Interview invitation has been sent",
