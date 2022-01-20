@@ -125,7 +125,10 @@ module.exports = (db) => {
       console.log("body", req.body);
       const userId = req.session.user_id;
       const { username, email } = req.body;
-      const filePath = req.file.path;
+      let filePath
+      if(req.file){
+        filePath = req.file.path;
+      }
       
       try {
         //check if username is not empty
