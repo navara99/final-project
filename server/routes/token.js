@@ -19,13 +19,17 @@ module.exports = () => {
     res.header("Access-Control-Allow-Origin", "*");
     // Get the channel name
     const channelName = req.query.channelName;
-    // get uid
     if (!channelName) return res.status(500).json({
-      error:"Missing channel name."
+      error: "Missing channel name."
     })
+    // get uid
+    const uid = req.query.uid;
+    if (!uid) uid = 0;
     // get role
-    
-
+    const role = RtcRole.SUBSCRIBER;
+    if (req.query.role === "publisher") {
+      role = RtcRole.PUBLISHER;
+    };
 
     // get expiration time for token
 
