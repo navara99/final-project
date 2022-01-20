@@ -13,10 +13,14 @@ const MessageListItem = (props) => {
         <ListItem>
           <Grid container>
             <Grid item xs={12}>
-              <ListItemText
-                align={sender_id === currentUser.id ? "right" : "left"}
-                primary={message}
-              ></ListItemText>
+              {is_invitation ? (
+                <>INVITATION</>
+              ) : (
+                <ListItemText
+                  align={sender_id === currentUser.id ? "right" : "left"}
+                  primary={message}
+                ></ListItemText>
+              )}
             </Grid>
             <Grid item xs={12}>
               <ListItemText

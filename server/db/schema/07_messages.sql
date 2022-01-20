@@ -9,5 +9,6 @@ CREATE TABLE messages (
   created_at TIMESTAMP NOT NULL DEFAULT NOW(),
   application_id INTEGER REFERENCES applications(id) ON DELETE CASCADE,
   start_time TIMESTAMP,
-  end_time TIMESTAMP
+  end_time TIMESTAMP,
+  is_accepted BOOLEAN
 );
