@@ -31,10 +31,10 @@ const Controls = ({ tracks, setStart, setInCall }) => {
         </Button>
         <Button
           variant="contained"
-          onClick={() => mute("audio")}
-          color={trackState.audio ? "primary" : "secondary"}
+          onClick={() => leaveChannel}
+          color="default"
         >
-          {trackState.audio ? <MicIcon /> : <MicOffIcon />}
+          Leave <ExitToAppIcon />
         </Button>
       </Grid>
       <Grid item></Grid>
