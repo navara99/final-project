@@ -122,11 +122,11 @@ module.exports = (db) => {
   });
   //Edit User Route
   router.post("/edit", upload.single("resume"),async (req,res) => {
-
+      console.log("body", req.body);
       const userId = req.session.user_id;
       const { username, email } = req.body;
       const filePath = req.file.path;
-      console.log("filePath", filePath);
+      
       try {
         //check if username is not empty
         const userWithSameUsername = await getUserByValue("username", username);
