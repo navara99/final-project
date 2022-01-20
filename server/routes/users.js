@@ -9,6 +9,16 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require("bcryptjs");
 const salt = 12;
+const multer = require("multer");
+const storage = multer.diskStorage({
+  destination: function (req, res, cb) {
+    cb(null, "./public/users_resume");
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + '_' + file.originalname);
+  }
+});
+const upload = multer({ storage: storage, limits: { fieldSize: 10 * 1024 * 1024 } });
 module.exports = (db) => {
   const queryGenerator = require("../db/queryHelpers");
   const { createNewUser, getUserByValue, getOrganizationsByUser, getAllOtherUsers,updateUser,updatePasswordById } = queryGenerator(db);
@@ -111,7 +121,7 @@ module.exports = (db) => {
 
   });
   //Edit User Route
-  router.post("/edit", async (req,res) => {
+  router.post("/edit", upload.single("resume"),async (req,res) => {
 
       const userId = req.session.user_id;
       const { username, email } = req.body;
