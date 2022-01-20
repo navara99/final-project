@@ -15,13 +15,23 @@ import { useState } from "react";
 import CoverLetter from "./CoverLetter";
 import { Link } from "react-router-dom";
 import "./ApplicantsListItem.css";
+import ScheduleInterviewForm from "./ScheduleInterviewForm";
 
 function ApplicantsListItem({ application }) {
   const [openResume, setOpenResume] = useState(false);
   const [openCoverLetter, setOpenCoverLetter] = useState(false);
+  const [interviewFormOpen, setInterviewFormOpen] = useState(false);
 
   return (
     <>
+      <ScheduleInterviewForm
+        {...{
+          interviewFormOpen,
+          setInterviewFormOpen,
+          // setOrganizationDetails,
+          // setSnackBarDetails,
+        }}
+      />
       <CoverLetter
         {...{ application }}
         {...{ setOpenCoverLetter }}
@@ -42,7 +52,7 @@ function ApplicantsListItem({ application }) {
             <span>
               <Button
                 variant="outlined"
-                onClick={() => console.log("invitation")}
+                onClick={() => setInterviewFormOpen(!interviewFormOpen)}
               >
                 Schedule Interview
               </Button>
