@@ -42,13 +42,9 @@ function ScheduleInterviewForm({
 
     try {
       const { data } = await axios.post("/api/messages/interview", newInterview);
-      setOrganizationDetails((prev) => ({
-        ...prev,
-        fairs: [data, ...prev.fairs],
-      }));
       setSnackBarDetails({
         open: true,
-        message: "Fair has been created",
+        message: "Interview invitation has been sent",
       });
     } catch (err) {
       console.log(err.message);
