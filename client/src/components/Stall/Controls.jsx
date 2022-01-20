@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useClient } from "./setting";
-import { Add, Button, Icon } from "@mui/icons-material";
+import { Button } from "@mui/material";
 import MicIcon from "@mui/icons-material/Mic";
 import MicOffIcon from "@mui/icons-material/MicOff";
 import VideocamIcon from "@mui/icons-material/Videocam";
@@ -11,7 +11,29 @@ import { Grid } from "@mui/material";
 const Controls = ({ tracks, setStart, setInCall }) => {
   const client = useClient();
   const [trackState, setTrackState] = useState({ video: true, audio: true });
+  const leaveChannel = async () => {
+    await client.leave();
+    client.removeAllListeners();
+    tracks[0].close();
+    tracks[1].close();
+    setInCall(false);
+  };
 
+  const mute = async (type) => {
+    if (type === "audio") {
+      await tracks[0].setEnabled(!trackState.audio);
+      setTrackState((prev) => {
+        return { ...prev, audio: !prev.audio };
+      });
+    }
+
+    if (type === "video") {
+      await tracks[1].setEnabled(!trackState.video);
+      setTrackState((prev) => {
+        return { ...prev, video: !prev.video };
+      });
+    }
+  };
   return (
     <Grid container spacing={2} alignItems="center">
       <Grid item>
@@ -32,7 +54,7 @@ const Controls = ({ tracks, setStart, setInCall }) => {
         <Button
           variant="contained"
           onClick={() => leaveChannel}
-          color="default"
+          // color="default"
         >
           Leave <ExitToAppIcon />
         </Button>
@@ -42,3 +64,5 @@ const Controls = ({ tracks, setStart, setInCall }) => {
     </Grid>
   );
 };
+
+export default Controls;

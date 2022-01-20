@@ -6,6 +6,8 @@ import {
   channelName,
 } from "./setting";
 import { Grid } from "@mui/material";
+import Controls from "./Controls";
+import Video from "./Video";
 
 const VideoCall = ({ setInCall }) => {
   const [users, setUsers] = useState([]);
@@ -64,7 +66,7 @@ const VideoCall = ({ setInCall }) => {
         )}
       </Grid>
       <Grid item style={{ height: "95%" }}>
-        {start && tracks && <Videos tracks={tracks} users={users} />}
+        {start && tracks && <Video tracks={tracks} users={users} />}
       </Grid>
     </Grid>
   );
