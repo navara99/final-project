@@ -9,7 +9,12 @@ const EditPassword = ({setCurrentUser, currentUser, setErrorMessage, setShowErro
   const[newPassword, setNewPassword] = useState("");
   const[confirmPassword, setConfirmPassword] = useState("");
   const handleSubmit = (e) => {
-    if(newPassword === confirmPassword) {
+    e.preventDefault();
+    
+    if(newPassword !== confirmPassword) {
+      setErrorMessage("Password doesn't match");
+      setShowError(true);
+    }else {
       const passwordData = {
         currentPassword,
         newPassword,
@@ -20,9 +25,13 @@ const EditPassword = ({setCurrentUser, currentUser, setErrorMessage, setShowErro
               setSnackBarDetails({open:true, message:"Your password has been updated"})
               navigate("/profile")
            })
+           .catch(error => {
+            setErrorMessage(error.response.data.error);
+            setShowError(true);
+           })
     }
-    setErrorMessage("Password doesn't match");
-    setShowError(true);
+ 
+
   }
   return (
     (
