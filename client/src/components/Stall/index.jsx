@@ -7,7 +7,8 @@ import "./Stall.css";
 const Stall = ({ currentUser }) => {
   let { fairId, organizationId } = useParams();
   const [inCall, setInCall] = useState(false);
-
+  console.log(fairId, organizationId);
+  
   return (
     <div class="stall">
       <Button

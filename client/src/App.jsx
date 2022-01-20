@@ -87,13 +87,13 @@ function App() {
           <Route path="/jobs" element={<Jobs />} />
           <Route path="/stall" element={<Stall />} />
           <Route path="/schedule" element={<Schedule />} />
-          <Route path="/messages" element={<ChatBox currentUser = {currentUser}/>} />
-          <Route path="/live/:fairId/:organizationId" element={<OrganizationDetails {...{ setSnackBarDetails }}/>} />
-          <Route path="/settings" element={<ProfileSetting setCurrentUser={setCurrentUser} currentUser={currentUser}/>}/>
+          <Route path="/messages" element={<ChatBox currentUser={currentUser} />} />
+          <Route path="/live/:fairId/:organizationId" element={<Stall />} />
+          <Route path="/settings" element={<ProfileSetting setCurrentUser={setCurrentUser} currentUser={currentUser} />} />
           <Route path="/jobs/:id/applications" element={<JobApplications />} />
           <Route path="/live/:id" element={<FairLobby currentUser={currentUser} />} />
           <Route path="/fairs/:id" element={<Fair currentUser={currentUser} />} />
-          <Route path="/organizations/:id" element={<OrganizationDetails {...{ setSnackBarDetails }}/>} />
+          <Route path="/organizations/:id" element={<OrganizationDetails {...{ setSnackBarDetails }} />} />
         </Routes>
       </div>
     </div>

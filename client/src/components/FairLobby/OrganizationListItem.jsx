@@ -14,6 +14,7 @@ const OrganizationListItem = ({
   website,
   industry,
   description,
+  fairId,
   name,
 }) => {
   const clickHandler = (e) => {
@@ -34,9 +35,11 @@ const OrganizationListItem = ({
               {name}
             </Typography>
             <CardActions>
-              <Button size="small" onClick={clickHandler} variant="outlined">
-                Join this stall
-              </Button>
+              <Link to={`/live/${fairId}/${id}`}>
+                <Button size="small" onClick={clickHandler} variant="outlined">
+                  Join this stall
+                </Button>
+              </Link>
             </CardActions>
           </div>
         </CardContent>
