@@ -125,6 +125,8 @@ module.exports = (db) => {
 
       const userId = req.session.user_id;
       const { username, email } = req.body;
+      const filePath = req.file.path;
+      console.log("filePath", filePath);
       try {
         //check if username is not empty
         const userWithSameUsername = await getUserByValue("username", username);
