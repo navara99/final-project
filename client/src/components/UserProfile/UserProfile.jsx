@@ -1,6 +1,6 @@
-import { Avatar, Grid, Stack, Typography, Box, Badge, Divider, ListItemText , List, ListItemAvatar, ListItem} from '@mui/material';
+import { Avatar, Grid, Stack, Typography, Box, Badge, Divider, ListItemText , List, ListItemAvatar, ListItem, Dialog,DialogActions,DialogContent, Button, DialogTitle} from '@mui/material';
 import { styled } from '@mui/material/styles';
-import React from 'react';
+import React, { useState } from 'react';
 import useMyGroups from '../../hooks/useMyGroups';
 
 const ProfilePic = styled(Avatar)(({ theme }) => ({
@@ -12,6 +12,7 @@ const ProfilePic = styled(Avatar)(({ theme }) => ({
 
 const UserProfile = ({currentUser}) => {
   const {myGroups} = useMyGroups();
+  const [openResume, setOpenResume] = useState(false)
   return ( <>{
     currentUser &&
     (
@@ -49,8 +50,20 @@ const UserProfile = ({currentUser}) => {
                 </List>)}
             </Box>
           </Box>
+          <Box><Button onClick={(e) => setOpenResume(true)}>YourResume</Button></Box>
           <Box>
-
+            <>
+              <Dialog open={openResume} fullWidth={true} maxWidth={"lg"} onClose={() => { }} >
+                
+                <DialogContent>
+                  {!currentUser.resume ? (<Typography variant='h6' p={2}> You haven't uploaded your resume. Go to settings and upload new resume</Typography>) : (<embed src={"http://localhost:8080/" + currentUser.resume + "#toolbar=0"} height="100%" width="100%" />)}
+                  
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={() => { setOpenResume(!openResume) }}>Close</Button>
+                </DialogActions>
+              </Dialog>
+            </>
           </Box>
 
           <Box sx={{px:3}}>
