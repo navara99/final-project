@@ -6,3 +6,5 @@
 /client/build
 /client/.env
 /server/.env
+/server/public/uploads/*
+!/server/public/uploads/.gitkeep
