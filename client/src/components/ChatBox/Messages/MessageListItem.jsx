@@ -23,10 +23,16 @@ const MessageListItem = (props) => {
                   align="left"
                   primary={
                     <>
-                      <h6>Invitation</h6>
-                      <div>{message}</div>
-                      <Button>Accept</Button>
-                      <Button>Reject</Button>
+                      {message}
+                      <div style={{marginTop: "1em"}}>
+                        <Button
+                          variant="contained"
+                          style={{ marginRight: "0.5em" }}
+                        >
+                          Accept
+                        </Button>
+                        <Button variant="outlined">Reject</Button>
+                      </div>
                     </>
                   }
                 ></ListItemText>
