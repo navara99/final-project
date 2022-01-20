@@ -7,8 +7,7 @@ import "./Stall.css";
 const Stall = ({ currentUser }) => {
   let { fairId, organizationId } = useParams();
   const [inCall, setInCall] = useState(false);
-  console.log(fairId, organizationId);
-  
+
   return (
     <div class="stall">
       <Button
@@ -18,7 +17,7 @@ const Stall = ({ currentUser }) => {
       >
         Join stall
       </Button>
-      {inCall ? <VideoCall setInCall={setInCall} /> : "waiting to join call!"}
+      {inCall ? <VideoCall setInCall={setInCall} userId={currentUser.id} channelName={organizationId} /> : "waiting to join call!"}
     </div>
   );
 };
