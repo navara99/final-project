@@ -14,9 +14,28 @@ module.exports = () => {
     next();
   };
 
-  router.get("/", async (req, res) => {
-    res.send("hi");
-  });
+  const generateAccessToken = (req, res) => {
+    // Set Response Header
+    res.header("Access-Control-Allow-Origin", "*");
+    // Get the channel name
+    const channelName = req.query.channelName;
+    // get uid
+    if (!channelName) return res.status(500).json({
+      error:"Missing channel name."
+    })
+    // get role
+    
+
+
+    // get expiration time for token
+
+    // build the token
+
+
+    // return token
+  };
+
+  router.get("/", nocache, generateAccessToken);
 
   return router;
 };
