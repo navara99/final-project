@@ -23,6 +23,7 @@ import JobApplications from "./components/Groups/JobApplications";
 import UserProfile from "./components/UserProfile/UserProfile";
 
 
+
 function App() {
   const [errorMessage, setErrorMessage] = useState("");
   const [showError, setShowError] = useState(false);
@@ -31,7 +32,7 @@ function App() {
     open: false,
     message: "",
   });
- 
+
   const handleSnackBarClose = () => {
     setSnackBarDetails({ open: false, message: "" });
   };
@@ -88,7 +89,7 @@ function App() {
           <Route path="/jobs" element={<Jobs  {...{ setSnackBarDetails }} />} />
           <Route path="/schedule" element={<Schedule />} />
           <Route path="/messages" element={<ChatBox currentUser = {currentUser}/>} />
-          <Route path="/profile" element={<UserProfile currentUser = {currentUser}/>} />
+          <Route path="/profile" element={<UserProfile currentUser = {currentUser} />} />
           <Route path="/settings" element={<ProfileSetting {...{setCurrentUser,currentUser,setErrorMessage,
                   setShowError,setSnackBarDetails}}/>}/>
           <Route path="/jobs/:id/applications" element={<JobApplications />} />

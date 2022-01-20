@@ -1,4 +1,4 @@
-import { Avatar, Grid, Stack, Typography, Box, Badge, Divider, ListItemText , List} from '@mui/material';
+import { Avatar, Grid, Stack, Typography, Box, Badge, Divider, ListItemText , List, ListItemAvatar, ListItem} from '@mui/material';
 import { styled } from '@mui/material/styles';
 import React from 'react';
 import useMyGroups from '../../hooks/useMyGroups';
@@ -12,12 +12,11 @@ const ProfilePic = styled(Avatar)(({ theme }) => ({
 
 const UserProfile = ({currentUser}) => {
   const {myGroups} = useMyGroups();
-  console.log("myGroupp", myGroups);
   return ( <>{
     currentUser &&
     (
     <Grid item xs={12} container sx={{backgroundColor:"#eff2f6"}} justifyContent="space-around">
-      <Stack spacing={3} >
+      <Stack spacing={2} >
           <Box sx={{bgcolor:'#1f78b1'}}>
             <Badge
             sx={{bgcolor:'#1f78b1', width:700}}
@@ -30,10 +29,30 @@ const UserProfile = ({currentUser}) => {
             <Box component="span" sx={{height:150, width:500}}/>
             </Badge>
           </Box>
-          <Box sx={{pt:6,px:3, display:'flex', alignItems:"end"}}>
-            <Typography variant='h4' sx={{}}>{`${currentUser.first_name} ${currentUser.last_name}`}</Typography>
-            <Typography variant='body1' sx={{alignSelf:"end", pl:1}}>{`( ${currentUser.username} )`}</Typography>
+          <Box sx={{pt:6,px:3,display:"flex", justifyContent:"space-between"}}>
+            <Box sx={{ display:'flex'}}>
+              <Typography variant='h4' sx={{}}>{`${currentUser.first_name} ${currentUser.last_name}`}</Typography>
+              <Typography variant='body1' sx={{ pl:1, pt:1.5}}>{`( ${currentUser.username} )`}</Typography>
+            </Box>
+            <Box sx={{mr:8, pr:3, display:'flex'}}>
+              {myGroups && myGroups.length > 0 && (
+                <List>
+                  { myGroups.map((group,i) => (
+                        <ListItem key={i}>
+                          <ListItemAvatar >
+                            <Avatar alt={`${group.name}`} src='https://assets.brand.microsites.netflix.io/assets/7dc497e2-4975-11ec-a9ce-066b49664af6_cm_1440w.jpg?v=1'></Avatar>
+                          </ListItemAvatar>
+                          <ListItemText primary={`${group.name}`} primaryTypographyProps={{variant:"h6"}}
+                          />
+                        </ListItem>))
+                  }
+                </List>)}
+            </Box>
           </Box>
+          <Box>
+
+          </Box>
+
           <Box sx={{px:3}}>
             <Typography variant='h6'>About</Typography>
             <Typography variant='body1' sx={{pt:1}}>{currentUser.bio}</Typography>
