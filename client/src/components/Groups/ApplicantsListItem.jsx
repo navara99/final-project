@@ -19,7 +19,6 @@ import "./ApplicantsListItem.css";
 function ApplicantsListItem({ application }) {
   const [openResume, setOpenResume] = useState(false);
   const [openCoverLetter, setOpenCoverLetter] = useState(false);
-  console.log(application.id);
 
   return (
     <>
