@@ -70,7 +70,6 @@ const EditProfile = ({setCurrentUser, currentUser, setErrorMessage, setShowError
                 <Divider/>
                 <Grid item>
                   <Button variant='contained'size='large' type="submit">Save</Button>
-                  {/* <Button variant='contained' size='small' sx={{height:30}}>Cancel</Button> */}
                 </Grid>
               </Grid>
             </Grid>
