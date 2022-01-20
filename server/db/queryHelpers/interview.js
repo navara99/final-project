@@ -10,10 +10,10 @@ const interviewQueryGenerator = (db) => {
     message
   ) => {
     try {
-      const values = [senderId, receiverId, message];
+      const values = [senderId, receiverId, message, applicationId, start, end];
       const queryString = `
-        INSERT INTO  messages (sender_id , receiver_id, message)
-        VALUES ($1, $2, $3)
+        INSERT INTO  messages (sender_id , receiver_id, message, is_invitation, application_id, start_time, end_time)
+        VALUES ($1, $2, $3, true, $4, $5, $6)
         RETURNING *;
       `;
       const result = await db.query(queryString, values);

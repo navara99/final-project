@@ -3,8 +3,9 @@ import { ListItem, Grid, ListItemText } from "@mui/material";
 import moment from "moment";
 import BasicScrollToBottom from "react-scroll-to-bottom/lib/BasicScrollToBottom";
 
-const MessageListItem = ({currentUser, message}) => {
-  const { message, created_at, sender_id, is_invitation } = message;
+const MessageListItem = (props) => {
+  const { message, created_at, sender_id, is_invitation } = props.message;
+  const currentUser = props.currentUser;
 
   return (
     <>
