@@ -9,40 +9,48 @@ import { Grid } from "@mui/material";
 import Controls from "./Controls";
 import Video from "./Video";
 
-const VideoCall = ({ setInCall }) => {
+export default function VideoCall(props) {
+  const { setInCall } = props;
   const [users, setUsers] = useState([]);
   const [start, setStart] = useState(false);
   const client = useClient();
   const { ready, tracks } = useMicrophoneAndCameraTracks();
+
   useEffect(() => {
     let init = async (name) => {
       client.on("user-published", async (user, mediaType) => {
         await client.subscribe(user, mediaType);
         if (mediaType === "video") {
-          setUsers((prev) => [...prev, user]);
+          setUsers((prevUsers) => {
+            return [...prevUsers, user];
+          });
         }
         if (mediaType === "audio") {
           user.audioTrack.play();
         }
       });
 
-      client.on("user-unpublished", async (user, mediaType) => {
-        if (mediaType === "video") {
-          setUsers((prev) => prev.filter((User) => User.uid !== user.uid));
-        }
+      client.on("user-unpublished", (user, mediaType) => {
         if (mediaType === "audio") {
-          if (user.audtioTrack) user.audioTrack.stop();
+          if (user.audioTrack) user.audioTrack.stop();
+        }
+        if (mediaType === "video") {
+          setUsers((prevUsers) => {
+            return prevUsers.filter((User) => User.uid !== user.uid);
+          });
         }
       });
 
       client.on("user-left", (user) => {
-        setUsers((prev) => prev.filter((User) => User.uid !== user.uid));
+        setUsers((prevUsers) => {
+          return prevUsers.filter((User) => User.uid !== user.uid);
+        });
       });
 
       try {
         await client.join(config.appId, name, config.token, null);
-      } catch (e) {
-        console.log(e);
+      } catch (error) {
+        console.log("error");
       }
 
       if (tracks) await client.publish([tracks[0], tracks[1]]);
@@ -62,7 +70,7 @@ const VideoCall = ({ setInCall }) => {
     <Grid container direction="column" style={{ height: "100%" }}>
       <Grid item style={{ height: "5%" }}>
         {ready && tracks && (
-          <Controls tracks={tracks} setStart={start} setInCall={setInCall} />
+          <Controls tracks={tracks} setStart={setStart} setInCall={setInCall} />
         )}
       </Grid>
       <Grid item style={{ height: "95%" }}>
@@ -70,6 +78,4 @@ const VideoCall = ({ setInCall }) => {
       </Grid>
     </Grid>
   );
-};
-
-export default VideoCall;
+}

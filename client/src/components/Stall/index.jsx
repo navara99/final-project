@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import VideoCall from "./VideoCall";
 import { Button } from "@mui/material";
+import "./Stall.css";
 
 const Stall = ({ currentUser }) => {
   let { fairId, organizationId } = useParams();
   const [inCall, setInCall] = useState(false);
 
   return (
-    <div>
+    <div class="stall">
       <Button
         variant="contained"
         color="primary"
