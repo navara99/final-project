@@ -21,6 +21,8 @@ import ProfileSetting from "./components/ProfileSetting/ProfileSetting";
 
 import JobApplications from "./components/Groups/JobApplications";
 import UserProfile from "./components/UserProfile/UserProfile";
+import OtherProfile from "./components/UserProfile/OtherProfile";
+
 
 
 
@@ -32,7 +34,7 @@ function App() {
     open: false,
     message: "",
   });
-
+  
   const handleSnackBarClose = () => {
     setSnackBarDetails({ open: false, message: "" });
   };
@@ -90,6 +92,7 @@ function App() {
           <Route path="/schedule" element={<Schedule />} />
           <Route path="/messages" element={<ChatBox currentUser = {currentUser}/>} />
           <Route path="/profile" element={<UserProfile currentUser = {currentUser} />} />
+          <Route path="/profile/:id" element={<OtherProfile />} />
           <Route path="/settings" element={<ProfileSetting {...{setCurrentUser,currentUser,setErrorMessage,setShowError,setSnackBarDetails}}/>}/>
           <Route path="/jobs/:id/applications" element={<JobApplications />} />
           <Route path="/live/:id" element={<FairLobby currentUser={currentUser} />} />
