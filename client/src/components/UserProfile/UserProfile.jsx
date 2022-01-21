@@ -50,18 +50,18 @@ const UserProfile = ({currentUser}) => {
                 </List>)}
             </Box>
           </Box>
-          <Box><Button onClick={(e) => setOpenResume(true)}>YourResume</Button></Box>
+          <Box sx={{px:3}}>
+            <Button onClick={(e) => setOpenResume(true)} variant='contained'>Your Resume</Button>
+          </Box>
           <Box>
-              <Dialog open={openResume} fullWidth={true} maxWidth={"lg"} onClose={() => { }} >
-                
-                <DialogContent>
-                  {!currentUser.resume ? (<Typography variant='h6' p={2}> You haven't uploaded your resume. Go to settings and upload new resume</Typography>) : (<embed src={"http://localhost:8080/" + currentUser.resume + "#toolbar=0"} height="100%" width="100%" />)}
-                  
-                </DialogContent>
-                <DialogActions>
-                  <Button onClick={() => { setOpenResume(!openResume) }}>Close</Button>
-                </DialogActions>
-              </Dialog>
+            <Dialog open={openResume} fullWidth={true} maxWidth={"lg"} onClose={() => { }} sx={{height:"100vh"}} scroll='body' >
+              <DialogContent sx={{height:"70vh"}}>
+                {!currentUser.resume ? (<Typography variant='h6' p={2}> You haven't uploaded your resume. Go to settings and upload new resume</Typography>) : (<embed src={"http://localhost:8080/" + currentUser.resume + "#toolbar=0"} height="100%" width="100%" />)}
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={() => { setOpenResume(!openResume) }}>Close</Button>
+              </DialogActions>
+            </Dialog>
           </Box>
 
           <Box sx={{px:3}}>
