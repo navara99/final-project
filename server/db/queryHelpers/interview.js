@@ -69,12 +69,20 @@ const interviewQueryGenerator = (db) => {
 
   const getInterviewById = async (id) => {
     const values = [id];
-    const queryString = `SELECT * FROM interviews WHERE interviews.id = $1;`;
+    const queryString = `
+    SELECT interviews.*, jobs.*, organizations.*
+    FROM interviews 
+    JOIN applications ON applications.id = interviews.application_id
+    JOIN jobs ON applications.job_id = jobs.id
+    JOIN organizations ON jobs.organization_id = organizations.id
+    WHERE interviews.id = $1;
+    `;
 
     try {
       const result = await db.query(queryString, values);
-      const newOrganizationInfo = getFirstRecord(result);
-      return newOrganizationInfo;
+      const interview = getFirstRecord(result);
+      console.log(interview);
+      return interview;
     } catch (err) {
       console.log(err);
     }
