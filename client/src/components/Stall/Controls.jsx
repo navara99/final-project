@@ -10,7 +10,7 @@ import { Grid } from "@mui/material";
 
 export default function Controls(props) {
   const client = props.useClient();
-  const { tracks, setStart, setInCall } = props;
+  const { tracks, setStart, setInCall, users } = props;
   const [trackState, setTrackState] = useState({ video: true, audio: true });
 
   const mute = async (type) => {
@@ -28,7 +28,12 @@ export default function Controls(props) {
   };
 
   const leaveChannel = async () => {
-    await client.leave();
+    try {
+      await client.leave();
+    }
+    catch (err) {
+      console.log(err.message);
+    }
     client.removeAllListeners();
     tracks[0].close();
     tracks[1].close();

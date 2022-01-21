@@ -4,7 +4,7 @@ import { Grid } from "@mui/material";
 import { useState, useEffect } from "react";
 
 export default function Video(props) {
-  const { users, tracks } = props;
+  const { users, tracks, username } = props;
   const [gridSpacing, setGridSpacing] = useState(12);
 
   useEffect(() => {
@@ -14,6 +14,7 @@ export default function Video(props) {
   return (
     <Grid container style={{ height: "100%" }}>
       <Grid item xs={gridSpacing}>
+        <p>{username}</p>
         <AgoraVideoPlayer
           videoTrack={tracks[1]}
           style={{ height: "100%", width: "100%" }}
@@ -23,7 +24,8 @@ export default function Video(props) {
         users.map((user) => {
           if (user.videoTrack) {
             return (
-              <Grid item xs={gridSpacing}>
+              <Grid item xs={gridSpacing} key={user.uid}>
+                <p>{user.uid}</p>
                 <AgoraVideoPlayer
                   videoTrack={user.videoTrack}
                   key={user.uid}
