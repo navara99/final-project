@@ -8,10 +8,20 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require("bcryptjs");
-
+const salt = 12;
+const multer = require("multer");
+const storage = multer.diskStorage({
+  destination: function (req, res, cb) {
+    cb(null, "./public/users_resume");
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + '_' + file.originalname);
+  }
+});
+const upload = multer({ storage: storage, limits: { fieldSize: 10 * 1024 * 1024 } });
 module.exports = (db) => {
   const queryGenerator = require("../db/queryHelpers");
-  const { createNewUser, getUserByValue, getOrganizationsByUser, getAllOtherUsers,updateUser } = queryGenerator(db);
+  const { createNewUser, getUserByValue, getOrganizationsByUser, getAllOtherUsers,updateUser,updatePasswordById } = queryGenerator(db);
 
   router.get("/", async (req, res) => {
     const { user_id } = req.session;
@@ -111,10 +121,15 @@ module.exports = (db) => {
 
   });
   //Edit User Route
-  router.post("/edit", async (req,res) => {
-
+  router.post("/edit", upload.single("resume"),async (req,res) => {
+      console.log("body", req.body);
       const userId = req.session.user_id;
       const { username, email } = req.body;
+      let filePath
+      if(req.file){
+        filePath = req.file.path;
+      }
+      
       try {
         //check if username is not empty
         const userWithSameUsername = await getUserByValue("username", username);
@@ -131,7 +146,7 @@ module.exports = (db) => {
           return res.status(400).json({ error: "This email is already taken." });
         }
   
-        const newUserInfo = { userId, ...req.body };
+        const newUserInfo = { userId, filePath, ...req.body};
   
         const updatedInfo = await updateUser(newUserInfo);
        console.log("updateInfo", updatedInfo);
@@ -139,6 +154,77 @@ module.exports = (db) => {
       } catch (err) {
         res.status(500).json({ error: err.message });
       }
+
+  });
+
+  // Edit password
+
+  router.post("/password", async(req, res) => {
+    
+    const { user_id } = req.session;
+    console.log("geet req", user_id);
+    const { currentPassword, newPassword, confirmPassword } = req.body;
+
+    try {
+
+      const user = await getUserByValue("id", user_id);
+
+      const { password: hashedPassword } = user;
+
+      const correctPassword = await bcrypt.compare(
+        currentPassword,
+        hashedPassword
+      );
+
+      if (!correctPassword) {
+        return res
+          .status(400)
+          .json({ error: "Current password is incorrect." });
+      }
+
+      const newPasswordIsConfirmed = newPassword === confirmPassword;
+
+      if (!newPasswordIsConfirmed) {
+        return res
+          .status(400)
+          .json({ error: "Different inputs for new password." });
+      }
+
+      const sameNewAndOldPassword = currentPassword === newPassword;
+
+      if (sameNewAndOldPassword) {
+        return res
+          .status(400)
+          .json({ error: "The new password is same with the current password." });
+      }
+
+      const newHashedPassword = await bcrypt.hash(newPassword, salt);
+
+      const newUserInfo = await updatePasswordById(user_id, newHashedPassword);
+
+      res.json(newUserInfo);
+    } catch (err) {
+      res.status(500).json({ error: 'Server Error' });
+    }
+  });
+
+  // Other user Password
+
+  router.get("/:user_id",async (req,res) => {
+    try{
+      const{user_id} = req.params;
+   
+      const user = await getUserByValue('id', user_id);
+
+      if(user) {
+        const user_organizations = await getOrganizationsByUser(user_id);
+        const otherUser = {...user, user_organizations};
+        return res.status(200).json(otherUser);
+      }
+     return res.status(400).json({error: 'User profile not found'})
+    }catch(err) {
+      res.status(500).json({error : 'Server Error'});
+    }
 
   })
 

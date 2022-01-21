@@ -18,6 +18,11 @@ import Schedule from "./components/Schedule";
 import ProfileSetting from "./components/ProfileSetting/ProfileSetting";
 import useMessages from "../src/hooks/useMessages";
 import JobApplications from "./components/Groups/JobApplications";
+import UserProfile from "./components/UserProfile/UserProfile";
+import OtherProfile from "./components/UserProfile/OtherProfile";
+
+
+
 
 function App() {
   const [errorMessage, setErrorMessage] = useState("");
@@ -83,6 +88,9 @@ function App() {
           />
           <Route path="/jobs" element={<Jobs />} />
           <Route path="/schedule" element={<Schedule />} />
+          <Route path="/profile" element={<UserProfile currentUser = {currentUser} />} />
+          <Route path="/profile/:user_id" element={<OtherProfile currentUser = {currentUser}/>} />
+          <Route path="/settings" element={<ProfileSetting {...{setCurrentUser,currentUser,setErrorMessage,setShowError,setSnackBarDetails}}/>}/>
           <Route
             path="/messages"
             element={<ChatBox currentUser={currentUser} messageState={messageState} />}
@@ -90,15 +98,6 @@ function App() {
           <Route
             path="/live/:fairId/:organizationId"
             element={<Stall {...{ setSnackBarDetails }} {...{ currentUser }} />}
-          />
-          <Route
-            path="/settings"
-            element={
-              <ProfileSetting
-                setCurrentUser={setCurrentUser}
-                currentUser={currentUser}
-              />
-            }
           />
           <Route
             path="/jobs/:id/applications"
