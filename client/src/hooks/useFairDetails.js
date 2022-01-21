@@ -14,8 +14,8 @@ const useFairDetails = (id) => {
       setAdded(added);
     });
   };
-  
-  useEffect(() => updateFairDetails(), []);
+
+  useEffect(() => updateFairDetails(), [updateFairDetails]);
 
   const add = () => setAdded(true);
 
