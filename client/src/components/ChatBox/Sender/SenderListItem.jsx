@@ -43,16 +43,30 @@ const SenderListItem = ({
             <ListItemText
               primary={`${first_name} ${last_name}`}
               secondary={
-                <>
-                  <Typography
-                    sx={{ display: "inline" }}
-                    component="span"
-                    variant="body2"
-                    color="text.secondary"
-                  >
-                    {`${msgName}: ${lastMsg} (${createdDate})`}
-                  </Typography>
-                </>
+                <div>
+                  <div>{`${msgName}: ${lastMsg}`}</div>
+                  <div className="created-date">{createdDate}</div>
+                </div>
+
+                // <>
+                //   <Typography
+                //     sx={{ display: "inline" }}
+                //     component="div"
+                //     variant="body2"
+                //     color="text.secondary"
+                //   >
+                //     {`${msgName}: ${lastMsg}`}
+                //   </Typography>
+
+                //   <Typography
+                //     sx={{ display: "inline" }}
+                //     component="div"
+                //     variant="body2"
+                //     color="text.secondary"
+                //   >
+                //     {createdDate}
+                //   </Typography>
+                // </>
               }
             />
           </ListItemButton>

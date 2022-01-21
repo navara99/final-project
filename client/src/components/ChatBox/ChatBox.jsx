@@ -29,7 +29,7 @@ const ChatBox = ({ currentUser, messageState }) => {
   return (
     <Grid container className="chat-box">
       <Grid item px={2} xs={3} component={Paper} variant="outlined">
-        <List>
+        <List className="sender">
             <SenderList
               messages={messages}
               currentUser={currentUser}

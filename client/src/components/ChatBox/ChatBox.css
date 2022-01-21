@@ -5,3 +5,17 @@
 .chat-box .MuiBadge-anchorOriginTopRightRectangular {
   top: 2em;
 }
+
+.chat-box .sender .MuiBadge-root {
+  width: 100%;
+}
+
+.chat-box .sender .MuiListItemButton-root {
+  align-items: center;
+}
+
+.chat-box .sender .MuiBadge-root .created-date {
+  font-style: italic;
+  text-align: right;
+  font-size: 0.75em;
+}
