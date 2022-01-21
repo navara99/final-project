@@ -6,6 +6,7 @@ CREATE TABLE messages (
   receiver_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   message varchar,
   is_invitation BOOLEAN NOT NULL DEFAULT false,
+  is_read BOOLEAN NOT NULL DEFAULT false,
   created_at TIMESTAMP NOT NULL DEFAULT NOW(),
   application_id INTEGER REFERENCES applications(id) ON DELETE CASCADE,
   start_time TIMESTAMP,
