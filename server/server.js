@@ -95,7 +95,7 @@ const messagesRoutes = require("./routes/messages");
 const applicationRoutes = require("./routes/applications");
 const tokenRoutes = require("./routes/token");
 const scheduleRoutes = require("./routes/schedule");
-const interviewRoutes = require("./routes/schedule");
+const interviewRoutes = require("./routes/interviews");
 
 app.use("/api/users", usersRoutes(db));
 app.use("/api/jobs", jobRoutes(db));
