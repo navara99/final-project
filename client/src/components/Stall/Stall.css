@@ -1,3 +1,28 @@
 .stall {
   width: 100%;
 }
+
+.videos {
+  width: 50%;
+  height: 100%;
+}
+
+.video-grid-item {
+  position: relative;
+}
+
+.video-username {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 25%;
+  height: 50px;
+  background-color: #ffffffaf;
+  border-bottom-left-radius: 15px;
+  font-size: 24px;
+  top: 0;
+  right: 0;
+  z-index: 10;
+  margin: 0;
+}

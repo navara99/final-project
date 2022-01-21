@@ -11,7 +11,7 @@ const Stall = ({ currentUser }) => {
   const [inCall, setInCall] = useState(false);
 
   return (
-    <div class="stall">
+    <div className="stall">
       {!inCall && < Button
         variant="contained"
         color="primary"
@@ -19,7 +19,9 @@ const Stall = ({ currentUser }) => {
       >
         Join stall
       </Button>}
-      {inCall ? <VideoCall setInCall={setInCall} {...{ config, useClient }} channelName={organizationId} username={currentUser.username} /> : "waiting to join call!"}
+      <div className="videos">
+        {inCall ? <VideoCall setInCall={setInCall} {...{ config, useClient }} channelName={organizationId} username={currentUser.username} /> : "waiting to join call!"}
+      </div>
     </div >
   );
 };
