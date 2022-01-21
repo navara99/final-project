@@ -1,11 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import { ListItem, Grid, ListItemText, Button } from "@mui/material";
 import moment from "moment";
 import BasicScrollToBottom from "react-scroll-to-bottom/lib/BasicScrollToBottom";
 
 const MessageListItem = (props) => {
-  const { message, created_at, sender_id, is_invitation } = props.message;
-  const currentUser = props.currentUser;
+  const {
+    message,
+    created_at,
+    sender_id,
+    is_invitation,
+    is_accepted,
+    application_id,
+    start_time,
+    end_time,
+  } = props.message;
+  const [clicked, setClicked] = useState();
+  const { currentUser, setMessageText, handleSubmit } = props;
+
+  const clickAcceptHandler = () => {
+    setMessageText("Invitation is accepted.");
+    handleSubmit();
+    setClicked(true);
+  };
+
+  const clickRejectHandler = () => {
+    setMessageText("Invitation is rejected.");
+    handleSubmit();
+    setClicked(true);
+  };
 
   return (
     <>
@@ -24,14 +46,22 @@ const MessageListItem = (props) => {
                   primary={
                     <>
                       {message}
-                      <div style={{marginTop: "1em"}}>
+                      <div style={{ marginTop: "0.7em" }}>
                         <Button
+                          disabled={is_accepted !== null || clicked}
                           variant="contained"
                           style={{ marginRight: "0.5em" }}
+                          onClick={clickAcceptHandler}
                         >
                           Accept
                         </Button>
-                        <Button variant="outlined">Reject</Button>
+                        <Button
+                          variant="outlined"
+                          disabled={is_accepted !== null || clicked}
+                          onClick={clickRejectHandler}
+                        >
+                          Reject
+                        </Button>
                       </div>
                     </>
                   }

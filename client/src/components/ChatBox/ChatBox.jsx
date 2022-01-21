@@ -174,6 +174,8 @@ const ChatBox = ({ currentUser }) => {
               }
               currentUser={currentUser}
               px={2}
+              setMessageText={setMessageText}
+              handleSubmit={handleSubmit}
             />
             <Divider />
             <MessageForm
