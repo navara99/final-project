@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { ListItem, Grid, ListItemText, Button } from "@mui/material";
 import moment from "moment";
 import BasicScrollToBottom from "react-scroll-to-bottom/lib/BasicScrollToBottom";
+import axios from "axios";
 
 const MessageListItem = (props) => {
   const {
+    id,
     message,
     created_at,
     sender_id,
@@ -16,17 +18,16 @@ const MessageListItem = (props) => {
   } = props.message;
   const [clicked, setClicked] = useState();
   const { currentUser, setMessageText, handleSubmit } = props;
-
-  const clickAcceptHandler = () => {
-    setMessageText("Invitation is accepted.");
-    handleSubmit();
+  console.log(id);
+  const clickAcceptHandler = (e) => {
     setClicked(true);
+    
+    handleSubmit(e, "Invitation is accepted.");
   };
 
-  const clickRejectHandler = () => {
-    setMessageText("Invitation is rejected.");
-    handleSubmit();
+  const clickRejectHandler = (e) => {
     setClicked(true);
+    handleSubmit(e, "Invitation is rejected.");
   };
 
   return (

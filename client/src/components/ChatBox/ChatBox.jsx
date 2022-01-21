@@ -51,12 +51,12 @@ const ChatBox = ({ currentUser }) => {
       });
     }
   }, [location.state]);
-  const handleSubmit = (e) => {
+  const handleSubmit = (e, message = messageText) => {
     e.preventDefault();
     const newMessage = {
       sender_id: currentUser.id,
       receiver_id: receiverId,
-      message: messageText,
+      message
     };
     axios.post("/api/messages/", newMessage).then((res) => {
       console.log("data", res);
