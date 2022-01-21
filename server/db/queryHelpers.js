@@ -36,10 +36,24 @@ const queryGenerator = (db) => {
   };
 
   const updateUser = async (newUserInfo) => {
-
-    const { firstName, lastName, username, email, bio, profilePicture, userId } =
-      newUserInfo;
-    const values = [firstName, lastName, username, email, bio, profilePicture, userId];
+    const {
+      firstName,
+      lastName,
+      username,
+      email,
+      bio,
+      profilePicture,
+      userId,
+    } = newUserInfo;
+    const values = [
+      firstName,
+      lastName,
+      username,
+      email,
+      bio,
+      profilePicture,
+      userId,
+    ];
 
     const queryString = `
         UPDATE users
@@ -55,7 +69,7 @@ const queryGenerator = (db) => {
 
     try {
       const result = await db.query(queryString, values);
-      const userInfo = getFirstRecord(result);   
+      const userInfo = getFirstRecord(result);
       return userInfo;
     } catch (err) {
       console.log(err);
@@ -394,6 +408,23 @@ const queryGenerator = (db) => {
     }
   };
 
+  const readMessages = async (senderId, receiverId) => {
+    const values = [senderId, receiverId];
+    const queryString = `
+      UPDATE messages
+      SET is_read = true
+      WHERE sender_id = $1
+      AND receiver_id = $2
+      RETURNING *;`;
+
+    try {
+      const result = await db.query(queryString, values);
+      return getData(result);
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
   // Get jobs by search
 
   const getJobsBySearch = async (searchTerm) => {
@@ -528,7 +559,6 @@ const queryGenerator = (db) => {
   // Job Applications
 
   const applyForJob = async (userId, message, jobId, filePath) => {
-
     try {
       const values = [userId, message, jobId, filePath];
       const queryString = `
@@ -539,23 +569,20 @@ const queryGenerator = (db) => {
       await db.query(queryString, values);
     } catch (error) {
       console.log(error);
-    };
-
+    }
   };
 
   const getJobById = async (id) => {
     const values = [id];
-    const queryString = "SELECT * FROM jobs WHERE id = $1"
+    const queryString = "SELECT * FROM jobs WHERE id = $1";
 
     try {
       const result = await db.query(queryString, values);
       return getFirstRecord(result);
     } catch (error) {
       console.log(error);
-    };
-
+    }
   };
-
 
   return {
     getJobById,
@@ -584,7 +611,8 @@ const queryGenerator = (db) => {
     createNewMessage,
     addJobToOrganization,
     getJobsBySearch,
-    updateUser
+    updateUser,
+    readMessages,
   };
 };
 

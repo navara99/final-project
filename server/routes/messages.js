@@ -6,7 +6,8 @@ module.exports = (db) => {
   const interviewQueryGenerator = require("../db/queryHelpers/interview");
   const { sendInterviewInvitation, responseToInterviewInvitation } =
     interviewQueryGenerator(db);
-  const { getMessagesByUserId, createNewMessage } = queryGenerator(db);
+  const { getMessagesByUserId, createNewMessage, readMessages } =
+    queryGenerator(db);
 
   //Get All Messages for users
   router.get("/", async (req, res) => {
@@ -55,10 +56,10 @@ module.exports = (db) => {
       end_time,
       interviewer_id,
       is_accepted,
-      message
+      message,
     } = req.body;
 
-    const newMessage = (is_accepted ? "[ACCEPTED] " : "[REJECTED] ") + message
+    const newMessage = (is_accepted ? "[ACCEPTED] " : "[REJECTED] ") + message;
     try {
       const data = await responseToInterviewInvitation(
         id,
@@ -69,6 +70,18 @@ module.exports = (db) => {
         is_accepted,
         newMessage
       );
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+    }
+  });
+
+  router.put("/read/:id", async (req, res) => {
+    const { id } = req.params;
+    const { user_id } = req.session;
+
+    try {
+      const data = await readMessages(id, user_id);
       res.status(200).json(data);
     } catch (error) {
       console.log(error);
