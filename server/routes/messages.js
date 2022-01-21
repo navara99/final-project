@@ -55,8 +55,10 @@ module.exports = (db) => {
       end_time,
       interviewer_id,
       is_accepted,
+      message
     } = req.body;
 
+    const newMessage = (is_accepted ? "[ACCEPTED] " : "[REJECTED] ") + message
     try {
       const data = await responseToInterviewInvitation(
         id,
@@ -64,7 +66,8 @@ module.exports = (db) => {
         start_time,
         end_time,
         interviewer_id,
-        is_accepted
+        is_accepted,
+        newMessage
       );
       res.status(200).json(data);
     } catch (error) {

@@ -23,6 +23,7 @@ const MessageListItem = (props) => {
     application_id,
     start_time,
     end_time,
+    message,
     interviewer_id: sender_id,
   };
   const clickAcceptHandler = (e) => {
