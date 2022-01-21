@@ -109,9 +109,9 @@ const ChatBox = ({ currentUser, messageState }) => {
             />
           </>
         ) : (
-          <>
-            <Typography variant="h3">Welcome to messages page</Typography>
-          </>
+          <div className="default">
+            <h4>Click contact to view messages</h4>
+          </div>
         )}
       </Grid>
     </Grid>

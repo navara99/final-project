@@ -43,3 +43,10 @@
 .chat-box .sender.MuiPaper-root {
   padding: 0;
 }
+
+.chat-box .default {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
