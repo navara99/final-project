@@ -30,8 +30,12 @@ const interviewQueryGenerator = (db) => {
       console.log(error);
     }
   };
+  
+  const responseToInterviewInvitation = () => {
 
-  return { sendInterviewInvitation };
+  };
+
+  return { sendInterviewInvitation, responseToInterviewInvitation };
 };
 
 module.exports = interviewQueryGenerator;
