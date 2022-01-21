@@ -24,6 +24,9 @@ function ScheduleInterviewForm({
   application,
   jobTitle,
   setSnackBarDetails,
+  setMessages,
+  setSenders,
+  socket
 }) {
   const [date, setDate] = useState(new Date());
   const [startTime, setStartTime] = useState(new Date());
@@ -43,10 +46,22 @@ function ScheduleInterviewForm({
     };
 
     try {
-      await axios.post(
+      const newMessage = await axios.post(
         "/api/messages/interview",
         newInterview
       );
+        console.log(newMessage)
+      setMessages((prev) => [...prev, newMessage.data.messageObj]);
+      setSenders((prev) => {
+        if (prev.some((el) => el.id === newMessage.data.receiver.id)) {
+          return prev;
+        }
+        return [...prev, newMessage.data.receiver];
+      });
+
+      //sending message to socket server
+      socket.emit("sendMessage", newMessage.data.messageObj);
+
       setSnackBarDetails({
         open: true,
         message: "Interview invitation has been sent",

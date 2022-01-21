@@ -17,7 +17,15 @@ import { Link } from "react-router-dom";
 import "./ApplicantsListItem.css";
 import ScheduleInterviewForm from "./ScheduleInterviewForm";
 
-function ApplicantsListItem({ application, jobTitle, setSnackBarDetails, currentUser }) {
+function ApplicantsListItem({
+  setMessages,
+  socket,
+  application,
+  jobTitle,
+  setSnackBarDetails,
+  currentUser,
+  setSenders,
+}) {
   const [openResume, setOpenResume] = useState(false);
   const [openCoverLetter, setOpenCoverLetter] = useState(false);
   const [interviewFormOpen, setInterviewFormOpen] = useState(false);
@@ -31,7 +39,10 @@ function ApplicantsListItem({ application, jobTitle, setSnackBarDetails, current
           setInterviewFormOpen,
           jobTitle,
           setSnackBarDetails,
-          currentUser
+          currentUser,
+          setMessages,
+          setSenders,
+          socket,
         }}
       />
       <CoverLetter

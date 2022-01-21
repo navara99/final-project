@@ -149,6 +149,8 @@ const useMessages = () => {
     setReceiverId,
     numOfUnreadMsg,
     setMessages,
+    setSenders,
+    socket
   };
 
   return { currentUser, setCurrentUser, logout, messageState };
