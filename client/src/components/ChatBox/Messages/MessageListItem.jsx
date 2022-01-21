@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { ListItem, Grid, ListItemText, Button } from "@mui/material";
 import moment from "moment";
-import BasicScrollToBottom from "react-scroll-to-bottom/lib/BasicScrollToBottom";
 import axios from "axios";
 
 const MessageListItem = (props) => {
@@ -17,7 +16,7 @@ const MessageListItem = (props) => {
     end_time,
   } = props.message;
   const [clicked, setClicked] = useState();
-  const { currentUser, setMessageText, handleSubmit } = props;
+  const { currentUser, handleSubmit } = props;
   const appointment = {
     id,
     application_id,
