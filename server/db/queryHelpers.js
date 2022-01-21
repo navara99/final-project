@@ -37,10 +37,16 @@ const queryGenerator = (db) => {
 
   const updateUser = async (newUserInfo) => {
 
-    const { firstName, lastName, username, email, bio, profilePicture, userId } =
+    const { firstName, lastName, username, email, bio, profilePicture, userId} =
       newUserInfo;
-    const values = [firstName, lastName, username, email, bio, profilePicture, userId];
-
+      const value1 = [userId];
+      let filePath = newUserInfo.filePath;
+      if(!filePath) {
+        const resultResume = await db.query(`SELECT users.resume FROM users WHERE id = $1`, value1);
+        filePath =  getFirstRecord(resultResume)["resume"];
+      } 
+    const values = [firstName, lastName, username, email, bio, profilePicture, filePath, userId];
+  
     const queryString = `
         UPDATE users
         SET first_name = $1,
@@ -48,8 +54,9 @@ const queryGenerator = (db) => {
         username = $3,
         email = $4,
         bio = $5,
-        profile_picture= $6
-        WHERE id = $7
+        profile_picture= $6,
+        resume = $7
+        WHERE id = $8
         RETURNING *;
     `;
 
