@@ -10,13 +10,13 @@ import "tippy.js/dist/tippy.css";
 import { Link } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 
-const UserButtons = ({ logout, currentUser }) => {
+const UserButtons = ({ logout, currentUser, numOfUnreadMsg }) => {
   return (
     <div>
       <Button
         {...{ to: "/schedule", Icon: DateRangeIcon, text: "My Schedule" }}
       />
-      <Button {...{ to: "/messages", Icon: ForumIcon, text: "Messages" }} />
+      <Button {...{ to: "/messages", Icon: ForumIcon, text: "Messages", numOfUnreadMsg }} />
       <Button
         {...{
           to: "/organizations",

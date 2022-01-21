@@ -1,15 +1,31 @@
-import React from 'react'
-import SenderListItem from './SenderListItem'
-import { List } from '@mui/material'
-const SenderList = ({senders, setReceiverId, handleOnClick, setReceiver}) => {
+import React from "react";
+import SenderListItem from "./SenderListItem";
+import { List } from "@mui/material";
 
-  const senderList = senders ? senders.map(sender => <SenderListItem key={sender.id} sender = {sender} setReceiverId = {setReceiverId} handleOnClick = {handleOnClick} setReceiver = {setReceiver}/>) : null
+const SenderList = ({
+  messages,
+  senders,
+  setReceiverId,
+  handleOnClick,
+  setReceiver,
+}) => {
+  const senderList = senders
+    ? senders.map((sender) => {
+        const { lastMsg, createdDate, lastUserId, numOfMsg } = sender;
+        return (
+          <SenderListItem
+            key={sender.id}
+            sender={sender}
+            setReceiverId={setReceiverId}
+            handleOnClick={handleOnClick}
+            setReceiver={setReceiver}
+            {...{ lastMsg, createdDate, lastUserId, numOfMsg }}
+          />
+        );
+      })
+    : null;
 
-  return (
-    <List>
-      {senderList}
-    </List>
-  )
-}
+  return <List>{senderList}</List>;
+};
 
-export default SenderList
+export default SenderList;

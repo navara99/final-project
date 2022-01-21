@@ -1,0 +1,7 @@
+.chat-box div.MuiGrid-root.MuiGrid-container {
+  width: 75%;
+}
+
+.chat-box .MuiBadge-anchorOriginTopRightRectangular {
+  top: 2em;
+}

@@ -19,7 +19,7 @@ const ScheduleButton = ({ added, upcoming, id, add, updateFairDetails }) => {
     axios.get(`/api/fairs/organizations/${id}`).then(({ data }) => {
       if (data.length > 0) setOptions(data);
     });
-  }, []);
+  }, [id]);
 
   const joinAsJobSeeker = () => {
     axios.post(`/api/fairs/join/${id}`).then(() => {

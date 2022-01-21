@@ -61,7 +61,7 @@
   justify-content: space-between;
 }
 
-.MuiBadge-root .MuiBadge-anchorOriginTopLeftRectangular {
+.live .MuiBadge-root .MuiBadge-anchorOriginTopLeftRectangular {
   left: 2.5em;
   top: 0.4em;
   font-size: 2em;

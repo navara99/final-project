@@ -1,13 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import LogIn from "./components/LogIn";
 import Navbar from "./components/Navbar/index";
-import { useState } from "react";
 import Register from "./components/Register";
 import ErrorModal from "./components/ErrorModal";
 import Home from "./components/Home";
 import { Routes, Route } from "react-router-dom";
-import useCurrentUser from "./hooks/useCurrentUser";
+import Stall from "./components/Stall"
 import Groups from "./components/Groups/index";
 import { Snackbar, Alert } from "@mui/material";
 import Fair from "./components/Fair";
@@ -16,20 +15,18 @@ import FairLobby from "./components/FairLobby";
 import OrganizationDetails from "./components/Groups/OrganizationDetails";
 import Jobs from "./components/JobBoard/index";
 import Schedule from "./components/Schedule";
-import Stall from "./components/Stall/index"
 import ProfileSetting from "./components/ProfileSetting/ProfileSetting";
-
-
+import useMessages from "../src/hooks/useMessages";
 import JobApplications from "./components/Groups/JobApplications";
 
 function App() {
   const [errorMessage, setErrorMessage] = useState("");
   const [showError, setShowError] = useState(false);
-  const { currentUser, setCurrentUser, logout } = useCurrentUser();
   const [snackBarDetails, setSnackBarDetails] = useState({
     open: false,
     message: "",
   });
+  const { currentUser, setCurrentUser, logout, messageState } = useMessages();
 
   const handleSnackBarClose = () => {
     setSnackBarDetails({ open: false, message: "" });
@@ -47,7 +44,7 @@ function App() {
           {snackBarDetails.message}
         </Alert>
       </Snackbar>
-      <Navbar {...{ currentUser, logout }} />
+      <Navbar {...{ currentUser, logout, numOfUnreadMsg: messageState.numOfUnreadMsg }} />
       <ErrorModal {...{ errorMessage, showError, setShowError }} />
       <div className="main-container">
         <Routes>
@@ -86,13 +83,44 @@ function App() {
           />
           <Route path="/jobs" element={<Jobs />} />
           <Route path="/schedule" element={<Schedule />} />
-          <Route path="/messages" element={<ChatBox currentUser={currentUser} />} />
-          <Route path="/settings" element={<ProfileSetting setCurrentUser={setCurrentUser} currentUser={currentUser} />} />
-          <Route path="/jobs/:id/applications" element={<JobApplications />} />
-          <Route path="/live/:id" element={<FairLobby currentUser={currentUser} />} />
-          <Route exact path="/live/:fairId/:organizationId" element={<Stall {...{ currentUser }} />} />
-          <Route path="/fairs/:id" element={<Fair currentUser={currentUser} />} />
-          <Route path="/organizations/:id" element={<OrganizationDetails {...{ setSnackBarDetails }} />} />
+          <Route
+            path="/messages"
+            element={<ChatBox currentUser={currentUser} messageState={messageState} />}
+          />
+          <Route
+            path="/live/:fairId/:organizationId"
+            element={<Stall {...{ setSnackBarDetails }} {...{ currentUser }} />}
+          />
+          <Route
+            path="/settings"
+            element={
+              <ProfileSetting
+                setCurrentUser={setCurrentUser}
+                currentUser={currentUser}
+              />
+            }
+          />
+          <Route
+            path="/jobs/:id/applications"
+            element={
+              <JobApplications
+                setSnackBarDetails={setSnackBarDetails}
+                currentUser={currentUser}
+              />
+            }
+          />
+          <Route
+            path="/live/:id"
+            element={<FairLobby currentUser={currentUser} />}
+          />
+          <Route
+            path="/fairs/:id"
+            element={<Fair currentUser={currentUser} />}
+          />
+          <Route
+            path="/organizations/:id"
+            element={<OrganizationDetails {...{ setSnackBarDetails }} />}
+          />
         </Routes>
       </div>
     </div>
