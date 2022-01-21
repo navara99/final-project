@@ -86,6 +86,15 @@ const useMessages = () => {
     socket.on("getMessage", (data) => {
       setIncomingMessage({ ...data, created_at: new Date().toISOString() });
     });
+
+    socket.on("editMessage", (data) => {
+      setMessages((prev) =>
+        prev.map((msg) => {
+          if (msg.id !== data.id) return msg;
+          return data;
+        })
+      );
+    });
     setSocket(socket);
   }, []);
 
