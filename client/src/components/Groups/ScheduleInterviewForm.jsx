@@ -43,7 +43,7 @@ function ScheduleInterviewForm({
     };
 
     try {
-      const newMessage = await axios.post(
+      await axios.post(
         "/api/messages/interview",
         newInterview
       );
