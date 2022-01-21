@@ -146,7 +146,7 @@ module.exports = (db) => {
           return res.status(400).json({ error: "This email is already taken." });
         }
   
-        const newUserInfo = { userId, ...req.body };
+        const newUserInfo = { userId, filePath, ...req.body};
   
         const updatedInfo = await updateUser(newUserInfo);
        console.log("updateInfo", updatedInfo);
