@@ -10,6 +10,7 @@ import {
 import MessageIcon from "@mui/icons-material/Message";
 import useCurrentUser from "../../hooks/useCurrentUser";
 import { Link } from "react-router-dom";
+import useOtherUserProfile from "../../hooks/useOtherUserProfile";
 
 function MembersListItem({ member }) {
   const { currentUser } = useCurrentUser();
@@ -19,9 +20,12 @@ function MembersListItem({ member }) {
         <Avatar alt="Travis Howard" src={`${member.profile_picture}`} />
       </ListItemAvatar>
       <ListItemText
-        primary={`${member.first_name} ${member.last_name} ${
-          currentUser && currentUser.id === member.id ? "  ( You )" : ""
-        }`}
+        primary = { currentUser && currentUser.id === member.id ? (`${member.first_name} ${member.last_name} ( You )` ) :
+          (<>
+            <Link to={`/profile/${member.id}`}>{`${member.first_name} ${member.last_name}`}</Link>
+          </>)
+        }
+        // primary={`${member.first_name} ${member.last_name} ${currentUser && currentUser.id === member.id ? '  ( You )' : ''}`}
         secondary={
           <>
             <Typography

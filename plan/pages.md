@@ -9,7 +9,7 @@ business profile:
       - requirement
       - location
     - (done) existing job post
-    - (thar) view the job applications from users
+    - (done) view the job applications from users
     - upcoming career fair
       - add existing posts to that fair
       - upload flyer pdf for futurue fair (stretch)
@@ -55,20 +55,20 @@ pages:
   - search bar (stretch)
   - filter (stretch)
 
-- (thar) job application page
+- (done) job application page
   - show details of the post
   - resume (existing resume/upload different resume)
   - cover letter (textarea)
   - eligibiliy to work in location
   - expected job salary range
 
-- (done, link to interview) calender/schedule
+- (done) calender/schedule
   - past/upcoming interview
     - tooltips: start time and end time, job title, company name, link to the job post, send message to interviewer/interviewee
   - past/upcoming career fairs (the one that they signed up for)
     - tooltips: start time and end time, name of the career fair, link to the career fair
 
-- (Yagnesh) user page
+- (done) user page
   - settings
     - update password
     - update profile
@@ -103,7 +103,7 @@ pages:
   - click on user and see their profile/send message
   - (stretch) breakout room
 
-- (Yagnesh) userpage (stalking)
+- (Yagnesh / style) userpage (stalking)
   - send message
   - name, bio, username
   - organizations the user is belongs to
@@ -124,5 +124,5 @@ pages:
   - password
   - name
 
-- features
+- features (stretch)
   - notifications before the career fair / interview starts

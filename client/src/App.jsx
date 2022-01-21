@@ -6,7 +6,7 @@ import Register from "./components/Register";
 import ErrorModal from "./components/ErrorModal";
 import Home from "./components/Home";
 import { Routes, Route } from "react-router-dom";
-
+import Stall from "./components/Stall"
 import Groups from "./components/Groups/index";
 import { Snackbar, Alert } from "@mui/material";
 import Fair from "./components/Fair";
@@ -15,10 +15,14 @@ import FairLobby from "./components/FairLobby";
 import OrganizationDetails from "./components/Groups/OrganizationDetails";
 import Jobs from "./components/JobBoard/index";
 import Schedule from "./components/Schedule";
-import Stall from "./components/Stall";
 import ProfileSetting from "./components/ProfileSetting/ProfileSetting";
 import useMessages from "../src/hooks/useMessages";
 import JobApplications from "./components/Groups/JobApplications";
+import UserProfile from "./components/UserProfile/UserProfile";
+import OtherProfile from "./components/UserProfile/OtherProfile";
+
+
+
 
 function App() {
   const [errorMessage, setErrorMessage] = useState("");
@@ -83,24 +87,17 @@ function App() {
             element={<Groups {...{ setSnackBarDetails }} />}
           />
           <Route path="/jobs" element={<Jobs />} />
-          <Route path="/stall" element={<Stall />} />
           <Route path="/schedule" element={<Schedule />} />
+          <Route path="/profile" element={<UserProfile currentUser = {currentUser} />} />
+          <Route path="/profile/:user_id" element={<OtherProfile currentUser = {currentUser}/>} />
+          <Route path="/settings" element={<ProfileSetting {...{setCurrentUser,currentUser,setErrorMessage,setShowError,setSnackBarDetails}}/>}/>
           <Route
             path="/messages"
             element={<ChatBox currentUser={currentUser} messageState={messageState} />}
           />
           <Route
             path="/live/:fairId/:organizationId"
-            element={<OrganizationDetails {...{ setSnackBarDetails }} />}
-          />
-          <Route
-            path="/settings"
-            element={
-              <ProfileSetting
-                setCurrentUser={setCurrentUser}
-                currentUser={currentUser}
-              />
-            }
+            element={<Stall {...{ setSnackBarDetails }} {...{ currentUser }} />}
           />
           <Route
             path="/jobs/:id/applications"

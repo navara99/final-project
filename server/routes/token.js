@@ -25,11 +25,13 @@ module.exports = () => {
     // get uid
     let uid = req.query.uid;
     if (!uid) uid = 0;
+
     // get role
-    const role = RtcRole.SUBSCRIBER;
+    let role = RtcRole.SUBSCRIBER;
     if (req.query.role === "publisher") {
       role = RtcRole.PUBLISHER;
     };
+
     // get expiration time for token
     let expireTime = req.query.expireTime;
     if (!expireTime) {
