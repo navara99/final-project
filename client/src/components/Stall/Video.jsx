@@ -21,7 +21,7 @@ export default function Video(props) {
             <AgoraVideoPlayer
               videoTrack={user.videoTrack}
               key={user.uid}
-              style={{ height: "100%", width: "100%" }}
+              style={{ height: "100%", width: "100%", border: "solid 2px #006494" }}
             />
           </Grid>
         );
@@ -33,15 +33,12 @@ export default function Video(props) {
 
   return (
     <Grid container style={{ height: "100%" }} >
-      {/* <Grid item style={{ height: "5%" }}>
-
-      </Grid> */}
       <Grid item xs={gridSpacing} className="video-grid-item">
         <div className="video-controls"><Controls tracks={tracks} setStart={setStart} setInCall={setInCall} {...{ useClient }} /></div>
         <p className="video-username">{username}</p>
         <AgoraVideoPlayer
           videoTrack={tracks[1]}
-          style={{ height: "100%", width: "100%" }}
+          style={{ height: "100%", width: "100%", border: "solid 2px #006494" }}
         />
       </Grid>
       {users.length > 0 && otherUsers()}
