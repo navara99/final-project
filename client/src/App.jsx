@@ -45,7 +45,7 @@ function App() {
           {snackBarDetails.message}
         </Alert>
       </Snackbar>
-      <Navbar {...{ currentUser, logout }} />
+      <Navbar {...{ currentUser, logout, numOfUnreadMsg: messageState.numOfUnreadMsg }} />
       <ErrorModal {...{ errorMessage, showError, setShowError }} />
       <div className="main-container">
         <Routes>

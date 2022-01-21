@@ -90,6 +90,10 @@ const useMessages = () => {
     setReceiverId(e.target.value);
   };
 
+  const numOfUnreadMsg = Array.isArray(messages)
+    ? messages.filter((message) => !message.is_read).length
+    : 0;
+
   const messageState = {
     setMessageText,
     messageText,
@@ -101,6 +105,7 @@ const useMessages = () => {
     messages,
     senders,
     setReceiverId,
+    numOfUnreadMsg,
   };
 
   return { currentUser, setCurrentUser, logout, messageState };

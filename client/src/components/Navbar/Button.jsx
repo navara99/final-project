@@ -1,18 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Tippy from "@tippyjs/react";
-import 'tippy.js/dist/tippy.css'; 
+import "tippy.js/dist/tippy.css";
+import Badge from "@mui/material/Badge";
 
-const Button = ({ Icon, to, text }) => {
+const Button = ({ Icon, to, text, numOfUnreadMsg }) => {
   return (
-    <Tippy
-      content={text}
-      placement="right"
-      theme="material"
-      arrow={true}
-    >
+    <Tippy content={text} placement="right" theme="material" arrow={true}>
       <Link to={to} className="navbar-button">
-        <Icon />
+        <Badge badgeContent={numOfUnreadMsg} color="primary">
+          <Icon />
+        </Badge>
       </Link>
     </Tippy>
   );
