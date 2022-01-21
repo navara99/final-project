@@ -119,7 +119,7 @@ function App() {
             element={<OrganizationDetails {...{ setSnackBarDetails }} />}
           />
           <Route
-            path="/interview/:id"
+            path="/interviews/:id"
             element={<InterviewRoom {...{ currentUser }} />}
           />
         </Routes>
