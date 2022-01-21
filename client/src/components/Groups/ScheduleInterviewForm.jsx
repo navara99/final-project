@@ -26,7 +26,7 @@ function ScheduleInterviewForm({
   setSnackBarDetails,
   setMessages,
   setSenders,
-  socket
+  socket,
 }) {
   const [date, setDate] = useState(new Date());
   const [startTime, setStartTime] = useState(new Date());
@@ -50,7 +50,6 @@ function ScheduleInterviewForm({
         "/api/messages/interview",
         newInterview
       );
-        console.log(newMessage)
       setMessages((prev) => [...prev, newMessage.data.messageObj]);
       setSenders((prev) => {
         if (prev.some((el) => el.id === newMessage.data.receiver.id)) {

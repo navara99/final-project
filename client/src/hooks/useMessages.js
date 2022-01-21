@@ -52,12 +52,17 @@ const useMessages = () => {
                 ...sender,
                 lastMsg,
                 createdDate: moment(`${createdDate}`).fromNow(),
+                compareDate: createdDate,
                 lastUserId,
                 msgId,
                 numOfMsg,
               };
             })
-            .sort((senderA, senderB) => senderB.msgId - senderA.msgId)
+            .sort((senderA, senderB) => {
+              console.log(senderB.compareDate > senderA.compareDate)
+              console.log(senderB.compareDate < senderA.compareDate)
+              return senderB.compareDate > senderA.compareDate;
+            })
         : prev
     );
   }, [messages]);
@@ -84,12 +89,7 @@ const useMessages = () => {
     // intialize socket
     const socket = io.connect("http://localhost:8080");
     socket.on("getMessage", (data) => {
-      setIncomingMessage({
-        receiver_id: data.receiver_id,
-        sender_id: data.sender_id,
-        message: data.message,
-        created_at: new Date().toISOString(),
-      });
+      setIncomingMessage({ ...data, created_at: new Date().toISOString() });
     });
     setSocket(socket);
   }, []);
@@ -150,7 +150,7 @@ const useMessages = () => {
     numOfUnreadMsg,
     setMessages,
     setSenders,
-    socket
+    socket,
   };
 
   return { currentUser, setCurrentUser, logout, messageState };

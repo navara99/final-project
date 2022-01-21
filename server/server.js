@@ -45,28 +45,22 @@ io.on("connection", (socket) => {
     // io.emit("getUsers", users);
   });
 
-  socket.on("sendMessage", ({ sender_id, receiver_id, message }) => {
-
+  socket.on("sendMessage", (data) => {
+    const { receiver_id } = data;
     const user = getUser(receiver_id);
-    // console.log("user", users);
     if (user) {
-
-      io.to(user.socketId).emit("getMessage", {
-        receiver_id,
-        sender_id,
-        message
-      });
+      io.to(user.socketId).emit("getMessage", data);
     } else {
       console.log("user not found", receiver_id);
     }
   });
 
-  //client disconnect 
+  //client disconnect
   socket.on("disconnect", () => {
     console.log("user disconnected!");
-    removeUser(socket.id)
-  })
-})
+    removeUser(socket.id);
+  });
+});
 
 // Set up cookie-session
 const cookieSession = require("cookie-session");
@@ -109,4 +103,3 @@ app.use("/api/schedule", scheduleRoutes(db));
 httpServer.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
-
