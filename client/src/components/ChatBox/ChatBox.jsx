@@ -4,7 +4,6 @@ import Grid from "@mui/material/Grid";
 import Divider from "@mui/material/Divider";
 import Typography from "@mui/material/Typography";
 import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
 import SenderList from "./Sender/SenderList";
 import MessageList from "./Messages/MessageList";
 import MessageForm from "./MessageForm/MessageForm";
@@ -31,23 +30,6 @@ const ChatBox = ({ currentUser, messageState }) => {
     <Grid container className="chat-box">
       <Grid item px={2} xs={3} component={Paper} variant="outlined">
         <List>
-          <ListItem>
-            <ListItemAvatar>
-              <Avatar
-                alt={currentUser && currentUser.username}
-                src={currentUser && currentUser.profile_picture}
-              />
-            </ListItemAvatar>
-            {/* <ListItemText primary={currentUser && currentUser.first_name}>
-                    </ListItemText>
-                    <ListItemText secondary="You">
-                    </ListItemText> */}
-            <Typography variant="h4">
-              {currentUser && currentUser.first_name}
-            </Typography>
-          </ListItem>
-          <Divider />
-          <ListItem>
             <SenderList
               messages={messages}
               currentUser={currentUser}
@@ -56,7 +38,6 @@ const ChatBox = ({ currentUser, messageState }) => {
               handleOnClick={handleOnClick}
               setReceiver={setReceiver}
             />
-          </ListItem>
         </List>
       </Grid>
       {/* Chatter Box */}
@@ -115,7 +96,7 @@ const ChatBox = ({ currentUser, messageState }) => {
           </>
         ) : (
           <>
-            <Typography variant="h3"> Open chat conversation</Typography>
+            <Typography variant="h3">Welcome to messages page</Typography>
           </>
         )}
       </Grid>

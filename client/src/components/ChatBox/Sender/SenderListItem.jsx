@@ -7,6 +7,7 @@ import {
   Divider,
   ListItemButton,
 } from "@mui/material";
+import ListItem from "@mui/material/ListItem";
 import Badge from "@mui/material/Badge";
 
 const SenderListItem = ({
@@ -34,29 +35,31 @@ const SenderListItem = ({
           horizontal: "right",
         }}
       >
-        <ListItemButton alignItems="flex-start" onClick={handleClick}>
-          <ListItemAvatar>
-            <Avatar alt={first_name} src={profile_picture} />
-          </ListItemAvatar>
-          <ListItemText
-            primary={`${first_name} ${last_name}`}
-            secondary={
-              <>
-                <Typography
-                  sx={{ display: "inline" }}
-                  component="span"
-                  variant="body2"
-                  color="text.secondary"
-                >
-                  {`${msgName}: ${lastMsg} (${createdDate})`}
-                </Typography>
-              </>
-            }
-          />
-        </ListItemButton>
+        <ListItem disablePadding>
+          <ListItemButton alignItems="flex-start" onClick={handleClick}>
+            <ListItemAvatar>
+              <Avatar alt={first_name} src={profile_picture} />
+            </ListItemAvatar>
+            <ListItemText
+              primary={`${first_name} ${last_name}`}
+              secondary={
+                <>
+                  <Typography
+                    sx={{ display: "inline" }}
+                    component="span"
+                    variant="body2"
+                    color="text.secondary"
+                  >
+                    {`${msgName}: ${lastMsg} (${createdDate})`}
+                  </Typography>
+                </>
+              }
+            />
+          </ListItemButton>
+        </ListItem>
       </Badge>
 
-      <Divider variant="inset" component="li" />
+      <Divider />
     </>
   );
 };
