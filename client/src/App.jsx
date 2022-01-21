@@ -16,7 +16,7 @@ import FairLobby from "./components/FairLobby";
 import OrganizationDetails from "./components/Groups/OrganizationDetails";
 import Jobs from "./components/JobBoard/index";
 import Schedule from "./components/Schedule";
-import Stall from "./components/Stall";
+import Stall from "./components/Stall/index"
 import ProfileSetting from "./components/ProfileSetting/ProfileSetting";
 
 
@@ -85,13 +85,12 @@ function App() {
             element={<Groups {...{ setSnackBarDetails }} />}
           />
           <Route path="/jobs" element={<Jobs />} />
-          <Route path="/stall" element={<Stall />} />
           <Route path="/schedule" element={<Schedule />} />
           <Route path="/messages" element={<ChatBox currentUser={currentUser} />} />
-          <Route path="/live/:fairId/:organizationId" element={<Stall />} />
           <Route path="/settings" element={<ProfileSetting setCurrentUser={setCurrentUser} currentUser={currentUser} />} />
           <Route path="/jobs/:id/applications" element={<JobApplications />} />
           <Route path="/live/:id" element={<FairLobby currentUser={currentUser} />} />
+          <Route exact path="/live/:fairId/:organizationId" element={<Stall {...{ currentUser }} />} />
           <Route path="/fairs/:id" element={<Fair currentUser={currentUser} />} />
           <Route path="/organizations/:id" element={<OrganizationDetails {...{ setSnackBarDetails }} />} />
         </Routes>
