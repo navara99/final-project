@@ -6,7 +6,7 @@ const useOtherUserProfile = (user_id) => {
   useEffect(() => {
     axios.get(`/api/users/${user_id}`)
          .then(res => {
-           console.log(res.data);
+           setOtherUser(res.data);
          }).catch(err => {
             console.log(err.response.data.error)
          })
