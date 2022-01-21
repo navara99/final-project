@@ -21,9 +21,6 @@ import JobApplications from "./components/Groups/JobApplications";
 import UserProfile from "./components/UserProfile/UserProfile";
 import OtherProfile from "./components/UserProfile/OtherProfile";
 
-
-
-
 function App() {
   const [errorMessage, setErrorMessage] = useState("");
   const [showError, setShowError] = useState(false);
