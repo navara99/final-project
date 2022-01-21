@@ -8,8 +8,9 @@ import SenderList from "./Sender/SenderList";
 import MessageList from "./Messages/MessageList";
 import MessageForm from "./MessageForm/MessageForm";
 import { Box } from "@mui/material";
-import { Avatar, ListItemAvatar } from "@mui/material";
+import { Avatar } from "@mui/material";
 import "./ChatBox.css";
+import { Link } from "react-router-dom";
 
 const ChatBox = ({ currentUser, messageState }) => {
   const {
@@ -30,14 +31,14 @@ const ChatBox = ({ currentUser, messageState }) => {
     <Grid container className="chat-box">
       <Grid item px={2} xs={3} component={Paper} variant="outlined">
         <List className="sender">
-            <SenderList
-              messages={messages}
-              currentUser={currentUser}
-              senders={senders}
-              setReceiverId={setReceiverId}
-              handleOnClick={handleOnClick}
-              setReceiver={setReceiver}
-            />
+          <SenderList
+            messages={messages}
+            currentUser={currentUser}
+            senders={senders}
+            setReceiverId={setReceiverId}
+            handleOnClick={handleOnClick}
+            setReceiver={setReceiver}
+          />
         </List>
       </Grid>
       {/* Chatter Box */}
@@ -56,9 +57,12 @@ const ChatBox = ({ currentUser, messageState }) => {
                 height: "50px",
                 backgroundColor: "#bdc7df",
                 display: "flex",
-                justifyContent: "center",
+                justifyContent: "flex-start",
                 alignItems: "center",
+                padding: "0.5em"
               }}
+              component={Link}
+              to={`/profile/${receiver.id}`}
             >
               <Avatar
                 alt={`${receiver.id}`}
