@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
 import axios from "axios";
+import { useLocation } from "react-router-dom";
 
 const useMessages = () => {
+  const [receiverId, setReceiverId] = useState(null);
   const [messages, setMessages] = useState(null);
   const [senders, setSenders] = useState(null);
   const [messageText, setMessageText] = useState("");
   const [incomingMessage, setIncomingMessage] = useState(null);
-  const [receiverId, setReceiverId, handleOnClick] = useMessageReceiver(null);
   const [socket, setSocket] = useState(null);
   const [receiver, setReceiver] = useState(null);
   const location = useLocation();
@@ -84,7 +85,33 @@ const useMessages = () => {
     }
   }, [currentUser, socket]);
 
-  return {};
+  const handleSubmit = (e, message = messageText) => {
+    e.preventDefault();
+    const newMessage = {
+      sender_id: currentUser.id,
+      receiver_id: receiverId,
+      message,
+    };
+    axios.post("/api/messages/", newMessage).then((res) => {
+      console.log("data", res);
+      setMessages((prev) => [...prev, res.data.messageObj]);
+      setSenders((prev) => {
+        if (prev.some((el) => el.id === res.data.receiver.id)) {
+          return prev;
+        }
+        return [...prev, res.data.receiver];
+      });
+    });
+    //sending message to socket server
+    socket.emit("sendMessage", newMessage);
+    setMessageText("");
+  };
+
+  const handleOnClick = (e) => {
+    setReceiverId(e.target.value);
+  };
+
+  return { handleSubmit, messages, senders, setReceiverId };
 };
 
 export default useMessages;
