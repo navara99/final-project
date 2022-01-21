@@ -16,6 +16,10 @@ const OrganizationListItem = ({
   description,
   name,
 }) => {
+  const clickHandler = (e) => {
+    e.stopPropagation();
+  };
+
   return (
     <Box onClick={setExpanded}>
       <Card variant="outlined" className="not-expanded">
@@ -30,7 +34,7 @@ const OrganizationListItem = ({
               {name}
             </Typography>
             <CardActions>
-              <Button size="small" variant="outlined">
+              <Button size="small" onClick={clickHandler} variant="outlined">
                 Join this stall
               </Button>
             </CardActions>

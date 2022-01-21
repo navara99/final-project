@@ -93,7 +93,7 @@ const fairsRoutes = require("./routes/fairs");
 const organizationRoutes = require("./routes/organizations");
 const messagesRoutes = require("./routes/messages");
 const applicationRoutes = require("./routes/applications");
-
+const tokenRoutes = require("./routes/token");
 const scheduleRoutes = require("./routes/schedule");
 
 app.use("/api/users", usersRoutes(db));
@@ -102,10 +102,11 @@ app.use("/api/applications", applicationRoutes(db));
 app.use("/api/fairs", fairsRoutes(db));
 app.use("/api/organizations", organizationRoutes(db));
 app.use("/api/messages", messagesRoutes(db));
-
+app.use("/api/token", tokenRoutes());
 
 app.use("/api/schedule", scheduleRoutes(db));
 
 httpServer.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
+
