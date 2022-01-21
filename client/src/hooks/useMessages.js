@@ -57,8 +57,7 @@ const useMessages = () => {
                 numOfMsg,
               };
             })
-            .sort((senderA, senderB) => senderB.msgId - senderA.msgId;
-            )
+            .sort((senderA, senderB) => senderB.msgId - senderA.msgId)
         : prev
     );
   }, [messages]);
