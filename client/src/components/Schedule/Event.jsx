@@ -8,29 +8,22 @@ import "tippy.js/themes/light-border.css"
 import "tippy.js/themes/translucent.css"
 
 const Event = ({ event }) => {
-  const { start, end, title, isInterview, asJobSeeker, fairId } = event;
+  const { start, end, title, isInterview, asJobSeeker, fairId, interviewId } = event;
   const LinkButton = () => {
     return isInterview ? (
-      asJobSeeker ? (
-        <Link to="/">
-          <Button variant="contained" size="small">
-            test button
-          </Button>
-        </Link>
-      ) : (
-        <Link to="/">
-          <Button variant="contained" size="small">
-            test button
-          </Button>
-        </Link>
-      )
-    ) : (
-      <Link to={`/fairs/${fairId}`}>
+      <Link to={`/interviews/${interviewId}`}>
         <Button variant="contained" size="small">
-          Details
+          Interview
         </Button>
       </Link>
-    );
+    )
+      : (
+        <Link to={`/fairs/${fairId}`}>
+          <Button variant="contained" size="small">
+            Details
+          </Button>
+        </Link>
+      );
   };
 
   const theme = isInterview ? "light-border" : "translucent";

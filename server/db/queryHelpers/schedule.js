@@ -11,6 +11,7 @@ const makeConductInterviewData = (data) => {
       candidate_id,
       application_id,
       organization_name,
+      id
     } = event;
     const title = `Interview ${candidate_first_name} ${candidate_last_name} for ${job_title} (${organization_name})`;
     return {
@@ -21,13 +22,14 @@ const makeConductInterviewData = (data) => {
       applicationId: application_id,
       isInterview: true,
       asJobSeeker: false,
+      interviewId: id,
     };
   });
 };
 
 const makeInterviewData = (data) => {
   return getData(data).map((event) => {
-    const { start, end, job_title, employer } = event;
+    const { start, end, job_title, employer, id } = event;
     const title = `Interview for ${job_title} at ${employer}`;
     return {
       start,
@@ -35,6 +37,7 @@ const makeInterviewData = (data) => {
       title,
       isInterview: true,
       asJobSeeker: true,
+      interviewId: id,
     };
   });
 };
@@ -63,7 +66,7 @@ const makeFairData = (data) => {
       title: fair_name,
       fairId: fair_id,
       isInterview: false,
-      asJobSeeker: true,
+      asJobSeeker: true
     };
   });
 };
@@ -80,7 +83,8 @@ const queryGenerator = (db) => {
       jobs.title AS job_title,
       users.id AS candidate_id,
       applications.id AS application_id,
-      organizations.name AS organization_name
+      organizations.name AS organization_name,
+      interviews.id
       FROM interviews
       JOIN applications ON interviews.application_id = applications.id
       JOIN users ON users.id = applications.user_id
@@ -93,7 +97,8 @@ const queryGenerator = (db) => {
       SELECT interviews.start_time AS start,
       interviews.end_time AS end,
       jobs.title AS job_title,
-      organizations.name AS employer
+      organizations.name AS employer,
+      interviews.id
       FROM interviews
       JOIN applications ON interviews.application_id = applications.id
       JOIN jobs ON applications.job_id = jobs.id
