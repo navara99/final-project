@@ -52,17 +52,13 @@ const useMessages = () => {
                 ...sender,
                 lastMsg,
                 createdDate: moment(`${createdDate}`).fromNow(),
-                compareDate: createdDate,
                 lastUserId,
                 msgId,
                 numOfMsg,
               };
             })
-            .sort((senderA, senderB) => {
-              console.log(senderB.compareDate > senderA.compareDate)
-              console.log(senderB.compareDate < senderA.compareDate)
-              return senderB.compareDate > senderA.compareDate;
-            })
+            .sort((senderA, senderB) => senderB.msgId - senderA.msgId;
+            )
         : prev
     );
   }, [messages]);
