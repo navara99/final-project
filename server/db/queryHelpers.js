@@ -442,7 +442,7 @@ const queryGenerator = (db) => {
     const queryString = searchTerm
       ? `
     SELECT * FROM jobs
-    WHERE title ILIKE $1 OR description ILIKE $1 OR location ILIKE $1;
+    WHERE title ILIKE $1 OR location ILIKE $1;
     `
       : "SELECT * FROM jobs;";
 
