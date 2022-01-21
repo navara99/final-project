@@ -6,7 +6,6 @@ const useJobs = () => {
 
   useEffect(() => {
     axios.get("/api/jobs").then(({ data }) => {
-      console.log(data);
       setJobs(data);
     });
   },[]);
