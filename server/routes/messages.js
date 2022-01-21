@@ -46,5 +46,24 @@ module.exports = (db) => {
     }
   });
 
+  router.put("/interview", async (req, res) => {
+    const { user_id } = req.session;
+    const { start, end, applicationId, receiverId, message } = req.body;
+
+    try {
+      const data = await sendInterviewInvitation(
+        start,
+        end,
+        user_id,
+        receiverId,
+        applicationId,
+        message
+      );
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+    }
+  });
+
   return router;
 };

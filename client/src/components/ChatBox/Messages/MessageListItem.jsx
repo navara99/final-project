@@ -18,16 +18,28 @@ const MessageListItem = (props) => {
   } = props.message;
   const [clicked, setClicked] = useState();
   const { currentUser, setMessageText, handleSubmit } = props;
-  console.log(id);
+  const appointment = {
+    application_id,
+    start_time,
+    end_time,
+    interviewer_id: sender_id,
+  };
   const clickAcceptHandler = (e) => {
-    setClicked(true);
-    
-    handleSubmit(e, "Invitation is accepted.");
+    axios
+      .put("/api/messages/interview", { ...appointment, is_accepted: true })
+      .then((res) => {
+        setClicked(true);
+        handleSubmit(e, "Invitation is accepted.");
+      });
   };
 
   const clickRejectHandler = (e) => {
-    setClicked(true);
-    handleSubmit(e, "Invitation is rejected.");
+    axios
+      .put("/api/messages/interview", { ...appointment, is_accepted: false })
+      .then((res) => {
+        setClicked(true);
+        handleSubmit(e, "Invitation is rejected :(");
+      });
   };
 
   return (
