@@ -13,8 +13,9 @@ import { Avatar, ListItemAvatar } from "@mui/material";
 import "./ChatBox.css";
 import useMessages from "../../hooks/useMessages";
 
-const ChatBox = ({ currentUser }) => {
-  const { setMessageText,
+const ChatBox = ({ currentUser, messageState }) => {
+  const {
+    setMessageText,
     messageText,
     receiverId,
     receiver,
@@ -23,7 +24,8 @@ const ChatBox = ({ currentUser }) => {
     handleSubmit,
     messages,
     senders,
-    setReceiverId, } = useMessages(currentUser);
+    setReceiverId,
+  } = messageState;
   return (
     <Grid container className="chat-box">
       <Grid item px={2} xs={3} component={Paper} variant="outlined">

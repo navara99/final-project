@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 import { io } from "socket.io-client";
+import useCurrentUser from "./useCurrentUser";
 
-const useMessages = (currentUser) => {
+const useMessages = () => {
   const [receiverId, setReceiverId] = useState(null);
   const [messages, setMessages] = useState(null);
   const [senders, setSenders] = useState(null);
@@ -12,6 +13,7 @@ const useMessages = (currentUser) => {
   const [socket, setSocket] = useState(null);
   const [receiver, setReceiver] = useState(null);
   const location = useLocation();
+  const { currentUser, setCurrentUser, logout } = useCurrentUser();
 
   useEffect(() => {
     axios.get("/api/messages").then((res) => {
@@ -88,7 +90,7 @@ const useMessages = (currentUser) => {
     setReceiverId(e.target.value);
   };
 
-  return {
+  const messageState = {
     setMessageText,
     messageText,
     receiverId,
@@ -100,6 +102,8 @@ const useMessages = (currentUser) => {
     senders,
     setReceiverId,
   };
+
+  return { currentUser, setCurrentUser, logout, messageState };
 };
 
 export default useMessages;
