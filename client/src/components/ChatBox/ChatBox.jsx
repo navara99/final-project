@@ -24,6 +24,7 @@ const ChatBox = ({ currentUser, messageState }) => {
     messages,
     senders,
     setReceiverId,
+    setMessages
   } = messageState;
   return (
     <Grid container className="chat-box">
@@ -96,10 +97,12 @@ const ChatBox = ({ currentUser, messageState }) => {
                       message.receiver_id === receiverId)
                 )
               }
+              receiverId={receiverId}
               currentUser={currentUser}
               px={2}
               setMessageText={setMessageText}
               handleSubmit={handleSubmit}
+              setMessages={setMessages}
             />
             <Divider />
             <MessageForm

@@ -108,6 +108,7 @@ const useMessages = () => {
     senders,
     setReceiverId,
     numOfUnreadMsg,
+    setMessages
   };
 
   return { currentUser, setCurrentUser, logout, messageState };

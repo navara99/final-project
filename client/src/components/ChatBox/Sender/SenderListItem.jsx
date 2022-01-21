@@ -23,10 +23,7 @@ const SenderListItem = ({
     setReceiverId(id);
     setReceiver({ ...sender });
   };
-
   const msgName = sender.id === lastUserId ? sender.first_name : "Me";
-
-  console.log(numOfMsg);
   return (
     <>
       <Badge
