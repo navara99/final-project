@@ -42,6 +42,13 @@ const useMessages = (currentUser) => {
     // intialize socket
     const socket = io.connect("http://localhost:8080");
     socket.on("getMessage", (data) => {
+      setIncomingMessage({
+        receiver_id: data.receiver_id,
+        sender_id: data.sender_id,
+        message: data.message,
+        created_at: new Date().toISOString(),
+      });
+    });
     setSocket(socket);
   }, []);
 
