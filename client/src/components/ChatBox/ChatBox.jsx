@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React from "react";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import Divider from "@mui/material/Divider";
@@ -11,7 +11,6 @@ import MessageForm from "./MessageForm/MessageForm";
 import { Box } from "@mui/material";
 import { Avatar, ListItemAvatar } from "@mui/material";
 import "./ChatBox.css";
-import useMessages from "../../hooks/useMessages";
 
 const ChatBox = ({ currentUser, messageState }) => {
   const {
