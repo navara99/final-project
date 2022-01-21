@@ -25,13 +25,20 @@ const ChatBox = ({ currentUser, messageState }) => {
     senders,
     setReceiverId,
     setMessages,
-    socket
+    socket,
   } = messageState;
 
   return (
     <Grid container className="chat-box">
-      <Grid item px={2} xs={3} component={Paper} variant="outlined">
-        <List className="sender">
+      <Grid
+        item
+        px={2}
+        xs={3}
+        component={Paper}
+        variant="outlined"
+        className="sender"
+      >
+        <List>
           <SenderList
             messages={messages}
             currentUser={currentUser}
@@ -49,6 +56,7 @@ const ChatBox = ({ currentUser, messageState }) => {
         sx={{ backgroundColor: "#eff2f6" }}
         component={Paper}
         variant="outlined"
+        className="messages"
       >
         {receiverId && currentUser ? (
           <>
@@ -60,7 +68,7 @@ const ChatBox = ({ currentUser, messageState }) => {
                 display: "flex",
                 justifyContent: "flex-start",
                 alignItems: "center",
-                padding: "0.5em"
+                padding: "0.5em",
               }}
               component={Link}
               to={`/profile/${receiver.id}`}
