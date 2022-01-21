@@ -210,14 +210,16 @@ module.exports = (db) => {
 
   // Other user Password
 
-  router.get("/:id",async (req,res) => {
+  router.get("/:user_id",async (req,res) => {
     try{
-      const{id} = req.params;
-      const user = await getUserByValue('id', id);
+      const{user_id} = req.params;
+   
+      const user = await getUserByValue('id', user_id);
+
       if(user) {
-        const user_organizations = await getOrganizationsByUser(id);
-        const otherUser = {...user, ...user_organizations};
-        return res.status(400).json(otherUser);
+        const user_organizations = await getOrganizationsByUser(user_id);
+        const otherUser = {...user, user_organizations};
+        return res.status(200).json(otherUser);
       }
      return res.status(400).json({error: 'User profile not found'})
     }catch(err) {
