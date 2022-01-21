@@ -1,9 +1,11 @@
 .stall {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
 }
 
 .videos {
-  width: 50%;
   height: 100%;
 }
 

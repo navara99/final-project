@@ -16,12 +16,12 @@ export default function Video(props) {
       if (user.videoTrack) {
         return (
           <Grid item xs={gridSpacing} key={user.uid} className="video-grid-item" >
-            <p className="video-username"></p>
+            <p className="video-username">{user.uid}</p>
             <AgoraVideoPlayer
               videoTrack={user.videoTrack}
               key={user.uid}
               style={{ height: "100%", width: "100%" }}
-            > {user.uid}</AgoraVideoPlayer >
+            /> 
           </Grid>
         );
       } else {
