@@ -90,8 +90,7 @@ function App() {
           <Route path="/schedule" element={<Schedule />} />
           <Route path="/messages" element={<ChatBox currentUser = {currentUser}/>} />
           <Route path="/profile" element={<UserProfile currentUser = {currentUser} />} />
-          <Route path="/settings" element={<ProfileSetting {...{setCurrentUser,currentUser,setErrorMessage,
-                  setShowError,setSnackBarDetails}}/>}/>
+          <Route path="/settings" element={<ProfileSetting {...{setCurrentUser,currentUser,setErrorMessage,setShowError,setSnackBarDetails}}/>}/>
           <Route path="/jobs/:id/applications" element={<JobApplications />} />
           <Route path="/live/:id" element={<FairLobby currentUser={currentUser} />} />
           <Route path="/fairs/:id" element={<Fair currentUser={currentUser} />} />
