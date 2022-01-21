@@ -13,6 +13,9 @@ const SenderList = ({
   const senderList = senders
     ? senders
         .map((sender) => {
+          const numOfMsg = messages.filter(
+            (message) => message.sender_id === sender.id
+          ).length;
           const [lastMsg, createdDate, lastUserId, msgId] = messages.reduce(
             (lastMessage, message) => {
               if (
@@ -36,11 +39,12 @@ const SenderList = ({
             createdDate: moment(`${createdDate}`).fromNow(),
             lastUserId,
             msgId,
+            numOfMsg,
           };
         })
         .sort((senderA, senderB) => senderB.msgId - senderA.msgId)
         .map((sender) => {
-          const { lastMsg, createdDate, lastUserId } = sender;
+          const { lastMsg, createdDate, lastUserId, numOfMsg } = sender;
           return (
             <SenderListItem
               key={sender.id}
@@ -48,7 +52,7 @@ const SenderList = ({
               setReceiverId={setReceiverId}
               handleOnClick={handleOnClick}
               setReceiver={setReceiver}
-              {...{ lastMsg, createdDate, lastUserId }}
+              {...{ lastMsg, createdDate, lastUserId, numOfMsg }}
             />
           );
         })
