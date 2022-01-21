@@ -11,14 +11,16 @@ const MessageList = (props) => {
       ))
     : null;
   useEffect(() => {
-    axios.put(`/api/messages/read/${receiverId}`).then((res) => {
-      setMessages((prev) =>
-        prev.map((message) => {
-          if (message.sender_id !== receiverId) return message;
-          return { ...message, is_read: true };
-        })
-      );
-    });
+    if (receiverId) {
+      axios.put(`/api/messages/read/${receiverId}`).then((res) => {
+        setMessages((prev) =>
+          prev.map((message) => {
+            if (message.sender_id !== receiverId) return message;
+            return { ...message, is_read: true };
+          })
+        );
+      });
+    }
   }, [receiverId, messages.length]);
   return <List>{messageList}</List>;
 };

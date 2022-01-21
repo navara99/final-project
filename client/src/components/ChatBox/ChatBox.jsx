@@ -24,8 +24,9 @@ const ChatBox = ({ currentUser, messageState }) => {
     messages,
     senders,
     setReceiverId,
-    setMessages
+    setMessages,
   } = messageState;
+
   return (
     <Grid container className="chat-box">
       <Grid item px={2} xs={3} component={Paper} variant="outlined">
