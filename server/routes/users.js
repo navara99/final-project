@@ -204,9 +204,27 @@ module.exports = (db) => {
 
       res.json(newUserInfo);
     } catch (err) {
-      res.status(500).json({ error: err.message });
+      res.status(500).json({ error: 'Server Error' });
     }
   });
+
+  // Other user Password
+
+  router.get("/:id",async (req,res) => {
+    try{
+      const{id} = req.params;
+      const user = await getUserByValue('id', id);
+      if(user) {
+        const user_organizations = await getOrganizationsByUser(id);
+        const otherUser = {...user, ...user_organizations};
+        return res.status(400).json(otherUser);
+      }
+     return res.status(400).json({error: 'User profile not found'})
+    }catch(err) {
+      res.status(500).json({error : 'Server Error'});
+    }
+
+  })
 
   return router;
 };
