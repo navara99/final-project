@@ -55,6 +55,17 @@ io.on("connection", (socket) => {
     }
   });
 
+  socket.on("editMessage", (data) => {
+    const { receiver_id } = data;
+    const user = getUser(receiver_id);
+    if (user) {
+      console.log(data)
+      io.to(user.socketId).emit("editMessage", data);
+    } else {
+      console.log("user not found", receiver_id);
+    }
+  });
+
   //client disconnect
   socket.on("disconnect", () => {
     console.log("user disconnected!");

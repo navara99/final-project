@@ -76,15 +76,15 @@ const interviewQueryGenerator = (db) => {
     try {
       const result = await db.query(queryString, values);
 
-      if (!is_accepted) return getData(result);
+      if (!is_accepted) return getFirstRecord(result);
 
       const values2 = [application_id, interviewer_id, start_time, end_time];
       const queryString2 = `
       INSERT INTO interviews (application_id, interviewer_id, start_time, end_time)
       VALUES ($1, $2, $3, $4)
       RETURNING *;`;
-      const result2 = await db.query(queryString2, values2);
-      return getData(result2);
+      await db.query(queryString2, values2);
+      return getFirstRecord(result);
     } catch (error) {
       console.log(error);
     }

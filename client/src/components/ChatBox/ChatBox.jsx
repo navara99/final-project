@@ -25,6 +25,7 @@ const ChatBox = ({ currentUser, messageState }) => {
     senders,
     setReceiverId,
     setMessages,
+    socket
   } = messageState;
 
   return (
@@ -89,6 +90,7 @@ const ChatBox = ({ currentUser, messageState }) => {
               setMessageText={setMessageText}
               handleSubmit={handleSubmit}
               setMessages={setMessages}
+              socket={socket}
             />
             <Divider />
             <MessageForm
