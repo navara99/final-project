@@ -1,4 +1,5 @@
 const getData = ({ rows }) => rows;
+const getFirstRecord = (result) => getData(result)[0];
 
 const interviewQueryGenerator = (db) => {
   const sendInterviewInvitation = async (
@@ -67,7 +68,16 @@ const interviewQueryGenerator = (db) => {
 
 
   const getInterviewById = async (id) => {
+    const values = [id];
+    const queryString = `SELECT * FROM interviews WHERE interviews.id = $1;`;
 
+    try {
+      const result = await db.query(queryString, values);
+      const newOrganizationInfo = getFirstRecord(result);
+      return newOrganizationInfo;
+    } catch (err) {
+      console.log(err);
+    }
 
   };
 
