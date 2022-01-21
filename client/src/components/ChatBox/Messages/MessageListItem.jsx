@@ -19,6 +19,7 @@ const MessageListItem = (props) => {
   const [clicked, setClicked] = useState();
   const { currentUser, setMessageText, handleSubmit } = props;
   const appointment = {
+    id,
     application_id,
     start_time,
     end_time,

@@ -4,7 +4,8 @@ const router = express.Router();
 module.exports = (db) => {
   const queryGenerator = require("../db/queryHelpers");
   const interviewQueryGenerator = require("../db/queryHelpers/interview");
-  const { sendInterviewInvitation, responseToInterviewInvitation } = interviewQueryGenerator(db);
+  const { sendInterviewInvitation, responseToInterviewInvitation } =
+    interviewQueryGenerator(db);
   const { getMessagesByUserId, createNewMessage } = queryGenerator(db);
 
   //Get All Messages for users
@@ -47,8 +48,8 @@ module.exports = (db) => {
   });
 
   router.put("/interview", async (req, res) => {
-    const { user_id } = req.session;
     const {
+      id,
       application_id,
       start_time,
       end_time,
@@ -58,12 +59,12 @@ module.exports = (db) => {
 
     try {
       const data = await responseToInterviewInvitation(
-        start,
-        end,
-        user_id,
-        receiverId,
-        applicationId,
-        message
+        id,
+        application_id,
+        start_time,
+        end_time,
+        interviewer_id,
+        is_accepted
       );
       res.status(200).json(data);
     } catch (error) {
