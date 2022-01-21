@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
+import { io } from "socket.io-client";
 
-const useMessages = () => {
+const useMessages = (currentUser) => {
   const [receiverId, setReceiverId] = useState(null);
   const [messages, setMessages] = useState(null);
   const [senders, setSenders] = useState(null);
@@ -36,27 +37,6 @@ const useMessages = () => {
       });
     }
   }, [location.state]);
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const newMessage = {
-      sender_id: currentUser.id,
-      receiver_id: receiverId,
-      message: messageText,
-    };
-    axios.post("/api/messages/", newMessage).then((res) => {
-      console.log("data", res);
-      setMessages((prev) => [...prev, res.data.messageObj]);
-      setSenders((prev) => {
-        if (prev.some((el) => el.id === res.data.receiver.id)) {
-          return prev;
-        }
-        return [...prev, res.data.receiver];
-      });
-    });
-    //sending message to socket server
-    socket.emit("sendMessage", newMessage);
-    setMessageText("");
-  };
 
   useEffect(() => {
     // intialize socket
@@ -111,7 +91,18 @@ const useMessages = () => {
     setReceiverId(e.target.value);
   };
 
-  return { handleSubmit, messages, senders, setReceiverId };
+  return {
+    setMessageText,
+    messageText,
+    receiverId,
+    receiver,
+    handleOnClick,
+    setReceiver,
+    handleSubmit,
+    messages,
+    senders,
+    setReceiverId,
+  };
 };
 
 export default useMessages;

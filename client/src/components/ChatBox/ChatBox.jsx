@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef } from "react";
-
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import Divider from "@mui/material/Divider";
@@ -10,15 +9,21 @@ import SenderList from "./Sender/SenderList";
 import MessageList from "./Messages/MessageList";
 import MessageForm from "./MessageForm/MessageForm";
 import { Box } from "@mui/material";
-import { io } from "socket.io-client";
-import axios from "axios";
 import { Avatar, ListItemAvatar } from "@mui/material";
-import { useLocation } from "react-router-dom";
 import "./ChatBox.css";
 import useMessages from "../../hooks/useMessages";
 
 const ChatBox = ({ currentUser }) => {
-  const { handleSubmit, messages, senders, setReceiverId } = useMessages();
+  const { setMessageText,
+    messageText,
+    receiverId,
+    receiver,
+    handleOnClick,
+    setReceiver,
+    handleSubmit,
+    messages,
+    senders,
+    setReceiverId, } = useMessages(currentUser);
   return (
     <Grid container className="chat-box">
       <Grid item px={2} xs={3} component={Paper} variant="outlined">
