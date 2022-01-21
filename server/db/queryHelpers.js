@@ -353,7 +353,7 @@ const queryGenerator = (db) => {
   const getMessagesByUserId = async (user_id) => {
     const values = [user_id];
     const queryString = `
-    SELECT * FROM messages WHERE sender_id = $1 OR receiver_id = $1
+    SELECT * FROM messages WHERE sender_id = $1 OR receiver_id = $1 ORDER BY created_at
     `;
     try {
       const result = await db.query(queryString, values);
