@@ -12,15 +12,15 @@ const Stall = ({ currentUser }) => {
 
   return (
     <div class="stall">
-      <Button
+      {!inCall && < Button
         variant="contained"
         color="primary"
         onClick={() => setInCall(true)}
       >
         Join stall
-      </Button>
+      </Button>}
       {inCall ? <VideoCall setInCall={setInCall} {...{ config, useClient }} channelName={organizationId} username={currentUser.username} /> : "waiting to join call!"}
-    </div>
+    </div >
   );
 };
 
