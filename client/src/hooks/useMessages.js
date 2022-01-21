@@ -91,7 +91,9 @@ const useMessages = () => {
   };
 
   const numOfUnreadMsg = Array.isArray(messages)
-    ? messages.filter((message) => !message.is_read).length
+    ? messages.filter(
+        ({ is_read, receiver_id }) => !is_read && receiver_id === currentUser.id
+      ).length
     : 0;
 
   const messageState = {
