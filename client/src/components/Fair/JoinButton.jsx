@@ -21,7 +21,7 @@ const JoinButton = ({ live, added, upcoming, id, add }) => {
     axios.get(`/api/fairs/organizations/${id}`).then(({ data }) => {
       if (data.length > 0) setOptions(data.filter(({ added }) => added));
     });
-  }, []);
+  }, [id]);
 
   const joinLive = () => {
     navigate(`/live/${id}`);

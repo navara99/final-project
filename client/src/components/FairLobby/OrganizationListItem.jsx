@@ -5,8 +5,8 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { Link } from "react-router-dom";
 import CardMedia from "@mui/material/CardMedia";
+import { Link } from "react-router-dom";
 
 const OrganizationListItem = ({
   setExpanded,
@@ -14,8 +14,13 @@ const OrganizationListItem = ({
   website,
   industry,
   description,
+  fairId,
   name,
 }) => {
+  const clickHandler = (e) => {
+    e.stopPropagation();
+  };
+
   return (
     <Box onClick={setExpanded}>
       <Card variant="outlined" className="not-expanded">
@@ -30,9 +35,11 @@ const OrganizationListItem = ({
               {name}
             </Typography>
             <CardActions>
-              <Button size="small" variant="outlined">
-                Join this stall
-              </Button>
+              <Link to={`/live/${fairId}/${id}`}>
+                <Button size="small" onClick={clickHandler} variant="outlined">
+                  Join this stall
+                </Button>
+              </Link>
             </CardActions>
           </div>
         </CardContent>

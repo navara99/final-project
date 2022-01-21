@@ -7,19 +7,8 @@ import CardMedia from "@mui/material/CardMedia";
 import { formatStartEndTime, formatDate } from "../../helpers/date";
 import { Badge } from "@mui/material";
 
-const Header = ({ id, fair, added, currentUser, add, updateFairDetails }) => {
-  const {
-    name,
-    description,
-    poster,
-    host_id,
-    host_name,
-    host_description,
-    start_time,
-    end_time,
-    live,
-    upcoming,
-  } = fair;
+const Header = ({ fair }) => {
+  const { name, description, poster, start_time, end_time, live } = fair;
 
   return (
     <>

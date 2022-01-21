@@ -11,12 +11,17 @@ const FairLobby = ({ currentUser }) => {
 
   return (
     <div className="live">
-      {fair && stalls && (
+      {fair && fair.live && stalls && (
         <>
-          <Header {...{ fair, added, currentUser, add, id, updateFairDetails }} />
+          <Header
+            {...{ fair, added, currentUser, add, id, updateFairDetails }}
+          />
           <h3>Stalls ({stalls.length})</h3>
-          <OrganizationList stalls={stalls} />
+          <OrganizationList stalls={stalls} fairId={id} />
         </>
+      )}
+      {fair && !fair.live && (
+        <>The career fair "{fair.name}" is not live at the moment.</>
       )}
     </div>
   );
