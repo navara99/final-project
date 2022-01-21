@@ -65,7 +65,13 @@ const interviewQueryGenerator = (db) => {
     }
   };
 
-  return { sendInterviewInvitation, responseToInterviewInvitation };
+
+  const getInterviewById = async (id) => {
+
+
+  };
+
+  return { sendInterviewInvitation, responseToInterviewInvitation, getInterviewById };
 };
 
 module.exports = interviewQueryGenerator;
