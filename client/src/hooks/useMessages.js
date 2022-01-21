@@ -42,15 +42,6 @@ const useMessages = (currentUser) => {
     // intialize socket
     const socket = io.connect("http://localhost:8080");
     socket.on("getMessage", (data) => {
-      console.log("data", data);
-      setIncomingMessage({
-        receiver_id: data.receiver_id,
-        sender_id: data.sender_id,
-        message: data.message,
-        created_at: new Date().toISOString(),
-      });
-    });
-    //   console.log("Intializing socket")
     setSocket(socket);
   }, []);
 
@@ -73,7 +64,6 @@ const useMessages = (currentUser) => {
       message,
     };
     axios.post("/api/messages/", newMessage).then((res) => {
-      console.log("data", res);
       setMessages((prev) => [...prev, res.data.messageObj]);
       setSenders((prev) => {
         if (prev.some((el) => el.id === res.data.receiver.id)) {
