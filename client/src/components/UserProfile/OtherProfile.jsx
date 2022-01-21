@@ -2,7 +2,6 @@ import { Avatar, Grid, Stack, Typography, Box, Badge, Divider, ListItemText , Li
 import { styled } from '@mui/material/styles';
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import useMyGroups from '../../hooks/useMyGroups';
 import useOtherUserProfile from '../../hooks/useOtherUserProfile';
 
 const ProfilePic = styled(Avatar)(({ theme }) => ({
@@ -11,11 +10,13 @@ const ProfilePic = styled(Avatar)(({ theme }) => ({
   border: `2px solid ${theme.palette.background.paper}`,
 }));
 
-const OtherProfile = () => {
-  const {id} = useParams()
-  const [otherUser, setOtherUser] = useOtherUserProfile(id)
+const OtherProfile = ({currentUser}) => {
+  const {user_id} = useParams();
+  // const {myGroups} = useMyGroups();
+  const [otherUser, setOtherUser] = useOtherUserProfile(user_id)
   const [openResume, setOpenResume] = useState(false);
   console.log("otherUser", otherUser);
+  
   return ( <>{
    otherUser &&
     (
@@ -27,7 +28,7 @@ const OtherProfile = () => {
               overlap="circular"
               anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
               badgeContent={
-                <ProfilePic alt={currentUser.first_name} src={currentUser.profile_picture} />
+                <ProfilePic alt={other.first_name} src={otherUser.profile_picture} />
               }
             >
             <Box component="span" sx={{height:150, width:500}}/>
@@ -35,13 +36,13 @@ const OtherProfile = () => {
           </Box>
           <Box sx={{pt:6,px:3,display:"flex", justifyContent:"space-between"}}>
             <Box sx={{ display:'flex'}}>
-              <Typography variant='h4' sx={{}}>{`${currentUser.first_name} ${currentUser.last_name}`}</Typography>
-              <Typography variant='body1' sx={{ pl:1, pt:1.5}}>{`( ${currentUser.username} )`}</Typography>
+              <Typography variant='h4' sx={{}}>{`${otherUser.first_name} ${otherUser.last_name}`}</Typography>
+              <Typography variant='body1' sx={{ pl:1, pt:1.5}}>{`( ${otherUser.username} )`}</Typography>
             </Box>
             <Box sx={{mr:8, pr:3, display:'flex'}}>
-              {myGroups && myGroups.length > 0 && (
+              {otherUser.user_organizations && otherUser.user_organizations.length > 0 ? (
                 <List>
-                  { myGroups.map((group,i) => (
+                  { otherUser.user_organizations.map((group,i) => (
                         <ListItem key={i}>
                           <ListItemAvatar >
                             <Avatar alt={`${group.name}`} src='https://assets.brand.microsites.netflix.io/assets/7dc497e2-4975-11ec-a9ce-066b49664af6_cm_1440w.jpg?v=1'></Avatar>
@@ -50,7 +51,7 @@ const OtherProfile = () => {
                           />
                         </ListItem>))
                   }
-                </List>)}
+                </List>): <Typography variant='body1' sx={{ pl:1, pt:1.5}}>Not associated with any organization</Typography>}
             </Box>
           </Box>
           <Box sx={{px:3}}>
