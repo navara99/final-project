@@ -1,6 +1,8 @@
 import React from "react";
 import SenderListItem from "./SenderListItem";
 import { List } from "@mui/material";
+import moment from "moment";
+
 const SenderList = ({
   messages,
   senders,
@@ -17,13 +19,24 @@ const SenderList = ({
                 message.sender_id === sender.id ||
                 message.receiver_id === sender.id
               ) {
-                return [message.message, message.created_at, message.sender_id, message.id];
+                return [
+                  message.message,
+                  message.created_at,
+                  message.sender_id,
+                  message.id,
+                ];
               }
               return lastMessage;
             },
             null
           );
-          return { ...sender, lastMsg, createdDate, lastUserId, msgId };
+          return {
+            ...sender,
+            lastMsg,
+            createdDate: moment(`${createdDate}`).fromNow(),
+            lastUserId,
+            msgId,
+          };
         })
         .sort((senderA, senderB) => senderB.msgId - senderA.msgId)
         .map((sender) => {

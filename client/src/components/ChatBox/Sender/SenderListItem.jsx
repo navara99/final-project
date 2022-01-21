@@ -22,6 +22,8 @@ const SenderListItem = ({
     setReceiver({ ...sender });
   };
 
+  const msgName = sender.id === lastUserId ? sender.first_name : "Me"
+
   console.log(lastMsg, createdDate, lastUserId);
   return (
     <>
@@ -39,7 +41,7 @@ const SenderListItem = ({
                 variant="body2"
                 color="text.secondary"
               >
-                {username}
+                {`${msgName}: ${lastMsg} (${createdDate})`}
               </Typography>
             </>
           }
