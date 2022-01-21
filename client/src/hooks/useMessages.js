@@ -3,6 +3,7 @@ import axios from "axios";
 import { useLocation } from "react-router-dom";
 import { io } from "socket.io-client";
 import useCurrentUser from "./useCurrentUser";
+import moment from "moment";
 
 const useMessages = () => {
   const [receiverId, setReceiverId] = useState(null);
@@ -21,6 +22,45 @@ const useMessages = () => {
       setSenders(res.data.contacts);
     });
   }, []);
+
+  useEffect(() => {
+    setSenders((prev) =>
+      prev
+        ? prev
+            .map((sender) => {
+              const numOfMsg = messages.filter(
+                (message) => message.sender_id === sender.id && !message.is_read
+              ).length;
+              const [lastMsg, createdDate, lastUserId, msgId] = messages.reduce(
+                (lastMessage, message) => {
+                  if (
+                    message.sender_id === sender.id ||
+                    message.receiver_id === sender.id
+                  ) {
+                    return [
+                      message.message,
+                      message.created_at,
+                      message.sender_id,
+                      message.id,
+                    ];
+                  }
+                  return lastMessage;
+                },
+                null
+              );
+              return {
+                ...sender,
+                lastMsg,
+                createdDate: moment(`${createdDate}`).fromNow(),
+                lastUserId,
+                msgId,
+                numOfMsg,
+              };
+            })
+            .sort((senderA, senderB) => senderB.msgId - senderA.msgId)
+        : prev
+    );
+  }, [messages]);
 
   useEffect(() => {
     if (location.state) {
@@ -108,7 +148,7 @@ const useMessages = () => {
     senders,
     setReceiverId,
     numOfUnreadMsg,
-    setMessages
+    setMessages,
   };
 
   return { currentUser, setCurrentUser, logout, messageState };
