@@ -4,6 +4,7 @@ import {
   DialogTitle,
   DialogContent,
 } from "@mui/material";
+import TimeAgo from "timeago-react";
 
 const JobDetailsDialog = ({ jobDetailsOpen, setJobDetailsOpen, job }) => {
   return (
