@@ -8,7 +8,7 @@ import "tippy.js/themes/light-border.css"
 import "tippy.js/themes/translucent.css"
 
 const Event = ({ event }) => {
-  const { start, end, title, isInterview, asJobSeeker, fairId, interviewId } = event;
+  const { start, end, title, isInterview, fairId, interviewId } = event;
   const LinkButton = () => {
     return isInterview ? (
       <Link to={`/interviews/${interviewId}`}>
