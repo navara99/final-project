@@ -14,7 +14,7 @@ const OrganizationListItem = ({ setExpanded, id, fairId, name, live }) => {
   };
 
   return (
-    <Box onClick={setExpanded} className="stall-list">
+    <Box onClick={setExpanded}>
       <Card variant="outlined" className="not-expanded">
         <CardMedia
           component="img"

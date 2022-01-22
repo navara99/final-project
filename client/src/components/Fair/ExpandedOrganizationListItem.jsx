@@ -29,7 +29,7 @@ const ExpandedOrganizationListItem = ({
   const [jobId, setJobId] = useState();
   const jobInfo = jobs.find((job) => job.id === jobId);
   return (
-    <Box onClick={setExpanded}>
+    <Box onClick={setExpanded} className="stall-list">
       <JobDetailsDialog
         {...{ jobDetailsOpen, setJobDetailsOpen, job: jobInfo }}
       />
