@@ -17,34 +17,36 @@ function PaperComponent(props) {
 function WhiteBoard({ openWhiteBoard, setOpenWhiteBoard }) {
 
   return (
-      <Dialog
-        open={openWhiteBoard}
-        PaperComponent={PaperComponent}
-        aria-labelledby="draggable-dialog-title"
-      >
-        <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
-          White Board
-        </DialogTitle>
-        <DialogContent>
-          <div style={{ width: 600, height: 550 }} id="wt-container"></div>
-          <Helmet async={false}>
-            <script>
-              {`var wt = new api.WhiteboardTeam('#wt-container', {
+    <Dialog
+      hideBackdrop={true}
+      open={openWhiteBoard}
+      PaperComponent={PaperComponent}
+      aria-labelledby="draggable-dialog-title"
+      maxWidth="lg"
+    >
+      <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
+        White Board
+      </DialogTitle>
+      <DialogContent>
+        <div style={{ width: 600, height: 550 }} id="wt-container"></div>
+        <Helmet async={false}>
+          <script>
+            {`var wt = new api.WhiteboardTeam('#wt-container', {
                   clientId: '${process.env.REACT_APP_CLIENT_ID}',
                   boardCode: 'tharsikantharsikan',
                   board: {
                   tool: "text",
                   bg: "None"
                   }})`}
-            </script>
-          </Helmet>
-        </DialogContent>
-        <DialogActions>
-          <Button autoFocus onClick={() => setOpenWhiteBoard(!openWhiteBoard)}>
-            Cancel
-          </Button>
-        </DialogActions>
-      </Dialog>
+          </script>
+        </Helmet>
+      </DialogContent>
+      <DialogActions>
+        <Button autoFocus onClick={() => setOpenWhiteBoard(!openWhiteBoard)}>
+          Cancel
+        </Button>
+      </DialogActions>
+    </Dialog>
   )
 }
 
