@@ -79,15 +79,26 @@
 
 .live ul {
   margin: 0;
+  padding: 0;
 }
 
 .live li {
   display: flex;
   justify-content: space-between;
-  margin: 0.5em 0;
+  padding: 0.5em 0;
   align-items: center;
+  border-top: 0.1em solid #111111;
+}
+
+.live .MuiTypography-root.MuiTypography-body1 {
+  margin: 0;
+}
+
+.live li:first-child {
+  border-top: none;
 }
 
 .live li button {
   margin: 0 0.3em;
+  padding: 0;
 }
