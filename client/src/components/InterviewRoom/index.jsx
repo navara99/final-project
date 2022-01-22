@@ -17,14 +17,18 @@ function InterviewRoom({ currentUser }) {
 
   return (
     <div className="interview-lobby">
-      {interview &&
+      {interview && !inCall &&
         <h3
           className="interview-lobby-title">
           Your interview for {interview.title} position at {interview.name} starts is at {formatStartEndTime(interview.start_time, interview.end_time)}.
           Please click join when you are ready.
         </h3>}
       {!inCall && < Button variant="contained" color="primary" onClick={() => setInCall(true)}>Join Interview</Button>}
-      {inCall && <VideoCall setInCall={setInCall} {...{ config, useClient, currentUser, channelName: `interview${id}` }} />}
+      {inCall &&
+        <>
+          <h3>Interview for {interview.title} position at {interview.name}</h3>
+          <VideoCall setInCall={setInCall} {...{ config, useClient, currentUser, channelName: `interview${id}` }} />
+        </>}
     </div>
   )
 }
