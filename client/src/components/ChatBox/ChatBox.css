@@ -4,6 +4,8 @@
 
 .chat-box .MuiBadge-anchorOriginTopRightRectangular {
   top: 2em;
+  z-index: 2;
+  right: 2em;
 }
 
 .chat-box .sender .MuiBadge-root {
@@ -33,4 +35,33 @@
 
 .chat-box .sender-text > *:nth-child(2) {
   flex: 1 0 auto;
+}
+
+.chat-box .MuiPaper-root a {
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.chat-box .sender.MuiPaper-root {
+  padding: 0;
+  overflow: auto;
+  max-height: 100%;
+}
+
+.chat-box .messages.MuiPaper-root {
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-box .default {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.chat-box .messages > ul {
+  flex: 1 1 auto;
+  overflow: auto;
 }

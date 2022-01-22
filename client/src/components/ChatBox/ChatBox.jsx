@@ -8,8 +8,9 @@ import SenderList from "./Sender/SenderList";
 import MessageList from "./Messages/MessageList";
 import MessageForm from "./MessageForm/MessageForm";
 import { Box } from "@mui/material";
-import { Avatar, ListItemAvatar } from "@mui/material";
+import { Avatar } from "@mui/material";
 import "./ChatBox.css";
+import { Link } from "react-router-dom";
 
 const ChatBox = ({ currentUser, messageState }) => {
   const {
@@ -24,20 +25,28 @@ const ChatBox = ({ currentUser, messageState }) => {
     senders,
     setReceiverId,
     setMessages,
+    socket,
   } = messageState;
 
   return (
     <Grid container className="chat-box">
-      <Grid item px={2} xs={3} component={Paper} variant="outlined">
-        <List className="sender">
-            <SenderList
-              messages={messages}
-              currentUser={currentUser}
-              senders={senders}
-              setReceiverId={setReceiverId}
-              handleOnClick={handleOnClick}
-              setReceiver={setReceiver}
-            />
+      <Grid
+        item
+        px={2}
+        xs={3}
+        component={Paper}
+        variant="outlined"
+        className="sender"
+      >
+        <List>
+          <SenderList
+            messages={messages}
+            currentUser={currentUser}
+            senders={senders}
+            setReceiverId={setReceiverId}
+            handleOnClick={handleOnClick}
+            setReceiver={setReceiver}
+          />
         </List>
       </Grid>
       {/* Chatter Box */}
@@ -47,6 +56,7 @@ const ChatBox = ({ currentUser, messageState }) => {
         sx={{ backgroundColor: "#eff2f6" }}
         component={Paper}
         variant="outlined"
+        className="messages"
       >
         {receiverId && currentUser ? (
           <>
@@ -56,9 +66,12 @@ const ChatBox = ({ currentUser, messageState }) => {
                 height: "50px",
                 backgroundColor: "#bdc7df",
                 display: "flex",
-                justifyContent: "center",
+                justifyContent: "flex-start",
                 alignItems: "center",
+                padding: "0.5em",
               }}
+              component={Link}
+              to={`/profile/${receiver.id}`}
             >
               <Avatar
                 alt={`${receiver.id}`}
@@ -85,6 +98,7 @@ const ChatBox = ({ currentUser, messageState }) => {
               setMessageText={setMessageText}
               handleSubmit={handleSubmit}
               setMessages={setMessages}
+              socket={socket}
             />
             <Divider />
             <MessageForm
@@ -95,9 +109,9 @@ const ChatBox = ({ currentUser, messageState }) => {
             />
           </>
         ) : (
-          <>
-            <Typography variant="h3">Welcome to messages page</Typography>
-          </>
+          <div className="default">
+            <h4>Click contact to view messages</h4>
+          </div>
         )}
       </Grid>
     </Grid>
