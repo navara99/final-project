@@ -7,7 +7,7 @@ import useVideo from "../../hooks/useVideo";
 const useMicrophoneAndCameraTracks = createMicrophoneAndCameraTracks();
 
 export default function VideoCall(props) {
-  const { setInCall, config, useClient, username, channelName } = props;
+  const { config, useClient, username, channelName, organizationDetails, setInCall } = props;
   const client = useClient();
   const { ready, tracks } = useMicrophoneAndCameraTracks();
   const { users, start, setStart } = useVideo(ready, tracks, config, channelName, client, username);
@@ -15,7 +15,9 @@ export default function VideoCall(props) {
   return (
     <Grid container direction="column" style={{ height: "100%" }}>
       <Grid item style={{ height: "95%" }}>
-        {start && tracks && <Video ready={ready} tracks={tracks} setStart={setStart} setInCall={setInCall} users={users} username={username} {...{ useClient }} />}
+        {start && tracks && <Video
+          {...{ useClient, username, users, setStart, ready, tracks, organizationDetails, setInCall }}
+        />}
       </Grid>
     </Grid>
   );
