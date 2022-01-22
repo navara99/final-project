@@ -44,7 +44,7 @@ module.exports = (db) => {
     const { id } = req.params;
     console.log("==================================")
     try {
-      const jobs = await getAllJobsByOrganizationId(id);
+      const jobs = await getAllJobsByOrganizationId(id, true);
       console.log(jobs);
       res.json(jobs);
     } catch (err) {
