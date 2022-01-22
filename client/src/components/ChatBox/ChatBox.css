@@ -4,6 +4,8 @@
 
 .chat-box .MuiBadge-anchorOriginTopRightRectangular {
   top: 2em;
+  z-index: 2;
+  right: 2em;
 }
 
 .chat-box .sender .MuiBadge-root {
