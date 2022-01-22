@@ -45,7 +45,7 @@
 * Organization page can see fair hosted and participated fairs 
 * Fair created by organization then it add to organization table (Siu)
 * My organization design (Yagnesh)
-
+* show the fair that the organization is going to participate (not just the one that it host)
 
 
 

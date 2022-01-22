@@ -351,6 +351,14 @@ const queryGenerator = (db) => {
     try {
       const result = await db.query(queryString, values);
       const newFair = getFirstRecord(result);
+
+      const values2 = [hostId, newFair.id];
+      const queryString2 = `
+        INSERT INTO fairs_organizations (organization_id, fair_id)
+        VALUES ($1, $2, $3, $4, $5)
+        RETURNING *;
+      `;
+      await db.query(queryString2, values2);
       return newFair;
     } catch (err) {
       console.log(err.message);
