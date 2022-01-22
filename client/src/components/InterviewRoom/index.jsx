@@ -11,7 +11,7 @@ function InterviewRoom({ currentUser }) {
   const { id } = useParams();
   const [interview] = useInterview(id);
   const [inCall, setInCall] = useState();
-  const { config, useClient } = useChannel(id, currentUser ? currentUser : "");
+  const { config, useClient } = useChannel(`interview${id}`, currentUser ? currentUser : "");
   console.log(interview);
 
 
@@ -20,11 +20,11 @@ function InterviewRoom({ currentUser }) {
       {interview &&
         <h3
           className="interview-lobby-title">
-          Your interview for {interview.title} position at {interview.name} starts is at {formatStartEndTime(interview.start_time, interview.end_time)}. 
+          Your interview for {interview.title} position at {interview.name} starts is at {formatStartEndTime(interview.start_time, interview.end_time)}.
           Please click join when you are ready.
         </h3>}
       {!inCall && < Button variant="contained" color="primary" onClick={() => setInCall(true)}>Join Interview</Button>}
-      {inCall && <VideoCall setInCall={setInCall} {...{ config, useClient, currentUser }} />}
+      {inCall && <VideoCall setInCall={setInCall} {...{ config, useClient, currentUser, channelName: `interview${id}` }} />}
     </div>
   )
 }
