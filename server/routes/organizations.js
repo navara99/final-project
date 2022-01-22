@@ -45,7 +45,6 @@ module.exports = (db) => {
 
     try {
       const jobs = await getAllJobsByOrganizationId(id);
-
       res.json(jobs);
     } catch (err) {
       console.log(err.message);
