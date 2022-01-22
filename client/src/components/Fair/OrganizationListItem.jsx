@@ -8,12 +8,7 @@ import Typography from "@mui/material/Typography";
 import CardMedia from "@mui/material/CardMedia";
 import { Link } from "react-router-dom";
 
-const OrganizationListItem = ({
-  setExpanded,
-  id,
-  fairId,
-  name,
-}) => {
+const OrganizationListItem = ({ setExpanded, id, fairId, name, live }) => {
   const clickHandler = (e) => {
     e.stopPropagation();
   };
@@ -31,13 +26,19 @@ const OrganizationListItem = ({
             <Typography variant="h5" component="div">
               {name}
             </Typography>
-            <CardActions>
-              <Link to={`/live/${fairId}/${id}`} target="_blank">
-                <Button size="small" onClick={clickHandler} variant="outlined">
-                  Join this stall
-                </Button>
-              </Link>
-            </CardActions>
+            {live && (
+              <CardActions>
+                <Link to={`/live/${fairId}/${id}`} target="_blank">
+                  <Button
+                    size="small"
+                    onClick={clickHandler}
+                    variant="outlined"
+                  >
+                    Join this stall
+                  </Button>
+                </Link>
+              </CardActions>
+            )}
           </div>
         </CardContent>
       </Card>

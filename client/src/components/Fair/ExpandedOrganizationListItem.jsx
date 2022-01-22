@@ -21,6 +21,7 @@ const ExpandedOrganizationListItem = ({
   name,
   fairId,
   setSnackBarDetails,
+  live,
 }) => {
   const jobs = useOrganizationJobs(id);
   const [jobDetailsOpen, setJobDetailsOpen] = useState(false);
@@ -80,11 +81,13 @@ const ExpandedOrganizationListItem = ({
                 >
                   Details
                 </Button>
-                <Link to={`/live/${fairId}/${id}`} target="_blank">
-                  <Button size="small" variant="outlined">
-                    Join this stall
-                  </Button>
-                </Link>
+                {live && (
+                  <Link to={`/live/${fairId}/${id}`} target="_blank">
+                    <Button size="small" variant="outlined">
+                      Join this stall
+                    </Button>
+                  </Link>
+                )}
               </CardActions>
             </div>
           </div>

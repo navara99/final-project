@@ -27,6 +27,7 @@ const Fair = ({ currentUser, setSnackBarDetails }) => {
             stalls={stalls}
             fairId={id}
             setSnackBarDetails={setSnackBarDetails}
+            live={fair.live}
           />
         </>
       )}
