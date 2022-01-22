@@ -20,7 +20,7 @@ const ExpandedOrganizationListItem = ({
   description,
   name,
   fairId,
-  setSnackBarDetails
+  setSnackBarDetails,
 }) => {
   const jobs = useOrganizationJobs(id);
   const [jobDetailsOpen, setJobDetailsOpen] = useState(false);
@@ -94,9 +94,7 @@ const ExpandedOrganizationListItem = ({
             Job vacancies ({jobs.length})
           </Typography>
           <JobList
-            jobs={jobs}
-            setJobId={setJobId}
-            setJobDetailsOpen={setJobDetailsOpen}
+            {...{ jobs, setJobId, setJobDetailsOpen, setOpenApplicationForm }}
           />
         </CardContent>
       </Card>

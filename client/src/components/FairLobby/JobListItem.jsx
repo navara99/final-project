@@ -1,10 +1,20 @@
 import React from "react";
 import Button from "@mui/material/Button";
 
-const JobListItem = ({ job, setJobDetailsOpen, setJobId }) => {
+const JobListItem = ({
+  job,
+  setJobDetailsOpen,
+  setJobId,
+  setOpenApplicationForm,
+}) => {
   const clickHandler = () => {
     setJobId(job.id);
     setJobDetailsOpen(true);
+  };
+
+  const clickHandlerApplication = () => {
+    setOpenApplicationForm(true);
+    setJobId(job.id);
   };
   return (
     <li key={job.id}>
@@ -20,7 +30,7 @@ const JobListItem = ({ job, setJobDetailsOpen, setJobId }) => {
         </Button>
         <Button
           size="small"
-          onClick={clickHandler}
+          onClick={clickHandlerApplication}
           variant="outlined"
           color="warning"
         >
