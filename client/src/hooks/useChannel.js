@@ -12,18 +12,18 @@ import axios from "axios";
 
 const appId = "7fbb0d7a140c49ddb9a80357e303fb88";
 
-export default function useVideoSettings(name, currentUser) {
+export default function useVideoSettings(name, username) {
   const [token, setToken] = useState();
 
   useEffect(() => {
 
-    if (currentUser) {
-      axios.get(`/api/token?channelName=${name}&uid=${currentUser.username}`).then(({ data }) => {
+    if (username) {
+      axios.get(`/api/token?channelName=${name}&uid=${username}`).then(({ data }) => {
         setToken(data.token);
       });
     }
 
-  }, [currentUser]);
+  }, [username]);
 
   const config = { mode: "rtc", codec: "vp8", appId, token };
   const useClient = createClient(config);
