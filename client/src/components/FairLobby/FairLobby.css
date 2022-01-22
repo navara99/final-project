@@ -80,3 +80,8 @@
 .live ul {
   margin: 0;
 }
+
+.live li {
+  display: flex;
+  justify-content: space-between;
+}
