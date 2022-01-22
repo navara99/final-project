@@ -355,7 +355,7 @@ const queryGenerator = (db) => {
       const values2 = [hostId, newFair.id];
       const queryString2 = `
         INSERT INTO fairs_organizations (organization_id, fair_id)
-        VALUES ($1, $2, $3, $4, $5)
+        VALUES ($1, $2)
         RETURNING *;
       `;
       await db.query(queryString2, values2);
