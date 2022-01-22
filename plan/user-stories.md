@@ -36,7 +36,6 @@
 
 ### To do
 
-* Fix the style for messsage (siu)
 * Display job on stall (siu)
 * Search for user (Yagnesh)
 * Need picture field for organizations and fair (Yagnesh)

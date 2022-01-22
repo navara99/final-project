@@ -8,10 +8,10 @@ function JobsList({ jobs, isMember, setSnackBarDetails }) {
   const renderJobs = () => {
     return jobs.map((job, i) => {
       return (
-        <>
+        <div key={job.id}>
           <JobListItem {...{ job }} {...{ isMember }}  {...{ setSnackBarDetails }} key={job.id} />
           {i === jobs.length - 1 ? "" : < Divider />}
-        </>
+        </div>
       )
     });
   };

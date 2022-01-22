@@ -6,7 +6,7 @@ import Register from "./components/Register";
 import ErrorModal from "./components/ErrorModal";
 import Home from "./components/Home";
 import { Routes, Route } from "react-router-dom";
-import Stall from "./components/Stall"
+import Stall from "./components/Stall";
 import Groups from "./components/Groups/index";
 import { Snackbar, Alert } from "@mui/material";
 import Fair from "./components/Fair";
@@ -30,7 +30,7 @@ function App() {
     message: "",
   });
   const { currentUser, setCurrentUser, logout, messageState } = useMessages();
-
+  const { setMessages, setSenders, socket, numOfUnreadMsg } = messageState;
   const handleSnackBarClose = () => {
     setSnackBarDetails({ open: false, message: "" });
   };
@@ -47,7 +47,13 @@ function App() {
           {snackBarDetails.message}
         </Alert>
       </Snackbar>
-      <Navbar {...{ currentUser, logout, numOfUnreadMsg: messageState.numOfUnreadMsg }} />
+      <Navbar
+        {...{
+          currentUser,
+          logout,
+          numOfUnreadMsg,
+        }}
+      />
       <ErrorModal {...{ errorMessage, showError, setShowError }} />
       <div className="main-container">
         <Routes>
@@ -86,12 +92,33 @@ function App() {
           />
           <Route path="/jobs" element={<Jobs />} />
           <Route path="/schedule" element={<Schedule />} />
-          <Route path="/profile" element={<UserProfile currentUser={currentUser} />} />
-          <Route path="/profile/:user_id" element={<OtherProfile currentUser={currentUser} />} />
-          <Route path="/settings" element={<ProfileSetting {...{ setCurrentUser, currentUser, setErrorMessage, setShowError, setSnackBarDetails }} />} />
+          <Route
+            path="/profile"
+            element={<UserProfile currentUser={currentUser} />}
+          />
+          <Route
+            path="/profile/:user_id"
+            element={<OtherProfile currentUser={currentUser} />}
+          />
+          <Route
+            path="/settings"
+            element={
+              <ProfileSetting
+                {...{
+                  setCurrentUser,
+                  currentUser,
+                  setErrorMessage,
+                  setShowError,
+                  setSnackBarDetails,
+                }}
+              />
+            }
+          />
           <Route
             path="/messages"
-            element={<ChatBox currentUser={currentUser} messageState={messageState} />}
+            element={
+              <ChatBox currentUser={currentUser} messageState={messageState} />
+            }
           />
           <Route
             path="/live/:fairId/:organizationId"
@@ -103,6 +130,7 @@ function App() {
               <JobApplications
                 setSnackBarDetails={setSnackBarDetails}
                 currentUser={currentUser}
+                {...{ setMessages, setSenders, socket }}
               />
             }
           />

@@ -84,12 +84,16 @@ const useMessages = () => {
     // intialize socket
     const socket = io.connect("http://localhost:8080");
     socket.on("getMessage", (data) => {
-      setIncomingMessage({
-        receiver_id: data.receiver_id,
-        sender_id: data.sender_id,
-        message: data.message,
-        created_at: new Date().toISOString(),
-      });
+      setIncomingMessage({ ...data, created_at: new Date().toISOString() });
+    });
+
+    socket.on("editMessage", (data) => {
+      setMessages((prev) =>
+        prev.map((msg) => {
+          if (msg.id !== data.id) return msg;
+          return data;
+        })
+      );
     });
     setSocket(socket);
   }, []);
@@ -149,6 +153,8 @@ const useMessages = () => {
     setReceiverId,
     numOfUnreadMsg,
     setMessages,
+    setSenders,
+    socket,
   };
 
   return { currentUser, setCurrentUser, logout, messageState };

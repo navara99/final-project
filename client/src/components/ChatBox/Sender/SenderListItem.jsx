@@ -43,10 +43,10 @@ const SenderListItem = ({
             <ListItemText
               primary={`${first_name} ${last_name}`}
               secondary={
-                <div className="sender-text">
-                  <div>{`${msgName}: ${lastMsg}`}</div>
-                  <div className="created-date">{createdDate}</div>
-                </div>
+                <span className="sender-text">
+                  <span>{`${msgName}: ${lastMsg}`}</span>
+                  <span className="created-date">{createdDate}</span>
+                </span>
               }
             />
           </ListItemButton>

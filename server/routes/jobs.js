@@ -42,9 +42,8 @@ module.exports = (db) => {
   });
 
 
-  router.get("/:search?", async (req, res) => {
-    const { search } = req.params;
-
+  router.get("/", async (req, res) => {
+    const { search } = req.query;
     try {
       const jobs = await getJobsBySearch(search);
       res.json(jobs);

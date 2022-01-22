@@ -12,8 +12,8 @@ const Jobs = ({ setSnackBarDetails }) => {
   const [jobs, setJobs] = useJobs();
 
   const handleSearch = (e) => {
-    const search = e.target.value;
-    axios.get(`/api/jobs/${search}`).then(({ data }) => {
+    const term = e.target.value;
+    axios.get(`/api/jobs/?search=${term}`).then(({ data }) => {
       setJobs(data);
     });
 

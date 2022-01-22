@@ -70,7 +70,7 @@ const OtherProfile = ({currentUser}) => {
 
           <Box sx={{px:3}}>
             <Typography variant='h6'>About</Typography>
-            <Typography variant='body1' sx={{pt:1}}>{currentUser.bio}</Typography>
+            <Typography variant='body1' sx={{pt:1}}>{otherUser.bio}</Typography>
           </Box>
       </Stack>
     </Grid>)

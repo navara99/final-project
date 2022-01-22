@@ -21,6 +21,7 @@ function OrganizationMembers({ organization, cardStyles, setSnackBarDetails, set
   return (
     <div>
       <AddMemberForm
+        {...{ organization}}
         {...{ openAddMembersModal }}
         {...{ setOpenAddMembersModal }}
         {...{ id }}

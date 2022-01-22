@@ -16,7 +16,7 @@ const MessageListItem = (props) => {
     end_time,
   } = props.message;
   const [clicked, setClicked] = useState();
-  const { currentUser, handleSubmit } = props;
+  const { currentUser, handleSubmit, setMessages, socket } = props;
   const appointment = {
     id,
     application_id,
@@ -29,6 +29,15 @@ const MessageListItem = (props) => {
     axios
       .put("/api/messages/interview", { ...appointment, is_accepted: true })
       .then((res) => {
+        const { data } = res;
+        setMessages((prev) =>
+          prev.map((msg) => {
+            if (msg.id !== data.id) return msg;
+            return data;
+          })
+        );
+        console.log(data);
+        socket.emit("editMessage", data);
         setClicked(true);
         handleSubmit(e, "Invitation is accepted.");
       });
@@ -38,6 +47,15 @@ const MessageListItem = (props) => {
     axios
       .put("/api/messages/interview", { ...appointment, is_accepted: false })
       .then((res) => {
+        const { data } = res;
+        setMessages((prev) =>
+          prev.map((msg) => {
+            if (msg.id !== data.id) return msg;
+            return data;
+          })
+        );
+        console.log(data);
+        socket.emit("editMessage", data);
         setClicked(true);
         handleSubmit(e, "Invitation is rejected :(");
       });
