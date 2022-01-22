@@ -9,7 +9,7 @@ import OrganizationList from "./OrganizationList";
 const Fair = ({ currentUser, setSnackBarDetails }) => {
   let { id } = useParams();
   const { fair, stalls, added, add, updateFairDetails } = useFairDetails(id);
-  const title = stalls && fair.live ? "Stalls" : "Employers"
+  const title = stalls && fair.live ? "Stalls" : "Employers";
   return (
     <div className="live">
       {fair && fair.live && (
@@ -18,11 +18,23 @@ const Fair = ({ currentUser, setSnackBarDetails }) => {
         />
       )}
       {fair && !fair.live && (
-        <Header {...{ fair, added, currentUser, add, id, updateFairDetails }} />
+        <Header
+          {...{
+            fair,
+            added,
+            currentUser,
+            add,
+            id,
+            updateFairDetails,
+            setSnackBarDetails,
+          }}
+        />
       )}
       {stalls && (
         <>
-          <h3>{title} ({stalls.length})</h3>
+          <h3>
+            {title} ({stalls.length})
+          </h3>
           <OrganizationList
             stalls={stalls}
             fairId={id}

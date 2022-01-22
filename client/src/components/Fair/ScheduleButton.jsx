@@ -10,7 +10,14 @@ import MenuItem from "@mui/material/MenuItem";
 import MenuList from "@mui/material/MenuList";
 import axios from "axios";
 
-const ScheduleButton = ({ added, upcoming, id, add, updateFairDetails }) => {
+const ScheduleButton = ({
+  added,
+  upcoming,
+  id,
+  add,
+  updateFairDetails,
+  setSnackBarDetails,
+}) => {
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
   const [options, setOptions] = useState();
@@ -24,6 +31,10 @@ const ScheduleButton = ({ added, upcoming, id, add, updateFairDetails }) => {
   const joinAsJobSeeker = () => {
     axios.post(`/api/fairs/join/${id}`).then(() => {
       add();
+      setSnackBarDetails({
+        open: true,
+        message: "Career fair is added to schedule.",
+      });
     });
   };
 
@@ -35,6 +46,10 @@ const ScheduleButton = ({ added, upcoming, id, add, updateFairDetails }) => {
           const newState = [...prev];
           newState[index] = { ...newState[index], added: true };
           return newState;
+        });
+        setSnackBarDetails({
+          open: true,
+          message: `Career fair is added to schedule for ${options[index].name}.`,
         });
         updateFairDetails();
       });
