@@ -13,7 +13,7 @@ import axios from "axios";
 import useInput from "../../hooks/useInput";
 import { useState } from "react";
 
-function JobApplicationForm({ job, openApplicationForm, setOpenApplicationForm, setSnackBarDetails }) {
+function JobApplicationForm({ job, openApplicationForm, setOpenApplicationForm, setSnackBarDetails, setApplied }) {
   const [message, setMessage] = useInput();
   const [resume, setResume] = useState();
   const [showResumeInput, setResumeInput] = useState(false);
@@ -33,6 +33,7 @@ function JobApplicationForm({ job, openApplicationForm, setOpenApplicationForm, 
           "Content-Type": "multipart/formdata"
         }
       });
+      setApplied(true);
       setOpenApplicationForm(!openApplicationForm);
       setSnackBarDetails({
         open: true,
