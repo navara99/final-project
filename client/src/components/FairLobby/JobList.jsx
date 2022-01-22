@@ -1,10 +1,13 @@
 import React from "react";
 
-const JobList = ({ jobs }) => {
+const JobList = ({ jobs, setJobId }) => {
+  console.log(jobs);
   return (
     <ul>
       {jobs.map((job) => (
-        <li key={job.id}>{job.title}</li>
+        <li key={job.id} onClick={() => setJobId(job.id)}>
+          {/* {job.title} */}
+        </li>
       ))}
     </ul>
   );

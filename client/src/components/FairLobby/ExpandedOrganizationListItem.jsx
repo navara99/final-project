@@ -25,7 +25,7 @@ const ExpandedOrganizationListItem = ({
   const jobInfo = jobs.find(job => job.id === jobId);
   return (
     <Box onClick={setExpanded}>
-      <JobDetailsDialog {...{ jobDetailsOpen, setJobDetailsOpen, job={jobInfo} }} />
+      <JobDetailsDialog {...{ jobDetailsOpen, setJobDetailsOpen, job: jobInfo }} />
       <Card variant="outlined">
         <CardMedia
           component="img"

@@ -4,7 +4,7 @@ import ExpandedOrganizationListItem from "./ExpandedOrganizationListItem";
 
 const OrganizationList = ({ stalls, fairId }) => {
   const [expand, setExpanded] = useState();
-  
+
   const elm = stalls.map((stall) => {
     const { id } = stall;
     if (expand === id) {
