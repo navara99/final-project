@@ -72,11 +72,7 @@ const ExpandedOrganizationListItem = ({
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
             Job vacancies ({jobs.length})
           </Typography>
-          <ul>
-            {jobs.map((job) => (
-              <li key={job.id}>{job.title}</li>
-            ))}
-          </ul>
+          <JobList jobs={jobs} />
         </CardContent>
       </Card>
     </Box>
