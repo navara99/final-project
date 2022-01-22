@@ -27,7 +27,7 @@ function InterviewRoom({ currentUser }) {
       {!inCall && < Button variant="contained" color="primary" onClick={() => setInCall(true)}>Join Interview</Button>}
       {inCall &&
         <>
-          <WhiteBoard {...{ openWhiteBoard, setOpenWhiteBoard}} />
+          <WhiteBoard {...{ openWhiteBoard, setOpenWhiteBoard, boardCode: `interview${id}-${interview.start_time}` }} />
           <div className="interview-head">
             <h3>Interview for {interview.title} position at {interview.name}</h3>
             <Button variant="contained" onClick={() => setOpenWhiteBoard(!openWhiteBoard)} >White Board</Button>

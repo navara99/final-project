@@ -14,7 +14,7 @@ function PaperComponent(props) {
   );
 }
 
-function WhiteBoard({ openWhiteBoard, setOpenWhiteBoard }) {
+function WhiteBoard({ openWhiteBoard, setOpenWhiteBoard, boardCode }) {
 
   return (
     <Dialog
@@ -33,7 +33,7 @@ function WhiteBoard({ openWhiteBoard, setOpenWhiteBoard }) {
           <script>
             {`var wt = new api.WhiteboardTeam('#wt-container', {
                   clientId: '${process.env.REACT_APP_CLIENT_ID}',
-                  boardCode: 'tharsikantharsikan',
+                  boardCode: '${boardCode}',
                   board: {
                   tool: "text",
                   bg: "None"
