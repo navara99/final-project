@@ -27,7 +27,7 @@ function InterviewRoom({ currentUser }) {
       {inCall &&
         <>
           <h3>Interview for {interview.title} position at {interview.name}</h3>
-          <VideoCall setInCall={setInCall} {...{ config, useClient, currentUser, channelName: `interview${id}` }} />
+          <VideoCall setInCall={setInCall} {...{ config, useClient, currentUser, channelName: `interview${id}`, interview }} />
         </>}
     </div>
   )
