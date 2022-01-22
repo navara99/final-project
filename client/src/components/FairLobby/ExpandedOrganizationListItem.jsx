@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import useOrganizationJobs from "../../hooks/useOrganizationJobs";
 import JobList from "./JobList";
 import JobDetailsDialog from "./JobDetailsDialog";
+import JobApplicationForm from "../Groups/JobApplicationForm";
 
 const ExpandedOrganizationListItem = ({
   setExpanded,
@@ -19,15 +20,25 @@ const ExpandedOrganizationListItem = ({
   description,
   name,
   fairId,
+  setSnackBarDetails
 }) => {
   const jobs = useOrganizationJobs(id);
   const [jobDetailsOpen, setJobDetailsOpen] = useState(false);
+  const [openApplicationForm, setOpenApplicationForm] = useState(false);
   const [jobId, setJobId] = useState();
   const jobInfo = jobs.find((job) => job.id === jobId);
   return (
     <Box onClick={setExpanded}>
       <JobDetailsDialog
         {...{ jobDetailsOpen, setJobDetailsOpen, job: jobInfo }}
+      />
+      <JobApplicationForm
+        {...{
+          openApplicationForm,
+          setOpenApplicationForm,
+          setSnackBarDetails,
+          job: jobInfo,
+        }}
       />
       <Card variant="outlined">
         <CardMedia

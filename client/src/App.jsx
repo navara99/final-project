@@ -135,7 +135,12 @@ function App() {
           />
           <Route
             path="/live/:id"
-            element={<FairLobby currentUser={currentUser} />}
+            element={
+              <FairLobby
+                currentUser={currentUser}
+                setSnackBarDetails={setSnackBarDetails}
+              />
+            }
           />
           <Route
             path="/fairs/:id"

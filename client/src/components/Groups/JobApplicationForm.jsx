@@ -57,7 +57,7 @@ function JobApplicationForm({ job, openApplicationForm, setOpenApplicationForm, 
   return (
     <Dialog open={openApplicationForm} fullWidth maxWidth="md" >
       <form onSubmit={handleApplicationSubmissions} >
-        <DialogTitle>Apply To Posting: {job.title}</DialogTitle>
+        <DialogTitle>Apply To Posting: {job && job.title}</DialogTitle>
         <DialogContent>
           <div >
             <FormControlLabel control={<Switch defaultChecked onChange={handleResumeToggle} />} label={"Use resume from profile"} />

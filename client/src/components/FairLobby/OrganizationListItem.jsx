@@ -11,9 +11,6 @@ import { Link } from "react-router-dom";
 const OrganizationListItem = ({
   setExpanded,
   id,
-  website,
-  industry,
-  description,
   fairId,
   name,
 }) => {

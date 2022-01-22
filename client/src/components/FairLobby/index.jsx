@@ -5,7 +5,7 @@ import Header from "./Header";
 import "./FairLobby.css";
 import OrganizationList from "./OrganizationList";
 
-const FairLobby = ({ currentUser }) => {
+const FairLobby = ({ currentUser, setSnackBarDetails }) => {
   let { id } = useParams();
   const { fair, stalls, added, add, updateFairDetails } = useFairDetails(id);
 
@@ -17,7 +17,11 @@ const FairLobby = ({ currentUser }) => {
             {...{ fair, added, currentUser, add, id, updateFairDetails }}
           />
           <h3>Stalls ({stalls.length})</h3>
-          <OrganizationList stalls={stalls} fairId={id} />
+          <OrganizationList
+            stalls={stalls}
+            fairId={id}
+            setSnackBarDetails={setSnackBarDetails}
+          />
         </>
       )}
       {fair && !fair.live && (
