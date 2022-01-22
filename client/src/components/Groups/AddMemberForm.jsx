@@ -68,20 +68,6 @@ const AddMemberForm = ({ openAddMembersModal, setOpenAddMembersModal, id, setSna
   };
 
   const generateUsersList = () => {
-        if(organization){
-          console.log("organization", organization);
-        }
-    // return allUsers.map(({ id, first_name, last_name, username }, i) => {
-    //   return (
-    //     <ListItem key={id}>
-    //       <ListItemText>
-    //         {`${first_name} ${last_name} (${username})`}
-    //       </ListItemText>
-    //       <Checkbox color="primary" onChange={() => toggleCheckBox(i)} />
-    //     </ListItem>
-    //   )
-    // });
-
     return users.map(({ id, first_name, last_name, username }, i) => {
       return (
         <ListItem key={id}>
