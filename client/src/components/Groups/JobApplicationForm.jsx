@@ -72,7 +72,7 @@ function JobApplicationForm({ job, openApplicationForm, setOpenApplicationForm, 
                     name="resume"
                     hidden />
                 </Button>
-                <span class="filename">{resume && resume[0].name}</span>
+                <span className="filename">{resume && resume[0].name}</span>
               </>
             }
 
