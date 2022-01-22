@@ -40,11 +40,12 @@ module.exports = (db) => {
     }
   });
 
-  router.get("jobs/:id", async (req, res) => {
+  router.get("/jobs/:id", async (req, res) => {
     const { id } = req.params;
-
+    console.log("==================================")
     try {
       const jobs = await getAllJobsByOrganizationId(id);
+      console.log(jobs);
       res.json(jobs);
     } catch (err) {
       console.log(err.message);

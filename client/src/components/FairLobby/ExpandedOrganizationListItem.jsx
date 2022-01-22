@@ -7,6 +7,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
+import useOrganizationJobs from "../../hooks/useOrganizationJobs";
 
 const ExpandedOrganizationListItem = ({
   setExpanded,
@@ -16,6 +17,7 @@ const ExpandedOrganizationListItem = ({
   description,
   name,
 }) => {
+  const jobs = useOrganizationJobs(id);
   return (
     <Box onClick={setExpanded}>
       <Card variant="outlined">
@@ -69,6 +71,7 @@ const ExpandedOrganizationListItem = ({
           </div>
           <Typography variant="body2">{description}</Typography>
         </CardContent>
+        <ul>{jobs.map(job => <li key={job.id}>{job.title}</li>)}</ul>
       </Card>
     </Box>
   );
