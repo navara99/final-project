@@ -31,7 +31,7 @@ const ExpandedOrganizationListItem = ({
       <Card variant="outlined">
         <CardMedia
           component="img"
-          image="https://mui.com/static/images/cards/contemplative-reptile.jpg"
+          image="http://assets.stickpng.com/images/580b57fcd9996e24bc43c53e.png"
           alt={name + "_logo"}
         />
         <CardContent>
