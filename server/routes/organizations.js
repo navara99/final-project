@@ -25,12 +25,13 @@ module.exports = (db) => {
     }
   });
 
-  router.get("/:id/isMember", (req, res) => {
+  router.get("/:id/isMember", async (req, res) => {
     const { user_id } = req.session;
     const { id } = req.params;
-
+    console.log("check")
     try {
-
+      const result = await checkIfIAmMember(id, user_id);
+      res.json({ isMember: result });
     } catch (err) {
       console.log(err.message);
     }
