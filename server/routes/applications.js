@@ -18,9 +18,10 @@ module.exports = (db) => {
   router.post("/", upload.single("resume"), async (req, res) => {
     const { user_id } = req.session;
     const { jobId, message } = req.body;
-
+    let filePath = req.file ? req.file.path : req.body.resume;
+  
     try {
-      const filePath = req.file.path;
+      // const filePath = req.file.path;
       await applyForJob(user_id, message, jobId, filePath);
       res.json({
         status: "success"
