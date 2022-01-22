@@ -25,6 +25,18 @@ module.exports = (db) => {
     }
   });
 
+  router.get("/:id/isMember", (req, res) => {
+    const { user_id } = req.session;
+    const { id } = req.params;
+
+    try {
+
+    } catch (err) {
+      console.log(err.message);
+    }
+
+  })
+
   router.post("/:id/users", async (req, res) => {
     const { usersIdToAdd } = req.body;
 
@@ -56,6 +68,8 @@ module.exports = (db) => {
       console.log(err.message);
     }
   });
+
+
 
   return router;
 };
