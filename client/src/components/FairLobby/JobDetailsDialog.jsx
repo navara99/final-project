@@ -11,7 +11,7 @@ const JobDetailsDialog = ({ jobDetailsOpen, setJobDetailsOpen, job }) => {
       open={jobDetailsOpen}
       onClose={() => setJobDetailsOpen(!jobDetailsOpen)}
     >
-      <DialogTitle>Job title</DialogTitle>
+      <DialogTitle>{job.title}</DialogTitle>
       <DialogContent>
         <p>{job.description}</p>
         <p>Location: {job.location}</p>
