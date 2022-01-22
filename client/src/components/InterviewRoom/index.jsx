@@ -10,8 +10,8 @@ import { formatStartEndTime } from "../../helpers/date";
 function InterviewRoom({ currentUser }) {
   const { id } = useParams();
   const [interview] = useInterview(id);
-  const [inCall, setInCall] = useState();
-  const { config, useClient } = useChannel(`interview${id}`, currentUser ? currentUser : "");
+  const [inCall, setInCall] = useState(false);
+  const { config, useClient } = useChannel(`interview${id}`, currentUser ? `${currentUser.username}${interview && interview.interviewer ? " (interviewer)" : ""}` : "");
   console.log(interview);
 
 
@@ -27,7 +27,7 @@ function InterviewRoom({ currentUser }) {
       {inCall &&
         <>
           <h3>Interview for {interview.title} position at {interview.name}</h3>
-          <VideoCall setInCall={setInCall} {...{ config, useClient, currentUser, channelName: `interview${id}`, interview }} />
+          <VideoCall setInCall={setInCall} {...{ config, useClient, channelName: `interview${id}`, interview, username: `${currentUser.username}${interview.interviewer ? " (interviewer)" : ""}` }} />
         </>}
     </div>
   )

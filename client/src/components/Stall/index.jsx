@@ -7,7 +7,7 @@ import "./Stall.css";
 
 const Stall = ({ currentUser }) => {
   let { fairId, organizationId } = useParams();
-  const { config, useClient } = useChannel(organizationId, currentUser);
+  const { config, useClient } = useChannel(organizationId, currentUser ? currentUser.username : "");
   const [inCall, setInCall] = useState(false);
 
   return (

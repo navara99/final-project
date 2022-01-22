@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import Controls from "./Controls";
 
 export default function Video(props) {
-  const { users, tracks, username, setStart, setInCall, ready, useClient } = props;
+  const { users, tracks, username, setStart, setInCall, useClient } = props;
   const [gridSpacing, setGridSpacing] = useState(12);
 
   useEffect(() => {
