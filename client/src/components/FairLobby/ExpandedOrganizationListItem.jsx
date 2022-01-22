@@ -22,10 +22,12 @@ const ExpandedOrganizationListItem = ({
   const jobs = useOrganizationJobs(id);
   const [jobDetailsOpen, setJobDetailsOpen] = useState(false);
   const [jobId, setJobId] = useState();
-  const jobInfo = jobs.find(job => job.id === jobId);
+  const jobInfo = jobs.find((job) => job.id === jobId);
   return (
     <Box onClick={setExpanded}>
-      <JobDetailsDialog {...{ jobDetailsOpen, setJobDetailsOpen, job: jobInfo }} />
+      <JobDetailsDialog
+        {...{ jobDetailsOpen, setJobDetailsOpen, job: jobInfo }}
+      />
       <Card variant="outlined">
         <CardMedia
           component="img"
@@ -77,7 +79,11 @@ const ExpandedOrganizationListItem = ({
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
             Job vacancies ({jobs.length})
           </Typography>
-          <JobList jobs={jobs} setJobId={setJobId} />
+          <JobList
+            jobs={jobs}
+            setJobId={setJobId}
+            setJobDetailsOpen={setJobDetailsOpen}
+          />
         </CardContent>
       </Card>
     </Box>
