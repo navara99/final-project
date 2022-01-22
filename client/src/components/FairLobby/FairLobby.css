@@ -76,3 +76,7 @@
 .live .MuiBox-root .MuiPaper-root.not-expanded img {
   max-width: 5em;
 }
+
+.live ul {
+  margin: 0;
+}

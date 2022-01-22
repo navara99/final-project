@@ -39,9 +39,6 @@ const ExpandedOrganizationListItem = ({
               <Typography variant="h5" component="div">
                 {name}
               </Typography>
-              {/* <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                adjective
-              </Typography> */}
             </div>
             <div>
               <CardActions>
@@ -70,8 +67,16 @@ const ExpandedOrganizationListItem = ({
             </div>
           </div>
           <Typography variant="body2">{description}</Typography>
+          <br />
+          <Typography sx={{ mb: 1.5 }} color="text.secondary">
+            Job vacancies ({jobs.length})
+          </Typography>
+          <ul>
+            {jobs.map((job) => (
+              <li key={job.id}>{job.title}</li>
+            ))}
+          </ul>
         </CardContent>
-        <ul>{jobs.map(job => <li key={job.id}>{job.title}</li>)}</ul>
       </Card>
     </Box>
   );
