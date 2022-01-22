@@ -3,9 +3,8 @@ import { useParams } from "react-router-dom";
 import useFairDetails from "../../hooks/useFairDetails";
 import HeaderLive from "./HeaderLive";
 import Header from "./Header";
-import "./FairLobby.css";
+import "./Fair.css";
 import OrganizationList from "./OrganizationList";
-import { fairListSettings } from "../../constants";
 
 const Fair = ({ currentUser, setSnackBarDetails }) => {
   let { id } = useParams();
