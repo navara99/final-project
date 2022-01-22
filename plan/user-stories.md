@@ -44,11 +44,3 @@
 * Apply job button make deactive (Yagnesh)
 * Organization page can see fair hosted and participated fairs
 * My organization design (Yagnesh)
-* show the fair that the organization is going to participate (not just the one that it host)
-
-
-
-
-
-
-
