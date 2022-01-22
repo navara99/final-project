@@ -34,10 +34,9 @@ const useVideo = (ready, tracks, config, channelName, client, username) => {
           return prevUsers.filter((User) => User.uid !== user.uid);
         });
       });
-      console.log(username);
+
       try {
-        const result = await client.join(config.appId, name, config.token, username);
-        console.log("JOINED")
+        await client.join(config.appId, name, config.token, username);
       } catch (error) {
         console.log(error.message);
       }
