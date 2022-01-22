@@ -35,7 +35,7 @@ const OrganizationListItem = ({
               {name}
             </Typography>
             <CardActions>
-              <Link to={`/live/${fairId}/${id}`}>
+              <Link to={`/live/${fairId}/${id}`} target="_blank">
                 <Button size="small" onClick={clickHandler} variant="outlined">
                   Join this stall
                 </Button>

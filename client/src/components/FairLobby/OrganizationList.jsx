@@ -10,7 +10,7 @@ const OrganizationList = ({ stalls, fairId }) => {
     if (expand === id) {
       return (
         <ExpandedOrganizationListItem
-          {...{ ...stall, key: id, setExpanded: () => setExpanded(id) }}
+          {...{ ...stall, key: id, setExpanded: () => setExpanded(id), fairId }}
         />
       );
     }
