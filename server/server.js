@@ -100,6 +100,7 @@ const messagesRoutes = require("./routes/messages");
 const applicationRoutes = require("./routes/applications");
 const tokenRoutes = require("./routes/token");
 const scheduleRoutes = require("./routes/schedule");
+const interviewRoutes = require("./routes/interviews");
 
 app.use("/api/users", usersRoutes(db));
 app.use("/api/jobs", jobRoutes(db));
@@ -108,7 +109,7 @@ app.use("/api/fairs", fairsRoutes(db));
 app.use("/api/organizations", organizationRoutes(db));
 app.use("/api/messages", messagesRoutes(db));
 app.use("/api/token", tokenRoutes());
-
+app.use("/api/interviews", interviewRoutes(db));
 app.use("/api/schedule", scheduleRoutes(db));
 
 httpServer.listen(PORT, () => {

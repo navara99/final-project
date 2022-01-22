@@ -20,6 +20,7 @@ import useMessages from "../src/hooks/useMessages";
 import JobApplications from "./components/Groups/JobApplications";
 import UserProfile from "./components/UserProfile/UserProfile";
 import OtherProfile from "./components/UserProfile/OtherProfile";
+import InterviewRoom from "./components/InterviewRoom";
 
 function App() {
   const [errorMessage, setErrorMessage] = useState("");
@@ -144,6 +145,10 @@ function App() {
           <Route
             path="/organizations/:id"
             element={<OrganizationDetails {...{ setSnackBarDetails }} />}
+          />
+          <Route
+            path="/interviews/:id"
+            element={<InterviewRoom {...{ currentUser }} />}
           />
         </Routes>
       </div>
