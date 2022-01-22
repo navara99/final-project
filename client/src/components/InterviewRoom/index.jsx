@@ -26,7 +26,10 @@ function InterviewRoom({ currentUser }) {
       {!inCall && < Button variant="contained" color="primary" onClick={() => setInCall(true)}>Join Interview</Button>}
       {inCall &&
         <>
-          <h3>Interview for {interview.title} position at {interview.name}</h3>
+          <div className="interview-head">
+            <h3>Interview for {interview.title} position at {interview.name}</h3>
+            <Button variant="contained">White Board</Button>
+          </div>
           <VideoCall setInCall={setInCall} {...{ config, useClient, channelName: `interview${id}`, interview, username: `${currentUser.username}${interview.interviewer ? " (interviewer)" : ""}` }} />
         </>}
     </div>
