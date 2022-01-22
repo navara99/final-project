@@ -6,7 +6,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
-import ScheduleButton from "./ScheduleButton";
+import ScheduleButton from "./ScheduleButton2";
 import { formatStartEndTime, formatDate } from "../../helpers/date";
 
 const Header = ({ id, fair, added, currentUser, add }) => {
@@ -65,14 +65,6 @@ const Header = ({ id, fair, added, currentUser, add }) => {
             {currentUser && (
               <div>
                 <ScheduleButton {...{ add, added, upcoming, id, live }} />
-                <Button
-                  component={Link}
-                  to={`/live/${id}`}
-                  disabled={!live}
-                  variant="contained"
-                >
-                  Join
-                </Button>
               </div>
             )}
           </CardActions>

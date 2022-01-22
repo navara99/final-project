@@ -18,11 +18,10 @@ const FairListItem = ({
 }) => {
   const height = isOngoing ? onGoingMediaHeight : otherMediaHeight;
   const formattedDate = formatDate(start);
-  const link = isOngoing ? `/live/${id}`: `/fairs/${id}`;
 
   return (
     <div>
-      <Link to={link}>
+      <Link to={`/fairs/${id}`}>
         <Card>
           {showDate && <div className="badge">{formattedDate}</div>}
           <div className="title">

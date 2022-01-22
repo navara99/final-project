@@ -1,10 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import OrganizationListItem from "./OrganizationListItem";
+import ExpandedOrganizationListItem from "./ExpandedOrganizationListItem";
 
-const OrganizationList = ({ stalls }) => {
+const OrganizationList = ({ stalls, fairId, setSnackBarDetails }) => {
+  const [expand, setExpanded] = useState();
+
   const elm = stalls.map((stall) => {
     const { id } = stall;
-    return <OrganizationListItem key={id} {...stall} />;
+    if (expand === id) {
+      return (
+        <ExpandedOrganizationListItem
+          {...{
+            ...stall,
+            key: id,
+            setExpanded: () => setExpanded(id),
+            fairId,
+            setSnackBarDetails,
+          }}
+        />
+      );
+    }
+    return (
+      <OrganizationListItem
+        {...{ ...stall, key: id, setExpanded: () => setExpanded(id), fairId }}
+      />
+    );
   });
   return <>{elm}</>;
 };

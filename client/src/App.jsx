@@ -11,7 +11,6 @@ import Groups from "./components/Groups/index";
 import { Snackbar, Alert } from "@mui/material";
 import Fair from "./components/Fair";
 import ChatBox from "./components/ChatBox/ChatBox";
-import FairLobby from "./components/FairLobby";
 import OrganizationDetails from "./components/Groups/OrganizationDetails";
 import Jobs from "./components/JobBoard/index";
 import Schedule from "./components/Schedule";
@@ -134,17 +133,13 @@ function App() {
             }
           />
           <Route
-            path="/live/:id"
+            path="/fairs/:id"
             element={
-              <FairLobby
+              <Fair
                 currentUser={currentUser}
                 setSnackBarDetails={setSnackBarDetails}
               />
             }
-          />
-          <Route
-            path="/fairs/:id"
-            element={<Fair currentUser={currentUser} />}
           />
           <Route
             path="/organizations/:id"
