@@ -14,13 +14,24 @@ import {
 import useAllUsers from "../../hooks/useAllUsers";
 import { useState } from "react";
 import axios from "axios";
+import { useEffect } from "react";
 
-const AddMemberForm = ({ openAddMembersModal, setOpenAddMembersModal, id, setSnackBarDetails, setOrganizationDetails }) => {
+const AddMemberForm = ({ openAddMembersModal, setOpenAddMembersModal, id, setSnackBarDetails, setOrganizationDetails, organization }) => {
   const allUsers = useAllUsers();
   const [selectedUsers, setSelectedUsers] = useState(new Array(allUsers.length).fill(false));
+  const [users, setUsers] = useState();
+  const [nonMember, setNonMember] = useState();
+  const [searchWord, setSearchWord] = useState("");
+  useEffect(() =>{
+    let membersId = organization.members.map(m => m.id)
+    setNonMember(allUsers.filter(user => !membersId.includes(user.id)));
+  }, [allUsers, organization]);
+  useEffect(() => {
+    setUsers(nonMember);
+  }, [nonMember]);
 
   const handleAddMember = async () => {
-    const usersIdToAdd = allUsers.filter((users, i) => selectedUsers[i]).map((user) => user.id);
+    const usersIdToAdd = nonMember.filter((users, i) => selectedUsers[i]).map((user) => user.id);
 
     try {
       const { data } = await axios.post(`/api/organizations/${id}/users`, { usersIdToAdd });
@@ -35,9 +46,20 @@ const AddMemberForm = ({ openAddMembersModal, setOpenAddMembersModal, id, setSna
     };
 
   };
-
-  const handleSearchChange = () => {
-
+  useEffect(()=>{
+    if(searchWord){
+      let word = searchWord.toLowerCase()
+      setUsers(nonMember.filter((user) => {
+        if (user.first_name.toLowerCase().includes(word) || user.last_name.toLowerCase().includes(word)|| user.username.toLowerCase().includes(word)){
+         return user 
+        }
+        return null
+      }))
+    }else {setUsers(nonMember);}
+    
+  },[searchWord])
+  const handleSearchChange = (e) => {
+    setSearchWord(e.target.value);
   };
 
   const toggleCheckBox = (i) => {
@@ -46,8 +68,7 @@ const AddMemberForm = ({ openAddMembersModal, setOpenAddMembersModal, id, setSna
   };
 
   const generateUsersList = () => {
-
-    return allUsers.map(({ id, first_name, last_name, username }, i) => {
+    return users.map(({ id, first_name, last_name, username }, i) => {
       return (
         <ListItem key={id}>
           <ListItemText>
@@ -69,11 +90,12 @@ const AddMemberForm = ({ openAddMembersModal, setOpenAddMembersModal, id, setSna
           margin="dense"
           id="search"
           label="Search"
+          value={searchWord}
           fullWidth
           onChange={handleSearchChange}
         />
         <List>
-          {allUsers && generateUsersList()}
+          {allUsers && users && generateUsersList()}
         </List>
       </DialogContent>
       <DialogActions>
