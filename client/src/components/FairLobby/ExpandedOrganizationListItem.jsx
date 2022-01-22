@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -8,7 +8,8 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
 import useOrganizationJobs from "../../hooks/useOrganizationJobs";
-import JobList from "./JobList"
+import JobList from "./JobList";
+import JobDetailsDialog from "./JobDetailsDialog";
 
 const ExpandedOrganizationListItem = ({
   setExpanded,
@@ -19,8 +20,12 @@ const ExpandedOrganizationListItem = ({
   name,
 }) => {
   const jobs = useOrganizationJobs(id);
+  const [jobDetailsOpen, setJobDetailsOpen] = useState(false);
+  const [jobId, setJobId] = useState();
+  const jobInfo = jobs.find(job => job.id === jobId);
   return (
     <Box onClick={setExpanded}>
+      <JobDetailsDialog {...{ jobDetailsOpen, setJobDetailsOpen, job={jobInfo} }} />
       <Card variant="outlined">
         <CardMedia
           component="img"
@@ -72,7 +77,7 @@ const ExpandedOrganizationListItem = ({
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
             Job vacancies ({jobs.length})
           </Typography>
-          <JobList jobs={jobs} />
+          <JobList jobs={jobs} setJobId={setJobId} />
         </CardContent>
       </Card>
     </Box>
