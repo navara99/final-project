@@ -77,12 +77,12 @@
   max-width: 5em;
 }
 
-.live ul {
+.live .stall-list ul {
   margin: 0;
   padding: 0;
 }
 
-.live li {
+.live .stall-list li {
   display: flex;
   justify-content: space-between;
   padding: 0.5em 0;
@@ -94,11 +94,11 @@
   margin: 0;
 }
 
-.live li:first-child {
+.live .stall-list li:first-child {
   border-top: none;
 }
 
-.live li button {
+.live .stall-list li button {
   margin: 0 0.3em;
   padding: 0;
 }
