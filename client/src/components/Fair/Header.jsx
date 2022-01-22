@@ -6,10 +6,10 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
-import ScheduleButton from "./ScheduleButton2";
+import ScheduleButton from "./ScheduleButton";
 import { formatStartEndTime, formatDate } from "../../helpers/date";
 
-const Header = ({ id, fair, added, currentUser, add }) => {
+const Header = ({ id, fair, added, currentUser, add, updateFairDetails }) => {
   const {
     name,
     description,
@@ -64,7 +64,9 @@ const Header = ({ id, fair, added, currentUser, add }) => {
 
             {currentUser && (
               <div>
-                <ScheduleButton {...{ add, added, upcoming, id, live }} />
+                <ScheduleButton
+                  {...{ add, added, upcoming, id, live, updateFairDetails }}
+                />
               </div>
             )}
           </CardActions>
