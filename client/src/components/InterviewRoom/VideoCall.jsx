@@ -3,6 +3,7 @@ import { Grid } from "@mui/material";
 import Video from "../Stall/Video";
 import { createMicrophoneAndCameraTracks } from "agora-rtc-react";
 import useVideo from "../../hooks/useVideo";
+import WhiteBoard from "./WhiteBoard";
 
 const useMicrophoneAndCameraTracks = createMicrophoneAndCameraTracks();
 
@@ -14,6 +15,7 @@ function VideoCall({ setInCall, config, useClient, channelName, interview, usern
   return (
     <>
       <Grid container direction="column" style={{ height: "100%" }}>
+        <WhiteBoard />
         <Grid item style={{ height: "95%" }}>
           {start && tracks && <Video {...{ interview, ready, tracks, setStart, setInCall, users, useClient, username }} />}
         </Grid>
