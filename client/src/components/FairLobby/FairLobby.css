@@ -29,7 +29,7 @@
 
 .live .MuiBox-root .MuiPaper-root {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .live .MuiBox-root.css-0 {
@@ -74,7 +74,7 @@
 }
 
 .live .MuiBox-root .MuiPaper-root.not-expanded img {
-  max-width: 5em;
+  max-width: 7.5em;
 }
 
 .live ul {
@@ -84,4 +84,10 @@
 .live li {
   display: flex;
   justify-content: space-between;
+  margin: 0.5em 0;
+  align-items: center;
+}
+
+.live li button {
+  margin: 0 0.3em;
 }
