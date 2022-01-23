@@ -132,11 +132,12 @@ const queryGenerator = (db) => {
     email,
     industry,
     website,
+    logo
   }) => {
-    const values = [name, description, email, industry, website];
+    const values = [name, description, email, industry, website, logo];
     const queryString = `
-      INSERT INTO organizations (name, description, email, industry, website)
-      VALUES ($1, $2, $3, $4, $5)
+      INSERT INTO organizations (name, description, email, industry, website, logo)
+      VALUES ($1, $2, $3, $4, $5, $6)
       RETURNING *;
     `;
 
