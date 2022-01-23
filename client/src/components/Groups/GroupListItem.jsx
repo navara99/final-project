@@ -1,5 +1,5 @@
 import React from "react";
-import { ListItemText, Card, Collapse, CardActions } from "@mui/material";
+import { ListItemText, Card, Collapse, CardActions, CardActionArea } from "@mui/material";
 import GroupAction from "./GroupAction";
 import { Link } from "react-router-dom";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -9,30 +9,34 @@ function GroupListItem({ group, openAddMembersModal, setOpenAddMembersModal, sel
   const { ExpandMore, handleExpandClick, expanded } = useExpand();
 
   return (
-    <Card alignItems="flex-start" style={cardStyles}>
-      <div className="organization-card">
-        <Link to={`/organizations/${group.id}`} style={{ textDecoration: 'none', display: "flex", color: "black" }}>
-          <img
-            alt={group.name}
-            className="organization-logo"
-            src={`${group.logo}`}
-          />
-          <ListItemText
-            primary={<h3 className="organization-card-name">{group.name}</h3>}
-            secondary={group.description}
-          />
-        </Link>
-        <CardActions>
-          <ExpandMore
-            expand={expanded}
-            onClick={handleExpandClick}
-            aria-expanded={expanded}
-            aria-label="show more"
-          >
-            <ExpandMoreIcon />
-          </ExpandMore>
-        </CardActions>
-      </div>
+    <Card alignItems="flex-start" style={cardStyles} raised>
+      
+        <div className="organization-card">
+        <CardActionArea>
+            <Link to={`/organizations/${group.id}`} style={{ textDecoration: 'none', display: "flex", color: "black" }}>
+              <img
+                alt={group.name}
+                className="organization-logo"
+                src={`${group.logo}`}
+              />
+              <ListItemText
+                primary={<h3 className="organization-card-name">{group.name}</h3>}
+                secondary={group.description}
+              />
+            </Link>
+          </CardActionArea>
+          <CardActions>
+            <ExpandMore
+              expand={expanded}
+              onClick={handleExpandClick}
+              aria-expanded={expanded}
+              aria-label="show more"
+            >
+              <ExpandMoreIcon />
+            </ExpandMore>
+          </CardActions>
+        </div>
+      
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <GroupAction
           {...{ openAddMembersModal }}
