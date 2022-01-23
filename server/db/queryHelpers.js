@@ -203,7 +203,7 @@ const queryGenerator = (db) => {
   const getAllApplicationsByJobId = async (job_id) => {
     const values = [job_id];
     const queryString = `
-    SELECT applications.resume, applications.user_id, applications.job_id, applications.created_at, users.first_name, users.last_name, users.email, users.profile_picture, users.username,users.bio, organizations.name AS organization_name FROM applications
+    SELECT applications.id, applications.resume, applications.user_id, applications.job_id, applications.created_at, users.first_name, users.last_name, users.email, users.profile_picture, users.username,users.bio, organizations.name AS organization_name FROM applications
     JOIN jobs ON jobs.id = applications.job_id
     JOIN users ON applications.user_id = users.id
     JOIN organizations ON jobs.organization_id = organizations.id
