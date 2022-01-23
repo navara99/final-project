@@ -32,7 +32,7 @@ function EditGroup({ group, editModal, editOrganization, setEditModal }) {
       <DialogTitle>Edit Organization</DialogTitle>
       <DialogContent>
         <DialogContentText>
-          Add your {group.name}'s info
+          Add {group.name}'s info
         </DialogContentText>
         <TextField
           autoFocus
