@@ -5,11 +5,14 @@ import { Link } from "react-router-dom";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import useExpand from "../../hooks/useExpand";
 
+
+
+
 function GroupListItem({ group, openAddMembersModal, setOpenAddMembersModal, selectedGroup, setSelectedGroup, cardStyles, setMyGroups }) {
 
   return (
-    <Card alignItems="flex-start" style={cardStyles}>
-      <div className="organization-card">
+    <Card style={cardStyles} raised>
+      {/* <div className="organization-card"> */}
         <Link to={`/organizations/${group.id}`} style={{ textDecoration: 'none', display: "flex", color: "black" }}>
           <img
             alt={group.name}
@@ -18,13 +21,13 @@ function GroupListItem({ group, openAddMembersModal, setOpenAddMembersModal, sel
           />
           <ListItemText
             primary={<h3 className="organization-card-name">{group.name}</h3>}
-            secondary={<p>{group.description}</p>}
+            secondary={group.description}
           />
         </Link>
         <CardActions>
           <GroupAction {...{ openAddMembersModal, setMyGroups, group, setSelectedGroup, selectedGroup }} />
         </CardActions>
-      </div>
+      {/* </div> */}
     </Card >
   )
 };
