@@ -6,13 +6,13 @@ import VideoCall from "./VideoCall";
 import useChannel from "../../hooks/useChannel";
 import "./interviewroom.css";
 import { formatStartEndTime } from "../../helpers/date";
+import WhiteBoardModal from "./WhiteBoardModal";
 
 function InterviewRoom({ currentUser }) {
   const { id } = useParams();
   const [interview] = useInterview(id);
   const [inCall, setInCall] = useState(false);
   const { config, useClient } = useChannel(`interview${id}`, currentUser ? `${currentUser.username}${interview && interview.interviewer ? " (interviewer)" : ""}` : "");
-  console.log(interview);
 
 
   return (
@@ -26,7 +26,10 @@ function InterviewRoom({ currentUser }) {
       {!inCall && < Button variant="contained" color="primary" onClick={() => setInCall(true)}>Join Interview</Button>}
       {inCall &&
         <>
-          <h3>Interview for {interview.title} position at {interview.name}</h3>
+          <div className="interview-head">
+            <h3>Interview for {interview.title} position at {interview.name}</h3>
+            <WhiteBoardModal boardCode={`interview${id}-${interview.start_time}-${interview.end_time}`} />
+          </div>
           <VideoCall setInCall={setInCall} {...{ config, useClient, channelName: `interview${id}`, interview, username: `${currentUser.username}${interview.interviewer ? " (interviewer)" : ""}` }} />
         </>}
     </div>

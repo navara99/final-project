@@ -5,3 +5,19 @@
   align-items: center;
   flex-direction: column;
 }
+
+.interview-head {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding-bottom: 1em;
+}
+
+.interview-head button {
+  height: 50%;
+  align-self: center;
+}
+
+#wt-container {
+  border: solid black 1px;
+}
