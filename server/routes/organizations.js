@@ -32,9 +32,12 @@ module.exports = (db) => {
   router.put("/:id", async (req, res) => {
     const { id } = req.params;
     const { name, description, email, industry, website, logo } = req.body;
-    console.log(req.body);
+
     try {
-      const results = await updateOrganizationInfo(id,);
+      const results = await updateOrganizationInfo(id, name, description, email, industry, website, logo);
+      res.json({
+        status: "success"
+      });
     } catch (err) {
       console.log(err.message);
     }

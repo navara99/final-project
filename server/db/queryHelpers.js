@@ -616,11 +616,29 @@ const queryGenerator = (db) => {
 
   };
 
-  const updateOrganizationInfo = async () => {
+  const updateOrganizationInfo = async (id, name, description, email, industry, website, logo) => {
+    const values = [name, description, email, industry, website, logo, id];
+    const queryString = `
+    UPDATE organizations
+    SET name = $1,
+      description = $2,
+      email = $3,
+      industry = $4,
+      website = $5,
+      logo = $6
+    WHERE id = $7;
+    `
+
+    try {
+      await db.query(queryString, values);
+    } catch (error) {
+      console.log(error);
+    };
 
   };
 
   return {
+    updateOrganizationInfo,
     deleteOrganizationById,
     getJobById,
     applyForJob,
