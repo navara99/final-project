@@ -35,7 +35,7 @@ function GroupAction({ group, setMyGroups }) {
 
     try {
       const { data } = await axios.put(`/api/organizations/${group.id}`, newGroupInfo);
-      console.log(data);
+      setMyGroups(data);
     } catch (err) {
       console.log(err);
     };
