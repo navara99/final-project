@@ -2,10 +2,9 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 import { io } from "socket.io-client";
-import useCurrentUser from "./useCurrentUser";
 import moment from "moment";
 
-const useMessages = () => {
+const useMessages = (currentUser) => {
   const [receiverId, setReceiverId] = useState(null);
   const [messages, setMessages] = useState(null);
   const [senders, setSenders] = useState(null);
@@ -14,7 +13,6 @@ const useMessages = () => {
   const [socket, setSocket] = useState(null);
   const [receiver, setReceiver] = useState(null);
   const location = useLocation();
-  const { currentUser, setCurrentUser, logout } = useCurrentUser();
 
   useEffect(() => {
     axios.get("/api/messages").then((res) => {
@@ -110,6 +108,7 @@ const useMessages = () => {
   }, [currentUser, socket]);
 
   const handleSubmit = (e, message = messageText) => {
+    if (!currentUser) return;
     e.preventDefault();
     const newMessage = {
       sender_id: currentUser.id,
@@ -134,7 +133,7 @@ const useMessages = () => {
     setReceiverId(e.target.value);
   };
 
-  const numOfUnreadMsg = Array.isArray(messages)
+  const numOfUnreadMsg = Array.isArray(messages) && currentUser
     ? messages.filter(
         ({ is_read, receiver_id }) => !is_read && receiver_id === currentUser.id
       ).length
@@ -157,7 +156,7 @@ const useMessages = () => {
     socket,
   };
 
-  return { currentUser, setCurrentUser, logout, messageState };
+  return messageState;
 };
 
 export default useMessages;

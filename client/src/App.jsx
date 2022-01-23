@@ -16,6 +16,7 @@ import Jobs from "./components/JobBoard/index";
 import Schedule from "./components/Schedule";
 import ProfileSetting from "./components/ProfileSetting/ProfileSetting";
 import useMessages from "../src/hooks/useMessages";
+import useCurrentUser from "../src/hooks/useCurrentUser";
 import JobApplications from "./components/Groups/JobApplications";
 import UserProfile from "./components/UserProfile/UserProfile";
 import OtherProfile from "./components/UserProfile/OtherProfile";
@@ -28,7 +29,8 @@ function App() {
     open: false,
     message: "",
   });
-  const { currentUser, setCurrentUser, logout, messageState } = useMessages();
+  const { currentUser, setCurrentUser, logout } = useCurrentUser();
+  const messageState = useMessages(currentUser);
   const { setMessages, setSenders, socket, numOfUnreadMsg } = messageState;
   const handleSnackBarClose = () => {
     setSnackBarDetails({ open: false, message: "" });
