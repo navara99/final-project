@@ -25,6 +25,7 @@ const MessageListItem = (props) => {
     message,
     interviewer_id: sender_id,
   };
+  console.log(is_invitation, application_id)
   const clickAcceptHandler = (e) => {
     axios
       .put("/api/messages/interview", { ...appointment, is_accepted: true })

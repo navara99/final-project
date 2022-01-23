@@ -54,7 +54,6 @@ const ChatBox = ({ currentUser, messageState }) => {
           />
         </List>
       </Grid>
-      {/* Chatter Box */}
       <Grid
         item
         xs={9}

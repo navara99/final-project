@@ -13,7 +13,7 @@ business profile:
     - upcoming career fair
       - add existing posts to that fair
       - upload flyer pdf for futurue fair (stretch)
-    - (just need the search function) members/ add admin (if the user is admin, stretch)
+    - (done) members/ add admin (if the user is admin, stretch)
     - (done) create career fair
       - time
       - date
@@ -31,7 +31,7 @@ pages:
   - private/public (stretch)
   - search bar (stretch)
 
-- (done, link to the fair) details page of career fair
+- (done) details page of career fair
   - title
   - time
   - date
@@ -42,7 +42,7 @@ pages:
     - join as a job seeker
     - (if the user is part of a group) join as GROUP_NAME
 
-- (style) job board (with career fairs that the busieness is attending), applicant can apply anytime (siu)
+- (style) job board (with career fairs that the busieness is attending), applicant can apply anytime
     - title
     - description
     - requirement
@@ -91,7 +91,7 @@ pages:
   - list of companies stall: number of person in queue, flyers (pdf, stretch)
   - Link to the stall
 
-- a stall in a career fair
+- (done) a stall in a career fair
   - conference style
   - button to show the pinned message
   - pinned message in chat contain job post description (auto generated)
@@ -103,12 +103,12 @@ pages:
   - click on user and see their profile/send message
   - (stretch) breakout room
 
-- (Yagnesh / style) userpage (stalking)
+- (done) userpage (stalking)
   - send message
   - name, bio, username
   - organizations the user is belongs to
 
-- actual interview page
+- (done) actual interview page
   - button to join the interview (in schedule)
   - whiteboard plus realtime coding: (textarea/ library to consider: editor.js)
     - draw on whiteboard: html5canvas (stretch)
