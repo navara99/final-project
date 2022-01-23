@@ -21,16 +21,20 @@ const io = new Server(httpServer, {
 let users = [];
 
 const addUser = (userId, socketId) => {
-  !users.some((user) => user.userId === userId) &&
-    users.push({ userId, socketId });
+  users.push({ userId, socketId });
 };
 
 const removeUser = (socketId) => {
   users = users.filter((user) => user.socketId !== socketId);
 };
 
-const getUser = (userId) => {
-  return users.find((user) => user.userId === userId);
+const getUsers = (receiverId, senderId, socketId) => {
+  return users.filter((user) => {
+    const receiverFound = user.userId === receiverId;
+    const senderFound = user.userId === senderId;
+    const notTheSenderSocket = user.socketId !== socketId;
+    return notTheSenderSocket && (receiverFound || senderFound);
+  });
 };
 
 io.on("connection", (socket) => {
@@ -46,31 +50,25 @@ io.on("connection", (socket) => {
   });
 
   socket.on("sendMessage", (data) => {
-    const { receiver_id } = data;
-    const user = getUser(receiver_id);
-    if (user) {
+    const { receiver_id, sender_id } = data;
+    const users = getUsers(receiver_id, sender_id, socket.id);
+    users.forEach((user) => {
       io.to(user.socketId).emit("getMessage", data);
-    } else {
-      console.log("user not found", receiver_id);
-    }
+    });
   });
 
   socket.on("editMessage", (data) => {
-    const { sender_id } = data;
-    const user = getUser(sender_id);
-    if (user) {
-      console.log(data)
+    const { sender_id, receiver_id } = data;
+    const users = getUsers(receiver_id, sender_id, socket.id);
+    users.forEach((user) => {
       io.to(user.socketId).emit("editMessage", data);
-    } else {
-      console.log("user not found", sender_id);
-    }
+    });
   });
 
   socket.on("logout", () => {
     console.log("user logout!");
     removeUser(socket.id);
   });
-
 
   //client disconnect
   socket.on("disconnect", () => {
