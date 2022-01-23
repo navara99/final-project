@@ -23,6 +23,7 @@ const ExpandedOrganizationListItem = ({
   setSnackBarDetails,
   live,
   currentUser,
+  logo
 }) => {
   const jobs = useOrganizationJobs(id);
   const [jobDetailsOpen, setJobDetailsOpen] = useState(false);
@@ -45,11 +46,7 @@ const ExpandedOrganizationListItem = ({
         }}
       />
       <Card variant="outlined">
-        <CardMedia
-          component="img"
-          image="http://assets.stickpng.com/images/580b57fcd9996e24bc43c53e.png"
-          alt={name + "_logo"}
-        />
+        <CardMedia component="img" image={logo} alt={name + "_logo"} />
         <CardContent>
           <div className="organization-details">
             <div>

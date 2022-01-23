@@ -525,7 +525,8 @@ const queryGenerator = (db) => {
         organizations.description AS host_description,
         start_time AS start,
         end_time AS end,
-        organizations.description AS host_description
+        organizations.description AS host_description,
+        fairs.poster
         FROM fairs
         JOIN organizations ON (organizations.id = fairs.host_id)
         WHERE fairs.id = $1
@@ -535,7 +536,8 @@ const queryGenerator = (db) => {
         organizations.name, 
         organizations.description,
         industry,
-        website
+        website,
+        logo
         FROM fairs
         JOIN fairs_organizations ON (fairs.id = fairs_organizations.fair_id) 
         JOIN organizations ON (organizations.id = fairs_organizations.organization_id)
