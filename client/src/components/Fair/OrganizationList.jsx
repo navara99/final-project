@@ -2,7 +2,13 @@ import React, { useState } from "react";
 import OrganizationListItem from "./OrganizationListItem";
 import ExpandedOrganizationListItem from "./ExpandedOrganizationListItem";
 
-const OrganizationList = ({ stalls, fairId, setSnackBarDetails, live }) => {
+const OrganizationList = ({
+  stalls,
+  fairId,
+  setSnackBarDetails,
+  live,
+  currentUser,
+}) => {
   const [expand, setExpanded] = useState();
 
   const elm = stalls.map((stall) => {
@@ -16,14 +22,21 @@ const OrganizationList = ({ stalls, fairId, setSnackBarDetails, live }) => {
             setExpanded: () => setExpanded(id),
             fairId,
             setSnackBarDetails,
-            live
+            live,
+            currentUser
           }}
         />
       );
     }
     return (
       <OrganizationListItem
-        {...{ ...stall, key: id, setExpanded: () => setExpanded(id), fairId, live }}
+        {...{
+          ...stall,
+          key: id,
+          setExpanded: () => setExpanded(id),
+          fairId,
+          live,
+        }}
       />
     );
   });
