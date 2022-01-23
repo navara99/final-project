@@ -36,10 +36,5 @@
 
 ### To do
 
-* Search for user (Yagnesh)
-* Need picture field for organizations and fair (Yagnesh)
-* Interview and Whiteboard form video (Thar)
-* Organization can deactive job post (Siu)
-* Apply job button make deactive (Yagnesh)
 * Organization page can see fair hosted and participated fairs
 * My organization design (Yagnesh)

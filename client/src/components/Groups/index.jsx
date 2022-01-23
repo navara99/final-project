@@ -22,11 +22,7 @@ function Groups({ setSnackBarDetails }) {
     return myGroups.sort((a, b) => b.id - a.id).map((group) => {
       return <GroupListItem
         key={group.id}
-        {...{ group }}
-        {...{ selectedGroup }}
-        {...{ setSelectedGroup }}
-        {...{ cardStyles }}
-        {...{ setSnackBarDetails }}
+        {...{ group, selectedGroup, setSelectedGroup, cardStyles, setSnackBarDetails, setMyGroups }}
       />
     });
 

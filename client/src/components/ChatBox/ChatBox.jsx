@@ -11,6 +11,7 @@ import { Box } from "@mui/material";
 import { Avatar } from "@mui/material";
 import "./ChatBox.css";
 import { Link } from "react-router-dom";
+import Unauthorized from "../Unauthorized";
 
 const ChatBox = ({ currentUser, messageState }) => {
   const {
@@ -27,6 +28,10 @@ const ChatBox = ({ currentUser, messageState }) => {
     setMessages,
     socket,
   } = messageState;
+
+  if (!currentUser) {
+    return <Unauthorized action="view messages" />;
+  }
 
   return (
     <Grid container className="chat-box">
@@ -49,7 +54,6 @@ const ChatBox = ({ currentUser, messageState }) => {
           />
         </List>
       </Grid>
-      {/* Chatter Box */}
       <Grid
         item
         xs={9}

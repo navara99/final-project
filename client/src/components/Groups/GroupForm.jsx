@@ -58,6 +58,7 @@ function GroupForm({ openForm, setOpenForm, setMyGroups }) {
           label="Organization Name"
           fullWidth
           required
+          value={name}
           onChange={handleNameChange}
         />
         <TextField
@@ -68,6 +69,7 @@ function GroupForm({ openForm, setOpenForm, setMyGroups }) {
           label="Description"
           fullWidth
           required
+          value={description}
           onChange={handleDescriptionChange}
         />
         <TextField
@@ -76,6 +78,7 @@ function GroupForm({ openForm, setOpenForm, setMyGroups }) {
           label="Email"
           fullWidth
           type="email"
+          value={email}
           required
           onChange={handleEmailChange}
         />
@@ -85,6 +88,7 @@ function GroupForm({ openForm, setOpenForm, setMyGroups }) {
           label="Industry"
           fullWidth
           required
+          value={industry}
           onChange={handleIndustryChange}
         />
         <TextField
@@ -92,12 +96,13 @@ function GroupForm({ openForm, setOpenForm, setMyGroups }) {
           id="website"
           label="Website"
           fullWidth
+          value={website}
           onChange={handleWebsiteChange}
         />
         <TextField
-          autoFocus
           margin="dense"
           id="logo"
+          value={logo}
           label="Organization Logo"
           fullWidth
           onChange={handleLogoChange}

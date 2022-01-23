@@ -37,16 +37,16 @@ const queryGenerator = (db) => {
 
   const updateUser = async (newUserInfo) => {
 
-    const { firstName, lastName, username, email, bio, profilePicture, userId} =
+    const { firstName, lastName, username, email, bio, profilePicture, userId } =
       newUserInfo;
-      const value1 = [userId];
-      let filePath = newUserInfo.filePath;
-      if(!filePath) {
-        const resultResume = await db.query(`SELECT users.resume FROM users WHERE id = $1`, value1);
-        filePath =  getFirstRecord(resultResume)["resume"];
-      } 
+    const value1 = [userId];
+    let filePath = newUserInfo.filePath;
+    if (!filePath) {
+      const resultResume = await db.query(`SELECT users.resume FROM users WHERE id = $1`, value1);
+      filePath = getFirstRecord(resultResume)["resume"];
+    }
     const values = [firstName, lastName, username, email, bio, profilePicture, filePath, userId];
-  
+
     const queryString = `
         UPDATE users
         SET first_name = $1,
@@ -203,7 +203,7 @@ const queryGenerator = (db) => {
   const getAllApplicationsByJobId = async (job_id) => {
     const values = [job_id];
     const queryString = `
-    SELECT applications.resume, applications.user_id, applications.job_id, applications.created_at, users.first_name, users.last_name, users.email, users.profile_picture, users.username,users.bio, organizations.name AS organization_name FROM applications
+    SELECT applications.id, applications.resume, applications.user_id, applications.job_id, applications.created_at, users.first_name, users.last_name, users.email, users.profile_picture, users.username,users.bio, organizations.name AS organization_name FROM applications
     JOIN jobs ON jobs.id = applications.job_id
     JOIN users ON applications.user_id = users.id
     JOIN organizations ON jobs.organization_id = organizations.id
@@ -525,7 +525,8 @@ const queryGenerator = (db) => {
         organizations.description AS host_description,
         start_time AS start,
         end_time AS end,
-        organizations.description AS host_description
+        organizations.description AS host_description,
+        fairs.poster
         FROM fairs
         JOIN organizations ON (organizations.id = fairs.host_id)
         WHERE fairs.id = $1
@@ -535,7 +536,8 @@ const queryGenerator = (db) => {
         organizations.name, 
         organizations.description,
         industry,
-        website
+        website,
+        logo
         FROM fairs
         JOIN fairs_organizations ON (fairs.id = fairs_organizations.fair_id) 
         JOIN organizations ON (organizations.id = fairs_organizations.organization_id)
@@ -604,7 +606,42 @@ const queryGenerator = (db) => {
     }
   };
 
+  const deleteOrganizationById = async (id) => {
+    const values = [id];
+    const queryString = `DELETE FROM organizations WHERE id = $1`
+
+    try {
+      await db.query(queryString, values);
+    } catch (error) {
+      console.log(error);
+    };
+
+  };
+
+  const updateOrganizationInfo = async (id, name, description, email, industry, website, logo) => {
+    const values = [name, description, email, industry, website, logo, id];
+    const queryString = `
+    UPDATE organizations
+    SET name = $1,
+      description = $2,
+      email = $3,
+      industry = $4,
+      website = $5,
+      logo = $6
+    WHERE id = $7;
+    `
+
+    try {
+      await db.query(queryString, values);
+    } catch (error) {
+      console.log(error);
+    };
+
+  };
+
   return {
+    updateOrganizationInfo,
+    deleteOrganizationById,
     getJobById,
     applyForJob,
     getFairDetails,
@@ -632,7 +669,7 @@ const queryGenerator = (db) => {
     addJobToOrganization,
     getJobsBySearch,
     updateUser,
-    updatePasswordById, 
+    updatePasswordById,
     readMessages,
   };
 };

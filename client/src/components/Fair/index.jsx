@@ -40,6 +40,7 @@ const Fair = ({ currentUser, setSnackBarDetails }) => {
             fairId={id}
             setSnackBarDetails={setSnackBarDetails}
             live={fair.live}
+            currentUser={currentUser}
           />
         </>
       )}
