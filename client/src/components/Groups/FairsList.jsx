@@ -8,10 +8,10 @@ function FairsList({ fairs, isMember }) {
   const renderFairs = () => {
     return fairs.map((fair, i) => {
       return (
-        <>
+        <div key={i}>
           <FairListItem {...{ fair }} key={fair.id} {...{ isMember }} />
           {i === fairs.length - 1 ? "" : < Divider />}
-        </>
+        </div>
       )
     });
   };
