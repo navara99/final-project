@@ -22,6 +22,7 @@ const ExpandedOrganizationListItem = ({
   fairId,
   setSnackBarDetails,
   live,
+  currentUser,
 }) => {
   const jobs = useOrganizationJobs(id);
   const [jobDetailsOpen, setJobDetailsOpen] = useState(false);
@@ -39,6 +40,8 @@ const ExpandedOrganizationListItem = ({
           setOpenApplicationForm,
           setSnackBarDetails,
           job: jobInfo,
+          setApplied: () => {},
+          currentUser,
         }}
       />
       <Card variant="outlined">
