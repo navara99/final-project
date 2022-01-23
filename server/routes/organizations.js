@@ -25,6 +25,19 @@ module.exports = (db) => {
     }
   });
 
+  router.get("/:id/isMember", async (req, res) => {
+    const { user_id } = req.session;
+    const { id } = req.params;
+    console.log("check")
+    try {
+      const result = await checkIfIAmMember(id, user_id);
+      res.json({ isMember: result });
+    } catch (err) {
+      console.log(err.message);
+    }
+
+  })
+
   router.post("/:id/users", async (req, res) => {
     const { usersIdToAdd } = req.body;
 
@@ -68,6 +81,8 @@ module.exports = (db) => {
       console.log(err.message);
     }
   });
+
+
 
   return router;
 };

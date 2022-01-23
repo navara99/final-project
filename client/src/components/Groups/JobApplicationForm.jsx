@@ -13,11 +13,10 @@ import axios from "axios";
 import useInput from "../../hooks/useInput";
 import { useState } from "react";
 
-function JobApplicationForm({ job, openApplicationForm, setOpenApplicationForm, setSnackBarDetails }) {
+function JobApplicationForm({ job, openApplicationForm, setOpenApplicationForm, setSnackBarDetails, setApplied, currentUser }) {
   const [message, setMessage] = useInput();
   const [resume, setResume] = useState();
   const [showResumeInput, setResumeInput] = useState(false);
-
   async function handleApplicationSubmissions(e) {
     e.preventDefault();
 
@@ -26,13 +25,15 @@ function JobApplicationForm({ job, openApplicationForm, setOpenApplicationForm, 
 
       formData.append("jobId", job.id);
       formData.append("message", message);
-      formData.append("resume", resume[0]);
+      resume && resume[0]? formData.append("resume", resume[0]) : formData.append("resume", currentUser.resume);
+     
 
       await axios.post("/api/applications", formData, {
         headers: {
           "Content-Type": "multipart/formdata"
         }
       });
+      setApplied(true);
       setOpenApplicationForm(!openApplicationForm);
       setSnackBarDetails({
         open: true,
@@ -72,7 +73,7 @@ function JobApplicationForm({ job, openApplicationForm, setOpenApplicationForm, 
                     name="resume"
                     hidden />
                 </Button>
-                <span class="filename">{resume && resume[0].name}</span>
+                <span className="filename">{resume && resume[0].name}</span>
               </>
             }
 

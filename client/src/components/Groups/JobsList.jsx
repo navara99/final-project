@@ -3,13 +3,13 @@ import { List, Divider } from "@mui/material"
 import JobListItem from "./JobListItem";
 import { JoinFull } from "@mui/icons-material";
 
-function JobsList({ jobs, isMember, setSnackBarDetails }) {
+function JobsList({ jobs, isMember, setSnackBarDetails, currentUser}) {
 
   const renderJobs = () => {
     return jobs.map((job, i) => {
       return (
         <div key={job.id}>
-          <JobListItem {...{ job }} {...{ isMember }}  {...{ setSnackBarDetails }} key={job.id} />
+          <JobListItem {...{ job }} {...{ isMember }}  {...{ setSnackBarDetails }} key={job.id} {...{currentUser}}/>
           {i === jobs.length - 1 ? "" : < Divider />}
         </div>
       )

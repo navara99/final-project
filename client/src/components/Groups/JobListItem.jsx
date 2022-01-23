@@ -1,10 +1,21 @@
-import React from "react";
+import React,{useEffect, useState} from "react";
 import { ListItem, ListItemText } from "@mui/material"
 import JobActions from "./JobActions";
 import TimeAgo from "timeago-react";
+import useApplications from "../../hooks/useApplications";
 
-function JobListItem({ job, isMember, setSnackBarDetails }) {
 
+function JobListItem({ job, isMember, setSnackBarDetails, currentUser }) {
+  const [isApplied, setApplied] = useState(false);
+  const job_id = job.id;
+  const[applications] = useApplications(job_id);
+  useEffect(() => {
+    if(currentUser && applications) {
+      if(applications.length > 0) {
+        setApplied(applications.filter(app => app.user_id === currentUser.id).length > 0)
+      }
+    }
+  },[applications, currentUser]);
   return (
     <>
       <ListItem>
@@ -23,7 +34,7 @@ function JobListItem({ job, isMember, setSnackBarDetails }) {
                 /></p>
               </>}
           />
-          <JobActions {...{ isMember }} {...{ job }}  {...{ setSnackBarDetails }} />
+          <JobActions {...{ isMember }} {...{ job }}  {...{ setSnackBarDetails }} {...{currentUser}} isApplied={isApplied} setApplied={setApplied} />
         </div>
       </ListItem>
     </>
