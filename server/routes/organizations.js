@@ -11,7 +11,22 @@ module.exports = (db) => {
     getAllFairsByOrganizationId,
     getOrganizationDetails,
     checkIfIAmMember,
+    deleteOrganizationById
   } = queryGenerator(db);
+
+  router.delete("/:id", async (req, res) => {
+    const { id } = req.params;
+
+    try {
+      await deleteOrganizationById(id);
+      res.json({
+        status: "success"
+      });
+    } catch (err) {
+      console.log(err.message);
+    };
+
+  });
 
   router.post("/", async (req, res) => {
     const { user_id } = req.session;
