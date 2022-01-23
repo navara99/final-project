@@ -80,14 +80,14 @@ pages:
     - upload resume
   - saved page (stretch)
 
-- (style) private message
+- (done) private message
   - find user to message (stretch)
 
 - (done) create organization
   - name
   - description
 
-- (siu) actual career fair page / lobby
+- (done) actual career fair page / lobby
   - list of companies stall: number of person in queue, flyers (pdf, stretch)
   - Link to the stall
 

@@ -53,6 +53,18 @@ module.exports = (db) => {
     }
   });
 
+  router.get("/jobs/:id", async (req, res) => {
+    const { id } = req.params;
+    console.log("==================================")
+    try {
+      const jobs = await getAllJobsByOrganizationId(id, true);
+      console.log(jobs);
+      res.json(jobs);
+    } catch (err) {
+      console.log(err.message);
+    }
+  });
+
   router.get("/:id", async (req, res) => {
     const { user_id } = req.session;
     const { id } = req.params;
