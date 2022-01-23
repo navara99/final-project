@@ -17,6 +17,7 @@ function GroupForm({ openForm, setOpenForm, setMyGroups }) {
   const [email, handleEmailChange] = useInput("");
   const [industry, handleIndustryChange] = useInput("");
   const [website, handleWebsiteChange] = useInput("");
+  const [logo, handleLogoChange] = useInput("");
 
   const createOrganization = async () => {
 
@@ -25,7 +26,8 @@ function GroupForm({ openForm, setOpenForm, setMyGroups }) {
       description,
       email,
       industry,
-      website
+      website,
+      logo
     };
 
     try {
@@ -91,6 +93,14 @@ function GroupForm({ openForm, setOpenForm, setMyGroups }) {
           label="Website"
           fullWidth
           onChange={handleWebsiteChange}
+        />
+        <TextField
+          autoFocus
+          margin="dense"
+          id="logo"
+          label="Organization Logo"
+          fullWidth
+          onChange={handleLogoChange}
         />
       </DialogContent>
       <DialogActions>
