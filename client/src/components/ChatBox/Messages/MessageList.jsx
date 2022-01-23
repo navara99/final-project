@@ -9,8 +9,8 @@ const MessageList = (props) => {
 
   const messageList = messages
     ? messages.map((message, i) => (
-        <MessageListItem key={i} {...{ ...props, message }} />
-      ))
+      <MessageListItem key={i} {...{ ...props, message }} />
+    ))
     : null;
 
   useEffect(() => {
@@ -30,7 +30,7 @@ const MessageList = (props) => {
         );
       });
     }
-  }, [receiverId, messages.length]);
+  }, [receiverId, messages.length, setMessages]);
   return <List ref={myMessage}>{messageList}</List>;
 };
 

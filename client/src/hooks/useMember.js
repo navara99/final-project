@@ -8,7 +8,7 @@ function useMember(id) {
     axios.get(`/api/organizations/${id}/isMember`).then(({ data }) => {
       setIsMember(data.isMember);
     });
-  },[]);
+  }, [id]);
 
   return isMember;
 
