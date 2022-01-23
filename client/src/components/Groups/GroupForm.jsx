@@ -11,13 +11,13 @@ import React from "react";
 import useInput from "../../hooks/useInput";
 import axios from "axios";
 
-function GroupForm({ openForm, setOpenForm, setMyGroups, group, editOrganization }) {
-  const [name, handleNameChange] = useInput(group ? group.name : "");
-  const [description, handleDescriptionChange] = useInput(group ? group.description : "");
-  const [email, handleEmailChange] = useInput(group ? group.email : "");
-  const [industry, handleIndustryChange] = useInput(group ? group.industry : "");
-  const [website, handleWebsiteChange] = useInput(group ? group.website : "");
-  const [logo, handleLogoChange] = useInput(group ? group.logo : "");
+function GroupForm({ openForm, setOpenForm, setMyGroups }) {
+  const [name, handleNameChange] = useInput("");
+  const [description, handleDescriptionChange] = useInput("");
+  const [email, handleEmailChange] = useInput("");
+  const [industry, handleIndustryChange] = useInput("");
+  const [website, handleWebsiteChange] = useInput("");
+  const [logo, handleLogoChange] = useInput("");
 
   const createOrganization = async () => {
 
@@ -110,7 +110,7 @@ function GroupForm({ openForm, setOpenForm, setMyGroups, group, editOrganization
       </DialogContent>
       <DialogActions>
         <Button onClick={() => { setOpenForm(!openForm) }}>Cancel</Button>
-        <Button onClick={editOrganization ? editOrganization : handleCreate}>{editOrganization ? "Save" : "Create"}</Button>
+        <Button onClick={handleCreate}>Create</Button>
       </DialogActions>
     </Dialog>
   )

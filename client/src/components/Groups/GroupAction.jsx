@@ -4,10 +4,11 @@ import { useState } from "react";
 import { Delete, Edit } from "@mui/icons-material";
 import axios from "axios";
 import ConfirmDelete from "./ConfirmDelete";
-import GroupForm from "./GroupForm";
+import EditGroup from "./EditGroup";
 
 function GroupAction({ group, setMyGroups }) {
   const [confirmModal, setConfirmModal] = useState(false);
+  const [editModal, setEditModal] = useState(false);
 
   const deleteOrganization = async () => {
 
@@ -21,11 +22,32 @@ function GroupAction({ group, setMyGroups }) {
 
   };
 
+  const editOrganization = async (name, description, email, industry, website, logo) => {
+
+    const newGroupInfo = {
+      name,
+      description,
+      email,
+      industry,
+      website,
+      logo
+    };
+
+    try {
+      const { data } = await axios.put(`/api/organizations/${group.id}`, newGroupInfo);
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+    };
+
+  };
+
   const btnInfo = [
     {
       text: "Edit",
       variant: "outlined",
-      icon: <Edit />
+      icon: <Edit />,
+      onClick: () => setEditModal(!editModal)
     }
     ,
     {
@@ -49,7 +71,7 @@ function GroupAction({ group, setMyGroups }) {
           setConfirmModal,
           message: `Are you sure you want to delete ${group.name}? This change is irreversible.`
         }} />
-        <GroupForm {...{ group }} />
+        <EditGroup {...{ group, editModal, setEditModal, editOrganization }} />
         {btns}
       </div>
     </>
