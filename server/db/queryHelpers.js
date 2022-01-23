@@ -37,16 +37,16 @@ const queryGenerator = (db) => {
 
   const updateUser = async (newUserInfo) => {
 
-    const { firstName, lastName, username, email, bio, profilePicture, userId} =
+    const { firstName, lastName, username, email, bio, profilePicture, userId } =
       newUserInfo;
-      const value1 = [userId];
-      let filePath = newUserInfo.filePath;
-      if(!filePath) {
-        const resultResume = await db.query(`SELECT users.resume FROM users WHERE id = $1`, value1);
-        filePath =  getFirstRecord(resultResume)["resume"];
-      } 
+    const value1 = [userId];
+    let filePath = newUserInfo.filePath;
+    if (!filePath) {
+      const resultResume = await db.query(`SELECT users.resume FROM users WHERE id = $1`, value1);
+      filePath = getFirstRecord(resultResume)["resume"];
+    }
     const values = [firstName, lastName, username, email, bio, profilePicture, filePath, userId];
-  
+
     const queryString = `
         UPDATE users
         SET first_name = $1,
@@ -604,7 +604,20 @@ const queryGenerator = (db) => {
     }
   };
 
+  const deleteOrganizationById = async (id) => {
+    const values = [id];
+    const queryString = `DELETE FROM organizations WHERE id = $1`
+
+    try {
+      await db.query(queryString, values);
+    } catch (error) {
+      console.log(error);
+    };
+
+  };
+
   return {
+    deleteOrganizationById,
     getJobById,
     applyForJob,
     getFairDetails,
@@ -632,7 +645,7 @@ const queryGenerator = (db) => {
     addJobToOrganization,
     getJobsBySearch,
     updateUser,
-    updatePasswordById, 
+    updatePasswordById,
     readMessages,
   };
 };
