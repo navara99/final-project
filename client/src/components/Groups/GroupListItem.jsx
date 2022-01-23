@@ -4,7 +4,7 @@ import GroupAction from "./GroupAction";
 import { Link } from "react-router-dom";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-function GroupListItem({ group, openAddMembersModal, setOpenAddMembersModal, selectedGroup, setSelectedGroup, cardStyles }) {
+function GroupListItem({ group, openAddMembersModal, setOpenAddMembersModal, selectedGroup, setSelectedGroup, cardStyles, setMyGroups }) {
 
   return (
     <Card alignItems="flex-start" style={cardStyles}>
@@ -21,13 +21,7 @@ function GroupListItem({ group, openAddMembersModal, setOpenAddMembersModal, sel
           />
         </Link>
         <CardActions>
-          <GroupAction
-            {...{ openAddMembersModal }}
-            {...{ setOpenAddMembersModal }}
-            {...{ group }}
-            {...{ selectedGroup }}
-            {...{ setSelectedGroup }}
-          />
+          <GroupAction {...{ openAddMembersModal, setMyGroups, group, setSelectedGroup, selectedGroup }} />
         </CardActions>
       </div>
     </Card >
