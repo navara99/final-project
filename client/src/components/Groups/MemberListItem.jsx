@@ -10,7 +10,6 @@ import {
 import MessageIcon from "@mui/icons-material/Message";
 import useCurrentUser from "../../hooks/useCurrentUser";
 import { Link } from "react-router-dom";
-import useOtherUserProfile from "../../hooks/useOtherUserProfile";
 
 function MembersListItem({ member }) {
   const { currentUser } = useCurrentUser();

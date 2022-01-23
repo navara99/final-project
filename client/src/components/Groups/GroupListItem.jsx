@@ -2,7 +2,6 @@ import React from "react";
 import { ListItemText, Card, CardActions } from "@mui/material";
 import GroupAction from "./GroupAction";
 import { Link } from "react-router-dom";
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 function GroupListItem({ group, openAddMembersModal, setOpenAddMembersModal, selectedGroup, setSelectedGroup, cardStyles, setMyGroups }) {
 

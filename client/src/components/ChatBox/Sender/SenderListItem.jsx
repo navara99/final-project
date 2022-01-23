@@ -3,7 +3,6 @@ import {
   ListItemAvatar,
   Avatar,
   ListItemText,
-  Typography,
   Divider,
   ListItemButton,
 } from "@mui/material";
@@ -19,7 +18,7 @@ const SenderListItem = ({
   lastUserId,
   numOfMsg,
 }) => {
-  const { first_name, last_name, profile_picture, username, id } = sender;
+  const { first_name, last_name, profile_picture, id } = sender;
   const handleClick = (e) => {
     setReceiverId(id);
     setReceiver({ ...sender });

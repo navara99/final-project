@@ -1,6 +1,5 @@
 import { Grid } from '@mui/material'
 import React,{useState} from 'react'
-import useCurrentUser from '../../hooks/useCurrentUser'
 import EditPassword from './EditPassword'
 import EditProfile from './EditProfile'
 import NavColumn from './NavColumn'
