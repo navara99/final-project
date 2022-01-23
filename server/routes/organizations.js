@@ -12,7 +12,8 @@ module.exports = (db) => {
     getOrganizationDetails,
     checkIfIAmMember,
     deleteOrganizationById,
-    updateOrganizationInfo
+    updateOrganizationInfo,
+    getOrganizationsByUser
   } = queryGenerator(db);
 
   router.delete("/:id", async (req, res) => {
@@ -30,14 +31,15 @@ module.exports = (db) => {
   });
 
   router.put("/:id", async (req, res) => {
+    const { user_id } = req.session;
     const { id } = req.params;
     const { name, description, email, industry, website, logo } = req.body;
 
     try {
-      const results = await updateOrganizationInfo(id, name, description, email, industry, website, logo);
-      res.json({
-        status: "success"
-      });
+      await updateOrganizationInfo(id, name, description, email, industry, website, logo);
+      const updatedOrganizations = await getOrganizationsByUser(user_id);
+      console.log(updatedOrganizations);
+      res.json(updatedOrganizations);
     } catch (err) {
       console.log(err.message);
     }
