@@ -3,10 +3,10 @@ import { ListItemText, Card, CardActions } from "@mui/material";
 import GroupAction from "./GroupAction";
 import { Link } from "react-router-dom";
 
-function GroupListItem({ group, openAddMembersModal, setOpenAddMembersModal, selectedGroup, setSelectedGroup, cardStyles, setMyGroups }) {
+function GroupListItem({ group, openAddMembersModal, selectedGroup, setSelectedGroup, cardStyles, setMyGroups }) {
 
   return (
-    <Card alignItems="flex-start" style={cardStyles}>
+    <Card style={cardStyles}>
       <div className="organization-card">
         <Link to={`/organizations/${group.id}`} style={{ textDecoration: 'none', display: "flex", color: "black" }}>
           <img
