@@ -19,7 +19,7 @@ const useMessages = (currentUser) => {
       setSenders(res.data.contacts);
       setMessages(res.data.messagesArr);
     });
-  }, []);
+  }, [currentUser]);
 
   useEffect(() => {
     setSenders((prev) =>
@@ -80,6 +80,7 @@ const useMessages = (currentUser) => {
 
   useEffect(() => {
     // intialize socket
+    if (!currentUser) return;
     const socket = io.connect("http://localhost:8080");
     socket.on("getMessage", (data) => {
       setIncomingMessage({ ...data, created_at: new Date().toISOString() });
@@ -94,7 +95,9 @@ const useMessages = (currentUser) => {
       );
     });
     setSocket(socket);
-  }, []);
+
+    return socket.emit("logout");
+  }, [currentUser]);
 
   useEffect(() => {
     incomingMessage && setMessages((prev) => [...prev, incomingMessage]);
