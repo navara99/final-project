@@ -53,3 +53,7 @@
 .applicants-resume-wrapper {
   display: flex;
 }
+
+.job-info {
+  padding: 0.2em;
+}
