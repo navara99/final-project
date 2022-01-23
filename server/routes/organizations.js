@@ -11,7 +11,8 @@ module.exports = (db) => {
     getAllFairsByOrganizationId,
     getOrganizationDetails,
     checkIfIAmMember,
-    deleteOrganizationById
+    deleteOrganizationById,
+    updateOrganizationInfo
   } = queryGenerator(db);
 
   router.delete("/:id", async (req, res) => {
@@ -30,9 +31,10 @@ module.exports = (db) => {
 
   router.put("/:id", async (req, res) => {
     const { id } = req.params;
-
+    const { name, description, email, industry, website, logo } = req.body;
+    console.log(req.body);
     try {
-      console.log(id);
+      const results = await updateOrganizationInfo(id,);
     } catch (err) {
       console.log(err.message);
     }
