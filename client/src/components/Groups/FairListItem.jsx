@@ -27,7 +27,7 @@ function FairListItem({ fair, isMember }) {
         </img>
         <ListItemText
           primary={fair.name}
-          secondary={fairDescription.split("\n").map((elem, i) => <span className="job-info" key={i} style={{ display: "block" }}>{elem}</span>)}
+          secondary={fairDescription.split("\n").map((elem, i) => <span className="description-info" key={i} style={{ display: "block" }}>{elem}</span>)}
         />
         <FairsAction id={fair.id} {...{ isMember }} />
       </div>

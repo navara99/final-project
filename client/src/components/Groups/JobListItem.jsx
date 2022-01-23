@@ -31,7 +31,7 @@ function JobListItem({ job, isMember, setSnackBarDetails, currentUser }) {
         <div>
           <ListItemText
             primary={job.title}
-            secondary={jobDescription.split("\n").map((elem, i) => <span className="job-info" key={i} style={{ display: "block" }}>{elem}</span>)}
+            secondary={jobDescription.split("\n").map((elem, i) => <span className="description-info" key={i} style={{ display: "block" }}>{elem}</span>)}
           />
           <JobActions {...{ isMember }} {...{ job }}  {...{ setSnackBarDetails }} {...{ currentUser }} isApplied={isApplied} setApplied={setApplied} />
         </div>
