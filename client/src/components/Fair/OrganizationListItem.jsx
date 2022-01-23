@@ -8,7 +8,7 @@ import Typography from "@mui/material/Typography";
 import CardMedia from "@mui/material/CardMedia";
 import { Link } from "react-router-dom";
 
-const OrganizationListItem = ({ setExpanded, id, fairId, name, live }) => {
+const OrganizationListItem = ({ setExpanded, id, fairId, name, live, logo }) => {
   const clickHandler = (e) => {
     e.stopPropagation();
   };
@@ -18,7 +18,7 @@ const OrganizationListItem = ({ setExpanded, id, fairId, name, live }) => {
       <Card variant="outlined" className="not-expanded">
         <CardMedia
           component="img"
-          image="http://assets.stickpng.com/images/580b57fcd9996e24bc43c53e.png"
+          image={logo}
           alt={name + "_logo"}
         />
         <CardContent>
