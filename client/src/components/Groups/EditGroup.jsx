@@ -93,7 +93,7 @@ function EditGroup({ group, editModal, editOrganization, setEditModal }) {
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose}>Cancel</Button>
-        <Button onClick={handleEdit}>Edit</Button>
+        <Button onClick={handleEdit}>Save</Button>
       </DialogActions>
     </Dialog>
   )
