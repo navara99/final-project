@@ -15,7 +15,7 @@ function GroupListItem({ group, openAddMembersModal, setOpenAddMembersModal, sel
           <img
             alt={group.name}
             className="organization-logo"
-            src="https://assets.brand.microsites.netflix.io/assets/7dc497e2-4975-11ec-a9ce-066b49664af6_cm_1440w.jpg?v=1"
+            src={`${group.logo}`}
           />
           <ListItemText
             primary={<h3 className="organization-card-name">{group.name}</h3>}

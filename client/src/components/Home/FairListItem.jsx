@@ -21,7 +21,7 @@ const FairListItem = ({
 
   return (
     <div>
-      <Link to={`fairs/${id}`}>
+      <Link to={`/fairs/${id}`}>
         <Card>
           {showDate && <div className="badge">{formattedDate}</div>}
           <div className="title">

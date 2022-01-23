@@ -1,54 +1,104 @@
-.fair-details {
+.live {
   width: 100%;
 }
 
-.fair-details .MuiTypography-h6 {
+.live .MuiBadge-root {
+  width: 100%;
+}
+
+.live .MuiTypography-h6 {
   margin: 1em 0 0em;
 }
 
-.fair-details a {
+.live a {
   text-decoration: none;
 }
 
-.fair-details .MuiCardActions-root {
+.live .MuiCardActions-root {
   display: flex;
   justify-content: space-between;
 }
 
-.fair-details .MuiCardActions-root > div > * {
+.live .MuiCardActions-root > div > * {
   margin: 0 0.3em;
 }
 
-.fair-details h3 {
+.live h3 {
   padding: 0 0.4em;
 }
 
-.fair-details .MuiBox-root .MuiPaper-root {
+.live .MuiBox-root .MuiPaper-root {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
 }
 
-.fair-details .MuiBox-root.css-0 {
+.live .MuiBox-root.css-0 {
   display: inline-block;
   margin-bottom: 0.8em;
   width: 100%;
 }
 
-.fair-details .MuiBox-root .MuiPaper-root img {
+.live .MuiBox-root .MuiPaper-root img {
   max-width: 7.5em;
   margin: 0.5em;
 }
 
-.fair-details .MuiBox-root .MuiPaper-root .MuiCardContent-root {
+.live .MuiBox-root .MuiPaper-root .MuiCardContent-root {
   flex: 1;
 }
 
-.fair-details .MuiBox-root .MuiCardActions-root {
+.live .MuiBox-root .MuiCardActions-root {
   display: flex;
 }
 
-.fair-details .organization-details {
+.live .MuiBox-root .MuiCardActions-root > * {
+  margin: 0 0.5em;
+}
+
+.live .organization-details {
   display: flex;
   width: 100%;
   justify-content: space-between;
+}
+
+.live .MuiBadge-root .MuiBadge-anchorOriginTopLeftRectangular {
+  left: 2.5em;
+  top: 0.4em;
+  font-size: 2em;
+  height: auto;
+}
+
+.not-expanded .organization-details {
+  align-items: center;
+  padding: 0 0.4em;
+}
+
+.live .MuiBox-root .MuiPaper-root.not-expanded img {
+  max-width: 5em;
+}
+
+.live .stall-list ul {
+  margin: 0;
+  padding: 0;
+}
+
+.live .stall-list li {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5em 0;
+  align-items: center;
+  border-top: 0.1em solid #111111;
+}
+
+.live .MuiTypography-root.MuiTypography-body1 {
+  margin: 0;
+}
+
+.live .stall-list li:first-child {
+  border-top: none;
+}
+
+.live .stall-list li button {
+  margin: 0 0.3em;
+  padding: 0;
 }

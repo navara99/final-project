@@ -202,7 +202,7 @@ const queryGenerator = (db) => {
   const getAllApplicationsByJobId = async (job_id) => {
     const values = [job_id];
     const queryString = `
-    SELECT applications.*, users.*, organizations.name AS organization_name FROM applications
+    SELECT applications.resume, applications.user_id, applications.job_id, applications.created_at, users.first_name, users.last_name, users.email, users.profile_picture, users.username,users.bio, organizations.name AS organization_name FROM applications
     JOIN jobs ON jobs.id = applications.job_id
     JOIN users ON applications.user_id = users.id
     JOIN organizations ON jobs.organization_id = organizations.id
@@ -217,7 +217,7 @@ const queryGenerator = (db) => {
     }
   };
 
-  const getAllJobsByOrganizationId = async (organization_id) => {
+  const getAllJobsByOrganizationId = async (organization_id, applicationsNotIncluded) => {
     const values = [organization_id];
     const queryString = `
     SELECT jobs.* FROM jobs
@@ -228,6 +228,7 @@ const queryGenerator = (db) => {
 
     try {
       const result = await db.query(queryString, values);
+      if (applicationsNotIncluded) return getData(result);
       const jobs = await Promise.all(
         result.rows.map(async (job) => {
           const jobWithApplicationArr = await getAllApplicationsByJobId(job.id);
@@ -351,6 +352,14 @@ const queryGenerator = (db) => {
     try {
       const result = await db.query(queryString, values);
       const newFair = getFirstRecord(result);
+
+      const values2 = [hostId, newFair.id];
+      const queryString2 = `
+        INSERT INTO fairs_organizations (organization_id, fair_id)
+        VALUES ($1, $2)
+        RETURNING *;
+      `;
+      await db.query(queryString2, values2);
       return newFair;
     } catch (err) {
       console.log(err.message);

@@ -5,7 +5,6 @@ import useExpand from "../../hooks/useExpand";
 
 function OrganizationHeader({ organization, cardStyles }) {
   const { ExpandMore, handleExpandClick, expanded } = useExpand();
-
   return (
     <div >
       <Card alignItems="flex-start" style={cardStyles}>
@@ -13,7 +12,7 @@ function OrganizationHeader({ organization, cardStyles }) {
           <img
             alt={organization.name}
             className="organization-logo"
-            src="https://assets.brand.microsites.netflix.io/assets/7dc497e2-4975-11ec-a9ce-066b49664af6_cm_1440w.jpg?v=1"
+            src={`${organization.details.logo}`}
           />
           <ListItemText
             primary={<h2 className="organization-card-name">{organization.details.name}</h2>}

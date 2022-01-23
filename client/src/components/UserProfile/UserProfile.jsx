@@ -41,7 +41,7 @@ const UserProfile = ({currentUser}) => {
                   { myGroups.map((group,i) => (
                         <ListItem key={i}>
                           <ListItemAvatar >
-                            <Avatar alt={`${group.name}`} src='https://assets.brand.microsites.netflix.io/assets/7dc497e2-4975-11ec-a9ce-066b49664af6_cm_1440w.jpg?v=1'></Avatar>
+                            <Avatar alt={`${group.name}`} src={group.logo}></Avatar>
                           </ListItemAvatar>
                           <ListItemText primary={`${group.name}`} primaryTypographyProps={{variant:"h6"}}
                           />

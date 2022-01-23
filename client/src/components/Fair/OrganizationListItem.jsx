@@ -3,64 +3,43 @@ import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import CardMedia from "@mui/material/CardMedia";
 import { Link } from "react-router-dom";
 
-const OrganizationListItem = ({ id, website, industry, description, name }) => {
+const OrganizationListItem = ({ setExpanded, id, fairId, name, live }) => {
+  const clickHandler = (e) => {
+    e.stopPropagation();
+  };
+
   return (
-    <Box>
-      <Card variant="outlined">
+    <Box onClick={setExpanded}>
+      <Card variant="outlined" className="not-expanded">
         <CardMedia
           component="img"
-          image="https://mui.com/static/images/cards/contemplative-reptile.jpg"
+          image="http://assets.stickpng.com/images/580b57fcd9996e24bc43c53e.png"
           alt={name + "_logo"}
         />
         <CardContent>
           <div className="organization-details">
-            <div>
-              <Typography
-                sx={{ fontSize: 14 }}
-                color="text.secondary"
-                gutterBottom
-              >
-                {industry}
-              </Typography>
-              <Typography variant="h5" component="div">
-                {name}
-              </Typography>
-              {/* <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                adjective
-              </Typography> */}
-            </div>
-            <div>
+            <Typography variant="h5" component="div">
+              {name}
+            </Typography>
+            {live && (
               <CardActions>
-                {website && (
+                <Link to={`/live/${fairId}/${id}`} target="_blank">
                   <Button
-                    target="_blank"
                     size="small"
-                    component={Link}
-                    to={website}
+                    onClick={clickHandler}
+                    variant="outlined"
                   >
-                    Website
+                    Join this stall
                   </Button>
-                )}
-                {/* <Button size="small" onClick={() => console.log("job post")}>
-                  Show Job Post
-                </Button> */}
-                <Button
-                  size="small"
-                  component={Link}
-                  target="_blank"
-                  to={`/organizations/${id}`}
-                >
-                  Details
-                </Button>
+                </Link>
               </CardActions>
-            </div>
+            )}
           </div>
-          <Typography variant="body2">{description}</Typography>
         </CardContent>
       </Card>
     </Box>
