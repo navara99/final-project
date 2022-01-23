@@ -28,6 +28,18 @@ module.exports = (db) => {
 
   });
 
+  router.put("/:id", async (req, res) => {
+    const { id } = req.params;
+
+    try {
+      console.log(id);
+    } catch (err) {
+      console.log(err.message);
+    }
+
+
+  });
+
   router.post("/", async (req, res) => {
     const { user_id } = req.session;
 

@@ -616,6 +616,10 @@ const queryGenerator = (db) => {
 
   };
 
+  const updateOrganizationInfo = async () => {
+
+  };
+
   return {
     deleteOrganizationById,
     getJobById,
