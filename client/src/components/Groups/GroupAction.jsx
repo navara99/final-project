@@ -1,8 +1,19 @@
 import React from "react";
 import GroupsBtn from "./GroupsBtn";
 import { Delete, Edit } from "@mui/icons-material";
+import axios from "axios";
 
 function GroupAction({ openAddMembersModal, setOpenAddMembersModal, group }) {
+
+  const deleteOrganization = async () => {
+
+    try {
+      await axios.delete("/organizations/");
+    } catch (err) {
+      console.log(err.message);
+    }
+
+  };
 
   const btnInfo = [
     {
@@ -14,12 +25,13 @@ function GroupAction({ openAddMembersModal, setOpenAddMembersModal, group }) {
     {
       text: "Delete",
       variant: "outlined",
-      icon: <Delete />
+      icon: <Delete />,
+      onClick: deleteOrganization
     }
   ];
 
   const btns = btnInfo.map((info, i) => {
-    return <GroupsBtn key={i} text={info.text} variant={info.variant} icon={info.icon} />
+    return <GroupsBtn key={i} text={info.text} variant={info.variant} icon={info.icon} onClick={info.onClick} />
   });
 
   return (
