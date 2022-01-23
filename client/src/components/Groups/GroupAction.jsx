@@ -11,7 +11,7 @@ function GroupAction({ group }) {
   const deleteOrganization = async () => {
 
     try {
-      await axios.delete(`/organizations/${group.id}`);
+      await axios.delete(`api/organizations/${group.id}`);
     } catch (err) {
       console.log(err.message);
     }
