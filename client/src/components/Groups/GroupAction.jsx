@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Delete, Edit } from "@mui/icons-material";
 import axios from "axios";
 import ConfirmDelete from "./ConfirmDelete";
+import GroupForm from "./GroupForm";
 
 function GroupAction({ group, setMyGroups }) {
   const [confirmModal, setConfirmModal] = useState(false);
@@ -12,7 +13,7 @@ function GroupAction({ group, setMyGroups }) {
 
     try {
       await axios.delete(`api/organizations/${group.id}`);
-      setMyGroups((prev)=> prev.filter((organization)=> organization.id !== group.id));
+      setMyGroups((prev) => prev.filter((organization) => organization.id !== group.id));
       setConfirmModal(!confirmModal);
     } catch (err) {
       console.log(err.message);
@@ -42,12 +43,13 @@ function GroupAction({ group, setMyGroups }) {
   return (
     <>
       <div className="organization-action-btns">
-      <ConfirmDelete {...{
-        onClick: deleteOrganization,
-        confirmModal,
-        setConfirmModal,
-        message: `Are you sure you want to delete ${group.name}? This change is irreversible.`
-      }} />
+        <ConfirmDelete {...{
+          onClick: deleteOrganization,
+          confirmModal,
+          setConfirmModal,
+          message: `Are you sure you want to delete ${group.name}? This change is irreversible.`
+        }} />
+        <GroupForm {...{ group }} />
         {btns}
       </div>
     </>

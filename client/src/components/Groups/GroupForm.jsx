@@ -11,13 +11,13 @@ import React from "react";
 import useInput from "../../hooks/useInput";
 import axios from "axios";
 
-function GroupForm({ openForm, setOpenForm, setMyGroups }) {
-  const [name, handleNameChange] = useInput("");
-  const [description, handleDescriptionChange] = useInput("");
-  const [email, handleEmailChange] = useInput("");
-  const [industry, handleIndustryChange] = useInput("");
-  const [website, handleWebsiteChange] = useInput("");
-  const [logo, handleLogoChange] = useInput("");
+function GroupForm({ openForm, setOpenForm, setMyGroups, group }) {
+  const [name, handleNameChange] = useInput(group ? group.name : "");
+  const [description, handleDescriptionChange] = useInput(group ? group.description : "");
+  const [email, handleEmailChange] = useInput(group ? group.email : "");
+  const [industry, handleIndustryChange] = useInput(group ? group.industry : "");
+  const [website, handleWebsiteChange] = useInput(group ? group.website : "");
+  const [logo, handleLogoChange] = useInput(group ? group.logo : "");
 
   const createOrganization = async () => {
 
@@ -58,6 +58,7 @@ function GroupForm({ openForm, setOpenForm, setMyGroups }) {
           label="Organization Name"
           fullWidth
           required
+          value={name}
           onChange={handleNameChange}
         />
         <TextField
@@ -68,6 +69,7 @@ function GroupForm({ openForm, setOpenForm, setMyGroups }) {
           label="Description"
           fullWidth
           required
+          value={description}
           onChange={handleDescriptionChange}
         />
         <TextField
@@ -76,6 +78,7 @@ function GroupForm({ openForm, setOpenForm, setMyGroups }) {
           label="Email"
           fullWidth
           type="email"
+          value={email}
           required
           onChange={handleEmailChange}
         />
@@ -85,6 +88,7 @@ function GroupForm({ openForm, setOpenForm, setMyGroups }) {
           label="Industry"
           fullWidth
           required
+          value={industry}
           onChange={handleIndustryChange}
         />
         <TextField
@@ -92,12 +96,13 @@ function GroupForm({ openForm, setOpenForm, setMyGroups }) {
           id="website"
           label="Website"
           fullWidth
+          value={website}
           onChange={handleWebsiteChange}
         />
         <TextField
-          autoFocus
           margin="dense"
           id="logo"
+          value={logo}
           label="Organization Logo"
           fullWidth
           onChange={handleLogoChange}
