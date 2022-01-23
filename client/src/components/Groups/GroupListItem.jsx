@@ -16,7 +16,7 @@ function GroupListItem({ group, openAddMembersModal, selectedGroup, setSelectedG
           />
           <ListItemText
             primary={<h3 className="organization-card-name">{group.name}</h3>}
-            secondary={<p>{group.description}</p>}
+            secondary={group.description}
           />
         </Link>
         <CardActions>
