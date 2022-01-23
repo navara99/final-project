@@ -21,7 +21,7 @@ function OrganizationFairs({ organization, cardStyles, setOrganizationDetails, s
         {...{ setOrganizationDetails }}
         {...{ setSnackBarDetails }}
       />
-      <Card alignItems="flex-start" style={cardStyles}>
+      <Card style={cardStyles}>
         <div className="organization-card">
           <ListItemText
             primary={<h2 className="organization-card-name">Fairs</h2>}
