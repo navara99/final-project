@@ -48,7 +48,6 @@
   * add more users
 * bubble for chat (siu)
 * icon for organizations on user profile page (Yagnesh)
-* update the sender list if receive message from new contact (Siu)
 * deployment (Siu)
 * job board: take out details button (or changed to saved job)
   * new features, new table
