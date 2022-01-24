@@ -5,13 +5,12 @@ import { io } from "socket.io-client";
 import moment from "moment";
 
 const useMessages = (currentUser) => {
-  const [receiverId, setReceiverId] = useState(null);
-  const [messages, setMessages] = useState(null);
-  const [senders, setSenders] = useState(null);
+  const [receiverId, setReceiverId] = useState();
+  const [messages, setMessages] = useState([]);
+  const [senders, setSenders] = useState([]);
   const [messageText, setMessageText] = useState("");
-  const [incomingMessage, setIncomingMessage] = useState(null);
-  const [socket, setSocket] = useState(null);
-  const [receiver, setReceiver] = useState(null);
+  const [socket, setSocket] = useState();
+  const [receiver, setReceiver] = useState();
   const location = useLocation();
 
   useEffect(() => {
@@ -24,39 +23,37 @@ const useMessages = (currentUser) => {
   useEffect(() => {
     setSenders((prev) =>
       prev
-        ? prev
-            .map((sender) => {
-              const numOfMsg = messages.filter(
-                (message) => message.sender_id === sender.id && !message.is_read
-              ).length;
-              const [lastMsg, createdDate, lastUserId, msgId] = messages.reduce(
-                (lastMessage, message) => {
-                  if (
-                    message.sender_id === sender.id ||
-                    message.receiver_id === sender.id
-                  ) {
-                    return [
-                      message.message,
-                      message.created_at,
-                      message.sender_id,
-                      message.id,
-                    ];
-                  }
-                  return lastMessage;
-                },
-                null
-              );
-              return {
-                ...sender,
-                lastMsg,
-                createdDate: moment(`${createdDate}`).fromNow(),
-                lastUserId,
-                msgId,
-                numOfMsg,
-              };
-            })
-            .sort((senderA, senderB) => senderB.msgId - senderA.msgId)
-        : prev
+        .map((sender) => {
+          const numOfMsg = messages.filter(
+            (message) => message.sender_id === sender.id && !message.is_read
+          ).length;
+          const [lastMsg, createdDate, lastUserId, msgId] = messages.reduce(
+            (lastMessage, message) => {
+              if (
+                message.sender_id === sender.id ||
+                message.receiver_id === sender.id
+              ) {
+                return [
+                  message.message,
+                  message.created_at,
+                  message.sender_id,
+                  message.id,
+                ];
+              }
+              return lastMessage;
+            },
+            null
+          );
+          return {
+            ...sender,
+            lastMsg,
+            createdDate: moment(`${createdDate}`).fromNow(),
+            lastUserId,
+            msgId,
+            numOfMsg,
+          };
+        })
+        .sort((senderA, senderB) => senderB.msgId - senderA.msgId)
     );
   }, [messages]);
 
@@ -83,7 +80,14 @@ const useMessages = (currentUser) => {
     if (!currentUser) return;
     const socket = io.connect("http://localhost:8080");
     socket.on("getMessage", (data) => {
-      setIncomingMessage({ ...data, created_at: new Date().toISOString() });
+      const newMsg = { ...data, created_at: new Date().toISOString() };
+      setSenders((prev) => {
+        if (prev.some((sender) => sender.id === data.sender_id)) {
+          return prev;
+        }
+        return [data.sender, ...prev];
+      });
+      setMessages((prev) => [...prev, newMsg]);
     });
 
     socket.on("editMessage", (data) => {
@@ -100,10 +104,6 @@ const useMessages = (currentUser) => {
   }, [currentUser]);
 
   useEffect(() => {
-    incomingMessage && setMessages((prev) => [...prev, incomingMessage]);
-  }, [incomingMessage]);
-
-  useEffect(() => {
     if (currentUser && socket) {
       //sending user id
       socket.emit("addUser", currentUser.id);
@@ -117,15 +117,16 @@ const useMessages = (currentUser) => {
       sender_id: currentUser.id,
       receiver_id: receiverId,
       message,
+      sender: currentUser,
     };
     axios.post("/api/messages/", newMessage).then((res) => {
-      setMessages((prev) => [...prev, res.data.messageObj]);
       setSenders((prev) => {
         if (prev.some((el) => el.id === res.data.receiver.id)) {
           return prev;
         }
-        return [...prev, res.data.receiver];
+        return [res.data.receiver, ...prev];
       });
+      setMessages((prev) => [...prev, res.data.messageObj]);
     });
     //sending message to socket server
     socket.emit("sendMessage", newMessage);
@@ -136,11 +137,13 @@ const useMessages = (currentUser) => {
     setReceiverId(e.target.value);
   };
 
-  const numOfUnreadMsg = Array.isArray(messages) && currentUser
-    ? messages.filter(
-        ({ is_read, receiver_id }) => !is_read && receiver_id === currentUser.id
-      ).length
-    : 0;
+  const numOfUnreadMsg =
+    Array.isArray(messages) && currentUser
+      ? messages.filter(
+          ({ is_read, receiver_id }) =>
+            !is_read && receiver_id === currentUser.id
+        ).length
+      : 0;
 
   const messageState = {
     setMessageText,

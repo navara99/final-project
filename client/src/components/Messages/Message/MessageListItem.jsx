@@ -27,7 +27,6 @@ const MessageListItem = (props) => {
   };
   
   const clickAcceptHandler = (e) => {
-    console.log(application_id)
     axios
       .put("/api/messages/interview", { ...appointment, is_accepted: true })
       .then((res) => {
@@ -38,7 +37,6 @@ const MessageListItem = (props) => {
             return data;
           })
         );
-        console.log(data);
         socket.emit("editMessage", data);
         setClicked(true);
         handleSubmit(e, "Invitation is accepted.");
@@ -56,7 +54,6 @@ const MessageListItem = (props) => {
             return data;
           })
         );
-        console.log(data);
         socket.emit("editMessage", data);
         setClicked(true);
         handleSubmit(e, "Invitation is rejected :(");
