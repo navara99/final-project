@@ -32,7 +32,7 @@ function JobActions({ job, isMember, setSnackBarDetails, currentUser, isApplied,
           style={{ position: "absolute", top: "0.5em", right: "0.5em" }}
           onClick={likeToggle}>
           {like ?
-            <FavoriteIcon style={{ color: "red" }} fontSize="large" /> :
+            <FavoriteIcon style={{ color: "#db565b" }} fontSize="large" /> :
             <FavoriteBorderIcon fontSize="large" />}
         </IconButton>}
     </div>
