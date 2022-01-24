@@ -35,7 +35,7 @@ function Groups({ setSnackBarDetails }) {
         <Button style={{ height: "50%" }} variant="contained" startIcon={<Add />} onClick={() => setOpenForm(!openForm)}>Add Organization</Button>
         <GroupForm {...{ openForm }} {...{ setOpenForm }}  {...{ setMyGroups }} />
       </div>
-      <List sx={{ width: '90%', paddingTop: "2em",mt:4, display:"flex", justifyContent:"center" }}>
+      <List sx={{ width: '90%', paddingTop: "2em",mt:4, display:"flex", justifyContent:"center", flexWrap:"wrap" }}>
         {myGroups && renderMyGroups(myGroups)}
       </List>
     </div>
