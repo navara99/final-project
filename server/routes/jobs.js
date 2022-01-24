@@ -3,14 +3,14 @@ const router = express.Router();
 
 module.exports = (db) => {
   const queryGenerator = require("../db/queryHelpers");
-  const { addJobToOrganization, getJobsBySearch, getAllApplicationsByJobId, getJobById } = queryGenerator(db);
+  const { addJobToOrganization, getJobsBySearch, getAllApplicationsByJobId, getJobById, toggleLikes } = queryGenerator(db);
 
-  router.post("/:id/like", (req, res) => {
+  router.post("/:id/like", async (req, res) => {
     const { id } = req.params;
     const { user_id } = req.session;
 
     try {
-      console.log(id, user_id);
+      await toggleLikes(user_id, id);
     } catch (err) {
       console.log(err.message);
     }
