@@ -5,8 +5,21 @@ import FairsAction from "./FairsActions";
 
 function FairListItem({ fair, isMember }) {
 
+  // secondary={jobDescription.split("\n").map((elem, i) => <span className="job-info" key={i} style={{ display: "block" }}>{elem}</span>)}
 
+  //   const jobDescription = `
+  // ${job.description} \n 
+  // Location: ${job.location} \n 
+  // Experience: ${job.experience} \n 
+  // Expected Salary: ${job.salary} \n
+  // Posted: ${formatDate(job.created_at)}
+  //`
 
+  const fairDescription = `
+    Description: ${fair.description} \n
+    Date: ${formatDate(fair.start_time)} \n
+    Time: ${formatStartEndTime(fair.start_time, fair.end_time)} \n
+  `
   return (
     <ListItem>
       <div>
@@ -14,12 +27,7 @@ function FairListItem({ fair, isMember }) {
         </img>
         <ListItemText
           primary={fair.name}
-          secondary={
-            <>
-              <p>Description: {fair.description}</p>
-              <p>Date: {formatDate(fair.start_time)}</p>
-              <p>Time: {formatStartEndTime(fair.start_time, fair.end_time)}</p>
-            </>}
+          secondary={fairDescription.split("\n").map((elem, i) => <span className="description-info" key={i} style={{ display: "block" }}>{elem}</span>)}
         />
         <FairsAction id={fair.id} {...{ isMember }} />
       </div>

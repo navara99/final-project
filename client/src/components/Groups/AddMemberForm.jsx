@@ -22,7 +22,7 @@ const AddMemberForm = ({ openAddMembersModal, setOpenAddMembersModal, id, setSna
   const [users, setUsers] = useState();
   const [nonMember, setNonMember] = useState();
   const [searchWord, setSearchWord] = useState("");
-  useEffect(() =>{
+  useEffect(() => {
     let membersId = organization.members.map(m => m.id)
     setNonMember(allUsers.filter(user => !membersId.includes(user.id)));
   }, [allUsers, organization]);
@@ -46,18 +46,18 @@ const AddMemberForm = ({ openAddMembersModal, setOpenAddMembersModal, id, setSna
     };
 
   };
-  useEffect(()=>{
-    if(searchWord){
+  useEffect(() => {
+    if (searchWord) {
       let word = searchWord.toLowerCase()
       setUsers(nonMember.filter((user) => {
-        if (user.first_name.toLowerCase().includes(word) || user.last_name.toLowerCase().includes(word)|| user.username.toLowerCase().includes(word)){
-         return user 
+        if (user.first_name.toLowerCase().includes(word) || user.last_name.toLowerCase().includes(word) || user.username.toLowerCase().includes(word)) {
+          return user
         }
         return null
       }))
-    }else {setUsers(nonMember);}
-    
-  },[searchWord])
+    } else { setUsers(nonMember); }
+
+  }, [searchWord, nonMember])
   const handleSearchChange = (e) => {
     setSearchWord(e.target.value);
   };

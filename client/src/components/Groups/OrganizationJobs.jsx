@@ -15,7 +15,7 @@ function OrganizationJobs({ cardStyles, organization, setOrganizationDetails, se
   return (
     <div>
       <JobForm {...{ jobFormOpen }} {...{ setJobFormOpen }} {...{ setSnackBarDetails }} {...{ setOrganizationDetails }} />
-      <Card alignItems="flex-start" style={cardStyles}>
+      <Card style={cardStyles}>
         <div className="organization-card">
           <ListItemText
             primary={<h2 className="organization-card-name">Jobs</h2>}

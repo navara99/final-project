@@ -2,17 +2,12 @@ import React from "react";
 import { ListItemText, Card, Collapse, CardActions, CardActionArea } from "@mui/material";
 import GroupAction from "./GroupAction";
 import { Link } from "react-router-dom";
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import useExpand from "../../hooks/useExpand";
 
-
-
-
-function GroupListItem({ group, openAddMembersModal, setOpenAddMembersModal, selectedGroup, setSelectedGroup, cardStyles, setMyGroups }) {
+function GroupListItem({ group, openAddMembersModal, selectedGroup, setSelectedGroup, cardStyles, setMyGroups }) {
 
   return (
-    <Card style={cardStyles} raised>
-      {/* <div className="organization-card"> */}
+    <Card style={cardStyles}>
+      <div className="organization-card">
         <Link to={`/organizations/${group.id}`} style={{ textDecoration: 'none', display: "flex", color: "black" }}>
           <img
             alt={group.name}
@@ -27,7 +22,7 @@ function GroupListItem({ group, openAddMembersModal, setOpenAddMembersModal, sel
         <CardActions>
           <GroupAction {...{ openAddMembersModal, setMyGroups, group, setSelectedGroup, selectedGroup }} />
         </CardActions>
-      {/* </div> */}
+      </div>
     </Card >
   )
 };

@@ -55,3 +55,7 @@
 .applicants-resume-wrapper {
   display: flex;
 }
+
+.description-info {
+  padding: 0.2em;
+}

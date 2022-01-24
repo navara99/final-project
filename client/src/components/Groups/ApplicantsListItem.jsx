@@ -55,7 +55,7 @@ function ApplicantsListItem({
         style={{ padding: "1.5em 0" }}
         alignItems="flex-start"
         secondaryAction={
-          <div class="view-application-buttons">
+          <div className="view-application-buttons">
             <span>
               <Button onClick={() => setOpenResume(!openResume)}>Resume</Button>
               <Button onClick={() => setOpenCoverLetter(!openCoverLetter)}>
@@ -94,9 +94,8 @@ function ApplicantsListItem({
         </ListItemAvatar>
         <ListItemText
           primary={`${application.first_name} ${application.last_name} (${application.username})`}
-          secondary={`Email: ${
-            application.email
-          } ~ Submission Date: ${formatDate(application.created_at)}`}
+          secondary={`Email: ${application.email
+            } ~ Submission Date: ${formatDate(application.created_at)}`}
         />
       </ListItem>
       <Divider variant="inset" component="li" />

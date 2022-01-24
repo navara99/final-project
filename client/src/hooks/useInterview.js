@@ -6,7 +6,7 @@ const useInterview = (id) => {
 
   useEffect(() => {
     axios.get(`/api/interviews/${id}`).then(({ data }) => setInterview(data));
-  }, []);
+  }, [id]);
 
   return [interview, setInterview];
 }

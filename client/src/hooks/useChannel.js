@@ -23,7 +23,7 @@ export default function useVideoSettings(name, username) {
       });
     }
 
-  }, [username]);
+  }, [username, name]);
 
   const config = { mode: "rtc", codec: "vp8", appId, token };
   const useClient = createClient(config);
