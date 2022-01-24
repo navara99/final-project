@@ -1,10 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import GroupsBtn from "./GroupsBtn";
 import JobApplicationForm from "./JobApplicationForm";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-
-
 
 function JobActions({ job, isMember, setSnackBarDetails, currentUser, isApplied, setApplied }) {
   const [openApplicationForm, setOpenApplicationForm] = useState(false);

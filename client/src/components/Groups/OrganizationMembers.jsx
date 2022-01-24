@@ -28,7 +28,7 @@ function OrganizationMembers({ organization, cardStyles, setSnackBarDetails, set
         {...{ setSnackBarDetails }}
         {...{ setOrganizationDetails }}
       />
-      <Card alignItems="flex-start" style={cardStyles}>
+      <Card style={cardStyles}>
         <div className="organization-card">
           <ListItemText
             primary={<h2 className="organization-card-name">Members</h2>}

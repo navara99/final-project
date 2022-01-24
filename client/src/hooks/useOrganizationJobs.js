@@ -8,7 +8,7 @@ const useOrganizationJobs = (id) => {
     axios.get(`/api/organizations/jobs/${id}`).then(({ data }) => {
       setJobs(data);
     });
-  }, []);
+  }, [id]);
 
   return jobs;
 };

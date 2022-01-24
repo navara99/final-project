@@ -7,7 +7,7 @@ function OrganizationHeader({ organization, cardStyles }) {
   const { ExpandMore, handleExpandClick, expanded } = useExpand();
   return (
     <div >
-      <Card alignItems="flex-start" style={cardStyles}>
+      <Card style={cardStyles}>
         <div className="organization-card">
           <img
             alt={organization.name}

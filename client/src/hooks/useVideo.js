@@ -58,7 +58,7 @@ const useVideo = (ready, tracks, config, channelName, client, username) => {
         console.log(error);
       }
     }
-  }, [ready, tracks, channelName, client]);
+  }, [ready, tracks, channelName, client, config.appId, config.token, username]);
 
   return { users, setUsers, start, setStart }
 };
