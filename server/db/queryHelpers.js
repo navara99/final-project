@@ -645,13 +645,20 @@ const queryGenerator = (db) => {
 
   const toggleLikes = async (user_id, jobId) => {
     const values = [user_id, jobId];
-    const queryString = `
+
+    const queryStringExists = `
+    SELECT EXISTS(SELECT 1 from favourites WHERE user_id = $1 AND job_id = $2)
+    `
+
+    const queryStringAdd = `
     INSERT into favourites (user_id, job_id)
     VALUES ($1, $2);
     `
 
     try {
-      await db.query(queryString, values);
+      const result = await db.query(queryStringExists, values);
+      const { exists } = result.rows[0];
+      console.log(exists);
     } catch (error) {
       console.log(error);
     };
