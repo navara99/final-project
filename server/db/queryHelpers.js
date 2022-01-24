@@ -662,7 +662,7 @@ const queryGenerator = (db) => {
     try {
       const result = await db.query(queryStringExists, values);
       const { exists } = result.rows[0];
-
+      exists ? await db.query(queryStringRemove, values) : await db.query(queryStringAdd, values)
       console.log(exists);
     } catch (error) {
       console.log(error);
