@@ -221,7 +221,10 @@ const queryGenerator = (db) => {
   const getAllJobsByOrganizationId = async (organization_id, applicationsNotIncluded) => {
     const values = [organization_id];
     const queryString = `
-    SELECT jobs.* FROM jobs
+    SELECT jobs.* ,
+    organizations.logo as organizationLogo,
+    organizations.name as organizationName
+    FROM jobs
     JOIN organizations ON jobs.organization_id = organizations.id
     WHERE organizations.id = $1
     ORDER BY jobs.created_at DESC;
