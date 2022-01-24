@@ -21,7 +21,7 @@ const useMessages = (currentUser) => {
   }, [currentUser]);
 
   useEffect(() => {
-    setSenders((prev) =>
+    if(Array.isArray(messages)) setSenders((prev) =>
       prev
         .map((sender) => {
           const numOfMsg = messages.filter(
