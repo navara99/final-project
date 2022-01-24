@@ -451,10 +451,13 @@ const queryGenerator = (db) => {
     const values = searchTerm ? ["%" + searchTerm + "%"] : null;
     const queryString = searchTerm
       ? `
-    SELECT * FROM jobs
-    WHERE title ILIKE $1 OR description ILIKE $1 OR location ILIKE $1;
+    SELECT jobs.*, organizations.logo as organizationLogo, organizations.name as organizationName, organizations.website FROM jobs
+    JOIN organizations ON jobs.organization_id = organizations.id
+    WHERE jobs.title ILIKE $1 OR jobs.description ILIKE $1 OR jobs.location ILIKE $1;
     `
-      : "SELECT * FROM jobs;";
+      :`
+      SELECT jobs.*, organizations.logo as organizationLogo, organizations.name as organizationName, organizations.website FROM jobs
+      JOIN organizations ON jobs.organization_id = organizations.id;`
 
     try {
       const result = await db.query(queryString, values);
