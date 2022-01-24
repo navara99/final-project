@@ -23,7 +23,7 @@ function JobActions({ job, isMember, setSnackBarDetails, currentUser, isApplied,
   };
 
   return (
-    <>
+    <div className="job-actions-wrapper">
       <JobApplicationForm {...{ job }} {...{ openApplicationForm }} {...{ setOpenApplicationForm }} {...{ setSnackBarDetails }} currentUser={currentUser} setApplied={setApplied} />
       {!isMember && <GroupsBtn text={!isApplied ? "Apply" : "Applied"} onClick={() => setOpenApplicationForm(!openApplicationForm)} deActive={isApplied} />}
       {isMember && <Link to={`/jobs/${job.id}/applications`} style={{ textDecoration: "none" }}><GroupsBtn text={`View Applications (${job.applications.length})`} /></Link>}
@@ -35,7 +35,7 @@ function JobActions({ job, isMember, setSnackBarDetails, currentUser, isApplied,
             <FavoriteIcon style={{ color: "red" }} fontSize="large" /> :
             <FavoriteBorderIcon fontSize="large" />}
         </IconButton>}
-    </>
+    </div>
   )
 
 };

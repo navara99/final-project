@@ -37,10 +37,12 @@ function JobListItem({ job, setJobs, isMember, setSnackBarDetails, currentUser }
           <Avatar alt={job.organizationname} src={job.organizationlogo} />
         </ListItemAvatar>
       </Link>
-      <ListItemText
-        primary={job.title}
-        secondary={jobDescription.split("\n").map((elem, i) => <span className="description-info" key={i} style={{ display: "block" }}>{elem}</span>)}
-      />
+      <div style={{ width: "80%" }}>
+        <ListItemText
+          primary={job.title}
+          secondary={jobDescription.split("\n").map((elem, i) => <span className="description-info" key={i} style={{ display: "block" }}>{elem}</span>)}
+        />
+      </div>
       <JobActions {...{ isMember, setJobs, job, setSnackBarDetails, currentUser, isApplied, setApplied, like, setLike }} />
     </ListItem>
   )

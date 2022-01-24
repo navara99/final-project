@@ -66,3 +66,7 @@
 .job-list-item {
   position: relative;
 }
+
+.job-actions-wrapper {
+  padding-left: 2.5em;
+}
