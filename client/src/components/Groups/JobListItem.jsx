@@ -8,6 +8,8 @@ import { Link } from "react-router-dom";
 
 function JobListItem({ job, setJobs, isMember, setSnackBarDetails, currentUser }) {
   const [isApplied, setApplied] = useState(false);
+  const [like, setLike] = useState(job.liked);
+
   const job_id = job.id;
   const [applications] = useApplications(job_id);
   useEffect(() => {
@@ -39,7 +41,7 @@ function JobListItem({ job, setJobs, isMember, setSnackBarDetails, currentUser }
         primary={job.title}
         secondary={jobDescription.split("\n").map((elem, i) => <span className="description-info" key={i} style={{ display: "block" }}>{elem}</span>)}
       />
-      <JobActions {...{ isMember, setJobs, job, setSnackBarDetails, currentUser, isApplied, setApplied }} />
+      <JobActions {...{ isMember, setJobs, job, setSnackBarDetails, currentUser, isApplied, setApplied, like, setLike }} />
     </ListItem>
   )
 
