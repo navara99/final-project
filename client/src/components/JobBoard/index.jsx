@@ -35,7 +35,7 @@ const Jobs = ({ setSnackBarDetails, currentUser }) => {
           <SearchIcon />
         </IconButton>
       </Paper>
-      <JobsList {...{ jobs }}  {...{ setSnackBarDetails }} {...{currentUser}}/>
+      <JobsList {...{ jobs, setJobs, setSnackBarDetails, currentUser }} />
     </div>
   );
 };

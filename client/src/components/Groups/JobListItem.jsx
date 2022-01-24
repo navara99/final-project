@@ -6,7 +6,7 @@ import useApplications from "../../hooks/useApplications";
 import { ListItemAvatar, Avatar } from "@mui/material";
 import { Link } from "react-router-dom";
 
-function JobListItem({ job, isMember, setSnackBarDetails, currentUser }) {
+function JobListItem({ job, setJobs, isMember, setSnackBarDetails, currentUser }) {
   const [isApplied, setApplied] = useState(false);
   const job_id = job.id;
   const [applications] = useApplications(job_id);
@@ -39,7 +39,7 @@ function JobListItem({ job, isMember, setSnackBarDetails, currentUser }) {
         primary={job.title}
         secondary={jobDescription.split("\n").map((elem, i) => <span className="description-info" key={i} style={{ display: "block" }}>{elem}</span>)}
       />
-      <JobActions {...{ isMember }} {...{ job }}  {...{ setSnackBarDetails }} {...{ currentUser }} isApplied={isApplied} setApplied={setApplied} />
+      <JobActions {...{ isMember, setJobs, job, setSnackBarDetails, currentUser, isApplied, setApplied }} />
     </ListItem>
   )
 
