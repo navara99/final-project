@@ -43,9 +43,6 @@
 * Only show the upcoming fair on organisations (Thar)
 * Take out the details button for job on organisations page
 * Poster input for making new fairs (Thar)
-* seeding (Siu)
-  * Louisa(part of 2 organisations) (Siu)
-  * add more users
 * bubble for chat (siu)
 * icon for organizations on user profile page (Yagnesh)
 * deployment (Siu)
