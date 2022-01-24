@@ -36,11 +36,9 @@
 
 ### To do
 
-* Organization page can see fair hosted and participated fairs
 * My organization design (Yagnesh)
   * 2nd row 50% 50%
   * show all details of the organization on first row
-* Deployment?
 * Title name, logo (Siu)
 * Only show the upcoming fair on organisations (Thar)
 * Take out the details button for job on organisations page
