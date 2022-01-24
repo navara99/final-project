@@ -11,13 +11,13 @@ const NavColumn = ({selectedIndex, setSelectedIndex}) => {
           <ListItemText primary="Settings" primaryTypographyProps={{variant:"h6"}}/>
         </ListItem>
         <Divider/>
-        <ListItemButton selected={selectedIndex === 0} onClick={(e) => setSelectedIndex(0)}>
+        <ListItemButton selected={selectedIndex === 0} sx={selectedIndex === 0 ?{borderRight: '5px solid #2196f366' } : {}} onClick={(e) => setSelectedIndex(0)}>
           <ListItemIcon>
             <EditIcon/>
           </ListItemIcon>
           <ListItemText primary= "Edit Profile"/>
         </ListItemButton>
-        <ListItemButton selected={selectedIndex === 1} onClick={(e) => setSelectedIndex(1)}>
+        <ListItemButton selected={selectedIndex === 1}sx={selectedIndex === 1 ?{borderRight: '5px solid #2196f366' } : {}} onClick={(e) => setSelectedIndex(1)}>
           <ListItemIcon>
             <SecurityIcon/>
           </ListItemIcon>
