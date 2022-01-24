@@ -2,27 +2,34 @@ import React from "react";
 import { ListItemText, Card, Collapse, CardActions, CardActionArea } from "@mui/material";
 import GroupAction from "./GroupAction";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+
+
+
 
 function GroupListItem({ group, openAddMembersModal, selectedGroup, setSelectedGroup, cardStyles, setMyGroups }) {
-
+  const [hover, setHover] = useState(false)
   return (
-    <Card style={cardStyles}>
-      <div className="organization-card">
-        <Link to={`/organizations/${group.id}`} style={{ textDecoration: 'none', display: "flex", color: "black" }}>
-          <img
-            alt={group.name}
-            className="organization-logo"
-            src={`${group.logo}`}
-          />
-          <ListItemText
-            primary={<h3 className="organization-card-name">{group.name}</h3>}
-            secondary={group.description}
-          />
-        </Link>
+    <Card style={cardStyles} onMouseEnter={(e) => setHover(true)} raised = {hover ? true : false} onMouseLeave={(e) => setHover(false)}  sx={{overflow:"unset", maxWidth:350, width:300, borderRadius:4, border:'1px solid #006394', display:"flex", flexDirection:"column", justifyContent:"space-between"}}>
+      {/* <div className="organization-card" sx={{direction : "column"}}> */}
+        <CardActionArea >
+          <Link to={`/organizations/${group.id}`} style={{ textDecoration: 'none',  color: "black", display:"flex", flexDirection:"column" , position:"relative", top:-60}}>
+            <img
+              alt={group.name}
+              className="organization-logo"
+              src={`${group.logo}`}
+              style={{alignSelf:"center",  borderRadius:'50%'}}
+            />
+            <ListItemText
+              primary={<h3 className="organization-card-name" >{group.name}</h3>}
+              secondary={group.description}
+            />
+          </Link>
+        </CardActionArea>
         <CardActions>
           <GroupAction {...{ openAddMembersModal, setMyGroups, group, setSelectedGroup, selectedGroup }} />
         </CardActions>
-      </div>
+      {/* </div> */}
     </Card >
   )
 };
