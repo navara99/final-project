@@ -30,7 +30,7 @@ const MessageList = (props) => {
         );
       });
     }
-  }, [receiverId, messages.length]);
+  }, [receiverId, messages.length, setMessages]);
   return <List ref={myMessage}>{messageList}</List>;
 };
 
