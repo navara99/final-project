@@ -655,9 +655,14 @@ const queryGenerator = (db) => {
     VALUES ($1, $2);
     `
 
+    const queryStringRemove = `
+    DELETE from favourites WHERE user_id = $1 and job_id = $2;
+    `
+
     try {
       const result = await db.query(queryStringExists, values);
       const { exists } = result.rows[0];
+
       console.log(exists);
     } catch (error) {
       console.log(error);
