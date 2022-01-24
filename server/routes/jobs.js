@@ -5,6 +5,19 @@ module.exports = (db) => {
   const queryGenerator = require("../db/queryHelpers");
   const { addJobToOrganization, getJobsBySearch, getAllApplicationsByJobId, getJobById } = queryGenerator(db);
 
+  router.post("/:id/like", (req, res) => {
+    const { id } = req.params;
+    const { user_id } = req.session;
+
+    try {
+      console.log(id, user_id);
+    } catch (err) {
+      console.log(err.message);
+    }
+
+
+  });
+
   router.get(`/:id/applications`, async (req, res) => {
     const { id } = req.params;
 
