@@ -31,7 +31,7 @@ function JobListItem({ job, setJobs, isMember, setSnackBarDetails, currentUser }
     `
 
   return (
-    <ListItem>
+    <ListItem className="job-list-item">
       <Link to={`/organizations/${job.organization_id}`}>
         <ListItemAvatar>
           <Avatar alt={job.organizationname} src={job.organizationlogo} />
