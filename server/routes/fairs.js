@@ -113,7 +113,7 @@ module.exports = (db) => {
   });
 
   router.post("/", async (req, res) => {
-    const { name, description, startTimeStamp, endTimeStamp, hostId } =
+    const { name, description, startTimeStamp, endTimeStamp, hostId, poster } =
       req.body;
 
     try {
@@ -122,7 +122,8 @@ module.exports = (db) => {
         description,
         startTimeStamp,
         endTimeStamp,
-        hostId
+        hostId,
+        poster
       );
       res.json(newFair);
     } catch (err) {

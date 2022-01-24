@@ -344,12 +344,13 @@ const queryGenerator = (db) => {
     description,
     startTime,
     endTime,
-    hostId
+    hostId,
+    poster
   ) => {
-    const values = [name, description, startTime, endTime, hostId];
+    const values = [name, description, startTime, endTime, hostId, poster];
     const queryString = `
-      INSERT INTO fairs (name, description, start_time, end_time, host_id)
-      VALUES ($1, $2, $3, $4, $5)
+      INSERT INTO fairs (name, description, start_time, end_time, host_id, poster)
+      VALUES ($1, $2, $3, $4, $5, $6)
       RETURNING *;
     `;
 
