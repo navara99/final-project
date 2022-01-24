@@ -447,16 +447,26 @@ const queryGenerator = (db) => {
 
   // Get jobs by search
 
-  const getJobsBySearch = async (searchTerm) => {
-    const values = searchTerm ? ["%" + searchTerm + "%"] : null;
+  const getJobsBySearch = async (searchTerm, user_id) => {
+    const values = searchTerm ? [user_id, "%" + searchTerm + "%"] : [user_id];
     const queryString = searchTerm
       ? `
-    SELECT jobs.*, organizations.logo as organizationLogo, organizations.name as organizationName, organizations.website FROM jobs
+    SELECT 
+    jobs.*,
+    (SELECT EXISTS(SELECT 1 from favourites WHERE user_id = $1)) as liked,
+    organizations.logo as organizationLogo,
+    organizations.name as organizationName,
+    organizations.website FROM jobs
     JOIN organizations ON jobs.organization_id = organizations.id
-    WHERE jobs.title ILIKE $1 OR jobs.description ILIKE $1 OR jobs.location ILIKE $1;
+    WHERE jobs.title ILIKE $2 OR jobs.description ILIKE $2 OR jobs.location ILIKE $2;
     `
       : `
-      SELECT jobs.*, organizations.logo as organizationLogo, organizations.name as organizationName, organizations.website FROM jobs
+      SELECT 
+      jobs.*, 
+      (SELECT EXISTS(SELECT 1 from favourites WHERE user_id = $1)) as liked,
+      organizations.logo as organizationLogo, 
+      organizations.name as organizationName, 
+      organizations.website FROM jobs
       JOIN organizations ON jobs.organization_id = organizations.id;`
 
     try {
