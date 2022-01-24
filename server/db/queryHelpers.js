@@ -455,7 +455,7 @@ const queryGenerator = (db) => {
     JOIN organizations ON jobs.organization_id = organizations.id
     WHERE jobs.title ILIKE $1 OR jobs.description ILIKE $1 OR jobs.location ILIKE $1;
     `
-      :`
+      : `
       SELECT jobs.*, organizations.logo as organizationLogo, organizations.name as organizationName, organizations.website FROM jobs
       JOIN organizations ON jobs.organization_id = organizations.id;`
 
@@ -642,8 +642,26 @@ const queryGenerator = (db) => {
 
   };
 
+
+  const toggleLikes = async (user_id, jobId) => {
+    const values = [user_id, jobId];
+    const queryString = `
+    INSERT into favourites (user_id, job_id)
+    VALUES ($1, $2);
+    `
+
+    try {
+      await db.query(queryString, values);
+    } catch (error) {
+      console.log(error);
+    };
+
+
+  };
+
   return {
     updateOrganizationInfo,
+    toggleLikes,
     deleteOrganizationById,
     getJobById,
     applyForJob,
