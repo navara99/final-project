@@ -57,8 +57,10 @@ module.exports = (db) => {
 
   router.get("/", async (req, res) => {
     const { search } = req.query;
+    const { user_id } = req.session;
+
     try {
-      const jobs = await getJobsBySearch(search);
+      const jobs = await getJobsBySearch(search, user_id);
       res.json(jobs);
     } catch (err) {
       console.log(err.message);
