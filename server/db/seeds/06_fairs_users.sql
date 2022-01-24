@@ -1,7 +1,9 @@
-INSERT INTO fairs_users (fair_id, user_id)
+INSERT INTO fairs_users (user_id, fair_id)
 VALUES
-  (1, 1),
-  (1, 2),
   (2, 1),
-  (2, 2)
+  (2, 4),
+  (2, 7),
+  (2, 10),
+  (2, 11),
+  (2, 12)
 ;
