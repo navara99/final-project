@@ -48,10 +48,9 @@
 * seeding (Siu)
   * Louisa(part of 2 organisations) (Siu)
   * add more users
-* Background colour of the body (Siu)
 * bubble for chat (siu)
-* icon for organizations on user profile page
-* update the sender list if receive message from new contact
+* icon for organizations on user profile page (Yagnesh)
+* update the sender list if receive message from new contact (Siu)
 * deployment (Siu)
 * job board: take out details button (or changed to saved job)
   * new features, new table
