@@ -1,0 +1,9 @@
+DROP TABLE IF EXISTS favourites
+CASCADE;
+
+CREATE TABLE favourites
+(
+  id SERIAL PRIMARY KEY,
+  job_id int NOT NULL REFERENCES jobs(id) ON DELETE CASCADE,
+  user_id int NOT NULL REFERENCES users(id) ON DELETE CASCADE
+);
