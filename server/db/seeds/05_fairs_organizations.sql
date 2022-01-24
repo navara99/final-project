@@ -1,7 +1,5 @@
 INSERT INTO fairs_organizations (fair_id, organization_id)
 VALUES
-(15, 1),
-(14, 1),
 (1, 1),
 (1, 2),
 (1, 3),
