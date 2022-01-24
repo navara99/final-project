@@ -461,7 +461,8 @@ const queryGenerator = (db) => {
     organizations.name as organizationName,
     organizations.website FROM jobs
     JOIN organizations ON jobs.organization_id = organizations.id
-    WHERE jobs.title ILIKE $2 OR jobs.description ILIKE $2 OR jobs.location ILIKE $2;
+    WHERE jobs.title ILIKE $2 OR jobs.description ILIKE $2 OR jobs.location ILIKE $2
+    ORDER BY created_at DESC;
     `
       : `
       SELECT 
@@ -470,7 +471,8 @@ const queryGenerator = (db) => {
       organizations.logo as organizationLogo, 
       organizations.name as organizationName, 
       organizations.website FROM jobs
-      JOIN organizations ON jobs.organization_id = organizations.id;`
+      JOIN organizations ON jobs.organization_id = organizations.id
+      ORDER BY created_at DESC;`
 
     try {
       const result = await db.query(queryString, values);
