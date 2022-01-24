@@ -453,7 +453,7 @@ const queryGenerator = (db) => {
       ? `
     SELECT 
     jobs.*,
-    (SELECT EXISTS(SELECT 1 from favourites WHERE user_id = $1)) as liked,
+    (SELECT EXISTS(SELECT 1 from favourites WHERE user_id = $1 AND jobs.id = favourites.job_id)) as liked,
     organizations.logo as organizationLogo,
     organizations.name as organizationName,
     organizations.website FROM jobs
@@ -463,7 +463,7 @@ const queryGenerator = (db) => {
       : `
       SELECT 
       jobs.*, 
-      (SELECT EXISTS(SELECT 1 from favourites WHERE user_id = $1)) as liked,
+      (SELECT EXISTS(SELECT 1 from favourites WHERE user_id = $1 AND jobs.id = favourites.job_id)) as liked,
       organizations.logo as organizationLogo, 
       organizations.name as organizationName, 
       organizations.website FROM jobs
