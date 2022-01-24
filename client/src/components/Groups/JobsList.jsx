@@ -16,7 +16,7 @@ function JobsList({ jobs, setJobs, isMember, setSnackBarDetails, currentUser }) 
   };
 
   return (
-    <List>
+    <List style={{ width: "90%" }}>
       {renderJobs()}
     </List>
   )
