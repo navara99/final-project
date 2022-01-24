@@ -1,10 +1,17 @@
-INSERT INTO users_organizations
-  (user_id, organization_id, admin)
+INSERT INTO users_organizations (user_id, organization_id, admin)
 VALUES
-  (1, 1, true),
-  (2, 1, true),
-  (4, 1, false),
-  (2, 2, true),
-  (3, 2, false),
-  (4, 2, false)
+(1, 1, true),
+(5, 1, true),
+(5, 2, true),
+(5, 3, true),
+(5, 4, true),
+(5, 5, true),
+(5, 6, true),
+(5, 7, true),
+(5, 8, true),
+(5, 9, true),
+(5, 10, true),
+(5, 11, true),
+(5, 12, true),
+(5, 13, true)
 ;
