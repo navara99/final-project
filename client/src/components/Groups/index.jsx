@@ -6,6 +6,7 @@ import GroupListItem from "./GroupListItem";
 import GroupForm from "./GroupForm";
 import { useState } from "react";
 import useMyGroups from "../../hooks/useMyGroups";
+import useTitle from "../../hooks/useTitle";
 
 const cardStyles = {
   padding: "2em",
@@ -16,6 +17,8 @@ function Groups({ setSnackBarDetails }) {
   const [openForm, setOpenForm] = useState(false);
   const { myGroups, setMyGroups } = useMyGroups();
   const [selectedGroup, setSelectedGroup] = useState();
+
+  useTitle("My organizations");
 
   const renderMyGroups = (myGroups) => {
 
