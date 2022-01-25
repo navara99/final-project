@@ -14,7 +14,7 @@ function OrganizationFairs({ organization, cardStyles, setOrganizationDetails, s
 
 
   return (
-    <div>
+    <div style={{flexGrow:1}}>
       <FairsForm
         {...{ fairsFormOpen }}
         {...{ setFairsFormOpen }}
