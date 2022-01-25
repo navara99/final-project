@@ -155,7 +155,7 @@ function App() {
           />
           <Route
             path="/bookmarks"
-            element={<Bookmarks {...{ setSnackBarDetails }}/>}
+            element={<Bookmarks {...{ setSnackBarDetails, currentUser }} />}
           />
         </Routes>
       </div>
