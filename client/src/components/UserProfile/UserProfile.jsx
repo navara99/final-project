@@ -84,10 +84,10 @@ const UserProfile = ({ currentUser }) => {
                 <Typography variant='body1' sx={{ pt: 1 }}>{currentUser.bio}</Typography>
               </Box>
             </Box>
-            <Box sx={{pr: 3,display: 'flex', flexWrap:"wrap"}}>
+            <Box sx={{pr: 3,display: 'flex', flexWrap:"wrap", flexDirection:"column", gap:'10px'}}>
               <Typography variant='h6' alignSelf='center'>Organization</Typography>
               {myGroups && myGroups.length > 0 && (
-                <List sx={{width:200, display:'flex', flexWrap:'wrap'}}>
+                <List sx={{width:200, display:'flex', flexWrap:'wrap', gap:'10px'}}>
                   {myGroups.map((group, i) => (
                     <ListItem key={i} sx={{width: '30%'}}>
                       <Tooltip title={group.name} placement="top-start">
