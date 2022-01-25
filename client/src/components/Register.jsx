@@ -65,7 +65,7 @@ function Register({
   }
 
   return (
-    <Container>
+    <Container className="centered-container">
       <form onSubmit={registerUser}>
         <Grid
           container
