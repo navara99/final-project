@@ -5,7 +5,6 @@ import {
   Typography,
   Box,
   Badge,
-  ListItemText,
   List,
   ListItemAvatar,
   ListItem,
