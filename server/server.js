@@ -79,6 +79,8 @@ io.on("connection", (socket) => {
   });
 });
 
+app.set("trust proxy", 1);
+app.enable("trust-proxy");
 // Set up cookie-session
 const cookieSession = require("cookie-session");
 app.use(cookieSession({ secret: process.env.SECRET }));
