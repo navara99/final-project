@@ -8,8 +8,7 @@ const useAppliedJobs = () => {
     axios.get("/api/jobs/applied").then(({ data }) => {
       setAppliedJobs(data);
     });
-  });
-
+  }, []);
 
   return { appliedJobs, setAppliedJobs };
 };
