@@ -8,7 +8,7 @@ import axios from "axios";
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 
-function JobActions({ job, isMember, setSnackBarDetails, currentUser, isApplied, setApplied, like, setLike, setAppliedJobs }) {
+function JobActions({ job, isMember, setSnackBarDetails, currentUser, isApplied, setApplied, like, setLike, updateAppliedJobs }) {
   const [openApplicationForm, setOpenApplicationForm] = useState(false);
 
   const likeToggle = async () => {
@@ -24,7 +24,7 @@ function JobActions({ job, isMember, setSnackBarDetails, currentUser, isApplied,
 
   return (
     <div className="job-actions-wrapper">
-      <JobApplicationForm {...{ job, setAppliedJobs, openApplicationForm, setOpenApplicationForm, setSnackBarDetails, currentUser, setApplied }} />
+      <JobApplicationForm {...{ job, openApplicationForm, setOpenApplicationForm, setSnackBarDetails, currentUser, updateAppliedJobs, setApplied }} />
       {!isMember && <GroupsBtn text={!isApplied ? "Apply" : "Applied"} onClick={() => setOpenApplicationForm(!openApplicationForm)} deActive={isApplied} />}
       {isMember && <Link to={`/jobs/${job.id}/applications`} style={{ textDecoration: "none" }}><GroupsBtn text={`View Applications (${job.applications.length})`} /></Link>}
       {!isMember &&

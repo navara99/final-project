@@ -13,7 +13,15 @@ import axios from "axios";
 import useInput from "../../hooks/useInput";
 import { useState } from "react";
 
-function JobApplicationForm({ job, openApplicationForm, setOpenApplicationForm, setSnackBarDetails, setApplied, currentUser }) {
+function JobApplicationForm({
+  job,
+  openApplicationForm,
+  setOpenApplicationForm,
+  setSnackBarDetails,
+  setApplied,
+  currentUser,
+  updateAppliedJobs
+}) {
   const [message, setMessage] = useInput();
   const [resume, setResume] = useState();
   const [showResumeInput, setResumeInput] = useState(false);
@@ -25,8 +33,7 @@ function JobApplicationForm({ job, openApplicationForm, setOpenApplicationForm, 
 
       formData.append("jobId", job.id);
       formData.append("message", message);
-      resume && resume[0]? formData.append("resume", resume[0]) : formData.append("resume", currentUser.resume);
-     
+      resume && resume[0] ? formData.append("resume", resume[0]) : formData.append("resume", currentUser.resume);
 
       await axios.post("/api/applications", formData, {
         headers: {
@@ -39,6 +46,7 @@ function JobApplicationForm({ job, openApplicationForm, setOpenApplicationForm, 
         open: true,
         message: "Application Submitted"
       });
+      updateAppliedJobs();
     } catch (err) {
       console.log(err.message);
     };
