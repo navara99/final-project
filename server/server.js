@@ -70,13 +70,11 @@ io.on("connection", (socket) => {
   });
 
   socket.on("logout", () => {
-    console.log("user logout!");
     removeUser(socket.id);
   });
 
   //client disconnect
   socket.on("disconnect", () => {
-    console.log("user disconnected!");
     removeUser(socket.id);
   });
 });

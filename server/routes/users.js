@@ -28,7 +28,6 @@ module.exports = (db) => {
 
     try {
       const users = await getAllOtherUsers(user_id);
-      console.log(users);
       res.json(users);
     } catch (err) {
       console.log(err.message);
