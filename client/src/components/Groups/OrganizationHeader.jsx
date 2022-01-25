@@ -1,5 +1,5 @@
 import React from "react";
-import { ListItemText, Card, Typography } from "@mui/material";
+import { ListItemText, Card, Typography,Link } from "@mui/material";
 
 import BusinessIcon from '@mui/icons-material/Business';
 import EmailIcon from '@mui/icons-material/Email';
@@ -24,7 +24,7 @@ function OrganizationHeader({ organization, cardStyles }) {
               <EmailIcon fontSize ="large" /> <Typography component="span"  color={blueGrey["A700"]} variant="subtitle1"  sx={{ml:1, alignSelf:"center"}}>{organization.details.email}</Typography>
             </div>
             <div style={{display:"flex", alignSelf:"center", marginTop:"10px"}}>
-              <LanguageIcon fontSize ="large" />  <Typography component="span"  color={blueGrey["A700"]} variant="subtitle1"  sx={{ml:1, alignSelf:"center"}}>{organization.details.website}</Typography>
+              <LanguageIcon fontSize ="large" /> <Link href={organization.details.website} sx={{ml:1, alignSelf:"center", textDecoration:"none"}} color={blueGrey["A700"]} target="_blank" rel="noopener"><Typography component="span"variant="subtitle1">{organization.details.website}</Typography></Link> 
             </div>
           </div>
           </div>
