@@ -84,10 +84,10 @@ const UserProfile = ({ currentUser }) => {
                 <Typography variant='body1' sx={{ pt: 1 }}>{currentUser.bio}</Typography>
               </Box>
             </Box>
-            <Box sx={{pr: 3,display: 'flex', flexWrap:"wrap"}}>
+            <Box sx={{pr: 3,display: 'flex', flexWrap:"wrap", flexDirection:"column", gap:'10px'}}>
               <Typography variant='h6' alignSelf='center'>Organization</Typography>
-              {myGroups && myGroups.length > 0 && (
-                <List sx={{width:200, display:'flex', flexWrap:'wrap'}}>
+              {myGroups && myGroups.length > 0 ?(
+                <List sx={{width:200, display:'flex', flexWrap:'wrap', gap:'10px'}}>
                   {myGroups.map((group, i) => (
                     <ListItem key={i} sx={{width: '30%'}}>
                       <Tooltip title={group.name} placement="top-start">
@@ -99,7 +99,11 @@ const UserProfile = ({ currentUser }) => {
                       {/* <ListItemText primary={`${group.name}`} primaryTypographyProps={{ variant: "h6" }}/> */}
                     </ListItem>))
                   }
-                </List>)
+                </List>) : (
+                  <Typography variant="body1" sx={{ pl: 1, pt: 1.5 }}>
+                    Not associated with any organization
+                  </Typography>
+                )
               }
             </Box>
           </Box>
