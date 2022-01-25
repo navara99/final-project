@@ -5,7 +5,7 @@ import useFavoriteJobs from "../../hooks/useFavoriteJobs";
 import JobsList from "../Groups/JobsList";
 import useAppliedJobs from "../../hooks/useAppliedJobs";
 
-function Bookmarks() {
+function Bookmarks({ setSnackBarDetails }) {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const { favoriteJobs } = useFavoriteJobs();
   const { appliedJobs } = useAppliedJobs();
@@ -13,7 +13,7 @@ function Bookmarks() {
   return (
     <>
       <Columns {...{ selectedIndex, setSelectedIndex }} />
-      <JobsList jobs={selectedIndex ? appliedJobs : favoriteJobs} />
+      <JobsList jobs={selectedIndex ? appliedJobs : favoriteJobs} {...{ setSnackBarDetails }} />
     </>
   )
 };
