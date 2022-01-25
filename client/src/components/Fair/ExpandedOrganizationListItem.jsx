@@ -23,7 +23,7 @@ const ExpandedOrganizationListItem = ({
   setSnackBarDetails,
   live,
   currentUser,
-  logo
+  logo,
 }) => {
   const jobs = useOrganizationJobs(id);
   const [jobDetailsOpen, setJobDetailsOpen] = useState(false);
@@ -64,14 +64,9 @@ const ExpandedOrganizationListItem = ({
             <div>
               <CardActions>
                 {website && (
-                  <Button
-                    size="small"
-                    target="_blank"
-                    component={Link}
-                    to={website}
-                  >
-                    Website
-                  </Button>
+                  <a target="_blank" href={website} rel="noopener noreferrer">
+                    <Button size="small">Website</Button>
+                  </a>
                 )}
                 <Button
                   size="small"

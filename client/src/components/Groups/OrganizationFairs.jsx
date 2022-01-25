@@ -24,8 +24,8 @@ function OrganizationFairs({ organization, cardStyles, setOrganizationDetails, s
       <Card style={cardStyles}>
         <div className="organization-card">
           <ListItemText
-            primary={<h2 className="organization-card-name">Fairs</h2>}
-            secondary={`${organization.details.name} is a part of ${organization.fairs.length} fair(s).`}
+            primary={<h2 className="organization-card-name">Upcoming Fairs</h2>}
+            secondary={`${organization.details.name} is a part of ${organization.fairs.length} upcoming fair(s).`}
           />
           <CardActions>
             {organization.isMember && <GroupsBtn

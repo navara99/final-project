@@ -36,22 +36,14 @@
 
 ### To do
 
-* Organization page can see fair hosted and participated fairs
 * My organization design (Yagnesh)
   * 2nd row 50% 50%
   * show all details of the organization on first row
-* Deployment?
 * Title name, logo (Siu)
 * Only show the upcoming fair on organisations (Thar)
 * Take out the details button for job on organisations page
 * Poster input for making new fairs (Thar)
-* seeding (Siu)
-  * Louisa(part of 2 organisations) (Siu)
-  * add more users
-* Background colour of the body (Siu)
-* bubble for chat (siu)
-* icon for organizations on user profile page
-* update the sender list if receive message from new contact
+* icon for organizations on user profile page (Yagnesh)
 * deployment (Siu)
 * job board: take out details button (or changed to saved job)
   * new features, new table

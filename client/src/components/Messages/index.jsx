@@ -5,15 +5,16 @@ import Divider from "@mui/material/Divider";
 import Typography from "@mui/material/Typography";
 import List from "@mui/material/List";
 import SenderList from "./Sender/SenderList";
-import MessageList from "./Messages/MessageList";
+import MessageList from "./Message/MessageList";
 import MessageForm from "./MessageForm/MessageForm";
 import { Box } from "@mui/material";
 import { Avatar } from "@mui/material";
-import "./ChatBox.css";
+import "./Messages.css";
 import { Link } from "react-router-dom";
 import Unauthorized from "../Unauthorized";
+import useTitle from "../../hooks/useTitle";
 
-const ChatBox = ({ currentUser, messageState }) => {
+const Messages = ({ currentUser, messageState }) => {
   const {
     setMessageText,
     messageText,
@@ -29,6 +30,7 @@ const ChatBox = ({ currentUser, messageState }) => {
     socket,
   } = messageState;
 
+  useTitle("Messages");
   if (!currentUser) {
     return <Unauthorized action="view messages" />;
   }
@@ -122,4 +124,4 @@ const ChatBox = ({ currentUser, messageState }) => {
   );
 };
 
-export default ChatBox;
+export default Messages;

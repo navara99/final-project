@@ -3,6 +3,7 @@ import ApplicantsList from "./ApplicantsList";
 import { useParams } from "react-router";
 import useApplications from "../../hooks/useApplications";
 import useEachJob from "../../hooks/useEachJob";
+import useTitle from "../../hooks/useTitle";
 
 function JobApplications({
   setSnackBarDetails,
@@ -14,6 +15,7 @@ function JobApplications({
   const { id } = useParams();
   const [applications] = useApplications(id);
   const [job] = useEachJob(id);
+  useTitle(job && `Applications for ${job.title}`);
 
   return (
     <div>

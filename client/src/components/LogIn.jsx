@@ -13,9 +13,18 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import axios from "axios";
 import Unauthorized from "./Unauthorized/index";
 import { useNavigate } from "react-router-dom";
+import useTitle from "../hooks/useTitle";
 
-const LogIn = ({ setCurrentUser, currentUser, logout, setErrorMessage, setShowError }) => {
+const LogIn = ({
+  setCurrentUser,
+  currentUser,
+  logout,
+  setErrorMessage,
+  setShowError,
+}) => {
   const navigate = useNavigate();
+
+  useTitle("Login");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -33,7 +42,7 @@ const LogIn = ({ setCurrentUser, currentUser, logout, setErrorMessage, setShowEr
       if (error) {
         setErrorMessage(error);
         setShowError(true);
-      };
+      }
       if (!error) {
         setCurrentUser(data);
         navigate("/");

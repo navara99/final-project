@@ -7,6 +7,7 @@ import useMember from "../../hooks/useMember";
 import useOrganizationDetails from "../../hooks/useOrganizationDetails";
 import "./Stall.css";
 import useFairDetails from "../../hooks/useFairDetails";
+import useTitle from "../../hooks/useTitle";
 
 const Stall = ({ currentUser }) => {
   const { organizationId, fairId } = useParams();
@@ -15,6 +16,9 @@ const Stall = ({ currentUser }) => {
   const [organizationDetails] = useOrganizationDetails(organizationId);
   const { config, useClient } = useChannel(organizationId, currentUser && organizationDetails ? `${currentUser.username}${isMember ? ` (${organizationDetails.details.name})` : ""}` : "");
   const [inCall, setInCall] = useState(false);
+
+  const title = `${inCall && "📞"}Stall of + ${organizationDetails && organizationDetails.name}`;
+  useTitle(title);
 
   return (
     <div className="stall">

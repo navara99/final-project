@@ -18,31 +18,45 @@ import {
 import { styled } from '@mui/material/styles';
 import React, { useState } from 'react';
 import useMyGroups from '../../hooks/useMyGroups';
+import useTitle from "../../hooks/useTitle";
 
 const ProfilePic = styled(Avatar)(({ theme }) => ({
   width: 150,
   height: 150,
   border: `2px solid ${theme.palette.background.paper}`,
-
 }));
 
 const UserProfile = ({ currentUser }) => {
   const { myGroups } = useMyGroups();
-  const [openResume, setOpenResume] = useState(false)
-  return (<>{
+  const [openResume, setOpenResume] = useState(false);
+
+  const title =
     currentUser &&
-    (
-      <Grid item xs={12} container sx={{ backgroundColor: "#eff2f6" }} justifyContent="space-around">
-        <Stack spacing={2} >
-          <Box sx={{ bgcolor: '#1f78b1' }}>
-            <Badge
-              sx={{ bgcolor: '#1f78b1', width: 700 }}
-              overlap="circular"
-              anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-              badgeContent={
-                <ProfilePic alt={currentUser.first_name} src={currentUser.profile_picture} />
-              }
-            >
+    `${currentUser.first_name} ${currentUser.last_name} (@${currentUser.username})`;
+  useTitle(title);
+  return (
+    <>
+      {currentUser && (
+        <Grid
+          item
+          xs={12}
+          container
+          sx={{ backgroundColor: "#eff2f6" }}
+          justifyContent="space-around"
+        >
+          <Stack spacing={2}>
+            <Box sx={{ bgcolor: "#1f78b1" }}>
+              <Badge
+                sx={{ bgcolor: "#1f78b1", width: 700 }}
+                overlap="circular"
+                anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+                badgeContent={
+                  <ProfilePic
+                    alt={currentUser.first_name}
+                    src={currentUser.profile_picture}
+                  />
+                }
+              >
               <Box component="span" sx={{ height: 150, width: 500 }} />
             </Badge>
           </Box>
@@ -99,6 +113,4 @@ const UserProfile = ({ currentUser }) => {
   )
 }
 
-export default UserProfile
-
-
+export default UserProfile;

@@ -221,7 +221,10 @@ const queryGenerator = (db) => {
   const getAllJobsByOrganizationId = async (organization_id, applicationsNotIncluded) => {
     const values = [organization_id];
     const queryString = `
-    SELECT jobs.* FROM jobs
+    SELECT jobs.* ,
+    organizations.logo as organizationLogo,
+    organizations.name as organizationName
+    FROM jobs
     JOIN organizations ON jobs.organization_id = organizations.id
     WHERE organizations.id = $1
     ORDER BY jobs.created_at DESC;
@@ -297,7 +300,7 @@ const queryGenerator = (db) => {
     const queryString = `
     SELECT fairs.* FROM fairs
     JOIN fairs_organizations ON fairs.host_id = fairs_organizations.fair_id
-    WHERE fairs_organizations.organization_id = $1
+    WHERE fairs_organizations.organization_id = $1 AND fairs.start_time > NOW()
     ORDER BY fairs.start_time DESC;
     `;
 
@@ -341,12 +344,13 @@ const queryGenerator = (db) => {
     description,
     startTime,
     endTime,
-    hostId
+    hostId,
+    poster
   ) => {
-    const values = [name, description, startTime, endTime, hostId];
+    const values = [name, description, startTime, endTime, hostId, poster];
     const queryString = `
-      INSERT INTO fairs (name, description, start_time, end_time, host_id)
-      VALUES ($1, $2, $3, $4, $5)
+      INSERT INTO fairs (name, description, start_time, end_time, host_id, poster)
+      VALUES ($1, $2, $3, $4, $5, $6)
       RETURNING *;
     `;
 
@@ -447,17 +451,31 @@ const queryGenerator = (db) => {
 
   // Get jobs by search
 
-  const getJobsBySearch = async (searchTerm) => {
-    const values = searchTerm ? ["%" + searchTerm + "%"] : null;
+  const getJobsBySearch = async (searchTerm, user_id) => {
+    const values = searchTerm ? [user_id, "%" + searchTerm + "%"] : [user_id];
     const queryString = searchTerm
       ? `
-    SELECT jobs.*, organizations.logo as organizationLogo, organizations.name as organizationName, organizations.website FROM jobs
+    SELECT 
+    jobs.*,
+    (SELECT EXISTS(SELECT 1 from favourites WHERE user_id = $1 AND jobs.id = favourites.job_id)) as liked,
+    (SELECT EXISTS(SELECT 1 from applications WHERE user_id = $1 AND jobs.id = applications.job_id)) as applied,
+    organizations.logo as organizationLogo,
+    organizations.name as organizationName,
+    organizations.website FROM jobs
     JOIN organizations ON jobs.organization_id = organizations.id
-    WHERE jobs.title ILIKE $1 OR jobs.description ILIKE $1 OR jobs.location ILIKE $1;
+    WHERE jobs.title ILIKE $2 OR jobs.description ILIKE $2 OR jobs.location ILIKE $2
+    ORDER BY created_at DESC;
     `
-      :`
-      SELECT jobs.*, organizations.logo as organizationLogo, organizations.name as organizationName, organizations.website FROM jobs
-      JOIN organizations ON jobs.organization_id = organizations.id;`
+      : `
+      SELECT 
+      jobs.*, 
+      (SELECT EXISTS(SELECT 1 from favourites WHERE user_id = $1 AND jobs.id = favourites.job_id)) as liked,
+      (SELECT EXISTS(SELECT 1 from applications WHERE user_id = $1 AND jobs.id = applications.job_id)) as applied,
+      organizations.logo as organizationLogo, 
+      organizations.name as organizationName, 
+      organizations.website FROM jobs
+      JOIN organizations ON jobs.organization_id = organizations.id
+      ORDER BY created_at DESC;`
 
     try {
       const result = await db.query(queryString, values);
@@ -642,8 +660,86 @@ const queryGenerator = (db) => {
 
   };
 
+
+  const toggleLikes = async (user_id, jobId) => {
+    const values = [user_id, jobId];
+
+    const queryStringExists = `
+    SELECT EXISTS(SELECT 1 from favourites WHERE user_id = $1 AND job_id = $2)
+    `
+
+    const queryStringAdd = `
+    INSERT into favourites (user_id, job_id)
+    VALUES ($1, $2);
+    `
+
+    const queryStringRemove = `
+    DELETE from favourites WHERE user_id = $1 and job_id = $2;
+    `
+
+    try {
+      const result = await db.query(queryStringExists, values);
+      const { exists } = result.rows[0];
+      exists ? await db.query(queryStringRemove, values) : await db.query(queryStringAdd, values)
+      console.log(exists);
+    } catch (error) {
+      console.log(error);
+    };
+
+
+  };
+
+  const getFavoriteJobsByUser = async (user_id) => {
+    const values = [user_id];
+    const queryString = `
+    SELECT 
+    jobs.*, 
+    (SELECT EXISTS(SELECT 1 from favourites WHERE user_id = $1 AND jobs.id = favourites.job_id)) as liked,
+    (SELECT EXISTS(SELECT 1 from applications WHERE user_id = $1 AND jobs.id = applications.job_id)) as applied,
+    organizations.logo as organizationLogo, 
+    organizations.name as organizationName, 
+    organizations.website FROM jobs
+    JOIN organizations ON jobs.organization_id = organizations.id
+    JOIN favourites ON favourites.job_id = jobs.id
+    WHERE favourites.user_id = $1
+    ORDER BY created_at DESC;`
+
+    try {
+      const result = await db.query(queryString, values);
+      return result.rows;
+    } catch (error) {
+      console.log(error);
+    }
+
+  };
+
+  const getAppliedJobsByUser = async (user_id) => {
+    const values = [user_id];
+    const queryString = `
+    SELECT 
+    jobs.*, 
+    (SELECT EXISTS(SELECT 1 from favourites WHERE user_id = $1 AND jobs.id = favourites.job_id)) as liked,
+    organizations.logo as organizationLogo, 
+    organizations.name as organizationName, 
+    organizations.website FROM jobs
+    JOIN organizations ON jobs.organization_id = organizations.id
+    JOIN applications ON applications.job_id = jobs.id
+    WHERE applications.user_id = $1
+    ORDER BY created_at DESC;`
+
+    try {
+      const result = await db.query(queryString, values);
+      return result.rows.map((job) => ({ ...job, applied: true }));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return {
+    getAppliedJobsByUser,
+    getFavoriteJobsByUser,
     updateOrganizationInfo,
+    toggleLikes,
     deleteOrganizationById,
     getJobById,
     applyForJob,

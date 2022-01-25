@@ -10,7 +10,7 @@ import Stall from "./components/Stall";
 import Groups from "./components/Groups/index";
 import { Snackbar, Alert } from "@mui/material";
 import Fair from "./components/Fair";
-import ChatBox from "./components/ChatBox/ChatBox";
+import Messages from "./components/Messages";
 import OrganizationDetails from "./components/Groups/OrganizationDetails";
 import Jobs from "./components/JobBoard/index";
 import Schedule from "./components/Schedule";
@@ -21,6 +21,7 @@ import JobApplications from "./components/Groups/JobApplications";
 import UserProfile from "./components/UserProfile/UserProfile";
 import OtherProfile from "./components/UserProfile/OtherProfile";
 import InterviewRoom from "./components/InterviewRoom";
+import Bookmarks from "./components/Bookmarks/index";
 
 function App() {
   const [errorMessage, setErrorMessage] = useState("");
@@ -91,7 +92,7 @@ function App() {
             path="/organizations"
             element={<Groups {...{ setSnackBarDetails }} />}
           />
-          <Route path="/jobs" element={<Jobs currentUser={currentUser} {... {setSnackBarDetails}}/>} />
+          <Route path="/jobs" element={<Jobs currentUser={currentUser} {... { setSnackBarDetails }} />} />
           <Route path="/schedule" element={<Schedule />} />
           <Route
             path="/profile"
@@ -118,7 +119,7 @@ function App() {
           <Route
             path="/messages"
             element={
-              <ChatBox currentUser={currentUser} messageState={messageState} />
+              <Messages currentUser={currentUser} messageState={messageState} />
             }
           />
           <Route
@@ -151,6 +152,10 @@ function App() {
           <Route
             path="/interviews/:id"
             element={<InterviewRoom {...{ currentUser }} />}
+          />
+          <Route
+            path="/bookmarks"
+            element={<Bookmarks />}
           />
         </Routes>
       </div>

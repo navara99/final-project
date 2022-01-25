@@ -9,6 +9,7 @@ import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
 import { Link } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
+import BookmarksIcon from '@mui/icons-material/Bookmarks';
 
 const UserButtons = ({ logout, currentUser, numOfUnreadMsg }) => {
   return (
@@ -22,6 +23,13 @@ const UserButtons = ({ logout, currentUser, numOfUnreadMsg }) => {
           to: "/organizations",
           Icon: GroupsIcon,
           text: "My Organizations",
+        }}
+      />
+      <Button
+        {...{
+          to: "/bookmarks",
+          Icon: BookmarksIcon,
+          text: "Bookmarks"
         }}
       />
       <Tippy content="Profile" placement="right" theme="material" arrow={true}>

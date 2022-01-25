@@ -12,6 +12,7 @@ import { combineDateTimes } from "../../helpers/date";
 function FairsForm({ fairsFormOpen, setFairsFormOpen, setOrganizationDetails, setSnackBarDetails }) {
   const [name, setName] = useInput();
   const [description, setDescription] = useInput();
+  const [poster, setPoster] = useInput();
   const [date, setDate] = useState(new Date());
   const [startTime, setStartTime] = useState(new Date());
   const [endTime, setEndTime] = useState(new Date());
@@ -24,15 +25,16 @@ function FairsForm({ fairsFormOpen, setFairsFormOpen, setOrganizationDetails, se
       description,
       hostId: id,
       startTimeStamp,
-      endTimeStamp
+      endTimeStamp,
+      poster
     };
 
     try {
       const { data } = await axios.post("/api/fairs", newFair);
       setOrganizationDetails((prev) => (({ ...prev, fairs: [data, ...prev.fairs] })));
       setSnackBarDetails({
-        open:true,
-        message:"Fair has been created"
+        open: true,
+        message: "Fair has been created"
       });
     } catch (err) {
       console.log(err.message);
@@ -91,6 +93,14 @@ function FairsForm({ fairsFormOpen, setFairsFormOpen, setOrganizationDetails, se
             onChange={(time) => {
               setEndTime(time);
             }}
+          />
+          <TextField
+            margin="dense"
+            id="poster"
+            label="Poster"
+            fullWidth
+            required
+            onChange={setPoster}
           />
         </LocalizationProvider>
       </DialogContent>

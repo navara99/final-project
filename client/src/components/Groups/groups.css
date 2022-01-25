@@ -63,3 +63,11 @@
 .description-info {
   padding: 0.2em;
 }
+
+.job-list-item {
+  position: relative;
+}
+
+.job-actions-wrapper {
+  padding-left: 2.5em;
+}
