@@ -23,3 +23,7 @@ div.MuiContainer-root.centered-container {
   justify-content: center;
   align-items: center;
 }
+
+div.MuiContainer-root.centered-container img {
+  max-width: 3.5em;
+}

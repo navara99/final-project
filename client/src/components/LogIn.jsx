@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  Avatar,
   Button,
   TextField,
   Link,
@@ -9,7 +8,6 @@ import {
   Typography,
   Container,
 } from "@mui/material";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import axios from "axios";
 import Unauthorized from "./Unauthorized/index";
 import { useNavigate } from "react-router-dom";
@@ -66,9 +64,7 @@ const LogIn = ({
           alignItems: "center",
         }}
       >
-        <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-          <LockOutlinedIcon />
-        </Avatar>
+        <img src="/icon.png" alt="vCareer" />
         <Typography component="h1" variant="h5">
           Log in
         </Typography>
