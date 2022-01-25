@@ -5,7 +5,7 @@ import SecurityIcon from '@mui/icons-material/Security';
 const NavColumn = ({selectedIndex, setSelectedIndex}) => {
   
   return (
-    <Grid item xs ={3} >
+    <Grid item xs ={3} sx={{backgroundColor:'#ffffff'}} >
       <List>
         <ListItem >
           <ListItemText primary="Settings" primaryTypographyProps={{variant:"h6"}}/>
