@@ -8,7 +8,9 @@ import OrganizationFairs from "./OrganizationFairs";
 
 const cardStyles = {
   padding: "2em",
-  margin: "1em"
+  margin: "1em",
+  borderRadius: '10px',
+  boxShadow: '1px 1px 6px 1px rgba(0,0,0,0.3)'
 };
 
 function OrganizationDetails({ setSnackBarDetails }) {
@@ -18,10 +20,12 @@ function OrganizationDetails({ setSnackBarDetails }) {
   console.log(organization);
 
   return (
-    <div className="organization-details-wrapper">
+    <div className="organization-details-wrapper" style={{width:'100%', backgroundColor:"#eff2f6"}}>
       {organization && <OrganizationHeader {...{ organization }} {...{ cardStyles }} />}
-      {organization && <OrganizationJobs {...{ organization }} {...{ setOrganizationDetails }} {...{ cardStyles }} {...{ setSnackBarDetails }} />}
-      {organization && <OrganizationFairs {...{ organization }} {...{ setOrganizationDetails }} {...{ cardStyles }} {...{ setSnackBarDetails }} />}
+      <div style={{display:"flex", justifyContent:"space-between"}}>
+        {organization && <OrganizationJobs {...{ organization }} {...{ setOrganizationDetails }} {...{ cardStyles }} {...{ setSnackBarDetails }} />}
+        {organization && <OrganizationFairs {...{ organization }} {...{ setOrganizationDetails }} {...{ cardStyles }} {...{ setSnackBarDetails }} />}
+      </div>
       {organization && <OrganizationMembers {...{ organization }} {...{ setOrganizationDetails }} {...{ cardStyles }}  {...{ setSnackBarDetails }} />}
     </div>
   );
