@@ -21,7 +21,7 @@ function MembersListItem({ member }) {
       <ListItemText
         primary = { currentUser && currentUser.id === member.id ? (`${member.first_name} ${member.last_name} ( You )` ) :
           (<>
-            <Link to={`/profile/${member.id}`}>{`${member.first_name} ${member.last_name}`}</Link>
+            <Link style={{textDecoration: 'none'}} to={`/profile/${member.id}`}>{`${member.first_name} ${member.last_name}`}</Link>
           </>)
         }
 
