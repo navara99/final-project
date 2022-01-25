@@ -2,24 +2,12 @@ import React, { useEffect, useState } from "react";
 import { ListItem, ListItemText } from "@mui/material"
 import JobActions from "./JobActions";
 import { formatDate } from "../../helpers/date";
-import useApplications from "../../hooks/useApplications";
 import { ListItemAvatar, Avatar } from "@mui/material";
 import { Link } from "react-router-dom";
 
 function JobListItem({ job, setJobs, isMember, setSnackBarDetails, currentUser }) {
-  const [isApplied, setApplied] = useState(false);
+  const [isApplied, setApplied] = useState(job.applied);
   const [like, setLike] = useState(job.liked);
-
-  const job_id = job.id;
-  const [applications] = useApplications(job_id);
-  useEffect(() => {
-    if (currentUser && applications) {
-      if (applications.length > 0) {
-        setApplied(applications.filter(app => app.user_id === currentUser.id).length > 0)
-      }
-    }
-  }, [applications, currentUser]);
-
 
   const jobDescription = `
     ${job.description} \n 
