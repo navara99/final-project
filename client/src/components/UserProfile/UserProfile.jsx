@@ -29,7 +29,9 @@ const UserProfile = ({ currentUser }) => {
   const { myGroups } = useMyGroups();
   const [openResume, setOpenResume] = useState(false);
 
-  useTitle(currentUser.first_name + " " + currentUser.last_name + "'s profile");
+  useTitle(
+    `${currentUser.first_name} ${currentUser.last_name} (@${currentUser.username})`
+  );
   return (
     <>
       {currentUser && (
