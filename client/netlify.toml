@@ -1,0 +1,2 @@
+[build.environment]
+  REACT_APP_API_BASE_URL = "https://vcareer.herokuapp.com/api/"
