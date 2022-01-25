@@ -11,7 +11,7 @@ app.set("trust proxy", 1);
 app.enable("trust-proxy");
 // Set up cookie-session
 const cookieSession = require("cookie-session");
-app.use(cookieSession({ secret: process.env.SECRET }));
+app.use(cookieSession({ secret: process.env.SECRET, secure: false, sameSite: "none" }));
 
 // Enable All Cors Requests
 const cors = require("cors");
