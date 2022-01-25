@@ -710,7 +710,30 @@ const queryGenerator = (db) => {
 
   };
 
+  const getAppliedJobsByUser = async (user_id) => {
+    const values = [user_id];
+    const queryString = `
+    SELECT 
+    jobs.*, 
+    (SELECT EXISTS(SELECT 1 from favourites WHERE user_id = $1 AND jobs.id = favourites.job_id)) as liked,
+    organizations.logo as organizationLogo, 
+    organizations.name as organizationName, 
+    organizations.website FROM jobs
+    JOIN organizations ON jobs.organization_id = organizations.id
+    JOIN applications ON applications.job_id = jobs.id
+    WHERE applications.user_id = $1
+    ORDER BY created_at DESC;`
+
+    try {
+      const result = await db.query(queryString, values);
+      return result.rows;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return {
+    getAppliedJobsByUser,
     getFavoriteJobsByUser,
     updateOrganizationInfo,
     toggleLikes,
