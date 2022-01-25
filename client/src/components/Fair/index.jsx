@@ -11,7 +11,13 @@ const Fair = ({ currentUser, setSnackBarDetails }) => {
   let { id } = useParams();
   const { fair, stalls, added, add, updateFairDetails } = useFairDetails(id);
   const title = stalls && fair.live ? "Stalls" : "Employers";
-  const tabTitle = fair ? ((fair.live ? "LIVE NOW! " : "") + fair.name) : "";
+  const tabTitle = fair
+    ? (fair.live ? "LIVE NOW! " : "") +
+      fair.name +
+      " - Hosted by " +
+      fair.host_name
+    : "";
+    
   useTitle(tabTitle);
 
   return (
