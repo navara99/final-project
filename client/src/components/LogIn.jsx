@@ -57,7 +57,7 @@ const LogIn = ({
   }
 
   return (
-    <Container maxWidth="xs">
+    <Container className="centered-container" maxWidth="xs">
       <Box
         sx={{
           marginTop: 0,
