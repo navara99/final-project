@@ -76,7 +76,8 @@ function Register({
           spacing={2}
         >
           <Grid item>
-            <Typography component="div">
+            <Typography component="div" className="title-logo">
+              <img src="/icon.png" alt="vCareer" />
               <h2>Register</h2>
             </Typography>
           </Grid>

@@ -27,3 +27,13 @@ div.MuiContainer-root.centered-container {
 div.MuiContainer-root.centered-container img {
   max-width: 3.5em;
 }
+
+div.MuiContainer-root.centered-container .title-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+div.MuiContainer-root.centered-container .title-logo h2{
+  margin-top: 0;
+}
