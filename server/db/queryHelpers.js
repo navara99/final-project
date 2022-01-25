@@ -726,7 +726,7 @@ const queryGenerator = (db) => {
 
     try {
       const result = await db.query(queryString, values);
-      return result.rows;
+      return result.rows.map((job) => ({ ...job, applied: true }));
     } catch (error) {
       console.log(error);
     }
