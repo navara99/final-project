@@ -1,13 +1,13 @@
 - update organization's logo on user profile page (when not logged in) (Yagnesh)
 - organization hyperlink style (color and font decoration) (Yagnesh)
-- move login and register page to the middle & add logo of the app (Siu)
-- undefined title for the name of stall (Siu)
+* move login and register page to the middle & add logo of the app (Siu)
+* undefined title for the name of stall (Siu)
 - in application page (organization), bug in showing cover letter (Thar)
 - change icon to bookmark (Thar)
 - bug in saved jobs page (Thar)
 - organization: remove grey background when hover (Yagnesh)
 - pass down setSnackBars on saved job page (Thar)
-- change seeds username
+- change seeds username (Siu)
 
 1. intro everyone
 2. upload resume
