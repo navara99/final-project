@@ -12,7 +12,7 @@ const useAppliedJobs = () => {
 
   useEffect(() => {
     updateAppliedJobs();
-  }, []);
+  }, [updateAppliedJobs]);
 
   return { appliedJobs, setAppliedJobs, updateAppliedJobs };
 };
