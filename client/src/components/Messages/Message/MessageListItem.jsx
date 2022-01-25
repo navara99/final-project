@@ -25,7 +25,7 @@ const MessageListItem = (props) => {
     message,
     interviewer_id: sender_id,
   };
-  
+
   const clickAcceptHandler = (e) => {
     axios
       .put("/api/messages/interview", { ...appointment, is_accepted: true })
@@ -60,18 +60,20 @@ const MessageListItem = (props) => {
       });
   };
 
+  const isSender = sender_id === currentUser.id;
+
   return (
     <>
       {currentUser && (
         <ListItem
-          style={{
-            justifyContent:
-              sender_id === currentUser.id ? "flex-end" : "flex-start",
-          }}
+          // style={{
+          //   justifyContent: isSender ? "flex-end" : "flex-start",
+          // }}
         >
+          {isSender && <div style={{ flex: "1 0 25%", height: "1px" }}></div>}
           <Grid container>
             <Grid item xs={12}>
-              {is_invitation && sender_id !== currentUser.id ? (
+              {is_invitation && !isSender ? (
                 <ListItemText
                   align="left"
                   primary={
@@ -99,18 +101,19 @@ const MessageListItem = (props) => {
                 ></ListItemText>
               ) : (
                 <ListItemText
-                  align={sender_id === currentUser.id ? "right" : "left"}
+                  align={isSender ? "right" : "left"}
                   primary={message}
                 ></ListItemText>
               )}
             </Grid>
             <Grid item xs={12}>
               <ListItemText
-                align={sender_id === currentUser.id ? "right" : "left"}
+                align={isSender ? "right" : "left"}
                 secondary={moment(`${created_at}`).fromNow()}
               ></ListItemText>
             </Grid>
           </Grid>
+          {!isSender && <div style={{ flex: "1 0 25%", height: "1px" }}></div>}
         </ListItem>
       )}
     </>
