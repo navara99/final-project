@@ -5,11 +5,13 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import "./schedule.css";
 import Event from "./Event";
 import useSchedule from "../../hooks/useSchedule";
+import useTitle from "../../hooks/useTitle";
 
 const localizer = momentLocalizer(moment);
 
 const Schedule = () => {
   const events = useSchedule();
+  useTitle("My Schedule");
   return (
     <div className="schedule">
       <Calendar
