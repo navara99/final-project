@@ -43,7 +43,6 @@
 * Only show the upcoming fair on organisations (Thar)
 * Take out the details button for job on organisations page
 * Poster input for making new fairs (Thar)
-* bubble for chat (siu)
 * icon for organizations on user profile page (Yagnesh)
 * deployment (Siu)
 * job board: take out details button (or changed to saved job)
