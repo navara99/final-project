@@ -15,7 +15,9 @@ app.use(cookieSession({ secret: process.env.SECRET }));
 
 // Enable All Cors Requests
 const cors = require("cors");
-app.use(cors());
+app.use(cors({
+  origin: "https://vcareer-demo.netlify.app/"
+}));
 
 //SocketIo config
 const { createServer } = require("http");
