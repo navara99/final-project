@@ -13,7 +13,7 @@ function OrganizationJobs({ cardStyles, organization, setOrganizationDetails, se
   const [jobFormOpen, setJobFormOpen] = useState(false);
 
   return (
-    <div>
+    <div style={{flexGrow:1}}>
       <JobForm {...{ jobFormOpen }} {...{ setJobFormOpen }} {...{ setSnackBarDetails }} {...{ setOrganizationDetails }} />
       <Card style={cardStyles}>
         <div className="organization-card">
