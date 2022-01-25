@@ -1,11 +1,8 @@
 import React from "react";
-import { ListItemText, Card, Collapse, CardActions, CardActionArea } from "@mui/material";
+import { ListItemText, Card, CardActions, CardActionArea } from "@mui/material";
 import GroupAction from "./GroupAction";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-
-
-
 
 function GroupListItem({ group, openAddMembersModal, selectedGroup, setSelectedGroup, cardStyles, setMyGroups }) {
   const [hover, setHover] = useState(false)

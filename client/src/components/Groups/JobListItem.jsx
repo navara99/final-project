@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { ListItem, ListItemText } from "@mui/material"
 import JobActions from "./JobActions";
 import { formatDate } from "../../helpers/date";
