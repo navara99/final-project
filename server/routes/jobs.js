@@ -18,6 +18,13 @@ module.exports = (db) => {
 
   });
 
+  router.get("/favorite", (req, res) => {
+    const { user_id } = req.session;
+
+    console.log(user_id);
+
+  });
+
   router.get(`/:id/applications`, async (req, res) => {
     const { id } = req.params;
 
