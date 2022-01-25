@@ -7,6 +7,12 @@ const express = require("express");
 const app = express();
 const morgan = require("morgan");
 
+app.set("trust proxy", 1);
+app.enable("trust-proxy");
+// Set up cookie-session
+const cookieSession = require("cookie-session");
+app.use(cookieSession({ secret: process.env.SECRET }));
+
 // Enable All Cors Requests
 const cors = require("cors");
 app.use(cors());
@@ -79,11 +85,7 @@ io.on("connection", (socket) => {
   });
 });
 
-app.set("trust proxy", 1);
-app.enable("trust-proxy");
-// Set up cookie-session
-const cookieSession = require("cookie-session");
-app.use(cookieSession({ secret: process.env.SECRET }));
+
 
 // PG database client/connection setup
 const { Pool } = require("pg");
