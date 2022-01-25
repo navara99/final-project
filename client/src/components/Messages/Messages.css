@@ -8,6 +8,15 @@
   flex-direction: column;
 }
 
+.chat-box a.MuiBox-root {
+  background-color: #4797ec;
+  padding: 0.5em;
+}
+
+.chat-box .MuiButtonBase-root.MuiFab-root {
+  margin-left: 0.3em;
+}
+
 .chat-box li.MuiListItem-root div.MuiGrid-root.MuiGrid-item {
   flex: 0 1 auto;
   width: auto;
