@@ -18,7 +18,7 @@ function Groups({ setSnackBarDetails }) {
   const { myGroups, setMyGroups } = useMyGroups();
   const [selectedGroup, setSelectedGroup] = useState();
 
-  useTitle("My organizations");
+  useTitle("My Organizations");
 
   const renderMyGroups = (myGroups) => {
 
