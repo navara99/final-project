@@ -1,10 +1,11 @@
 import React from "react";
+import Columns from "./Columns";
 
 function Bookmarks() {
 
   return (
     <>
-    bookmarks
+      <Columns selectedIndex={0} />
     </>
   )
 };
