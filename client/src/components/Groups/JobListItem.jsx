@@ -5,7 +5,7 @@ import { formatDate } from "../../helpers/date";
 import { ListItemAvatar, Avatar } from "@mui/material";
 import { Link } from "react-router-dom";
 
-function JobListItem({ job, setJobs, isMember, setSnackBarDetails, currentUser }) {
+function JobListItem({ job, setJobs, isMember, setSnackBarDetails, currentUser, setAppliedJobs }) {
   const [isApplied, setApplied] = useState(job.applied);
   const [like, setLike] = useState(job.liked);
 
@@ -31,7 +31,7 @@ function JobListItem({ job, setJobs, isMember, setSnackBarDetails, currentUser }
           secondary={jobDescription.split("\n").map((elem, i) => <span className="description-info" key={i} style={{ display: "block" }}>{elem}</span>)}
         />
       </div>
-      <JobActions {...{ isMember, setJobs, job, setSnackBarDetails, currentUser, isApplied, setApplied, like, setLike }} />
+      <JobActions {...{ isMember, setJobs, job, setSnackBarDetails, currentUser, isApplied, setApplied, like, setLike, setAppliedJobs }} />
     </ListItem>
   )
 
