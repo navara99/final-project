@@ -5,6 +5,7 @@ import OrganizationHeader from "./OrganizationHeader";
 import OrganizationJobs from "./OrganizationJobs";
 import OrganizationMembers from "./OrganizationMembers";
 import OrganizationFairs from "./OrganizationFairs";
+import useTitle from "../../hooks/useTitle";
 
 const cardStyles = {
   padding: "2em",
@@ -17,7 +18,7 @@ function OrganizationDetails({ setSnackBarDetails }) {
   const { id } = useParams();
   const [organization, setOrganizationDetails] = useOrganizationDetails(id);
 
-  console.log(organization);
+  useTitle(organization && organization.name);
 
   return (
     <div className="organization-details-wrapper" style={{width:'100%', backgroundColor:"#eff2f6"}}>

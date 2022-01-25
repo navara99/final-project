@@ -10,7 +10,7 @@ import Stall from "./components/Stall";
 import Groups from "./components/Groups/index";
 import { Snackbar, Alert } from "@mui/material";
 import Fair from "./components/Fair";
-import ChatBox from "./components/ChatBox/ChatBox";
+import Messages from "./components/Messages";
 import OrganizationDetails from "./components/Groups/OrganizationDetails";
 import Jobs from "./components/JobBoard/index";
 import Schedule from "./components/Schedule";
@@ -119,7 +119,7 @@ function App() {
           <Route
             path="/messages"
             element={
-              <ChatBox currentUser={currentUser} messageState={messageState} />
+              <Messages currentUser={currentUser} messageState={messageState} />
             }
           />
           <Route
