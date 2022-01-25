@@ -22,7 +22,7 @@ function GroupListItem({ group, openAddMembersModal, selectedGroup, setSelectedG
             />
             <ListItemText
               primary={<h3 className="organization-card-name" >{group.name}</h3>}
-              secondary={group.description}
+              secondary={group.description && group.description.length > 200 ? `${group.description.substring(0,200)}...` : group.description}
             />
           </Link>
         </CardActionArea>
