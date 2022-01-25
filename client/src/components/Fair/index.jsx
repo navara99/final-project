@@ -5,11 +5,15 @@ import HeaderLive from "./HeaderLive";
 import Header from "./Header";
 import "./Fair.css";
 import OrganizationList from "./OrganizationList";
+import useTitle from "../../hooks/useTitle";
 
 const Fair = ({ currentUser, setSnackBarDetails }) => {
   let { id } = useParams();
   const { fair, stalls, added, add, updateFairDetails } = useFairDetails(id);
   const title = stalls && fair.live ? "Stalls" : "Employers";
+  const tabTitle = fair ? ((fair.live ? "LIVE NOW! " : "") + fair.name) : "";
+  useTitle(tabTitle);
+
   return (
     <div className="live">
       {fair && fair.live && (

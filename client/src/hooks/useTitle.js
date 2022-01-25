@@ -2,9 +2,9 @@ import { useEffect } from "react";
 
 const useTitle = (title) => {
   useEffect(() => {
-    // This will run when the page first loads and whenever the title changes
-    document.title = title;
-  }, []);
+    if (title) return document.title = title + " - vCareer";
+    document.title = "vCareer";
+  }, [title]);
 };
 
 export default useTitle;
