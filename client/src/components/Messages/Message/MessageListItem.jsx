@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { Button } from "@mui/material";
+import { ListItem, Grid, ListItemText, Button } from "@mui/material";
 import moment from "moment";
 import axios from "axios";
 
-const Messagediv = (props) => {
+const MessageListItem = (props) => {
   const {
     id,
     message,
@@ -25,7 +25,7 @@ const Messagediv = (props) => {
     message,
     interviewer_id: sender_id,
   };
-
+  
   const clickAcceptHandler = (e) => {
     axios
       .put("/api/messages/interview", { ...appointment, is_accepted: true })
@@ -63,45 +63,58 @@ const Messagediv = (props) => {
   return (
     <>
       {currentUser && (
-        <div
+        <ListItem
           style={{
             justifyContent:
               sender_id === currentUser.id ? "flex-end" : "flex-start",
           }}
         >
-          {is_invitation && sender_id !== currentUser.id ? (
-            <div align="left">
-              {message}
-              <div style={{ marginTop: "0.7em" }}>
-                <Button
-                  disabled={is_accepted !== null || clicked}
-                  variant="contained"
-                  style={{ marginRight: "0.5em" }}
-                  onClick={clickAcceptHandler}
-                >
-                  Accept
-                </Button>
-                <Button
-                  variant="outlined"
-                  disabled={is_accepted !== null || clicked}
-                  onClick={clickRejectHandler}
-                >
-                  Reject
-                </Button>
-              </div>
-            </div>
-          ) : (
-            <div align={sender_id === currentUser.id ? "right" : "left"}>
-              {message}
-            </div>
-          )}
-          <div align={sender_id === currentUser.id ? "right" : "left"}>
-            {moment(`${created_at}`).fromNow()}
-          </div>
-        </div>
+          <Grid container>
+            <Grid item xs={12}>
+              {is_invitation && sender_id !== currentUser.id ? (
+                <ListItemText
+                  align="left"
+                  primary={
+                    <>
+                      {message}
+                      <div style={{ marginTop: "0.7em" }}>
+                        <Button
+                          disabled={is_accepted !== null || clicked}
+                          variant="contained"
+                          style={{ marginRight: "0.5em" }}
+                          onClick={clickAcceptHandler}
+                        >
+                          Accept
+                        </Button>
+                        <Button
+                          variant="outlined"
+                          disabled={is_accepted !== null || clicked}
+                          onClick={clickRejectHandler}
+                        >
+                          Reject
+                        </Button>
+                      </div>
+                    </>
+                  }
+                ></ListItemText>
+              ) : (
+                <ListItemText
+                  align={sender_id === currentUser.id ? "right" : "left"}
+                  primary={message}
+                ></ListItemText>
+              )}
+            </Grid>
+            <Grid item xs={12}>
+              <ListItemText
+                align={sender_id === currentUser.id ? "right" : "left"}
+                secondary={moment(`${created_at}`).fromNow()}
+              ></ListItemText>
+            </Grid>
+          </Grid>
+        </ListItem>
       )}
     </>
   );
 };
 
-export default Messagediv;
+export default MessageListItem;
