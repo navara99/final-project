@@ -1,5 +1,5 @@
 import React from "react";
-import { ListItemText, Card, CardActions, CardActionArea } from "@mui/material";
+import { ListItemText, Card, CardActions } from "@mui/material";
 import GroupAction from "./GroupAction";
 import { Link } from "react-router-dom";
 import { useState } from "react";
