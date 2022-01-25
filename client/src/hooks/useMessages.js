@@ -78,7 +78,7 @@ const useMessages = (currentUser) => {
   useEffect(() => {
     // intialize socket
     if (!currentUser) return;
-    const socket = io.connect("http://localhost:8080");
+    const socket = io.connect("https://vcareer.herokuapp.com/");
     socket.on("getMessage", (data) => {
       console.log(data);
       const newMsg = { ...data, created_at: new Date().toISOString() };

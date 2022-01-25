@@ -72,7 +72,7 @@ const OtherProfile = ({ currentUser }) => {
               <Box>
                 <Dialog open={openResume} fullWidth={true} maxWidth={"lg"} onClose={() => { }} sx={{ height: "100vh" }} scroll='body' >
                   <DialogContent sx={{ height: "70vh" }}>
-                    {!otherUser.resume ? (<Typography variant='h6' p={2}> {`${otherUser.first_name} ${otherUser.last_name} haven't uploaded resume yet`}</Typography>) : (<embed src={"http://localhost:8080/" + otherUser.resume + "#toolbar=0"} height="100%" width="100%" />)}
+                    {!otherUser.resume ? (<Typography variant='h6' p={2}> {`${otherUser.first_name} ${otherUser.last_name} haven't uploaded resume yet`}</Typography>) : (<embed src={"https://vcareer.herokuapp.com/" + otherUser.resume + "#toolbar=0"} height="100%" width="100%" />)}
                   </DialogContent>
                   <DialogActions>
                     <Button onClick={() => { setOpenResume(!openResume) }}>Close</Button>
