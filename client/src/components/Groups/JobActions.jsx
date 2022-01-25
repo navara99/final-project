@@ -4,9 +4,9 @@ import JobApplicationForm from "./JobApplicationForm";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { IconButton } from "@mui/material";
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import FavoriteIcon from '@mui/icons-material/Favorite';
 import axios from "axios";
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
 
 function JobActions({ job, isMember, setSnackBarDetails, currentUser, isApplied, setApplied, like, setLike }) {
   const [openApplicationForm, setOpenApplicationForm] = useState(false);
@@ -32,8 +32,8 @@ function JobActions({ job, isMember, setSnackBarDetails, currentUser, isApplied,
           style={{ position: "absolute", top: "0.5em", right: "0.5em" }}
           onClick={likeToggle}>
           {like ?
-            <FavoriteIcon style={{ color: "#db565b" }} fontSize="large" /> :
-            <FavoriteBorderIcon fontSize="large" />}
+            <BookmarkIcon style={{ color: "#db565b" }} fontSize="large" /> :
+            <BookmarkBorderIcon fontSize="large" />}
         </IconButton>}
     </div>
   )
