@@ -12,7 +12,8 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
-  Button
+  Button,
+  Tooltip
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import React, { useState } from 'react';
@@ -46,42 +47,48 @@ const UserProfile = ({ currentUser }) => {
             </Badge>
           </Box>
           <Box sx={{ pt: 6, px: 3, display: "flex", justifyContent: "space-between" }}>
-            <Box sx={{ display: 'flex' }}>
-              <Typography variant='h4' sx={{}}>{`${currentUser.first_name} ${currentUser.last_name}`}</Typography>
-              <Typography variant='body1' sx={{ pl: 1, pt: 1.5 }}>{`( ${currentUser.username} )`}</Typography>
+            <Box sx={{ display: 'flex', flexDirection:"column", pr:10 }}>
+              <Box sx={{ display: 'flex' }}>
+                <Typography variant='h4' sx={{}}>{`${currentUser.first_name} ${currentUser.last_name}`}</Typography>
+                <Typography variant='body1' sx={{ pl: 1, pt: 1.5 }}>{`( ${currentUser.username} )`}</Typography>
+              </Box>
+              <Box sx={{mt:3}}>
+                <Button onClick={(e) => setOpenResume(true)} variant='contained'>Your Resume</Button>
+              </Box>
+              <Box>
+                <Dialog open={openResume} fullWidth={true} maxWidth={"lg"} onClose={() => { }} sx={{ height: "100vh" }} scroll='body' >
+                  <DialogContent sx={{ height: "70vh" }}>
+                    {!currentUser.resume ? (<Typography variant='h6' p={2}> You haven't uploaded your resume. Go to settings and upload new resume</Typography>) : (<embed src={"http://localhost:8080/" + currentUser.resume + "#toolbar=0"} height="100%" width="100%" />)}
+                  </DialogContent>
+                  <DialogActions>
+                    <Button onClick={() => { setOpenResume(!openResume) }}>Close</Button>
+                  </DialogActions>
+                </Dialog>
+              </Box>
+
+              <Box sx={{mt:3}}>
+                <Typography variant='h6'>About</Typography>
+                <Typography variant='body1' sx={{ pt: 1 }}>{currentUser.bio}</Typography>
+              </Box>
             </Box>
-            <Box sx={{ mr: 8, pr: 3, display: 'flex' }}>
+            <Box sx={{pr: 3,display: 'flex', flexWrap:"wrap"}}>
+              <Typography variant='h6' alignSelf='center'>Organization</Typography>
               {myGroups && myGroups.length > 0 && (
-                <List>
+                <List sx={{width:200, display:'flex', flexWrap:'wrap'}}>
                   {myGroups.map((group, i) => (
-                    <ListItem key={i}>
-                      <ListItemAvatar >
-                        <Avatar alt={`${group.name}`} src={group.logo}></Avatar>
-                      </ListItemAvatar>
-                      <ListItemText primary={`${group.name}`} primaryTypographyProps={{ variant: "h6" }}
-                      />
+                    <ListItem key={i} sx={{width: '30%'}}>
+                      <Tooltip title={group.name} placement="top-start">
+                        <ListItemAvatar variant="rounded" sx={{height:25, width:25}}>
+                          <Avatar alt={`${group.name}`} src={group.logo}></Avatar>
+                        </ListItemAvatar>
+                      </Tooltip>
+                      
+                      {/* <ListItemText primary={`${group.name}`} primaryTypographyProps={{ variant: "h6" }}/> */}
                     </ListItem>))
                   }
-                </List>)}
+                </List>)
+              }
             </Box>
-          </Box>
-          <Box sx={{ px: 3 }}>
-            <Button onClick={(e) => setOpenResume(true)} variant='contained'>Your Resume</Button>
-          </Box>
-          <Box>
-            <Dialog open={openResume} fullWidth={true} maxWidth={"lg"} onClose={() => { }} sx={{ height: "100vh" }} scroll='body' >
-              <DialogContent sx={{ height: "70vh" }}>
-                {!currentUser.resume ? (<Typography variant='h6' p={2}> You haven't uploaded your resume. Go to settings and upload new resume</Typography>) : (<embed src={"http://localhost:8080/" + currentUser.resume + "#toolbar=0"} height="100%" width="100%" />)}
-              </DialogContent>
-              <DialogActions>
-                <Button onClick={() => { setOpenResume(!openResume) }}>Close</Button>
-              </DialogActions>
-            </Dialog>
-          </Box>
-
-          <Box sx={{ px: 3 }}>
-            <Typography variant='h6'>About</Typography>
-            <Typography variant='body1' sx={{ pt: 1 }}>{currentUser.bio}</Typography>
           </Box>
         </Stack>
       </Grid>)
