@@ -12,6 +12,7 @@ import { Avatar } from "@mui/material";
 import "./Messages.css";
 import { Link } from "react-router-dom";
 import Unauthorized from "../Unauthorized";
+import useTitle from "../../hooks/useTitle";
 
 const Messages = ({ currentUser, messageState }) => {
   const {
@@ -29,6 +30,7 @@ const Messages = ({ currentUser, messageState }) => {
     socket,
   } = messageState;
 
+  useTitle("Messages");
   if (!currentUser) {
     return <Unauthorized action="view messages" />;
   }
