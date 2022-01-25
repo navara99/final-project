@@ -1,8 +1,8 @@
 INSERT INTO users_organizations (user_id, organization_id, admin)
 VALUES
 (1, 1, true),
-(5, 1, true),
-(5, 2, true),
+(1, 2, true),
+(4, 2, true),
 (5, 3, true),
 (5, 4, true),
 (5, 5, true),

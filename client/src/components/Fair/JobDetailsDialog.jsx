@@ -4,7 +4,7 @@ import {
   DialogTitle,
   DialogContent,
 } from "@mui/material";
-import TimeAgo from "timeago-react";
+import { formatDate } from "../../helpers/date";
 
 const JobDetailsDialog = ({ jobDetailsOpen, setJobDetailsOpen, job }) => {
   return (
@@ -19,7 +19,7 @@ const JobDetailsDialog = ({ jobDetailsOpen, setJobDetailsOpen, job }) => {
         <p>Experience: {job && job.experience}</p>
         <p>Expected Salary: {job && job.salary}</p>
         <p>
-          Posted: <TimeAgo datetime={job && job.created_at} locale="vi" />
+          Posted: {formatDate(job && job.created_at)}
         </p>
       </DialogContent>
     </Dialog>

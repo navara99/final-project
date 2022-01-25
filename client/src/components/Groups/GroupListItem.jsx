@@ -7,7 +7,7 @@ import { useState } from "react";
 function GroupListItem({ group, openAddMembersModal, selectedGroup, setSelectedGroup, cardStyles, setMyGroups }) {
   const [hover, setHover] = useState(false)
   return (
-    <Card style={cardStyles} onMouseEnter={(e) => setHover(true)} raised = {hover ? true : false} onMouseLeave={(e) => setHover(false)}  sx={{overflow:"unset", maxWidth:350, width:300, borderRadius:4, border:'1px solid #006394', display:"flex", flexDirection:"column", justifyContent:"space-between"}}>
+    <Card style={cardStyles} onMouseEnter={(e) => setHover(true)} raised = {hover ? true : false} onMouseLeave={(e) => setHover(false)}  sx={{overflow:"unset",minWidth:300, maxWidth:350, borderRadius:4, border:'1px solid #006394', display:"flex", flexDirection:"column", justifyContent:"space-between", mt:2, rowGap:10}}>
       {/* <div className="organization-card" sx={{direction : "column"}}> */}
         <CardActionArea >
           <Link to={`/organizations/${group.id}`} style={{ textDecoration: 'none',  color: "black", display:"flex", flexDirection:"column" , position:"relative", top:-60}}>
@@ -19,7 +19,7 @@ function GroupListItem({ group, openAddMembersModal, selectedGroup, setSelectedG
             />
             <ListItemText
               primary={<h3 className="organization-card-name" >{group.name}</h3>}
-              secondary={group.description}
+              secondary={group.description && group.description.length > 200 ? `${group.description.substring(0,200)}...` : group.description}
             />
           </Link>
         </CardActionArea>

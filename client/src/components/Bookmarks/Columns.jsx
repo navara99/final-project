@@ -8,7 +8,7 @@ function Columns({ selectedIndex, setSelectedIndex }) {
   
 
   return (
-    <Grid item xs={3} >
+    <Grid item xs={3} sx={{backgroundColor:"#ffffff"}} >
       <List>
         <ListItem >
           <ListItemText primary="Jobs" primaryTypographyProps={{ variant: "h6" }} />

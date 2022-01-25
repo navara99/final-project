@@ -7,6 +7,7 @@ import useChannel from "../../hooks/useChannel";
 import "./interviewroom.css";
 import { formatStartEndTime } from "../../helpers/date";
 import WhiteBoardModal from "./WhiteBoardModal";
+import useTitle from "../../hooks/useTitle";
 
 function InterviewRoom({ currentUser }) {
   const { id } = useParams();
@@ -14,7 +15,8 @@ function InterviewRoom({ currentUser }) {
   const [inCall, setInCall] = useState(false);
   const { config, useClient } = useChannel(`interview${id}`, currentUser ? `${currentUser.username}${interview && interview.interviewer ? " (interviewer)" : ""}` : "");
 
-
+  useTitle(interview && `Interview for ${interview.title} position at ${interview.name}`);
+  
   return (
     <div className="interview-lobby">
       {interview && !inCall &&

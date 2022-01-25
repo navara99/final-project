@@ -6,6 +6,7 @@ import GroupListItem from "./GroupListItem";
 import GroupForm from "./GroupForm";
 import { useState } from "react";
 import useMyGroups from "../../hooks/useMyGroups";
+import useTitle from "../../hooks/useTitle";
 
 const cardStyles = {
   padding: "2em",
@@ -16,6 +17,8 @@ function Groups({ setSnackBarDetails }) {
   const [openForm, setOpenForm] = useState(false);
   const { myGroups, setMyGroups } = useMyGroups();
   const [selectedGroup, setSelectedGroup] = useState();
+
+  useTitle("My Organizations");
 
   const renderMyGroups = (myGroups) => {
 
@@ -35,7 +38,7 @@ function Groups({ setSnackBarDetails }) {
         <Button style={{ height: "50%" }} variant="contained" startIcon={<Add />} onClick={() => setOpenForm(!openForm)}>Add Organization</Button>
         <GroupForm {...{ openForm }} {...{ setOpenForm }}  {...{ setMyGroups }} />
       </div>
-      <List sx={{ width: '90%', paddingTop: "2em",mt:4, display:"flex", justifyContent:"center" }}>
+      <List sx={{ width: '90%', paddingTop: "2em",mt:4, display:"flex", flexWrap:"wrap" }}>
         {myGroups && renderMyGroups(myGroups)}
       </List>
     </div>
