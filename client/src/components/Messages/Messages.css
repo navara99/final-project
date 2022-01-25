@@ -1,11 +1,16 @@
 .chat-box div.MuiGrid-root.MuiGrid-container {
-  max-width: 75%;
   flex: 0 1 auto;
   width: auto;
   background-color: white;
   padding: 0.5em 1em;
   margin: 0.25em;
   border-radius: 10px;
+  flex-direction: column;
+}
+
+.chat-box li.MuiListItem-root div.MuiGrid-root.MuiGrid-item {
+  flex: 0 1 auto;
+  width: auto;
 }
 
 .chat-box .MuiBadge-anchorOriginTopRightRectangular {
