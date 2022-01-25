@@ -7,15 +7,13 @@ import useAppliedJobs from "../../hooks/useAppliedJobs";
 
 function Bookmarks() {
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const { favoriteJobs, setFavoriteJobs } = useFavoriteJobs();
-  const { appliedJobs, setAppliedJobs } = useAppliedJobs();
-
-  console.log(appliedJobs);
+  const { favoriteJobs } = useFavoriteJobs();
+  const { appliedJobs } = useAppliedJobs();
 
   return (
     <>
       <Columns {...{ selectedIndex, setSelectedIndex }} />
-      {selectedIndex === 0 && <JobsList jobs={favoriteJobs} />}
+      <JobsList jobs={selectedIndex ? appliedJobs : favoriteJobs} />
     </>
   )
 };
