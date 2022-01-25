@@ -80,9 +80,10 @@ const useMessages = (currentUser) => {
     if (!currentUser) return;
     const socket = io.connect("http://localhost:8080");
     socket.on("getMessage", (data) => {
+      console.log(data);
       const newMsg = { ...data, created_at: new Date().toISOString() };
       setSenders((prev) => {
-        if (prev.some((sender) => sender.id === data.sender_id)) {
+        if (prev.some((sender) => sender && sender.id === data.sender_id)) {
           return prev;
         }
         return [data.sender, ...prev];
