@@ -17,7 +17,7 @@ const Stall = ({ currentUser }) => {
   const { config, useClient } = useChannel(organizationId, currentUser && organizationDetails ? `${currentUser.username}${isMember ? ` (${organizationDetails.details.name})` : ""}` : "");
   const [inCall, setInCall] = useState(false);
 
-  const title = `${inCall && "📞 "}Stall of + ${organizationDetails && organizationDetails.name}`;
+  const title = `${inCall && "📞"}Stall of + ${organizationDetails && organizationDetails.name}`;
   useTitle(title);
 
   return (
