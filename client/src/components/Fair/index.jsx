@@ -14,7 +14,7 @@ const Fair = ({ currentUser, setSnackBarDetails }) => {
   const tabTitle = fair
     ? (fair.live ? "LIVE NOW! " : "") +
       fair.name +
-      " - Hosted by " +
+      " • Hosted by " +
       fair.host_name
     : "";
     
