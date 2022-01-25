@@ -9,7 +9,8 @@ module.exports = (db) => {
     getAllApplicationsByJobId,
     getJobById,
     toggleLikes,
-    getFavoriteJobsByUser
+    getFavoriteJobsByUser,
+    getAppliedJobsByUser
   } = queryGenerator(db);
 
   router.post("/:id/like", async (req, res) => {
@@ -30,6 +31,18 @@ module.exports = (db) => {
 
     try {
       const jobs = await getFavoriteJobsByUser(user_id);
+      res.json(jobs);
+    } catch (err) {
+      console.log(err.message);
+    };
+
+  });
+
+  router.get("/applied", async (req, res) => {
+    const { user_id } = req.session;
+
+    try {
+      const jobs = await getAppliedJobsByUser(user_id);
       res.json(jobs);
     } catch (err) {
       console.log(err.message);
