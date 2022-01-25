@@ -13,7 +13,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import axios from "axios";
 import Unauthorized from "./Unauthorized/index";
 import { useNavigate } from "react-router-dom";
-import useTitle from "../../hooks/useTitle";
+import useTitle from "../hooks/useTitle";
 
 const LogIn = ({
   setCurrentUser,

@@ -13,7 +13,7 @@ import useInput from "../hooks/useInput";
 import axios from "axios";
 import Unauthorized from "./Unauthorized";
 import { useNavigate } from "react-router-dom";
-import useTitle from "../../hooks/useTitle";
+import useTitle from "../hooks/useTitle";
 
 function Register({
   setErrorMessage,
