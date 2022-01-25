@@ -7,6 +7,10 @@ const express = require("express");
 const app = express();
 const morgan = require("morgan");
 
+// Enable All Cors Requests
+const cors = require("cors");
+app.use(cors());
+
 //SocketIo config
 const { createServer } = require("http");
 const { Server } = require("socket.io");
