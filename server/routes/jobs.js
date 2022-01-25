@@ -3,7 +3,14 @@ const router = express.Router();
 
 module.exports = (db) => {
   const queryGenerator = require("../db/queryHelpers");
-  const { addJobToOrganization, getJobsBySearch, getAllApplicationsByJobId, getJobById, toggleLikes } = queryGenerator(db);
+  const {
+    addJobToOrganization,
+    getJobsBySearch,
+    getAllApplicationsByJobId,
+    getJobById,
+    toggleLikes,
+    getFavoriteJobsByUser
+  } = queryGenerator(db);
 
   router.post("/:id/like", async (req, res) => {
     const { id } = req.params;
@@ -18,10 +25,15 @@ module.exports = (db) => {
 
   });
 
-  router.get("/favorite", (req, res) => {
+  router.get("/favorite", async (req, res) => {
     const { user_id } = req.session;
 
-    console.log(user_id);
+    try {
+      const jobs = await getFavoriteJobsByUser(user_id);
+      res.json(jobs);
+    } catch (err) {
+      console.log(err.message);
+    };
 
   });
 

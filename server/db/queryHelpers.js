@@ -687,7 +687,31 @@ const queryGenerator = (db) => {
 
   };
 
+  const getFavoriteJobsByUser = async (user_id) => {
+    const values = [user_id];
+    const queryString = `
+    SELECT 
+    jobs.*, 
+    (SELECT EXISTS(SELECT 1 from favourites WHERE user_id = $1 AND jobs.id = favourites.job_id)) as liked,
+    organizations.logo as organizationLogo, 
+    organizations.name as organizationName, 
+    organizations.website FROM jobs
+    JOIN organizations ON jobs.organization_id = organizations.id
+    JOIN favourites ON favourites.job_id = jobs.id
+    WHERE favourites.user_id = $1
+    ORDER BY created_at DESC;`
+
+    try {
+      const result = await db.query(queryString, values);
+      return result.rows;
+    } catch (error) {
+      console.log(error);
+    }
+
+  };
+
   return {
+    getFavoriteJobsByUser,
     updateOrganizationInfo,
     toggleLikes,
     deleteOrganizationById,
