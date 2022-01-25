@@ -16,7 +16,7 @@ function Resume({ application, openResume, setOpenResume }) {
       <Dialog open={openResume} fullWidth={true} maxWidth={"lg"} onClose={() => { }} classes={{ paper: classes.dialogPaper }}>
         <DialogTitle>{application.first_name}'s Resume</DialogTitle>
         <DialogContent>
-          <embed src={"http://localhost:8080/" + application.resume + "#toolbar=0"} height="100%" width="100%" />
+          <embed src={"https://vcareer.herokuapp.com/" + application.resume + "#toolbar=0"} height="100%" width="100%" />
         </DialogContent>
         <DialogActions>
           <Button onClick={() => { setOpenResume(!openResume) }}>Cancel</Button>
