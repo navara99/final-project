@@ -10,7 +10,7 @@ import { useState } from "react";
 function GroupListItem({ group, openAddMembersModal, selectedGroup, setSelectedGroup, cardStyles, setMyGroups }) {
   const [hover, setHover] = useState(false)
   return (
-    <Card style={cardStyles} onMouseEnter={(e) => setHover(true)} raised = {hover ? true : false} onMouseLeave={(e) => setHover(false)}  sx={{overflow:"unset",minWidth:350, maxWidth:380, borderRadius:4, border:'1px solid #006394', display:"flex", flexDirection:"column", justifyContent:"space-between", mt:2}}>
+    <Card style={cardStyles} onMouseEnter={(e) => setHover(true)} raised = {hover ? true : false} onMouseLeave={(e) => setHover(false)}  sx={{overflow:"unset",minWidth:300, maxWidth:350, borderRadius:4, border:'1px solid #006394', display:"flex", flexDirection:"column", justifyContent:"space-between", mt:2, rowGap:10}}>
       {/* <div className="organization-card" sx={{direction : "column"}}> */}
         <CardActionArea >
           <Link to={`/organizations/${group.id}`} style={{ textDecoration: 'none',  color: "black", display:"flex", flexDirection:"column" , position:"relative", top:-60}}>
