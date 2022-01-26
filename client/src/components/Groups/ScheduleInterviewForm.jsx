@@ -58,7 +58,7 @@ function ScheduleInterviewForm({
         return [newMessage.data.receiver, ...prev];
       });
       setMessages((prev) => [...prev, newMessage.data.messageObj]);
-
+      console.log(newMessage.data.messageObj.created_at);
       //sending message to socket server
       socket.emit("sendMessage", {
         message: newMessage.data.messageObj,

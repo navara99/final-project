@@ -76,7 +76,7 @@ const useMessages = (currentUser) => {
     socket.on("getMessage", (data) => {
       const newMsg = { ...data.message, created_at: new Date().toISOString() };
       setSenders((prev) => {
-        if (prev.some((sender) => sender && sender.id === data.sender_id)) {
+        if (prev.some((sender) => sender && sender.id === data.message.sender_id)) {
           return prev;
         }
         return [data.sender, ...prev];
