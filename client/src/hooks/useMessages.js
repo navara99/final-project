@@ -16,52 +16,46 @@ const useMessages = (currentUser) => {
   useEffect(() => {
     axios.get("/api/messages").then((res) => {
       setMessages(res.data.messagesArr);
-      setSenders(
-        res.data.contacts.map((sender) => {
-          const { createdDate } = sender;
-          const timeAgo = moment(`${createdDate}`).fromNow();
-          return { ...sender, createdDate: timeAgo };
-        })
-      );
+      setSenders(res.data.contacts);
     });
   }, [currentUser]);
 
-  // useEffect(() => {
-  //   if (Array.isArray(messages) && Array.isArray(senders)) setSenders((prev) =>
-  //     prev
-  //       .map((sender) => {
-  //         const numOfMsg = messages.filter(
-  //           (message) => message.sender_id === sender.id && !message.is_read
-  //         ).length;
-  //         const [lastMsg, createdDate, lastUserId, msgId] = messages.reduce(
-  //           (lastMessage, message) => {
-  //             if (
-  //               message.sender_id === sender.id ||
-  //               message.receiver_id === sender.id
-  //             ) {
-  //               return [
-  //                 message.message,
-  //                 message.created_at,
-  //                 message.sender_id,
-  //                 message.id,
-  //               ];
-  //             }
-  //             return lastMessage;
-  //           },
-  //           null
-  //         );
-  //         return {
-  //           ...sender,
-  //           lastMsg,
-  //           createdDate: moment(`${createdDate}`).fromNow(),
-  //           lastUserId,
-  //           msgId,
-  //           numOfMsg,
-  //         };
-  //       })
-  //       .sort((senderA, senderB) => senderB.msgId - senderA.msgId)
-  //   );
-  // }, [messages]);
+  useEffect(() => {
+    if (Array.isArray(messages)) setSenders((prev) =>
+      prev
+        .map((sender) => {
+          const numOfMsg = messages.filter(
+            (message) => message.sender_id === sender.id && !message.is_read
+          ).length;
+          const [lastMsg, createdDate, lastUserId, msgId] = messages.reduce(
+            (lastMessage, message) => {
+              if (
+                message.sender_id === sender.id ||
+                message.receiver_id === sender.id
+              ) {
+                return [
+                  message.message,
+                  message.created_at,
+                  message.sender_id,
+                  message.id,
+                ];
+              }
+              return lastMessage;
+            },
+            null
+          );
+          return {
+            ...sender,
+            lastMsg,
+            createdDate: moment(`${createdDate}`).fromNow(),
+            lastUserId,
+            msgId,
+            numOfMsg,
+          };
+        })
+        .sort((senderA, senderB) => senderB.msgId - senderA.msgId)
+    );
+  }, [messages]);
 
   useEffect(() => {
     if (location.state) {
@@ -88,28 +82,11 @@ const useMessages = (currentUser) => {
     socket.on("getMessage", (data) => {
       console.log(data);
       const newMsg = { ...data, created_at: new Date().toISOString() };
-      const senderInfo = {
-        lastMsg: newMsg.message,
-        createdDate: moment(`${newMsg.created_at}`).fromNow(),
-        lastUserId: newMsg.sender_id,
-        msgId: newMsg.id,
-      };
-
       setSenders((prev) => {
-        if (prev.some((sender) => sender.id === data.sender_id)) {
-          return prev.map((sender) => {
-            if (sender.id === data.sender_id) {
-              return {
-                ...sender,
-                ...senderInfo,
-                numOfMsg: sender.numOfMsg + 1,
-              };
-            }
-            return sender;
-          });
+        if (prev.some((sender) => sender && sender.id === data.sender_id)) {
+          return prev;
         }
-        console.log(data.sender)
-        return [{ ...data.sender, ...senderInfo, numOfMsg: 1 }, ...prev];
+        return [data.sender, ...prev];
       });
       setMessages((prev) => [...prev, newMsg]);
     });
@@ -143,25 +120,12 @@ const useMessages = (currentUser) => {
       message,
       sender: currentUser,
     };
-
     axios.post("/api/messages/", newMessage).then((res) => {
-      const senderInfo = {
-        lastMsg: newMessage.message,
-        createdDate: moment(`${res.data.messageObj.created_at}`).fromNow(),
-        lastUserId: res.data.messageObj.sender_id,
-        msgId: res.data.messageObj.id,
-      };
-
       setSenders((prev) => {
         if (prev.some((el) => el.id === res.data.receiver.id)) {
-          return prev.map((sender) => {
-            if (sender.id === res.data.receiver.id) {
-              return { ...sender, ...senderInfo };
-            }
-            return sender;
-          });
+          return prev;
         }
-        return [{ ...res.data.receiver, ...senderInfo, numOfMsg: 0 }, ...prev];
+        return [res.data.receiver, ...prev];
       });
       setMessages((prev) => [...prev, res.data.messageObj]);
     });
