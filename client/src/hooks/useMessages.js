@@ -150,6 +150,7 @@ const useMessages = (currentUser) => {
     numOfUnreadMsg,
     setMessages,
     socket,
+    setSenders
   };
 
   return messageState;
