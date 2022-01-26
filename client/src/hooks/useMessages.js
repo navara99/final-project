@@ -16,46 +16,52 @@ const useMessages = (currentUser) => {
   useEffect(() => {
     axios.get("/api/messages").then((res) => {
       setMessages(res.data.messagesArr);
-      setSenders(res.data.contacts);
+      setSenders(
+        res.data.contacts.map((sender) => {
+          const { createdDate } = sender;
+          const timeAgo = moment(`${createdDate}`).fromNow();
+          return { ...sender, createdDate: timeAgo };
+        })
+      );
     });
   }, [currentUser]);
 
-  useEffect(() => {
-    if (Array.isArray(messages)) setSenders((prev) =>
-      prev
-        .map((sender) => {
-          const numOfMsg = messages.filter(
-            (message) => message.sender_id === sender.id && !message.is_read
-          ).length;
-          const [lastMsg, createdDate, lastUserId, msgId] = messages.reduce(
-            (lastMessage, message) => {
-              if (
-                message.sender_id === sender.id ||
-                message.receiver_id === sender.id
-              ) {
-                return [
-                  message.message,
-                  message.created_at,
-                  message.sender_id,
-                  message.id,
-                ];
-              }
-              return lastMessage;
-            },
-            null
-          );
-          return {
-            ...sender,
-            lastMsg,
-            createdDate: moment(`${createdDate}`).fromNow(),
-            lastUserId,
-            msgId,
-            numOfMsg,
-          };
-        })
-        .sort((senderA, senderB) => senderB.msgId - senderA.msgId)
-    );
-  }, [messages]);
+  // useEffect(() => {
+  //   if (Array.isArray(messages) && Array.isArray(senders)) setSenders((prev) =>
+  //     prev
+  //       .map((sender) => {
+  //         const numOfMsg = messages.filter(
+  //           (message) => message.sender_id === sender.id && !message.is_read
+  //         ).length;
+  //         const [lastMsg, createdDate, lastUserId, msgId] = messages.reduce(
+  //           (lastMessage, message) => {
+  //             if (
+  //               message.sender_id === sender.id ||
+  //               message.receiver_id === sender.id
+  //             ) {
+  //               return [
+  //                 message.message,
+  //                 message.created_at,
+  //                 message.sender_id,
+  //                 message.id,
+  //               ];
+  //             }
+  //             return lastMessage;
+  //           },
+  //           null
+  //         );
+  //         return {
+  //           ...sender,
+  //           lastMsg,
+  //           createdDate: moment(`${createdDate}`).fromNow(),
+  //           lastUserId,
+  //           msgId,
+  //           numOfMsg,
+  //         };
+  //       })
+  //       .sort((senderA, senderB) => senderB.msgId - senderA.msgId)
+  //   );
+  // }, [messages]);
 
   useEffect(() => {
     if (location.state) {
