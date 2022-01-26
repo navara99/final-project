@@ -28,6 +28,7 @@ const Messages = ({ currentUser, messageState }) => {
     setReceiverId,
     setMessages,
     socket,
+    setSenders
   } = messageState;
 
   useTitle("Messages");
@@ -105,6 +106,7 @@ const Messages = ({ currentUser, messageState }) => {
               handleSubmit={handleSubmit}
               setMessages={setMessages}
               socket={socket}
+              setSenders={setSenders}
             />
             <Divider />
             <MessageForm

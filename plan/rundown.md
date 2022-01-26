@@ -12,8 +12,6 @@
 
 1. intro everyone
 
-2. upload resume
- * introduce features: update the settings
 3. (job seeker) career fairs live - conferences
   * (member) career fair live
 4. (job seeker) apply on fair details page
