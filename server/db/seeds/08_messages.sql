@@ -21,5 +21,6 @@ VALUES
   (2, 4, 'Umami tumblr celiac, chambray tote bag etsy brunch poutine', (current_timestamp - interval '5 hour')),
   (4, 2, 'gastropub hexagon street art snackwave unicorn.', (current_timestamp - interval '4.9 hour')),
   (2, 4, 'Heirloom ennui art party etsy typewriter chambray', (current_timestamp - interval '4.8 hour')),
-  (4, 2, 'Kombucha church-key truffaut mumblecore crucifix', (current_timestamp - interval '4.7 hour'))
+  (4, 2, 'Kombucha church-key truffaut mumblecore crucifix', (current_timestamp - interval '4.7 hour')),
+  (2, 1, 'I am interested in working for your company. I look forward to your career fair today. :).', (current_timestamp - interval '1 hour'))
 ;
