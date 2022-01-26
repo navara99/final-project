@@ -27,10 +27,6 @@ const useMessages = (currentUser) => {
     setSenders((prev) =>
       prev
         .map((sender) => {
-          if (!sender) {
-            console.log(sender);
-            return sender;
-          }
           const numOfMsg = messages.filter(
             (message) => message.sender_id === sender.id && !message.is_read
           ).length;
@@ -121,7 +117,6 @@ const useMessages = (currentUser) => {
         }
         return [res.data.receiver, ...prev];
       });
-      console.log(res.data.messageObj)
       setMessages((prev) => [...prev, res.data.messageObj]);
       socket.emit("sendMessage", { message: res.data.messageObj, sender: currentUser });
       setMessageText("");
