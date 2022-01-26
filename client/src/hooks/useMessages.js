@@ -88,11 +88,27 @@ const useMessages = (currentUser) => {
     socket.on("getMessage", (data) => {
       console.log(data);
       const newMsg = { ...data, created_at: new Date().toISOString() };
+      const senderInfo = {
+        lastMsg: newMsg.message,
+        createdDate: moment(`${newMsg.created_at}`).fromNow(),
+        lastUserId: newMsg.sender_id,
+        msgId: newMsg.id,
+      };
+
       setSenders((prev) => {
-        if (prev.some((sender) => sender && sender.id === data.sender_id)) {
-          return prev;
+        if (prev.some((sender) => sender.id === data.sender_id)) {
+          return prev.map((sender) => {
+            if (sender.id === data.sender_id) {
+              return {
+                ...sender,
+                ...senderInfo,
+                numOfMsg: sender.numOfMsg + 1,
+              };
+            }
+            return sender;
+          });
         }
-        return [data.sender, ...prev];
+        return [{ ...data.sender, ...senderInfo, numOfMsg: 1 }, ...prev];
       });
       setMessages((prev) => [...prev, newMsg]);
     });
@@ -126,12 +142,25 @@ const useMessages = (currentUser) => {
       message,
       sender: currentUser,
     };
+
     axios.post("/api/messages/", newMessage).then((res) => {
+      const senderInfo = {
+        lastMsg: res.data.messageObj.message,
+        createdDate: moment(`${res.data.messageObj.created_at}`).fromNow(),
+        lastUserId: res.data.messageObj.sender_id,
+        msgId: res.data.messageObj.id,
+      };
+
       setSenders((prev) => {
         if (prev.some((el) => el.id === res.data.receiver.id)) {
-          return prev;
+          return prev.map((sender) => {
+            if (sender.id === res.data.receiver.id) {
+              return { ...sender, ...senderInfo };
+            }
+            return sender;
+          });
         }
-        return [res.data.receiver, ...prev];
+        return [{ ...res.data.receiver, ...senderInfo, numOfMsg: 0 }, ...prev];
       });
       setMessages((prev) => [...prev, res.data.messageObj]);
     });
