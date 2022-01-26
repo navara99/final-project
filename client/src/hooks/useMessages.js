@@ -26,6 +26,10 @@ const useMessages = (currentUser) => {
     setSenders((prev) =>
       prev
         .map((sender) => {
+          if (!sender) {
+            console.log(sender);
+            return sender;
+          }
           const numOfMsg = messages.filter(
             (message) => message.sender_id === sender.id && !message.is_read
           ).length;
@@ -70,8 +74,7 @@ const useMessages = (currentUser) => {
     if (!currentUser) return;
     const socket = io.connect("http://localhost:8080");
     socket.on("getMessage", (data) => {
-      console.log(data);
-      const newMsg = { ...data, created_at: new Date().toISOString() };
+      const newMsg = { ...data.message, created_at: new Date().toISOString() };
       setSenders((prev) => {
         if (prev.some((sender) => sender && sender.id === data.sender_id)) {
           return prev;
@@ -108,7 +111,6 @@ const useMessages = (currentUser) => {
       sender_id: currentUser.id,
       receiver_id: receiverId,
       message,
-      sender: currentUser,
     };
     axios.post("/api/messages/", newMessage).then((res) => {
       setSenders((prev) => {
@@ -120,7 +122,7 @@ const useMessages = (currentUser) => {
       setMessages((prev) => [...prev, res.data.messageObj]);
     });
     //sending message to socket server
-    socket.emit("sendMessage", newMessage);
+    socket.emit("sendMessage", { message: newMessage, sender: currentUser });
     setMessageText("");
   };
 
@@ -150,7 +152,7 @@ const useMessages = (currentUser) => {
     numOfUnreadMsg,
     setMessages,
     socket,
-    setSenders
+    setSenders,
   };
 
   return messageState;

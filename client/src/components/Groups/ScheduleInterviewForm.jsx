@@ -27,6 +27,7 @@ function ScheduleInterviewForm({
   setMessages,
   setSenders,
   socket,
+  currentUser
 }) {
   const [date, setDate] = useState(new Date());
   const [startTime, setStartTime] = useState(new Date());
@@ -59,7 +60,10 @@ function ScheduleInterviewForm({
       setMessages((prev) => [...prev, newMessage.data.messageObj]);
 
       //sending message to socket server
-      socket.emit("sendMessage", newMessage.data.messageObj);
+      socket.emit("sendMessage", {
+        message: newMessage.data.messageObj,
+        sender: currentUser,
+      });
 
       setSnackBarDetails({
         open: true,

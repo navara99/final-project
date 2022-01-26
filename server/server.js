@@ -54,7 +54,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("sendMessage", (data) => {
-    const { receiver_id, sender_id } = data;
+    const { receiver_id, sender_id } = data.message;
     const users = getUsers(receiver_id, sender_id, socket.id);
     users.forEach((user) => {
       io.to(user.socketId).emit("getMessage", data);
@@ -62,7 +62,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("editMessage", (data) => {
-    const { sender_id, receiver_id } = data;
+    const { sender_id, receiver_id } = data.message;
     const users = getUsers(receiver_id, sender_id, socket.id);
     users.forEach((user) => {
       io.to(user.socketId).emit("editMessage", data);
