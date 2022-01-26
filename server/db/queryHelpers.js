@@ -395,27 +395,30 @@ const queryGenerator = (db) => {
       ORDER BY created_at
     `;
     try {
-      const result = await db.query(queryString, values);
+      const data = await db.query(queryString, values);
+
+      const messages = getResult(data)
       //getting other users
-      const senders = result.rows.reduce((prev, curr) => {
-        if (curr.sender_id !== user_id && !prev.includes(curr.sender_id)) {
-          prev.push(curr.sender_id);
-        }
-        if (curr.receiver_id !== user_id && !prev.includes(curr.receiver_id)) {
-          prev.push(curr.receiver_id);
-        }
-        return prev;
-      }, []);
+      // const senders = [];
+      
+      // for(const message of messages) {
+      //   if (message.sender_id !== user_id && !senders.includes(message.sender_id)) {
+      //     senders.push(message.sender_id);
+      //   }
+      //   if (message.receiver_id !== user_id && !senders.includes(message.receiver_id)) {
+      //     senders.push(message.receiver_id);
+      //   }
+      // };
 
-      const contacts = await Promise.all(
-        senders.map(async (userId) => {
-          const userInfo = await getUserByValue("id", userId);
-          delete userInfo.password;
-          return {...userInfo};
-        })
-      );
+      // const contacts = await Promise.all(
+      //   senders.map(async (userId) => {
+      //     const userInfo = await getUserByValue("id", userId);
+      //     delete userInfo.password;
+      //     return {...userInfo};
+      //   })
+      // );
 
-      return { messagesArr: result.rows, contacts };
+      return messages;
     } catch (error) {
       console.log(error);
     }

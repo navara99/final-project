@@ -12,13 +12,18 @@ import Badge from "@mui/material/Badge";
 const SenderListItem = ({
   sender,
   setReceiverId,
-  setReceiver,
-  lastMsg,
-  createdDate,
-  lastUserId,
-  numOfMsg,
+  setReceiver
 }) => {
-  const { first_name, last_name, profile_picture, id } = sender;
+  const {
+    first_name,
+    last_name,
+    profile_picture,
+    id,
+    lastMsg,
+    createdDate,
+    lastUserId,
+    numOfMsg,
+  } = sender;
   const handleClick = (e) => {
     setReceiverId(id);
     setReceiver({ ...sender });
