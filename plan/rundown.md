@@ -8,17 +8,22 @@
 - organization: remove grey background when hover (Yagnesh)
 - pass down setSnackBars on saved job page (Thar)
 - change seeds username (Siu)
+- fix logout crash
 
 1. intro everyone
+
 2. upload resume
-2. (job seeker) career fairs live - conferences
+ * introduce features: update the settings
+3. (job seeker) career fairs live - conferences
   * (member) career fair live
-3. (job seeker) apply on fair details page
-4. (member) view application and send 2 invitation, view the organization page
+4. (job seeker) apply on fair details page
+
+5. (member) view application and send 2 invitation, view the organization page
   * profile page of the user
-5. (job seeker) accepts one, reject one, send and receive some message
-6. (job seeker) schedule
-7. (job seeker) interview live, whiteboard
+6. (job seeker) accepts one, reject one, send and receive some message
+7. (job seeker) schedule
+
+8. (job seeker) interview live, whiteboard
   * (member) interview live
-8. (job seeker) job board (apply, saved) & saved job page
-9. (job seeker and member) add to schedule on upcoming fair
+9. (job seeker) job board (apply, saved) & saved job page
+10. (job seeker and member) add to schedule on upcoming fair
