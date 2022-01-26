@@ -17,13 +17,12 @@ app.use(cookieSession({
   sameSite: false,
   proxy: true,
   httpOnly: false,
-  domain: "https://vcareer-demo.netlify.app"
 }));
 
 // Enable All Cors Requests
 const cors = require("cors");
 app.use(cors({
-  origin: "https://vcareer-demo.netlify.app"
+  origin: "*"
 }));
 
 //SocketIo config
