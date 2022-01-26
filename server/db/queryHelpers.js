@@ -435,9 +435,6 @@ const queryGenerator = (db) => {
             const userInfo = await getUserByValue("id", userId);
             const userWithoutPassword = Object.assign({}, userInfo);
             delete userWithoutPassword.password;
-            const numOfMsg = messages.filter(
-              (message) => message.sender_id === userInfo.id && !message.is_read
-            ).length;
             const newestMsg = messages.find(
               (message) =>
                 message.sender_id === userInfo.id ||
@@ -448,7 +445,6 @@ const queryGenerator = (db) => {
 
             return {
               ...userWithoutPassword,
-              numOfMsg,
               lastMsg: message,
               createdDate: created_at,
               lastUserId: sender_id,

@@ -4,13 +4,13 @@ import MessageListItem from "./MessageListItem";
 import axios from "axios";
 
 const MessageList = (props) => {
-  const { messages, receiverId, setMessages, setSenders } = props;
+  const { messages, receiverId, setMessages } = props;
   const myMessage = useRef(null);
 
   const messageList = messages
     ? messages.map((message, i) => (
-        <MessageListItem key={i} {...{ ...props, message }} />
-      ))
+      <MessageListItem key={i} {...{ ...props, message }} />
+    ))
     : null;
 
   useEffect(() => {
@@ -26,12 +26,6 @@ const MessageList = (props) => {
           prev.map((message) => {
             if (message.sender_id !== receiverId) return message;
             return { ...message, is_read: true };
-          })
-        );
-        setSenders((prev) =>
-          prev.map((sender) => {
-            if (sender.id === receiverId) return { ...sender, numOfMsg: 0 };
-            return sender;
           })
         );
       });
