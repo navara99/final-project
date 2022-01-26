@@ -15,8 +15,8 @@ const useMessages = (currentUser) => {
 
   useEffect(() => {
     axios.get("/api/messages").then((res) => {
-      setMessages(res.data.messagesArr);
       setSenders(res.data.contacts);
+      setMessages(res.data.messagesArr);
     });
   }, [currentUser]);
 

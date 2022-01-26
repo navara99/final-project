@@ -13,8 +13,8 @@ module.exports = (db) => {
   router.get("/", async (req, res) => {
     try {
       const { user_id } = req.session;
-      const { messagesArr, contacts } = await getMessagesByUserId(user_id);
-      res.status(200).json({ messagesArr, contacts });
+      const data = await getMessagesByUserId(user_id);
+      res.status(200).json(data);
     } catch (error) {
       console.log(error);
     }
