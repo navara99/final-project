@@ -1,10 +1,10 @@
-/server/node_modules
+/node_modules
 /client/node_modules
 /client/.pnp
 /client/.pnp.js
 /client/coverage
 /client/build
 /client/.env
-/server/.env
-/server/public/uploads/*
-!/server/public/uploads/.gitkeep
+.env
+/public/uploads/*
+!/public/uploads/.gitkeep

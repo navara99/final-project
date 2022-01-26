@@ -118,6 +118,10 @@ app.use("/api/token", tokenRoutes());
 app.use("/api/interviews", interviewRoutes(db));
 app.use("/api/schedule", scheduleRoutes(db));
 
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+});
+
 httpServer.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
