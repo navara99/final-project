@@ -17,6 +17,7 @@ import {
   formatDate,
   formatStartEndTime,
 } from "../../helpers/date";
+import moment from "moment";
 
 function ScheduleInterviewForm({
   interviewFormOpen,
@@ -44,6 +45,7 @@ function ScheduleInterviewForm({
       end,
       applicationId: application.id,
       receiverId: application.user_id,
+      created_at: moment()
     };
 
     try {
@@ -58,7 +60,6 @@ function ScheduleInterviewForm({
         return [newMessage.data.receiver, ...prev];
       });
       setMessages((prev) => [...prev, newMessage.data.messageObj]);
-      console.log(newMessage.data.messageObj.created_at);
       //sending message to socket server
       socket.emit("sendMessage", {
         message: newMessage.data.messageObj,

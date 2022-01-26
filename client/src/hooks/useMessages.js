@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 import { io } from "socket.io-client";
+import moment from "moment";
 
 const useMessages = (currentUser) => {
   const [receiverId, setReceiverId] = useState();
@@ -74,7 +75,7 @@ const useMessages = (currentUser) => {
     if (!currentUser) return;
     const socket = io.connect("http://localhost:8080");
     socket.on("getMessage", (data) => {
-      const newMsg = { ...data.message, created_at: new Date().toISOString() };
+      const newMsg = { ...data.message };
       setSenders((prev) => {
         if (prev.some((sender) => sender && sender.id === data.message.sender_id)) {
           return prev;
@@ -111,6 +112,7 @@ const useMessages = (currentUser) => {
       sender_id: currentUser.id,
       receiver_id: receiverId,
       message,
+      created_at: moment()
     };
     axios.post("/api/messages/", newMessage).then((res) => {
       setSenders((prev) => {
@@ -119,11 +121,12 @@ const useMessages = (currentUser) => {
         }
         return [res.data.receiver, ...prev];
       });
+      console.log(res.data.messageObj)
       setMessages((prev) => [...prev, res.data.messageObj]);
+      socket.emit("sendMessage", { message: res.data.messageObj, sender: currentUser });
+      setMessageText("");
     });
     //sending message to socket server
-    socket.emit("sendMessage", { message: newMessage, sender: currentUser });
-    setMessageText("");
   };
 
   const handleOnClick = (e) => {

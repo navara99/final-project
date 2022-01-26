@@ -473,12 +473,12 @@ const queryGenerator = (db) => {
 
   // create NewMessage
 
-  const createNewMessage = async ({ sender_id, receiver_id, message }) => {
+  const createNewMessage = async ({ sender_id, receiver_id, message, created_at }) => {
     try {
-      const values = [sender_id, receiver_id, message];
+      const values = [sender_id, receiver_id, message, created_at];
       const queryString = `
-        INSERT INTO  messages (sender_id , receiver_id, message)
-        VALUES ($1, $2, $3)
+        INSERT INTO  messages (sender_id , receiver_id, message, created_at)
+        VALUES ($1, $2, $3, $4)
         RETURNING *;
       `;
       const result = await db.query(queryString, values);
