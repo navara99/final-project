@@ -11,7 +11,14 @@ app.set("trust proxy", 1);
 app.enable("trust-proxy");
 // Set up cookie-session
 const cookieSession = require("cookie-session");
-app.use(cookieSession({ secret: process.env.SECRET, secure: true, sameSite: false, proxy: true, httpOnly: false }));
+app.use(cookieSession({
+  secret: process.env.SECRET,
+  secure: true,
+  sameSite: false,
+  proxy: true,
+  httpOnly: false,
+  domain: "https://vcareer-demo.netlify.app"
+}));
 
 // Enable All Cors Requests
 const cors = require("cors");
