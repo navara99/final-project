@@ -432,7 +432,7 @@ const queryGenerator = (db) => {
           const userInfo = await getUserByValue("id", message.sender_id);
           delete userInfo.password;
           const numOfMsg = messages.filter(
-            (message) => message.receiver_id === user_id && !message.is_read
+            (message2) => message2.sender_id === message.sender_id && !message2.is_read
           ).length;
 
           senders.push({
@@ -451,7 +451,7 @@ const queryGenerator = (db) => {
           const userInfo = await getUserByValue("id", message.receiver_id);
           delete userInfo.password;
           const numOfMsg = messages.filter(
-            (message) => message.receiver_id === user_id && !message.is_read
+            (message2) => message2.sender_id === message.sender_id && !message2.is_read
           ).length;
 
           senders.push({
