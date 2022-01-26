@@ -36,16 +36,34 @@ const queryGenerator = (db) => {
   };
 
   const updateUser = async (newUserInfo) => {
-
-    const { firstName, lastName, username, email, bio, profilePicture, userId } =
-      newUserInfo;
+    const {
+      firstName,
+      lastName,
+      username,
+      email,
+      bio,
+      profilePicture,
+      userId,
+    } = newUserInfo;
     const value1 = [userId];
     let filePath = newUserInfo.filePath;
     if (!filePath) {
-      const resultResume = await db.query(`SELECT users.resume FROM users WHERE id = $1`, value1);
+      const resultResume = await db.query(
+        `SELECT users.resume FROM users WHERE id = $1`,
+        value1
+      );
       filePath = getFirstRecord(resultResume)["resume"];
     }
-    const values = [firstName, lastName, username, email, bio, profilePicture, filePath, userId];
+    const values = [
+      firstName,
+      lastName,
+      username,
+      email,
+      bio,
+      profilePicture,
+      filePath,
+      userId,
+    ];
 
     const queryString = `
         UPDATE users
@@ -132,7 +150,7 @@ const queryGenerator = (db) => {
     email,
     industry,
     website,
-    logo
+    logo,
   }) => {
     const values = [name, description, email, industry, website, logo];
     const queryString = `
@@ -230,7 +248,10 @@ const queryGenerator = (db) => {
     }
   };
 
-  const getAllJobsByOrganizationId = async (organization_id, applicationsNotIncluded) => {
+  const getAllJobsByOrganizationId = async (
+    organization_id,
+    applicationsNotIncluded
+  ) => {
     const values = [organization_id];
     const queryString = `
     SELECT jobs.* ,
@@ -389,10 +410,14 @@ const queryGenerator = (db) => {
   const getMessagesByUserId = async (user_id) => {
     const values = [user_id];
     const queryString = `
-    SELECT * FROM messages WHERE sender_id = $1 OR receiver_id = $1 ORDER BY created_at
+      SELECT * 
+      FROM messages
+      WHERE sender_id = $1 OR receiver_id = $1
+      ORDER BY created_at DESC
     `;
     try {
       const result = await db.query(queryString, values);
+      const messages = result.rows;
       //getting other users
       const other_users = result.rows.reduce((prev, curr) => {
         if (curr.sender_id !== user_id && !prev.includes(curr.sender_id)) {
@@ -405,15 +430,35 @@ const queryGenerator = (db) => {
       }, []);
 
       const contacts = await Promise.all(
-        other_users.map(async (userId) => {
-          const userInfo = await getUserByValue("id", userId);
-          const userWithoutPassword = Object.assign({}, userInfo);
-          delete userWithoutPassword.password;
-          return userWithoutPassword;
-        })
+        other_users
+          .map(async (userId) => {
+            const userInfo = await getUserByValue("id", userId);
+            const userWithoutPassword = Object.assign({}, userInfo);
+            delete userWithoutPassword.password;
+            const numOfMsg = messages.filter(
+              (message) => message.sender_id === userInfo.id && !message.is_read
+            ).length;
+            const newestMsg = messages.find(
+              (message) =>
+                message.sender_id === userInfo.id ||
+                message.receiver_id === userInfo.id
+            );
+
+            const { message, created_at, sender_id, id } = newestMsg;
+
+            return {
+              ...userWithoutPassword,
+              numOfMsg,
+              lastMsg: message,
+              createdDate: created_at,
+              lastUserId: sender_id,
+              msgId: id,
+            };
+          })
+          .sort((senderA, senderB) => senderA.createdDate > senderB.createdDate)
       );
 
-      return { messagesArr: result.rows, contacts };
+      return { messagesArr: messages, contacts };
     } catch (error) {
       console.log(error);
     }
@@ -487,7 +532,7 @@ const queryGenerator = (db) => {
       organizations.name as organizationName, 
       organizations.website FROM jobs
       JOIN organizations ON jobs.organization_id = organizations.id
-      ORDER BY created_at DESC;`
+      ORDER BY created_at DESC;`;
 
     try {
       const result = await db.query(queryString, values);
@@ -641,17 +686,24 @@ const queryGenerator = (db) => {
 
   const deleteOrganizationById = async (id) => {
     const values = [id];
-    const queryString = `DELETE FROM organizations WHERE id = $1`
+    const queryString = `DELETE FROM organizations WHERE id = $1`;
 
     try {
       await db.query(queryString, values);
     } catch (error) {
       console.log(error);
-    };
-
+    }
   };
 
-  const updateOrganizationInfo = async (id, name, description, email, industry, website, logo) => {
+  const updateOrganizationInfo = async (
+    id,
+    name,
+    description,
+    email,
+    industry,
+    website,
+    logo
+  ) => {
     const values = [name, description, email, industry, website, logo, id];
     const queryString = `
     UPDATE organizations
@@ -662,43 +714,41 @@ const queryGenerator = (db) => {
       website = $5,
       logo = $6
     WHERE id = $7;
-    `
+    `;
 
     try {
       await db.query(queryString, values);
     } catch (error) {
       console.log(error);
-    };
-
+    }
   };
-
 
   const toggleLikes = async (user_id, jobId) => {
     const values = [user_id, jobId];
 
     const queryStringExists = `
     SELECT EXISTS(SELECT 1 from favourites WHERE user_id = $1 AND job_id = $2)
-    `
+    `;
 
     const queryStringAdd = `
     INSERT into favourites (user_id, job_id)
     VALUES ($1, $2);
-    `
+    `;
 
     const queryStringRemove = `
     DELETE from favourites WHERE user_id = $1 and job_id = $2;
-    `
+    `;
 
     try {
       const result = await db.query(queryStringExists, values);
       const { exists } = result.rows[0];
-      exists ? await db.query(queryStringRemove, values) : await db.query(queryStringAdd, values)
+      exists
+        ? await db.query(queryStringRemove, values)
+        : await db.query(queryStringAdd, values);
       console.log(exists);
     } catch (error) {
       console.log(error);
-    };
-
-
+    }
   };
 
   const getFavoriteJobsByUser = async (user_id) => {
@@ -714,7 +764,7 @@ const queryGenerator = (db) => {
     JOIN organizations ON jobs.organization_id = organizations.id
     JOIN favourites ON favourites.job_id = jobs.id
     WHERE favourites.user_id = $1
-    ORDER BY created_at DESC;`
+    ORDER BY created_at DESC;`;
 
     try {
       const result = await db.query(queryString, values);
@@ -722,7 +772,6 @@ const queryGenerator = (db) => {
     } catch (error) {
       console.log(error);
     }
-
   };
 
   const getAppliedJobsByUser = async (user_id) => {
@@ -737,7 +786,7 @@ const queryGenerator = (db) => {
     JOIN organizations ON jobs.organization_id = organizations.id
     JOIN applications ON applications.job_id = jobs.id
     WHERE applications.user_id = $1
-    ORDER BY created_at DESC;`
+    ORDER BY created_at DESC;`;
 
     try {
       const result = await db.query(queryString, values);
