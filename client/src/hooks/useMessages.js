@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 import { io } from "socket.io-client";
-import moment from "moment";
 
 const useMessages = (currentUser) => {
   const [receiverId, setReceiverId] = useState();
@@ -15,18 +14,60 @@ const useMessages = (currentUser) => {
 
   useEffect(() => {
     if (currentUser) {
-      axios.get("/api/messages").then((res) => {
-        // setSenders(res.data.contacts);
-        setMessages(res.data);
+      axios.get("/api/messages").then(({ data }) => {
+        setMessages(data.messages);
+        setSenders(data.senders);
       });
     }
   }, [currentUser]);
 
-  useEffect(() => {
-    if (Array.isArray(messages)) {
-      setSenders(prev => []);
-    }
-  }, messages)
+  // useEffect(async () => {
+  //   if (Array.isArray(messages)) {
+  //     setSenders((prev) => {
+  //       const senderIds = [];
+
+  //       for (const message of messages) {
+  //         if (
+  //           message.sender_id !== currentUser.id &&
+  //           !senderIds.includes(message.sender_id)
+  //         ) {
+  //           senderIds.push(message.sender_id);
+  //         }
+  //         if (
+  //           message.receiver_id !== currentUser.id &&
+  //           !senderIds.includes(message.receiver_id)
+  //         ) {
+  //           senderIds.push(message.receiver_id);
+  //         }
+  //       }
+
+  //       const newSenders = [];
+
+  //       for (const senderId of senderIds) {
+  //         const senderFound = prev.find(
+  //           (oldSender) => oldSender.id === senderId
+  //         );
+  //         if (senderFound) {
+  //           newSenders.push(senderFound);
+  //         } else {
+  //           axios.get(`/api/users/${senderId}`).then((res) => {
+  //             newSenders.push(res.data);
+  //           });
+  //         }
+  //       }
+  //       return newSenders;
+  //     });
+  //     // setSenders(prev => {
+
+  //     //     axios.get(`/api/users/${user_id}`)
+  //     //          .then(res => {
+  //     //            setOtherUser(res.data);
+  //     //          }).catch(err => {
+  //     //             console.log(err.response.data.error)
+  //     //          })
+  //     // });
+  //   }
+  // }, messages);
 
   // useEffect(() => {
   //   if (Array.isArray(messages))

@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import ListItem from "@mui/material/ListItem";
 import Badge from "@mui/material/Badge";
+import moment from "moment";
 
 const SenderListItem = ({
   sender,
@@ -49,7 +50,7 @@ const SenderListItem = ({
               secondary={
                 <span className="sender-text">
                   <span>{`${msgName}: ${lastMsg}`}</span>
-                  <span className="created-date">{createdDate}</span>
+                  <span className="created-date">{moment(`${createdDate}`).fromNow()}</span>
                 </span>
               }
             />
