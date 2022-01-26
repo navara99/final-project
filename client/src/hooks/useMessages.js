@@ -15,97 +15,37 @@ const useMessages = (currentUser) => {
   useEffect(() => {
     if (currentUser) {
       axios.get("/api/messages").then(({ data }) => {
-        setMessages(data.messages);
         setSenders(data.senders);
+        setMessages(data.messages);
       });
     }
   }, [currentUser]);
 
-  // useEffect(async () => {
-  //   if (Array.isArray(messages)) {
-  //     setSenders((prev) => {
-  //       const senderIds = [];
-
-  //       for (const message of messages) {
-  //         if (
-  //           message.sender_id !== currentUser.id &&
-  //           !senderIds.includes(message.sender_id)
-  //         ) {
-  //           senderIds.push(message.sender_id);
-  //         }
-  //         if (
-  //           message.receiver_id !== currentUser.id &&
-  //           !senderIds.includes(message.receiver_id)
-  //         ) {
-  //           senderIds.push(message.receiver_id);
-  //         }
-  //       }
-
-  //       const newSenders = [];
-
-  //       for (const senderId of senderIds) {
-  //         const senderFound = prev.find(
-  //           (oldSender) => oldSender.id === senderId
-  //         );
-  //         if (senderFound) {
-  //           newSenders.push(senderFound);
-  //         } else {
-  //           axios.get(`/api/users/${senderId}`).then((res) => {
-  //             newSenders.push(res.data);
-  //           });
-  //         }
-  //       }
-  //       return newSenders;
-  //     });
-  //     // setSenders(prev => {
-
-  //     //     axios.get(`/api/users/${user_id}`)
-  //     //          .then(res => {
-  //     //            setOtherUser(res.data);
-  //     //          }).catch(err => {
-  //     //             console.log(err.response.data.error)
-  //     //          })
-  //     // });
-  //   }
-  // }, messages);
-
-  // useEffect(() => {
-  //   if (Array.isArray(messages))
-  //     setSenders((prev) =>
-  //       prev
-  //         .map((sender) => {
-  //           const numOfMsg = messages.filter(
-  //             (message) => message.sender_id === sender.id && !message.is_read
-  //           ).length;
-  //           const [lastMsg, createdDate, lastUserId, msgId] = messages.reduce(
-  //             (lastMessage, message) => {
-  //               if (
-  //                 message.sender_id === sender.id ||
-  //                 message.receiver_id === sender.id
-  //               ) {
-  //                 return [
-  //                   message.message,
-  //                   message.created_at,
-  //                   message.sender_id,
-  //                   message.id,
-  //                 ];
-  //               }
-  //               return lastMessage;
-  //             },
-  //             null
-  //           );
-  //           return {
-  //             ...sender,
-  //             lastMsg,
-  //             createdDate: moment(`${createdDate}`).fromNow(),
-  //             lastUserId,
-  //             msgId,
-  //             numOfMsg,
-  //           };
-  //         })
-  //         .sort((senderA, senderB) => senderB.msgId - senderA.msgId)
-  //     );
-  // }, [messages]);
+  useEffect(() => {
+    const reverseMsg = [...messages].reverse();
+    setSenders((prev) =>
+      prev
+        .map((sender) => {
+          const numOfMsg = messages.filter(
+            (message) => message.sender_id === sender.id && !message.is_read
+          ).length;
+          const { message, created_at, sender_id, id } = reverseMsg.find(
+            (message) =>
+              message.sender_id === sender.id ||
+              message.receiver_id === sender.id
+          );
+          return {
+            ...sender,
+            lastMsg: message,
+            createdDate: created_at,
+            lastUserId: sender_id,
+            msgId: id,
+            numOfMsg,
+          };
+        })
+        .sort((senderA, senderB) => senderB.msgId - senderA.msgId)
+    );
+  }, [messages]);
 
   useEffect(() => {
     if (location.state) {
@@ -132,12 +72,12 @@ const useMessages = (currentUser) => {
     socket.on("getMessage", (data) => {
       console.log(data);
       const newMsg = { ...data, created_at: new Date().toISOString() };
-      // setSenders((prev) => {
-      //   if (prev.some((sender) => sender && sender.id === data.sender_id)) {
-      //     return prev;
-      //   }
-      //   return [data.sender, ...prev];
-      // });
+      setSenders((prev) => {
+        if (prev.some((sender) => sender && sender.id === data.sender_id)) {
+          return prev;
+        }
+        return [data.sender, ...prev];
+      });
       setMessages((prev) => [...prev, newMsg]);
     });
 
@@ -171,12 +111,12 @@ const useMessages = (currentUser) => {
       sender: currentUser,
     };
     axios.post("/api/messages/", newMessage).then((res) => {
-      // setSenders((prev) => {
-      //   if (prev.some((el) => el.id === res.data.receiver.id)) {
-      //     return prev;
-      //   }
-      //   return [res.data.receiver, ...prev];
-      // });
+      setSenders((prev) => {
+        if (prev.some((el) => el.id === res.data.receiver.id)) {
+          return prev;
+        }
+        return [res.data.receiver, ...prev];
+      });
       setMessages((prev) => [...prev, res.data.messageObj]);
     });
     //sending message to socket server

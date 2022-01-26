@@ -50,13 +50,13 @@ function ScheduleInterviewForm({
         "/api/messages/interview",
         newInterview
       );
+      setSenders((prev) => {
+        if (prev.some((el) => el.id === newMessage.data.receiver.id)) {
+          return prev;
+        }
+        return [newMessage.data.receiver, ...prev];
+      });
       setMessages((prev) => [...prev, newMessage.data.messageObj]);
-      // setSenders((prev) => {
-      //   if (prev.some((el) => el.id === newMessage.data.receiver.id)) {
-      //     return prev;
-      //   }
-      //   return [...prev, newMessage.data.receiver];
-      // });
 
       //sending message to socket server
       socket.emit("sendMessage", newMessage.data.messageObj);
