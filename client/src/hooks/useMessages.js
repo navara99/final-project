@@ -108,6 +108,7 @@ const useMessages = (currentUser) => {
             return sender;
           });
         }
+        console.log(data.sender)
         return [{ ...data.sender, ...senderInfo, numOfMsg: 1 }, ...prev];
       });
       setMessages((prev) => [...prev, newMsg]);
@@ -145,7 +146,7 @@ const useMessages = (currentUser) => {
 
     axios.post("/api/messages/", newMessage).then((res) => {
       const senderInfo = {
-        lastMsg: res.data.messageObj.message,
+        lastMsg: newMessage.message,
         createdDate: moment(`${res.data.messageObj.created_at}`).fromNow(),
         lastUserId: res.data.messageObj.sender_id,
         msgId: res.data.messageObj.id,
