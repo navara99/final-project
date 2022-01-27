@@ -17,6 +17,7 @@ import {
   formatDate,
   formatStartEndTime,
 } from "../../helpers/date";
+import moment from "moment";
 
 function ScheduleInterviewForm({
   interviewFormOpen,
@@ -27,6 +28,7 @@ function ScheduleInterviewForm({
   setMessages,
   setSenders,
   socket,
+  currentUser
 }) {
   const [date, setDate] = useState(new Date());
   const [startTime, setStartTime] = useState(new Date());
@@ -43,6 +45,7 @@ function ScheduleInterviewForm({
       end,
       applicationId: application.id,
       receiverId: application.user_id,
+      created_at: moment()
     };
 
     try {
@@ -50,16 +53,18 @@ function ScheduleInterviewForm({
         "/api/messages/interview",
         newInterview
       );
-      setMessages((prev) => [...prev, newMessage.data.messageObj]);
       setSenders((prev) => {
         if (prev.some((el) => el.id === newMessage.data.receiver.id)) {
           return prev;
         }
-        return [...prev, newMessage.data.receiver];
+        return [newMessage.data.receiver, ...prev];
       });
-
+      setMessages((prev) => [...prev, newMessage.data.messageObj]);
       //sending message to socket server
-      socket.emit("sendMessage", newMessage.data.messageObj);
+      socket.emit("sendMessage", {
+        message: newMessage.data.messageObj,
+        sender: currentUser,
+      });
 
       setSnackBarDetails({
         open: true,

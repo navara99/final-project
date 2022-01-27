@@ -14,42 +14,33 @@ const useMessages = (currentUser) => {
   const location = useLocation();
 
   useEffect(() => {
-    axios.get("/api/messages").then((res) => {
-      setMessages(res.data.messagesArr);
-      setSenders(res.data.contacts);
-    });
+    if (currentUser) {
+      axios.get("/api/messages").then(({ data }) => {
+        setSenders(data.senders);
+        setMessages(data.messages);
+      });
+    }
   }, [currentUser]);
 
   useEffect(() => {
-    if (Array.isArray(messages)) setSenders((prev) =>
+    const reverseMsg = [...messages].reverse();
+    setSenders((prev) =>
       prev
         .map((sender) => {
           const numOfMsg = messages.filter(
             (message) => message.sender_id === sender.id && !message.is_read
           ).length;
-          const [lastMsg, createdDate, lastUserId, msgId] = messages.reduce(
-            (lastMessage, message) => {
-              if (
-                message.sender_id === sender.id ||
-                message.receiver_id === sender.id
-              ) {
-                return [
-                  message.message,
-                  message.created_at,
-                  message.sender_id,
-                  message.id,
-                ];
-              }
-              return lastMessage;
-            },
-            null
+          const { message, created_at, sender_id, id } = reverseMsg.find(
+            (message) =>
+              message.sender_id === sender.id ||
+              message.receiver_id === sender.id
           );
           return {
             ...sender,
-            lastMsg,
-            createdDate: moment(`${createdDate}`).fromNow(),
-            lastUserId,
-            msgId,
+            lastMsg: message,
+            createdDate: created_at,
+            lastUserId: sender_id,
+            msgId: id,
             numOfMsg,
           };
         })
@@ -80,10 +71,9 @@ const useMessages = (currentUser) => {
     if (!currentUser) return;
     const socket = io.connect("http://localhost:8080");
     socket.on("getMessage", (data) => {
-      console.log(data);
-      const newMsg = { ...data, created_at: new Date().toISOString() };
+      const newMsg = { ...data.message };
       setSenders((prev) => {
-        if (prev.some((sender) => sender && sender.id === data.sender_id)) {
+        if (prev.some((sender) => sender && sender.id === data.message.sender_id)) {
           return prev;
         }
         return [data.sender, ...prev];
@@ -118,7 +108,7 @@ const useMessages = (currentUser) => {
       sender_id: currentUser.id,
       receiver_id: receiverId,
       message,
-      sender: currentUser,
+      created_at: moment()
     };
     axios.post("/api/messages/", newMessage).then((res) => {
       setSenders((prev) => {
@@ -128,10 +118,10 @@ const useMessages = (currentUser) => {
         return [res.data.receiver, ...prev];
       });
       setMessages((prev) => [...prev, res.data.messageObj]);
+      socket.emit("sendMessage", { message: res.data.messageObj, sender: currentUser });
+      setMessageText("");
     });
     //sending message to socket server
-    socket.emit("sendMessage", newMessage);
-    setMessageText("");
   };
 
   const handleOnClick = (e) => {
@@ -159,8 +149,8 @@ const useMessages = (currentUser) => {
     setReceiverId,
     numOfUnreadMsg,
     setMessages,
-    setSenders,
     socket,
+    setSenders,
   };
 
   return messageState;

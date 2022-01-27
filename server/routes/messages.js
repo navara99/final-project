@@ -13,8 +13,8 @@ module.exports = (db) => {
   router.get("/", async (req, res) => {
     try {
       const { user_id } = req.session;
-      const { messagesArr, contacts } = await getMessagesByUserId(user_id);
-      res.status(200).json({ messagesArr, contacts });
+      const data = await getMessagesByUserId(user_id);
+      res.status(200).json(data);
     } catch (error) {
       console.log(error);
     }
@@ -31,7 +31,7 @@ module.exports = (db) => {
 
   router.post("/interview", async (req, res) => {
     const { user_id } = req.session;
-    const { start, end, applicationId, receiverId, message } = req.body;
+    const { start, end, applicationId, receiverId, message, created_at } = req.body;
 
     try {
       const data = await sendInterviewInvitation(
@@ -40,7 +40,8 @@ module.exports = (db) => {
         user_id,
         receiverId,
         applicationId,
-        message
+        message,
+        created_at
       );
       res.status(200).json(data);
     } catch (error) {
