@@ -2,7 +2,7 @@
 business profile:
 - my organization button and page(depends if the user is part of any group)
   - details page for group
-    - update description (stretch)
+    - (done) update description
     - (done) make new job post
       - title
       - description
@@ -19,8 +19,6 @@ business profile:
       - date
       - cover image
       - upload flyer pdf for the whole fair (stretch)
-    - filter (stretch)
-    - private/public (stretch)
 
 pages:
 - (done) homepage
@@ -32,6 +30,7 @@ pages:
   - search bar (stretch)
 
 - (done) details page of career fair
+  - private/public (stretch)
   - title
   - time
   - date
@@ -49,10 +48,11 @@ pages:
     - location
     - company name
     - post date
+  - filter (stretch)
   - compulsory skills from users (filter, stretch)
   - order by (strech)
-  - saved (stretch)
-  - search bar (stretch)
+  - (done) saved (stretch)
+  - (done) search bar (stretch)
   - filter (stretch)
 
 - (done) job application page
@@ -78,7 +78,7 @@ pages:
       - bio
       - profile picture
     - upload resume
-  - saved page (stretch)
+  - (done) saved page (stretch)
 
 - (done) private message
   - find user to message (stretch)
@@ -111,7 +111,7 @@ pages:
 - (done) actual interview page
   - button to join the interview (in schedule)
   - whiteboard plus realtime coding: (textarea/ library to consider: editor.js)
-    - draw on whiteboard: html5canvas (stretch)
+    - (done) draw on whiteboard: html5canvas 
   - for both party to record the interview (stretch)
   - quick review after the interview (stretch)
 
