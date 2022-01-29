@@ -48,6 +48,8 @@ This is the final project for the Web Development Bootcamp at [Lighthouse Labs](
 
 * Each organization has a details page, if the current user is a member of that organization, they have access to adding
 
+![Organization Details](./docs/organization-details.gif)
+
 ### Job Board
 
 * The user has access to a job board, where they can search for, apply, and bookmark jobs.
