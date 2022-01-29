@@ -38,9 +38,11 @@ This is the final project for the Web Development Bootcamp at [Lighthouse Labs](
 
 ![Job Applications](./docs/applications-from-live.gif)
 
+### Job Board
 
+* The user has access to a job board, where they can search for, apply, and bookmark jobs.
 
-
+![Job Board](./docs/job-board.gif)
 
 ## Dependencies
 
