@@ -1,5 +1,9 @@
 # vCareer
 
+A full-stack application where employers can host interviews and career fairs. vCareer streamlines the hiring process by combing all aspects of it into one application. This application was built using React JS. NodeJS, Express, and PostgreSQL database.
+
+This is the final project for the Web Development Bootcamp at [Lighthouse Labs](https://www.lighthouselabs.ca/). The project is done by [@navara99](https://github.com/navara99), [@scc416](https://github.com/scc416) and [@YagneshP](https://github.com/YagneshP). 
+
 ## Table of Content
 
 - [Live Demo](#live-demo)
