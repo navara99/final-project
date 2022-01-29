@@ -92,13 +92,19 @@ This is the final project for the Web Development Bootcamp at [Lighthouse Labs](
 
 ![Real Time Chat](./docs/chat.gif)
 
+### User authentication
+
+* Users can login and logout
+
+![Authentication](./docs/authentication.gif)
+
 ### Job Board
 
 * The user has access to a job board, where they can search for, apply, and bookmark jobs.
 
 ![Job Board](./docs/job-board.gif)
 
-## Bookmarks
+### Bookmarks
 
 * The user has access to a bookmarks page where they can see the jobs they have bookmarked and jobs they already applied to.
 
