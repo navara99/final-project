@@ -70,6 +70,24 @@ This is the final project for the Web Development Bootcamp at [Lighthouse Labs](
 
 ### Live Interview
 
+* The job seeker and interviewer can enter the live interview through their calender. 
+
+![Live Interview](./docs/live-interview.gif)
+
+### Real Time Whiteboard
+
+* Both the job seeker and the interviewer have access to a collaborative whiteboard.
+
+![White Board](./docs/whiteboard.gif)
+
+### User Profiles
+
+
+
+### Real time chat
+
+
+
 ### Job Board
 
 * The user has access to a job board, where they can search for, apply, and bookmark jobs.
