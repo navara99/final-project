@@ -1,6 +1,6 @@
 # vCareer
 
-A full-stack application where employers can host interviews and career fairs with real time video and voice engagement. The application also allows employers to post jobs, and job seekers to apply to and bookmark them. Socket.io is used for real time chat and notifications. The live interviews feature a pop-up whiteboard that can be used for real time collaboration. This core of this application was built using React JS. NodeJS, Express, and PostgreSQL database.
+A full-stack application where employers can host interviews and career fairs with real time video and voice engagement. The application also allows employers to post jobs, and job seekers to apply to and bookmark them. Socket.io is used for real time chat and notifications. The live interviews feature a pop-up whiteboard that can be used for real time collaboration. The core of this application was built using React JS. NodeJS, Express, and PostgreSQL database.
 
 This is the final project for the Web Development Bootcamp at [Lighthouse Labs](https://www.lighthouselabs.ca/). The project is done by [@navara99](https://github.com/navara99), [@scc416](https://github.com/scc416) and [@YagneshP](https://github.com/YagneshP). 
 
@@ -58,9 +58,17 @@ This is the final project for the Web Development Bootcamp at [Lighthouse Labs](
 
 ### Automated Interview Requests
 
-* Interview requests is automatically sent to job seeker within the chat feature. Job seeker can discuss a new time or have the option to accept the interview at requested time. 
+* Interview requests are automatically sent to job seeker within the chat feature. Job seeker can discuss a new time or have the option to accept the interview at requested time. 
 
 ![Automated Interview Requests](./docs/automated-interview-requests.gif)
+
+### Calender
+
+* Interview requests and saved career fairs show up in the users personal calender 
+
+![Calender](./docs/calender.gif)
+
+### Live Interview
 
 ### Job Board
 
