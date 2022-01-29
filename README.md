@@ -50,6 +50,12 @@ This is the final project for the Web Development Bootcamp at [Lighthouse Labs](
 
 ![Organization Details](./docs/organization-details.gif)
 
+### Viewing Applications
+
+* Members of an organization can view applications posted by that organization. If interested, they could request an interview with the job seeker.
+
+![Viewing Applications](./docs/viewing-applications.gif)
+
 ### Job Board
 
 * The user has access to a job board, where they can search for, apply, and bookmark jobs.
