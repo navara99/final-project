@@ -44,6 +44,12 @@ This is the final project for the Web Development Bootcamp at [Lighthouse Labs](
 
 ![Job Board](./docs/job-board.gif)
 
+## Bookmarks
+
+* The user has access to a bookmarks page where they can see the jobs they have bookmarked and jobs they already applied to.
+
+![Bookmarks](./docs/bookmarks.gif)
+
 ## Dependencies
 
 ### Frontend
