@@ -38,6 +38,12 @@ This is the final project for the Web Development Bootcamp at [Lighthouse Labs](
 
 ![Job Applications](./docs/applications-from-live.gif)
 
+### My Organizations Page
+
+* The user can view all organizations they are a part of (companies/schools they belong to).
+
+![My Organizations](./docs/my-organizations.gif)
+
 ### Job Board
 
 * The user has access to a job board, where they can search for, apply, and bookmark jobs.
@@ -49,6 +55,8 @@ This is the final project for the Web Development Bootcamp at [Lighthouse Labs](
 * The user has access to a bookmarks page where they can see the jobs they have bookmarked and jobs they already applied to.
 
 ![Bookmarks](./docs/bookmarks.gif)
+
+
 
 ## Dependencies
 
