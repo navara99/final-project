@@ -82,13 +82,15 @@ This is the final project for the Web Development Bootcamp at [Lighthouse Labs](
 
 ### User Profiles
 
-* Users have their own profile that they can update
+* Users have their own profile that they can update. More features are planned for this page.
 
 ![User Profile](./docs/user-profile.gif)
 
 ### Real time chat
 
+* Users have conversations with other users in real time.
 
+![Real Time Chat](./docs/chat.gif)
 
 ### Job Board
 
@@ -101,8 +103,6 @@ This is the final project for the Web Development Bootcamp at [Lighthouse Labs](
 * The user has access to a bookmarks page where they can see the jobs they have bookmarked and jobs they already applied to.
 
 ![Bookmarks](./docs/bookmarks.gif)
-
-
 
 ## Dependencies
 
