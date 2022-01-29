@@ -82,7 +82,9 @@ This is the final project for the Web Development Bootcamp at [Lighthouse Labs](
 
 ### User Profiles
 
+* Users have their own profile that they can update
 
+![User Profile](./docs/user-profile.gif)
 
 ### Real time chat
 
