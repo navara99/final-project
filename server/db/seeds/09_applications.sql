@@ -1,0 +1,4 @@
+INSERT INTO applications (message, user_id, job_id, resume)
+VALUES ('Brownie cheesecake bear claw dessert jelly beans chocolate bar danish cake cake. Pudding gummies powder sugar plum apple pie jelly beans cheesecake pastry.', 3 , 4, '/public/uploads/1642724277982_Resume.pdf'),
+('Brownie cheesecake bear claw dessert jelly beans chocolate bar danish cake cake. Pudding gummies powder sugar plum apple pie jelly beans cheesecake pastry.', 4 , 4, '/public/uploads/1642724277982_Resume.pdf'),
+('Brownie cheesecake bear claw dessert jelly beans chocolate bar danish cake cake. Pudding gummies powder sugar plum apple pie jelly beans cheesecake pastry.', 5 , 4, '/public/uploads/1642724277982_Resume.pdf')
