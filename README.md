@@ -50,11 +50,17 @@ This is the final project for the Web Development Bootcamp at [Lighthouse Labs](
 
 ![Organization Details](./docs/organization-details.gif)
 
-### Viewing Applications
+### Viewing Applications / Booking Interviews
 
 * Members of an organization can view applications posted by that organization. If interested, they could request an interview with the job seeker.
 
 ![Viewing Applications](./docs/viewing-applications.gif)
+
+### Automated Interview Requests
+
+* Interview requests is automatically sent to job seeker within the chat feature. Job seeker can discuss a new time or have the option to accept the interview at requested time. 
+
+![Automated Interview Requests](./docs/automated-interview-requests.gif)
 
 ### Job Board
 
