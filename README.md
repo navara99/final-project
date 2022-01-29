@@ -20,6 +20,16 @@ This is the final project for the Web Development Bootcamp at [Lighthouse Labs](
 
 ### Home page
 
+* The user can see the current, upcoming and past career fairs
+
+![Home Page](./docs/home-page.gif)
+
+### Career Fair Page
+
+* The user clicks on a fair and sees the companies that are hosting stalls in within that particular fair
+
+
+
 ## Dependencies
 
 ### Frontend
