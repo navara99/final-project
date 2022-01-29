@@ -24,9 +24,25 @@ This is the final project for the Web Development Bootcamp at [Lighthouse Labs](
 
 ![Home Page](./docs/home-page.gif)
 
-### Career Fair Page
+### Live Career Fair
 
-* The user clicks on a fair and sees the companies that are hosting stalls in within that particular fair
+* The user clicks on a live career fair and sees the companies that are hosting stalls in within that particular fair
+
+![Live Fair](./docs/live-fair.gif)
+
+### Video Conference in Employer's Stall
+
+* The user can view and apply to a job the employer is promoting from the fairs main page.
+
+
+
+
+
+### Applying to jobs from the Live Fairs Page
+
+
+
+
 
 
 
