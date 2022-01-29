@@ -78,6 +78,164 @@ This is the final project for the Web Development Bootcamp at [Lighthouse Labs](
 
 ## Repository Overview
 
+<pre>
+📦client
+ ┣ 📂node_modules
+ ┣ 📂public
+ ┃ ┣ 📜favicon.png
+ ┃ ┣ 📜icon.png
+ ┃ ┗ 📜index.html
+ ┣ 📂src
+ ┃ ┣ 📂Context
+ ┃ ┃ ┗ 📂CurrentUser
+ ┃ ┃ ┃ ┗ 📜CurrentUserContext.jsx
+ ┃ ┣ 📂Providers
+ ┃ ┃ ┗ 📜ThemeProvider.js
+ ┃ ┣ 📂components
+ ┃ ┃ ┣ 📂Bookmarks
+ ┃ ┃ ┃ ┣ 📜Columns.jsx
+ ┃ ┃ ┃ ┗ 📜index.jsx
+ ┃ ┃ ┣ 📂Fair
+ ┃ ┃ ┃ ┣ 📜ExpandedOrganizationListItem.jsx
+ ┃ ┃ ┃ ┣ 📜Fair.css
+ ┃ ┃ ┃ ┣ 📜Header.jsx
+ ┃ ┃ ┃ ┣ 📜HeaderLive.jsx
+ ┃ ┃ ┃ ┣ 📜JobDetailsDialog.jsx
+ ┃ ┃ ┃ ┣ 📜JobList.jsx
+ ┃ ┃ ┃ ┣ 📜JobListItem.jsx
+ ┃ ┃ ┃ ┣ 📜OrganizationList.jsx
+ ┃ ┃ ┃ ┣ 📜OrganizationListItem.jsx
+ ┃ ┃ ┃ ┣ 📜ScheduleButton.jsx
+ ┃ ┃ ┃ ┗ 📜index.jsx
+ ┃ ┃ ┣ 📂Groups
+ ┃ ┃ ┃ ┣ 📜AddMemberForm.jsx
+ ┃ ┃ ┃ ┣ 📜ApplicantsList.jsx
+ ┃ ┃ ┃ ┣ 📜ApplicantsListItem.css
+ ┃ ┃ ┃ ┣ 📜ApplicantsListItem.jsx
+ ┃ ┃ ┃ ┣ 📜ConfirmDelete.jsx
+ ┃ ┃ ┃ ┣ 📜CoverLetter.jsx
+ ┃ ┃ ┃ ┣ 📜EditGroup.jsx
+ ┃ ┃ ┃ ┣ 📜FairListItem.jsx
+ ┃ ┃ ┃ ┣ 📜FairsActions.jsx
+ ┃ ┃ ┃ ┣ 📜FairsForm.jsx
+ ┃ ┃ ┃ ┣ 📜FairsList.jsx
+ ┃ ┃ ┃ ┣ 📜GroupAction.jsx
+ ┃ ┃ ┃ ┣ 📜GroupForm.jsx
+ ┃ ┃ ┃ ┣ 📜GroupListItem.jsx
+ ┃ ┃ ┃ ┣ 📜GroupsBtn.jsx
+ ┃ ┃ ┃ ┣ 📜JobActions.jsx
+ ┃ ┃ ┃ ┣ 📜JobApplicationForm.jsx
+ ┃ ┃ ┃ ┣ 📜JobApplications.jsx
+ ┃ ┃ ┃ ┣ 📜JobForm.jsx
+ ┃ ┃ ┃ ┣ 📜JobListItem.jsx
+ ┃ ┃ ┃ ┣ 📜JobsList.jsx
+ ┃ ┃ ┃ ┣ 📜MemberListItem.jsx
+ ┃ ┃ ┃ ┣ 📜MembersList.jsx
+ ┃ ┃ ┃ ┣ 📜OrganizationDetails.jsx
+ ┃ ┃ ┃ ┣ 📜OrganizationFairs.jsx
+ ┃ ┃ ┃ ┣ 📜OrganizationHeader.jsx
+ ┃ ┃ ┃ ┣ 📜OrganizationJobs.jsx
+ ┃ ┃ ┃ ┣ 📜OrganizationMembers.jsx
+ ┃ ┃ ┃ ┣ 📜Resume.jsx
+ ┃ ┃ ┃ ┣ 📜ScheduleInterviewForm.jsx
+ ┃ ┃ ┃ ┣ 📜groups.css
+ ┃ ┃ ┃ ┗ 📜index.jsx
+ ┃ ┃ ┣ 📂Home
+ ┃ ┃ ┃ ┣ 📜FairList.jsx
+ ┃ ┃ ┃ ┣ 📜FairListItem.jsx
+ ┃ ┃ ┃ ┣ 📜Home.css
+ ┃ ┃ ┃ ┗ 📜index.jsx
+ ┃ ┃ ┣ 📂InterviewRoom
+ ┃ ┃ ┃ ┣ 📜VideoCall.jsx
+ ┃ ┃ ┃ ┣ 📜WhiteBoard.jsx
+ ┃ ┃ ┃ ┣ 📜WhiteBoardModal.jsx
+ ┃ ┃ ┃ ┣ 📜index.jsx
+ ┃ ┃ ┃ ┗ 📜interviewroom.css
+ ┃ ┃ ┣ 📂JobBoard
+ ┃ ┃ ┃ ┣ 📜index.jsx
+ ┃ ┃ ┃ ┗ 📜jobboard.css
+ ┃ ┃ ┣ 📂Messages
+ ┃ ┃ ┃ ┣ 📂Message
+ ┃ ┃ ┃ ┃ ┣ 📜MessageList.jsx
+ ┃ ┃ ┃ ┃ ┗ 📜MessageListItem.jsx
+ ┃ ┃ ┃ ┣ 📂MessageForm
+ ┃ ┃ ┃ ┃ ┗ 📜MessageForm.jsx
+ ┃ ┃ ┃ ┣ 📂Sender
+ ┃ ┃ ┃ ┃ ┣ 📜SenderList.jsx
+ ┃ ┃ ┃ ┃ ┗ 📜SenderListItem.jsx
+ ┃ ┃ ┃ ┣ 📜Messages.css
+ ┃ ┃ ┃ ┗ 📜index.jsx
+ ┃ ┃ ┣ 📂Navbar
+ ┃ ┃ ┃ ┣ 📜Button.jsx
+ ┃ ┃ ┃ ┣ 📜MainButtons.jsx
+ ┃ ┃ ┃ ┣ 📜Navbar.css
+ ┃ ┃ ┃ ┣ 📜NullUserButtons.jsx
+ ┃ ┃ ┃ ┣ 📜UserButtons.jsx
+ ┃ ┃ ┃ ┗ 📜index.jsx
+ ┃ ┃ ┣ 📂ProfileSetting
+ ┃ ┃ ┃ ┣ 📜EditPassword.jsx
+ ┃ ┃ ┃ ┣ 📜EditProfile.jsx
+ ┃ ┃ ┃ ┣ 📜NavColumn.jsx
+ ┃ ┃ ┃ ┗ 📜ProfileSetting.jsx
+ ┃ ┃ ┣ 📂Schedule
+ ┃ ┃ ┃ ┣ 📜Event.jsx
+ ┃ ┃ ┃ ┣ 📜index.jsx
+ ┃ ┃ ┃ ┗ 📜schedule.css
+ ┃ ┃ ┣ 📂Stall
+ ┃ ┃ ┃ ┣ 📜Controls.jsx
+ ┃ ┃ ┃ ┣ 📜Stall.css
+ ┃ ┃ ┃ ┣ 📜Video.jsx
+ ┃ ┃ ┃ ┣ 📜VideoCall.jsx
+ ┃ ┃ ┃ ┗ 📜index.jsx
+ ┃ ┃ ┣ 📂Unauthorized
+ ┃ ┃ ┃ ┣ 📜LoginButton.jsx
+ ┃ ┃ ┃ ┣ 📜LogoutButton.jsx
+ ┃ ┃ ┃ ┗ 📜index.jsx
+ ┃ ┃ ┣ 📂UserProfile
+ ┃ ┃ ┃ ┣ 📜OtherProfile.jsx
+ ┃ ┃ ┃ ┗ 📜UserProfile.jsx
+ ┃ ┃ ┣ 📜ErrorModal.jsx
+ ┃ ┃ ┣ 📜LogIn.jsx
+ ┃ ┃ ┗ 📜Register.jsx
+ ┃ ┣ 📂helpers
+ ┃ ┃ ┣ 📜date.js
+ ┃ ┃ ┣ 📜object.js
+ ┃ ┃ ┗ 📜string.js
+ ┃ ┣ 📂hooks
+ ┃ ┃ ┣ 📜useAllUsers.js
+ ┃ ┃ ┣ 📜useApplications.js
+ ┃ ┃ ┣ 📜useAppliedJobs.js
+ ┃ ┃ ┣ 📜useChannel.js
+ ┃ ┃ ┣ 📜useCurrentUser.js
+ ┃ ┃ ┣ 📜useEachJob.js
+ ┃ ┃ ┣ 📜useExpand.js
+ ┃ ┃ ┣ 📜useFairDetails.js
+ ┃ ┃ ┣ 📜useFairs.js
+ ┃ ┃ ┣ 📜useFavoriteJobs.js
+ ┃ ┃ ┣ 📜useInput.js
+ ┃ ┃ ┣ 📜useInterview.js
+ ┃ ┃ ┣ 📜useJobs.js
+ ┃ ┃ ┣ 📜useMember.js
+ ┃ ┃ ┣ 📜useMessages.js
+ ┃ ┃ ┣ 📜useMyGroups.js
+ ┃ ┃ ┣ 📜useOrganizationDetails.js
+ ┃ ┃ ┣ 📜useOrganizationJobs.js
+ ┃ ┃ ┣ 📜useOtherUserProfile.js
+ ┃ ┃ ┣ 📜useSchedule.js
+ ┃ ┃ ┣ 📜useSpecificJob.js
+ ┃ ┃ ┣ 📜useTitle.js
+ ┃ ┃ ┗ 📜useVideo.js
+ ┃ ┣ 📜App.css
+ ┃ ┣ 📜App.jsx
+ ┃ ┣ 📜constants.js
+ ┃ ┣ 📜index.css
+ ┃ ┗ 📜index.js
+ ┣ 📜README.md
+ ┣ 📜package-lock.json
+ ┗ 📜package.json
+
+</pre>
+
 ## ERD Diagram
 
 ## Credits
