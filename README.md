@@ -32,15 +32,11 @@ This is the final project for the Web Development Bootcamp at [Lighthouse Labs](
 
 ### Video Conference in Employer's Stall
 
-* The user can view and apply to a job the employer is promoting from the fairs main page.
-
-
-
-
-
 ### Applying to jobs from the Live Fairs Page
 
+* The user can view and apply to a job the employer is promoting from the fairs main page.
 
+![Job Applications](./docs/applications-from-live.gif)
 
 
 
