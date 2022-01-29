@@ -56,7 +56,17 @@ This is the final project for the Web Development Bootcamp at [Lighthouse Labs](
 
 ![Bookmarks](./docs/bookmarks.gif)
 
+### Upcoming Career Fair
 
+* The user clicks on a upcoming career fair and sees the companies that are hosting stalls in that particular fair. Logged in user can add the fair to the schedule as a job seeker/organization.
+
+![Upcoming Career Fair](./docs/fair-details-upcoming.png)
+
+### Past Career Fair
+
+* The user clicks on a past career fair and sees the companies that are hosting stalls in that particular fair. Users cannot add the fair to the schedule as it is a past event.
+
+![Upcoming Career Fair](./docs/fair-details-past.png)
 
 ## Dependencies
 
