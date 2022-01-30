@@ -126,6 +126,23 @@ This is the final project for the Web Development Bootcamp at [Lighthouse Labs](
 
 ### Frontend
 
+* [React JS](https://reactjs.org/): Javascript library for building user interfaces
+* [date-io](https://github.com/dmtrKovalenko/date-io): Abstraction over common JavaScript date management libraries.
+* [emotion-js](https://github.com/emotion-js/emotion): Building on many other CSS-in-JS libraries, it allows you to style apps quickly with string or object styles.
+* [Material-UI](https://mui.com/): MUI provides a simple, customizable, and accessible library of React components. 
+* [Tippy.js](https://atomiks.github.io/tippyjs/): Tippy.js is the complete tooltip, popover, dropdown, and menu solution for the web, powered by Popper.
+* [agora-rtc-react](https://github.com/AgoraIO-Community/agora-rtc-react): A react wrapper for [Agora](https://www.agora.io/en/) RTC NG SDK. Used in the application for real time video and audio.
+* [axios](https://www.npmjs.com/package/axios): Promise based HTTP client for the browser and node.js.
+* [moment](https://www.npmjs.com/package/moment): A JavaScript date library for parsing, validating, manipulating, and formatting dates.
+* [React Alice Carousel](https://www.npmjs.com/package/react-alice-carousel): React Alice Carousel is a React component for building content galleries, content rotators and any React carousels. Used in the homepage. 
+* [React Big Calender](https://www.npmjs.com/package/react-big-calendar): An events calendar component built for React and made for modern browsers.
+* [React DOM](https://www.npmjs.com/package/react-dom): This package serves as the entry point to the DOM and server renderers for React.
+* [React Draggable](https://www.npmjs.com/package/react-draggable): A simple component for making elements draggable.
+* [React Helmet](https://www.npmjs.com/package/react-helmet): This reusable React component will manage all of your changes to the document head.
+* [React Router DOM](https://v5.reactrouter.com/web/guides/quick-start): React Router is a lightweight, fully-featured routing library for the React JavaScript library.
+* [React Scroll-To-Bottom](https://www.npmjs.com/package/react-scroll-to-bottom): React container that will auto scroll to bottom or top if new content is added and viewport is at the bottom.
+* [Socket.IO Client](https://github.com/socketio/socket.io-client): Client library that enables real-time, bidirectional and event-based communication between the browser and the server.
+
 ### Backend
 
 ## Getting Started
