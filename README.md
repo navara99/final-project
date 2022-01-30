@@ -373,6 +373,20 @@ You will also see any lint errors in the console.
 </pre>
 
 ## ERD Diagram
+The database consists of 11 tables:
+- users
+- organizations
+- users_organizations
+- fairs
+- fairs_organizations
+- fairs_users
+- jobs
+- applications
+- messages
+- interviews
+- favourites
+
+![erd](./docs/erd.jpg)
 
 ## Credits
 
