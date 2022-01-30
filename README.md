@@ -149,14 +149,14 @@ This is the final project for the Web Development Bootcamp at [Lighthouse Labs](
 - [bcryptjs](https://github.com/dcodeIO/bcrypt.js): To convert the passwords provided by users
 - [chalk](https://github.com/chalk/chalk): Terminal string styling
 - [cookie-session](https://github.com/expressjs/cookie-session): Cookie-based session middleware
-- [cors](https://github.com/expressjs/cors):
-- [dotenv]():
-- [express]():
-- [morgan]():
+- [cors](https://github.com/expressjs/cors): A middleware that can be used to enable CORS with various options
+- [dotenv](https://github.com/motdotla/dotenv): Loads environment variables from .env
+- [express](http://expressjs.com/): Web framework
+- [morgan](https://github.com/expressjs/morgan):
 - [multer]():
-- [pg]():
+- [pg](https://github.com/brianc/node-postgres): PostgreSQL client
 - [socket.io]():
-- [nodemon]():
+- [nodemon](https://nodemon.io/): Monitor for any changes in the application and automatically restart the server
 
 ## Getting Started
 
