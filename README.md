@@ -406,7 +406,7 @@ This is the final project for the Web Development Bootcamp at [Lighthouse Labs](
 Folder of the react application.
 
 #### 📂public
-Contains the `favicon.png`, `icon.png` (image displayed in the web app), `index.html` (document where the app is render)
+Contains the `favicon.png`, `icon.png` (image displayed in the web app), `index.html` (document where the app is render).
 
 #### 📂src
 Contains the folder `Context`, `Providers`, `components` (Contains the react components of the app).
@@ -419,14 +419,19 @@ Contains the custom hooks.
 
 #### 📜App.css
 
+Contains styles of react component (`App.jsx`).
+
 #### 📜App.jsx
+The high level root react component
 
 #### 📜constants.js
 Contains constants that are used in the client.
 
 #### 📜index.css
+Contains styles for general setup of the app.
 
 #### 📜index.js
+Renders the component.
 
 #### 📜package.json
 Contain the commands and dependecies for the react app (client).
@@ -488,6 +493,7 @@ Stores the uploads file from users.
 #### 📜server.js
 
 ### 📜.gitignore
+Specifies intentionally untracked files that Git should ignore
 
 ### 📜README.md
 This document you are reading
