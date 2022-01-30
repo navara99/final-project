@@ -32,6 +32,11 @@ This is the final project for the Web Development Bootcamp at [Lighthouse Labs](
 
 ### Video Conference in Employer's Stall
 
+* The user can click on one of the employer's stall and enter into a video conference with members from that company
+and other job seekers who are interested in the same company.
+
+![Employer's Stall](./docs/employer-stall-temporary.gif)
+
 ### Applying to jobs from the Live Fairs Page
 
 * The user can view and apply to a job the employer is promoting from the fairs main page.
