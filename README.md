@@ -443,40 +443,10 @@ Contains the image that are display in this `README.md` document.
 
 #### 📂bin
 
-┃ ┃ ┗ 📜resetdb.js
+Contains `resetdb.js` for reseting the database (command `npm run db:reset`)
 
 #### 📂db
-
-┃ ┃ ┣ 📂queryHelpers
-┃ ┃ ┃ ┣ 📜interview.js
-┃ ┃ ┃ ┗ 📜schedule.js
-┃ ┃ ┣ 📂schema
-┃ ┃ ┃ ┣ 📜01_users.sql
-┃ ┃ ┃ ┣ 📜02_organizations.sql
-┃ ┃ ┃ ┣ 📜03_users_organizations.sql
-┃ ┃ ┃ ┣ 📜04_fairs.sql
-┃ ┃ ┃ ┣ 📜05_fairs_organizations.sql
-┃ ┃ ┃ ┣ 📜06_fairs_users.sql
-┃ ┃ ┃ ┣ 📜07_jobs.sql
-┃ ┃ ┃ ┣ 📜08_applications.sql
-┃ ┃ ┃ ┣ 📜09_messages.sql
-┃ ┃ ┃ ┣ 📜10_interviews.sql
-┃ ┃ ┃ ┗ 📜11_favourites.sql
-┃ ┃ ┣ 📂seeds
-┃ ┃ ┃ ┣ 📜01_users.sql
-┃ ┃ ┃ ┣ 📜02_organizations.sql
-┃ ┃ ┃ ┣ 📜03_users_organizations.sql
-┃ ┃ ┃ ┣ 📜04_fairs.sql
-┃ ┃ ┃ ┣ 📜05_fairs_organizations.sql
-┃ ┃ ┃ ┣ 📜06_fairs_users.sql
-┃ ┃ ┃ ┣ 📜07_jobs.sql
-┃ ┃ ┃ ┗ 📜08_messages.sql
-┃ ┃ ┗ 📜queryHelpers.js
-
-#### 📂lib
-
-┃ ┃ ┣ 📜db.js
-┃ ┃ ┗ 📜sass-middleware.js
+Contains all the query helpers funtioncs, schema and seeds.
 
 #### 📂public
 
@@ -484,13 +454,13 @@ Stores the uploads file from users.
 
 #### 📂routes
 
-#### 📜.env.example
-
-#### 📜package-lock.json
+Contains the routes of the server.
 
 #### 📜package.json
+Contain the commands and dependecies for the server.
 
 #### 📜server.js
+The main file where the server is defined. It also has the socket.io settings, middleware, etc.
 
 ### 📜.gitignore
 Specifies intentionally untracked files that Git should ignore
