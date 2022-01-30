@@ -152,10 +152,10 @@ This is the final project for the Web Development Bootcamp at [Lighthouse Labs](
 - [cors](https://github.com/expressjs/cors): A middleware that can be used to enable CORS with various options
 - [dotenv](https://github.com/motdotla/dotenv): Loads environment variables from .env
 - [express](http://expressjs.com/): Web framework
-- [morgan](https://github.com/expressjs/morgan):
-- [multer]():
+- [morgan](https://github.com/expressjs/morgan): HTTP request logger middleware
+- [multer](https://github.com/expressjs/multer): For uploading files
 - [pg](https://github.com/brianc/node-postgres): PostgreSQL client
-- [socket.io]():
+- [socket.io](https://socket.io/): Realtime application framework, enables real-time bidirectional event-based communication
 - [nodemon](https://nodemon.io/): Monitor for any changes in the application and automatically restart the server
 
 ## Getting Started
