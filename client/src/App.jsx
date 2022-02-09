@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import LogIn from "./components/LogIn";
 import Navbar from "./components/Navbar/index";
@@ -36,6 +36,31 @@ function App() {
   const handleSnackBarClose = () => {
     setSnackBarDetails({ open: false, message: "" });
   };
+
+  const [numOfUsers, setNumOfUsers] = useState({});
+
+  const updateNumOfUsers = (fairId, stallId, num) => {
+
+    setNumOfUsers((prev) => {
+      if (!(fairId in prev)) {
+        return { ...prev, [fairId]: {} };
+      }
+      return prev;
+    });
+
+    setNumOfUsers((prev) => {
+      const fairObj = { ...prev[fairId] };
+      fairObj[stallId] = num;
+      return { ...prev, [fairId]: fairObj };
+    });
+  };
+
+  useEffect(() => {
+    console.log(numOfUsers);
+    for (const key in numOfUsers) {
+      console.log(numOfUsers[key]);
+    }
+  }, [numOfUsers]);
 
   return (
     <div className="App">
@@ -92,7 +117,12 @@ function App() {
             path="/organizations"
             element={<Groups {...{ setSnackBarDetails }} />}
           />
-          <Route path="/jobs" element={<Jobs currentUser={currentUser} {... { setSnackBarDetails }} />} />
+          <Route
+            path="/jobs"
+            element={
+              <Jobs currentUser={currentUser} {...{ setSnackBarDetails }} />
+            }
+          />
           <Route path="/schedule" element={<Schedule />} />
           <Route
             path="/profile"
@@ -124,7 +154,11 @@ function App() {
           />
           <Route
             path="/live/:fairId/:organizationId"
-            element={<Stall {...{ setSnackBarDetails }} {...{ currentUser }} />}
+            element={
+              <Stall
+                {...{ setSnackBarDetails, currentUser, updateNumOfUsers }}
+              />
+            }
           />
           <Route
             path="/jobs/:id/applications"
