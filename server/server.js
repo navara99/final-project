@@ -24,6 +24,8 @@ const io = new Server(httpServer, {
 
 let users = [];
 
+let stallUsers = {};
+
 const addUser = (userId, socketId) => {
   users.push({ userId, socketId });
 };
@@ -50,6 +52,7 @@ io.on("connection", (socket) => {
     // console.log("currentUserId", userId);
     addUser(userId, socket.id);
     console.log("users", users);
+    io.to(socket.id).emit("updateUsers", stallUsers);
     // io.emit("getUsers", users);
   });
 
@@ -59,6 +62,26 @@ io.on("connection", (socket) => {
     users.forEach((user) => {
       io.to(user.socketId).emit("getMessage", data);
     });
+  });
+
+  socket.on("join", ({ fairId, stallId }) => {
+    console.log("JOINNNNNNNNN");
+    if (!(fairId in stallUsers)) stallUsers[fairId] = {};
+    if (!(stallId in stallUsers[fairId])) stallUsers[fairId][stallId] = 0;
+    stallUsers[fairId][stallId]++;
+    users.forEach((user) => {
+      io.to(user.socketId).emit("updateUsers", stallUsers);
+    });
+    console.log(stallUsers);
+  });
+
+  socket.on("leave", ({ fairId, stallId }) => {
+    console.log("LEAVEEEEE");
+    stallUsers[fairId][stallId]--;
+    users.forEach((user) => {
+      io.to(user.socketId).emit("updateUsers", stallUsers);
+    });
+    console.log(stallUsers);
   });
 
   socket.on("editMessage", (data) => {

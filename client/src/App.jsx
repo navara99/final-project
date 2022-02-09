@@ -32,35 +32,18 @@ function App() {
   });
   const { currentUser, setCurrentUser, logout } = useCurrentUser();
   const messageState = useMessages(currentUser);
-  const { setMessages, setSenders, socket, numOfUnreadMsg } = messageState;
+  const {
+    setMessages,
+    setSenders,
+    socket,
+    numOfUnreadMsg,
+    numOfUsers,
+    leaveStall,
+    joinStall,
+  } = messageState;
   const handleSnackBarClose = () => {
     setSnackBarDetails({ open: false, message: "" });
   };
-
-  const [numOfUsers, setNumOfUsers] = useState({});
-
-  const updateNumOfUsers = (fairId, stallId, num) => {
-
-    setNumOfUsers((prev) => {
-      if (!(fairId in prev)) {
-        return { ...prev, [fairId]: {} };
-      }
-      return prev;
-    });
-
-    setNumOfUsers((prev) => {
-      const fairObj = { ...prev[fairId] };
-      fairObj[stallId] = num;
-      return { ...prev, [fairId]: fairObj };
-    });
-  };
-
-  useEffect(() => {
-    console.log(numOfUsers);
-    for (const key in numOfUsers) {
-      console.log(numOfUsers[key]);
-    }
-  }, [numOfUsers]);
 
   return (
     <div className="App">
@@ -156,7 +139,7 @@ function App() {
             path="/live/:fairId/:organizationId"
             element={
               <Stall
-                {...{ setSnackBarDetails, currentUser, updateNumOfUsers }}
+                {...{ setSnackBarDetails, currentUser, leaveStall, joinStall }}
               />
             }
           />
@@ -176,6 +159,7 @@ function App() {
               <Fair
                 currentUser={currentUser}
                 setSnackBarDetails={setSnackBarDetails}
+                numOfUsers={numOfUsers}
               />
             }
           />

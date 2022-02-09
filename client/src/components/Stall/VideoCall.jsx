@@ -14,7 +14,8 @@ export default function VideoCall(props) {
     channelName,
     organizationDetails,
     setInCall,
-    updateNumOfUsers,
+    leaveStall,
+    joinStall,
   } = props;
   const client = useClient();
   const { ready, tracks } = useMicrophoneAndCameraTracks();
@@ -27,13 +28,10 @@ export default function VideoCall(props) {
     username
   );
 
-  const numOfUsers = users.length;
-
   useEffect(() => {
-    console.log("===========HELLO", numOfUsers);
-   
-    updateNumOfUsers(numOfUsers);
-  }, [numOfUsers]);
+    joinStall();
+    return () => leaveStall();
+  }, []);
 
   return (
     <Grid container direction="column" style={{ height: "100%" }}>
