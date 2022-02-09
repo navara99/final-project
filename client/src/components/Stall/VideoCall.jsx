@@ -16,6 +16,7 @@ export default function VideoCall(props) {
     setInCall,
     leaveStall,
     joinStall,
+    updateUsers,
   } = props;
   const client = useClient();
   const { ready, tracks } = useMicrophoneAndCameraTracks();
@@ -27,6 +28,10 @@ export default function VideoCall(props) {
     client,
     username
   );
+
+  useEffect(() => {
+    updateUsers(users.length);
+  }, [users.length]);
 
   useEffect(() => {
     joinStall();

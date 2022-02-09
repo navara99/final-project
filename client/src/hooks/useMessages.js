@@ -145,11 +145,15 @@ const useMessages = (currentUser) => {
       : 0;
 
   const leaveStall = (fairId, stallId) => {
-    if(socket) socket.emit("leave", { fairId, stallId });
+    if (socket) socket.emit("leave", { fairId, stallId });
   };
 
   const joinStall = (fairId, stallId) => {
-    if(socket) socket.emit("join", { fairId, stallId });
+    if (socket) socket.emit("join", { fairId, stallId });
+  };
+
+  const updateUsers = (fairId, stallId, num) => {
+    if (socket) socket.emit("updateUsers", { fairId, stallId, num });
   };
 
   const messageState = {
@@ -169,7 +173,8 @@ const useMessages = (currentUser) => {
     setSenders,
     leaveStall,
     joinStall,
-    numOfUsers
+    numOfUsers,
+    updateUsers
   };
 
   return messageState;

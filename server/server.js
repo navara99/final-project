@@ -65,10 +65,17 @@ io.on("connection", (socket) => {
   });
 
   socket.on("join", ({ fairId, stallId }) => {
-    console.log("JOINNNNNNNNN");
     if (!(fairId in stallUsers)) stallUsers[fairId] = {};
     if (!(stallId in stallUsers[fairId])) stallUsers[fairId][stallId] = 0;
     stallUsers[fairId][stallId]++;
+    users.forEach((user) => {
+      io.to(user.socketId).emit("updateUsers", stallUsers);
+    });
+    console.log(stallUsers);
+  });
+
+  socket.on("leave", ({ fairId, stallId }) => {
+    stallUsers[fairId][stallId]--;
     users.forEach((user) => {
       io.to(user.socketId).emit("updateUsers", stallUsers);
     });

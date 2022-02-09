@@ -40,6 +40,7 @@ function App() {
     numOfUsers,
     leaveStall,
     joinStall,
+    updateUsers,
   } = messageState;
   const handleSnackBarClose = () => {
     setSnackBarDetails({ open: false, message: "" });
@@ -139,7 +140,13 @@ function App() {
             path="/live/:fairId/:organizationId"
             element={
               <Stall
-                {...{ setSnackBarDetails, currentUser, leaveStall, joinStall }}
+                {...{
+                  setSnackBarDetails,
+                  currentUser,
+                  leaveStall,
+                  joinStall,
+                  updateUsers,
+                }}
               />
             }
           />

@@ -9,7 +9,7 @@ import "./Stall.css";
 import useFairDetails from "../../hooks/useFairDetails";
 import useTitle from "../../hooks/useTitle";
 
-const Stall = ({ currentUser, leaveStall, joinStall }) => {
+const Stall = ({ currentUser, leaveStall, joinStall, updateUsers }) => {
   const { organizationId, fairId } = useParams();
   const { fair } = useFairDetails(fairId);
   const isMember = useMember(organizationId);
@@ -57,6 +57,7 @@ const Stall = ({ currentUser, leaveStall, joinStall }) => {
             }
             leaveStall={() => leaveStall(fairId, organizationId)}
             joinStall={() => joinStall(fairId, organizationId)}
+            updateUsers={num => updateUsers(fairId, organizationId, num)}
           />
         </>
       )}
