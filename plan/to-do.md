@@ -1,4 +1,3 @@
-- erd (Siu)
 - post on linkedin
 - filter candidate
 - notification (siu)
