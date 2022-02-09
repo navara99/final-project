@@ -1,5 +1,3 @@
-- deployment
-- README
 - erd (Siu)
 - post on linkedin
 - filter candidate
