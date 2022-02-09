@@ -5,21 +5,12 @@ import { useState, useEffect } from "react";
 import Controls from "./Controls";
 
 export default function Video(props) {
-  const {
-    users,
-    tracks,
-    username,
-    setStart,
-    setInCall,
-    useClient,
-  } = props;
+  const { users, tracks, username, setStart, setInCall, useClient } = props;
   const [gridSpacing, setGridSpacing] = useState(12);
 
   useEffect(() => {
     setGridSpacing(Math.max(Math.floor(12 / (users.length + 1)), 4));
   }, [users, tracks]);
-
-
 
   const otherUsers = () => {
     return users.map((user) => {

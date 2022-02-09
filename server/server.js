@@ -74,12 +74,12 @@ io.on("connection", (socket) => {
     console.log(stallUsers);
   });
 
-  socket.on("leave", ({ fairId, stallId }) => {
-    stallUsers[fairId][stallId]--;
+  socket.on("updateUsers", ({ fairId, stallId, num }) => {
+    if (!(fairId in stallUsers)) stallUsers[fairId] = {};
+    stallUsers[fairId][stallId] = num;
     users.forEach((user) => {
       io.to(user.socketId).emit("updateUsers", stallUsers);
     });
-    console.log(stallUsers);
   });
 
   socket.on("leave", ({ fairId, stallId }) => {

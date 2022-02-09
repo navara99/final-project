@@ -35,7 +35,17 @@ export default function VideoCall(props) {
 
   useEffect(() => {
     joinStall();
-    return () => leaveStall();
+
+    const cleanup = () => {
+      leaveStall();
+    };
+
+    window.addEventListener("beforeunload", cleanup);
+
+    return () => {
+      window.removeEventListener("beforeunload", cleanup);
+      cleanup();
+    };
   }, []);
 
   return (
