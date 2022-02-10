@@ -7,7 +7,7 @@ import "./Fair.css";
 import OrganizationList from "./OrganizationList";
 import useTitle from "../../hooks/useTitle";
 
-const Fair = ({ currentUser, setSnackBarDetails }) => {
+const Fair = ({ currentUser, setSnackBarDetails, numOfUsers }) => {
   let { id } = useParams();
   const { fair, stalls, added, add, updateFairDetails } = useFairDetails(id);
   const title = stalls && fair.live ? "Stalls" : "Employers";
@@ -17,6 +17,8 @@ const Fair = ({ currentUser, setSnackBarDetails }) => {
       " • Hosted by " +
       fair.host_name
     : "";
+  
+  const stallUserNum = id in numOfUsers ? numOfUsers[id] : {};
     
   useTitle(tabTitle);
 
@@ -51,6 +53,7 @@ const Fair = ({ currentUser, setSnackBarDetails }) => {
             setSnackBarDetails={setSnackBarDetails}
             live={fair.live}
             currentUser={currentUser}
+            stallUserNum={stallUserNum}
           />
         </>
       )}

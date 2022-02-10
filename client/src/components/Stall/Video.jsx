@@ -16,25 +16,41 @@ export default function Video(props) {
     return users.map((user) => {
       if (user.videoTrack) {
         return (
-          <Grid item xs={gridSpacing} key={user.uid} className="video-grid-item" >
+          <Grid
+            item
+            xs={gridSpacing}
+            key={user.uid}
+            className="video-grid-item"
+          >
             <p className="video-username">{user.uid}</p>
             <AgoraVideoPlayer
               videoTrack={user.videoTrack}
               key={user.uid}
-              style={{ height: "100%", width: "100%", border: "solid 2px #006494" }}
+              style={{
+                height: "100%",
+                width: "100%",
+                border: "solid 2px #006494",
+              }}
             />
           </Grid>
         );
       } else {
         return null;
-      };
-    })
+      }
+    });
   };
 
   return (
-    <Grid container style={{ height: "100%" }} >
+    <Grid container style={{ height: "100%" }}>
       <Grid item xs={gridSpacing} className="video-grid-item">
-        <div className="video-controls"><Controls tracks={tracks} setStart={setStart} setInCall={setInCall} {...{ useClient }} /></div>
+        <div className="video-controls">
+          <Controls
+            tracks={tracks}
+            setStart={setStart}
+            setInCall={setInCall}
+            {...{ useClient }}
+          />
+        </div>
         <p className="video-username">{username}</p>
         <AgoraVideoPlayer
           videoTrack={tracks[1]}

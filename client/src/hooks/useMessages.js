@@ -3,6 +3,7 @@ import axios from "axios";
 import { useLocation } from "react-router-dom";
 import { io } from "socket.io-client";
 import moment from "moment";
+import { DataArray } from "@mui/icons-material";
 
 const useMessages = (currentUser) => {
   const [receiverId, setReceiverId] = useState();
@@ -12,6 +13,7 @@ const useMessages = (currentUser) => {
   const [socket, setSocket] = useState();
   const [receiver, setReceiver] = useState();
   const location = useLocation();
+  const [numOfUsers, setNumOfUsers] = useState({});
 
   useEffect(() => {
     if (currentUser) {
@@ -73,7 +75,9 @@ const useMessages = (currentUser) => {
     socket.on("getMessage", (data) => {
       const newMsg = { ...data.message };
       setSenders((prev) => {
-        if (prev.some((sender) => sender && sender.id === data.message.sender_id)) {
+        if (
+          prev.some((sender) => sender && sender.id === data.message.sender_id)
+        ) {
           return prev;
         }
         return [data.sender, ...prev];
@@ -81,14 +85,15 @@ const useMessages = (currentUser) => {
       setMessages((prev) => [...prev, newMsg]);
     });
 
-    socket.on("editMessage", (data) => {
-      setMessages((prev) =>
-        prev.map((msg) => {
-          if (msg.id !== data.id) return msg;
-          return data;
-        })
-      );
+    socket.on("updateUsers", (data) => {
+      setNumOfUsers(data);
     });
+
+    socket.on("editMessage", (data) => {
+      setNumOfUsers(data);
+      console.log(data);
+    });
+
     setSocket(socket);
 
     return socket.emit("logout");
@@ -108,7 +113,7 @@ const useMessages = (currentUser) => {
       sender_id: currentUser.id,
       receiver_id: receiverId,
       message,
-      created_at: moment()
+      created_at: moment(),
     };
     axios.post("/api/messages/", newMessage).then((res) => {
       setSenders((prev) => {
@@ -118,7 +123,10 @@ const useMessages = (currentUser) => {
         return [res.data.receiver, ...prev];
       });
       setMessages((prev) => [...prev, res.data.messageObj]);
-      socket.emit("sendMessage", { message: res.data.messageObj, sender: currentUser });
+      socket.emit("sendMessage", {
+        message: res.data.messageObj,
+        sender: currentUser,
+      });
       setMessageText("");
     });
     //sending message to socket server
@@ -136,6 +144,18 @@ const useMessages = (currentUser) => {
         ).length
       : 0;
 
+  const leaveStall = (fairId, stallId) => {
+    if (socket) socket.emit("leave", { fairId, stallId });
+  };
+
+  const joinStall = (fairId, stallId) => {
+    if (socket) socket.emit("join", { fairId, stallId });
+  };
+
+  const updateUsers = (fairId, stallId, num) => {
+    if (socket) socket.emit("updateUsers", { fairId, stallId, num });
+  };
+
   const messageState = {
     setMessageText,
     messageText,
@@ -151,6 +171,10 @@ const useMessages = (currentUser) => {
     setMessages,
     socket,
     setSenders,
+    leaveStall,
+    joinStall,
+    numOfUsers,
+    updateUsers
   };
 
   return messageState;

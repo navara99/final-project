@@ -13,6 +13,5 @@
 - put more info on user profile
 - find user to message on messages page/home page (siu)
 - message use from user profile
-- show number of people in stall on details page
 - options to record the interview (thar)
 - responsive design (everyone)

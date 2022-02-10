@@ -8,16 +8,19 @@ const OrganizationList = ({
   setSnackBarDetails,
   live,
   currentUser,
+  stallUserNum
 }) => {
   const [expand, setExpanded] = useState();
 
   const elm = stalls.map((stall) => {
     const { id } = stall;
+    const userNum = id in stallUserNum ? stallUserNum[id] : 0;
     if (expand === id) {
       return (
         <ExpandedOrganizationListItem
           {...{
             ...stall,
+            userNum,
             key: id,
             setExpanded: () => setExpanded(id),
             fairId,
@@ -36,6 +39,7 @@ const OrganizationList = ({
           setExpanded: () => setExpanded(id),
           fairId,
           live,
+          userNum
         }}
       />
     );

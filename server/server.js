@@ -24,6 +24,21 @@ const io = new Server(httpServer, {
 
 let users = [];
 
+let stallUsers = {};
+
+let getStallUsers = () => {
+  const stallUserNum = {};
+  for (const fairId in stallUsers) {
+    stallUserNum[fairId] = {};
+    const stalls = stallUsers[fairId];
+    for (const stallId in stalls) {
+      const stallSocket = stalls[stallId];
+      stallUserNum[fairId][stallId] = stallSocket.length;
+    }
+  }
+  return stallUserNum;
+};
+
 const addUser = (userId, socketId) => {
   users.push({ userId, socketId });
 };
@@ -50,6 +65,7 @@ io.on("connection", (socket) => {
     // console.log("currentUserId", userId);
     addUser(userId, socket.id);
     console.log("users", users);
+    io.to(socket.id).emit("updateUsers", getStallUsers());
     // io.emit("getUsers", users);
   });
 
@@ -58,6 +74,25 @@ io.on("connection", (socket) => {
     const users = getUsers(receiver_id, sender_id, socket.id);
     users.forEach((user) => {
       io.to(user.socketId).emit("getMessage", data);
+    });
+  });
+
+  socket.on("join", ({ fairId, stallId }) => {
+    if (!(fairId in stallUsers)) stallUsers[fairId] = {};
+    if (!(stallId in stallUsers[fairId])) stallUsers[fairId][stallId] = [];
+    stallUsers[fairId][stallId].push(socket.id);
+    console.log(getStallUsers());
+    users.forEach((user) => {
+      io.to(user.socketId).emit("updateUsers", getStallUsers());
+    });
+  });
+
+  socket.on("leave", ({ fairId, stallId }) => {
+    stallUsers[fairId][stallId] = stallUsers[fairId][stallId].filter(
+      (id) => id !== socket.id
+    );
+    users.forEach((user) => {
+      io.to(user.socketId).emit("updateUsers", getStallUsers());
     });
   });
 
@@ -76,6 +111,18 @@ io.on("connection", (socket) => {
   //client disconnect
   socket.on("disconnect", () => {
     removeUser(socket.id);
+    for (const fairId in stallUsers) {
+      const stalls = stallUsers[fairId];
+      for (const stallId in stalls) {
+        let stallArr = stalls[stallId];
+        stallUsers[fairId][stallId] = stallArr.filter((id) => id !== socket.id);
+      }
+    }
+    console.log(stallUsers);
+    console.log(getStallUsers());
+    users.forEach((user) => {
+      io.to(user.socketId).emit("updateUsers", getStallUsers());
+    });
   });
 });
 

@@ -9,32 +9,59 @@ import "./Stall.css";
 import useFairDetails from "../../hooks/useFairDetails";
 import useTitle from "../../hooks/useTitle";
 
-const Stall = ({ currentUser }) => {
+const Stall = ({ currentUser, leaveStall, joinStall, updateUsers }) => {
   const { organizationId, fairId } = useParams();
   const { fair } = useFairDetails(fairId);
   const isMember = useMember(organizationId);
   const [organizationDetails] = useOrganizationDetails(organizationId);
-  const { config, useClient } = useChannel(organizationId, currentUser && organizationDetails ? `${currentUser.username}${isMember ? ` (${organizationDetails.details.name})` : ""}` : "");
+  const { config, useClient } = useChannel(
+    organizationId,
+    currentUser && organizationDetails
+      ? `${currentUser.username}${
+          isMember ? ` (${organizationDetails.details.name})` : ""
+        }`
+      : ""
+  );
   const [inCall, setInCall] = useState(false);
 
-  const title = `${inCall ? "📞": ""}Stall of ${organizationDetails ? organizationDetails.details.name: ""}`;
+  const title = `${inCall ? "📞" : ""}Stall of ${
+    organizationDetails ? organizationDetails.details.name : ""
+  }`;
   useTitle(title);
 
   return (
     <div className="stall">
-      {!inCall && < Button variant="contained" color="primary" onClick={() => setInCall(true)}>Join Stall {isMember && "as host"}</Button>}
-      {
-        inCall &&
+      {!inCall && (
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => setInCall(true)}
+        >
+          Join Stall {isMember && "as host"}
+        </Button>
+      )}
+      {inCall && (
         <>
-          <h3>Currently in stall hosted by: {organizationDetails.details.name}</h3>
+          <h3>
+            Currently in stall hosted by: {organizationDetails.details.name}
+          </h3>
           <VideoCall
             {...{ config, useClient, setInCall, fair }}
             channelName={organizationId}
-            username={currentUser ? `${currentUser.username}${isMember ? ` (${organizationDetails.details.name})` : ""}` : ""}
+            username={
+              currentUser
+                ? `${currentUser.username}${
+                    isMember ? ` (${organizationDetails.details.name})` : ""
+                  }`
+                : ""
+            }
+            leaveStall={() => leaveStall(fairId, organizationId)}
+            joinStall={() => joinStall(fairId, organizationId)}
+            updateUsers={num => updateUsers(fairId, organizationId, num)}
           />
         </>
-      }
-    </div >
+      )}
+    </div>
   );
 };
 

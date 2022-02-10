@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import LogIn from "./components/LogIn";
 import Navbar from "./components/Navbar/index";
@@ -32,7 +32,16 @@ function App() {
   });
   const { currentUser, setCurrentUser, logout } = useCurrentUser();
   const messageState = useMessages(currentUser);
-  const { setMessages, setSenders, socket, numOfUnreadMsg } = messageState;
+  const {
+    setMessages,
+    setSenders,
+    socket,
+    numOfUnreadMsg,
+    numOfUsers,
+    leaveStall,
+    joinStall,
+    updateUsers,
+  } = messageState;
   const handleSnackBarClose = () => {
     setSnackBarDetails({ open: false, message: "" });
   };
@@ -92,7 +101,12 @@ function App() {
             path="/organizations"
             element={<Groups {...{ setSnackBarDetails }} />}
           />
-          <Route path="/jobs" element={<Jobs currentUser={currentUser} {... { setSnackBarDetails }} />} />
+          <Route
+            path="/jobs"
+            element={
+              <Jobs currentUser={currentUser} {...{ setSnackBarDetails }} />
+            }
+          />
           <Route path="/schedule" element={<Schedule />} />
           <Route
             path="/profile"
@@ -124,7 +138,17 @@ function App() {
           />
           <Route
             path="/live/:fairId/:organizationId"
-            element={<Stall {...{ setSnackBarDetails }} {...{ currentUser }} />}
+            element={
+              <Stall
+                {...{
+                  setSnackBarDetails,
+                  currentUser,
+                  leaveStall,
+                  joinStall,
+                  updateUsers,
+                }}
+              />
+            }
           />
           <Route
             path="/jobs/:id/applications"
@@ -142,6 +166,7 @@ function App() {
               <Fair
                 currentUser={currentUser}
                 setSnackBarDetails={setSnackBarDetails}
+                numOfUsers={numOfUsers}
               />
             }
           />
