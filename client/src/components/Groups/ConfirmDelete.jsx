@@ -5,7 +5,7 @@ function ConfirmDelete({ onClick, confirmModal, setConfirmModal, message }) {
 
   return (
     <>
-      <Dialog open={confirmModal} fullWidth={true} onClose={() => { }}>
+      <Dialog open={confirmModal} fullWidth={true} onClose={() => setConfirmModal(!confirmModal)}>
         <DialogTitle>{message}</DialogTitle>
         <DialogActions>
           <Button onClick={() => { setConfirmModal(!confirmModal) }}>Cancel</Button>

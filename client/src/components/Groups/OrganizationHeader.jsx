@@ -12,7 +12,7 @@ import GroupsBtn from "./GroupsBtn";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function OrganizationHeader({ organization, cardStyles }) {
+function OrganizationHeader({ organization, cardStyles, setSnackBarDetails }) {
   const [confirmModal, setConfirmModal] = useState(false);
   const navigate = useNavigate();
 
@@ -22,6 +22,10 @@ function OrganizationHeader({ organization, cardStyles }) {
     try {
       await axios.post(`/api/organizations/${id}/leave`);
       navigate("/organizations");
+      setSnackBarDetails({
+        open: true,
+        message: `Successfully left ${organization.details.name}.`
+      })
     } catch (err) {
       console.log(err.message);
     };
