@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { ListItemText, Card, Typography, Link } from "@mui/material";
 
 import BusinessIcon from '@mui/icons-material/Business';
@@ -6,16 +6,27 @@ import EmailIcon from '@mui/icons-material/Email';
 import LanguageIcon from '@mui/icons-material/Language';
 import { blueGrey } from "@mui/material/colors";
 
+import ConfirmDelete from "./ConfirmDelete.jsx";
+
 import GroupsBtn from "./GroupsBtn";
 function OrganizationHeader({ organization, cardStyles }) {
+  const [confirmModal, setConfirmModal] = useState(false);
 
-  console.log(organization.isMember);
+  const leaveOrganization = () => {
+    const { id } = organization.details;
+  
+    
+
+
+  };
+
   return (
     <div >
+      <ConfirmDelete {...{ onClick: leaveOrganization, confirmModal, setConfirmModal, message: `Are you sure you want to leave ${organization.details.name}?` }} />
       <Card style={cardStyles} sx={{ display: "flex", gap: "40px" }}>
         <div >
           <img
-            alt={organization.name}
+            alt={organization.details.name}
             style={{ height: 100, width: 100, borderRadius: '50%' }}
             src={`${organization.details.logo}`}
           />
@@ -30,7 +41,7 @@ function OrganizationHeader({ organization, cardStyles }) {
               <LanguageIcon fontSize="large" /> <Link href={organization.details.website} sx={{ ml: 1, alignSelf: "center", textDecoration: "none" }} color={blueGrey["A700"]} target="_blank" rel="noopener"><Typography component="span" variant="subtitle1">{organization.details.website}</Typography></Link>
             </div>
             <div style={{ display: "flex", alignSelf: "center", marginTop: "10px" }}>
-              {organization.isMember && <GroupsBtn text="Leave Organization" variant="contained" onClick={() => { }} />}
+              {organization.isMember && <GroupsBtn text="Leave Organization" variant="contained" onClick={() => setConfirmModal(!confirmModal)} />}
             </div>
           </div>
 
