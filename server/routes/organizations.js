@@ -13,7 +13,8 @@ module.exports = (db) => {
     checkIfIAmMember,
     deleteOrganizationById,
     updateOrganizationInfo,
-    getOrganizationsByUser
+    getOrganizationsByUser,
+    removeUserFromOrganization
   } = queryGenerator(db);
 
   router.delete("/:id", async (req, res) => {
@@ -76,16 +77,14 @@ module.exports = (db) => {
     const { user_id } = req.session;
     const { id } = req.params;
 
-    console.log(user_id, "wants to leave", id);
+    try {
+      await removeUserFromOrganization(user_id, id);
+      res.json({ status: "success" });
+    } catch (err) {
+      console.log(err.message);
+    }
 
-    // try {
-    //   const result = await checkIfIAmMember(id, user_id);
-    //   res.json({ isMember: result });
-    // } catch (err) {
-    //   console.log(err.message);
-    // }
-
-  })
+  });
 
   router.post("/:id/users", async (req, res) => {
     const { usersIdToAdd } = req.body;
@@ -104,7 +103,7 @@ module.exports = (db) => {
 
   router.get("/jobs/:id", async (req, res) => {
     const { id } = req.params;
-    console.log("==================================")
+
     try {
       const jobs = await getAllJobsByOrganizationId(id, true);
       console.log(jobs);
