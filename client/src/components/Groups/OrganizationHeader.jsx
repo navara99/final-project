@@ -7,18 +7,24 @@ import LanguageIcon from '@mui/icons-material/Language';
 import { blueGrey } from "@mui/material/colors";
 
 import ConfirmDelete from "./ConfirmDelete.jsx";
-
 import GroupsBtn from "./GroupsBtn";
+
+import axios from "axios";
+
 function OrganizationHeader({ organization, cardStyles }) {
   const [confirmModal, setConfirmModal] = useState(false);
 
-  const leaveOrganization = () => {
+  const leaveOrganization = async () => {
     const { id } = organization.details;
-  
-    
 
+    try {
+      await axios.post(`/api/organizations/${id}/leave`);
+    } catch (err) {
+      console.log(err.message);
+    };
 
   };
+
 
   return (
     <div >
