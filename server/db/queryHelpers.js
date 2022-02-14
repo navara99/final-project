@@ -803,7 +803,20 @@ const queryGenerator = (db) => {
     }
   };
 
+  const removeUserFromOrganization = async (user_id, organizationId) => {
+    const values = [user_id, organizationId];
+    const queryString = `DELETE from users_organizations WHERE user_id = $1 AND organization_id = $2`;
+
+    try {
+      await db.query(queryString, values);
+    } catch (error) {
+      console.log(error);
+    }
+
+  };
+
   return {
+    removeUserFromOrganization,
     getAppliedJobsByUser,
     getFavoriteJobsByUser,
     updateOrganizationInfo,
