@@ -6,7 +6,6 @@
 - loading when making request
 - restriction (siu)
 - upload flyer pdf for futurue fair/the whole fair (from the host)
-- quit/remove member
 - remove admin function from organization
 - filter job, order by (Thar)
 - search bar for fair
