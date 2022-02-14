@@ -10,21 +10,23 @@ import ConfirmDelete from "./ConfirmDelete.jsx";
 import GroupsBtn from "./GroupsBtn";
 
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function OrganizationHeader({ organization, cardStyles }) {
   const [confirmModal, setConfirmModal] = useState(false);
+  const navigate = useNavigate();
 
   const leaveOrganization = async () => {
     const { id } = organization.details;
 
     try {
       await axios.post(`/api/organizations/${id}/leave`);
+      navigate("/organizations");
     } catch (err) {
       console.log(err.message);
     };
 
   };
-
 
   return (
     <div >
