@@ -19,6 +19,8 @@ This is the final project for the Web Development Bootcamp at [Lighthouse Labs](
 This project is deployed to [Heroku](https://heroku.com/):
 https://vcareer-client.herokuapp.com/
 
+It might take some time to load up the server.
+
 ## Final Product
 
 ### Home page
